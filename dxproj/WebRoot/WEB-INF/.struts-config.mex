@@ -1,0 +1,958 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FlowViewLayout Version="1.2">
+  <StrutsActivity path="/gwlzadmin/department/departMentsAction.do" location="950,50" dimension="280,84" />
+  <StrutsActivity path="/gwlzadmin/usergroup/userGroupAction.do" location="50,350" dimension="274,84" />
+  <StrutsActivity path="/gwlzadmin/user/userAction.do" location="650,550" dimension="244,84" />
+  <StrutsActivity path="/gwlzadmin/user/checkAccount.do" location="950,650" dimension="292,84" />
+  <StrutsActivity path="/gwlzadmin/templtes/templateAction.do" location="50,750" dimension="310,84" />
+  <StrutsActivity path="/gwlzadmin/parameter/parameterAction.do" location="950,850" dimension="274,84" />
+  <StrutsActivity path="/gwlzadmin/templtes/checkTemplateNameAction.do" location="50,1050" dimension="322,84" />
+  <StrutsActivity path="/gwlzadmin/doctypes/docTypesAction.do" location="650,1050" dimension="268,84" />
+  <StrutsActivity path="/gwlzadmin/docnum/docNumAction.do" location="50,1250" dimension="256,84" />
+  <StrutsActivity path="/gwlzadmin/accountie/accountieAction.do" location="1550,150" dimension="274,84" />
+  <StrutsActivity path="/gwlzadmin/log/logAction.do" location="1550,650" dimension="238,84" />
+  <StrutsActivity path="/gwlzclient/doc/docAction.do" location="650,1250" dimension="238,84" />
+  <StrutsActivity path="/gwlzclient/doc/selectTemplateAction.do" location="1850,350" dimension="304,84" />
+  <StrutsActivity path="/gwlzclient/doc/docSessionAction.do" location="1850,750" dimension="280,84" />
+  <StrutsActivity path="/gwlzclient/doc/attacheAction.do" location="1850,1150" dimension="304,84" />
+  <StrutsActivity path="/loginAction.do" location="1250,1350" dimension="250,84" />
+  <StrutsActivity path="/gwlzclient/docFlowsAction.do" location="2150,1350" dimension="268,84" />
+  <StrutsActivity path="/gwlzclient/submit/submitAction.do" location="2450,150" dimension="256,84" />
+  <StrutsActivity path="/gwlzclient/withDrawAction.do" location="50,1650" dimension="310,84" />
+  <StrutsActivity path="/gwlzclient/doc/getDocAction.do" location="650,1650" dimension="256,84" />
+  <StrutsActivity path="/gwlzclient/rejectAction.do" location="1250,1650" dimension="298,84" />
+  <StrutsActivity path="/gwlzclient/counterSignAction.do" location="2450,950" dimension="286,84" />
+  <StrutsActivity path="/gwlzclient/auditFinishAction.do" location="2450,1150" dimension="328,84" />
+  <StrutsActivity path="/gwlzclient/docNumOperAction.do" location="2150,1550" dimension="280,84" />
+  <StrutsActivity path="/gwlzadmin/monitor/watchesAction.do" location="1850,1750" dimension="262,84" />
+  <StrutsActivity path="/gwlzclient/docFinishAction.do" location="2450,350" dimension="274,84" />
+  <StrutsActivity path="/gwlzclient/bakupDocAction.do" location="2450,650" dimension="268,84" />
+  <StrutsActivity path="/gwlzclient/unloadAction.do" location="50,1850" dimension="256,84" />
+  <StrutsActivity path="/adviceAction.do" location="650,1850" dimension="256,84" />
+  <StrutsActivity path="/selectGroupAction.do" location="1550,1950" dimension="286,84" />
+  <StrutsActivity path="/gwlzclient/userPageAction.do" location="2750,1450" dimension="310,84" />
+  <StrutsActivity path="/flightAction.do" location="2750,1650" dimension="304,84" />
+  <StrutsActivity path="/ticketsAllocAction.do" location="2750,1950" dimension="340,84" />
+  <StrutsActivity path="/ticketpriceAction.do" location="350,2050" dimension="334,84" />
+  <StrutsActivity path="/flightInfoAction.do" location="2150,2150" dimension="328,84" />
+  <StrutsActivity path="/clientAction.do" location="950,2150" dimension="304,84" />
+  <StrutsActivity path="/dJPAction.do" location="3050,1150" dimension="286,84" />
+  <StrutsActivity path="/commandCenter.do" location="3050,350" dimension="310,84" />
+  <StrutsActivity path="/gwlzadmin/department/edit.jsp" location="650,250" dimension="220,48" />
+  <StrutsActivity path="/gwlzadmin/department/tip.jsp" location="50,150" dimension="214,48" />
+  <StrutsActivity path="/gwlzadmin/usergroup/powers.jsp" location="350,550" dimension="226,48" />
+  <StrutsActivity path="/gwlzadmin/usergroup/edit.jsp" location="50,550" dimension="214,48" />
+  <StrutsActivity path="/gwlzadmin/usergroup/uglist.jsp" location="650,350" dimension="226,48" />
+  <StrutsActivity path="/gwlzadmin/usergroup/tip.jsp" location="950,350" dimension="208,48" />
+  <StrutsActivity path="/gwlzadmin/user/list.jsp" location="950,550" dimension="184,48" />
+  <StrutsActivity path="/gwlzadmin/user/edit.jsp" location="350,650" dimension="184,48" />
+  <StrutsActivity path="/gwlzadmin/user/tip.jsp" location="50,650" dimension="178,48" />
+  <StrutsActivity path="/gwlzadmin/templtes/list.jsp" location="1250,450" dimension="208,48" />
+  <StrutsActivity path="/gwlzadmin/templtes/tip.jsp" location="1250,550" dimension="202,48" />
+  <StrutsActivity path="/gwlzadmin/parameter/list.jsp" location="50,950" dimension="214,48" />
+  <StrutsActivity path="/gwlzadmin/parameter/tip.jsp" location="350,950" dimension="208,48" />
+  <StrutsActivity path="/gwlzadmin/doctypes/list.jsp" location="1250,1050" dimension="208,48" />
+  <StrutsActivity path="/gwlzadmin/doctypes/tip.jsp" location="1250,1150" dimension="202,48" />
+  <StrutsActivity path="/gwlzadmin/docnum/list.jsp" location="1550,450" dimension="196,48" />
+  <StrutsActivity path="/gwlzadmin/docnum/tip.jsp" location="1550,550" dimension="190,48" />
+  <StrutsActivity path="/gwlzadmin/accountie/unbound.jsp" location="1550,850" dimension="232,48" />
+  <StrutsActivity path="/gwlzadmin/accountie/bound.jsp" location="650,950" dimension="220,48" />
+  <StrutsActivity path="/gwlzadmin/accountie/tip.jsp" location="1550,950" dimension="208,48" />
+  <StrutsActivity path="/gwlzadmin/log/list.jsp" location="1550,1050" dimension="178,48" />
+  <StrutsActivity path="/gwlzadmin/log/tip.jsp" location="1550,1150" dimension="172,48" />
+  <StrutsActivity path="/gwlzclient/doc/main.jsp" location="950,1250" dimension="184,48" />
+  <StrutsActivity path="/gwlzclient/fwgl-qcz/tip.jsp" location="1250,1250" dimension="208,48" />
+  <StrutsActivity path="/gwlzclient/doc/param.jsp" location="1850,1050" dimension="190,48" />
+  <StrutsActivity path="/gwlzclient/doc/attache.jsp" location="1550,1250" dimension="202,48" />
+  <StrutsActivity path="/client/djppages/djpMain.jsp" location="3050,1850" dimension="208,48" />
+  <StrutsActivity path="/gwlzadmin/index.jsp" location="50,2050" dimension="160,48" />
+  <StrutsActivity path="/client/toflypages/djpMain.jsp" location="3050,550" dimension="220,48" />
+  <StrutsActivity path="/client/zhzxpages/zhzxMain.jsp" location="3350,1350" dimension="220,48" />
+  <StrutsActivity path="/profile.jsp" location="2450,1850" dimension="112,48" />
+  <StrutsActivity path="/client/dsppages/dspMain.jsp" location="2750,550" dimension="208,48" />
+  <StrutsActivity path="/login.jsp" location="1550,1350" dimension="100,48" />
+  <StrutsActivity path="/gwlzclient/list.jsp" location="1850,1550" dimension="160,48" />
+  <StrutsActivity path="/gwlzclient/tip/tip.jsp" location="2450,550" dimension="178,48" />
+  <StrutsActivity path="/gwlzclient/fwgl-cbbssp/main.jsp" location="1850,550" dimension="232,48" />
+  <StrutsActivity path="/gwlzclient/fwgl-cbcsh/main.jsp" location="50,1550" dimension="226,48" />
+  <StrutsActivity path="/gwlzclient/fwgl-dsh/main.jsp" location="50,1450" dimension="214,48" />
+  <StrutsActivity path="/gwlzclient/fwgl-gd/main.jsp" location="1250,1550" dimension="208,48" />
+  <StrutsActivity path="/gwlzclient/fwgl-qcz/main.jsp" location="1550,1450" dimension="214,48" />
+  <StrutsActivity path="/gwlzclient/fwgl-ybj/main.jsp" location="2150,650" dimension="214,48" />
+  <StrutsActivity path="/gwlzclient/fwgl-spwb/main.jsp" location="1550,1550" dimension="220,48" />
+  <StrutsActivity path="/gwlzclient/fwgl-jsldsp/main.jsp" location="2150,550" dimension="232,48" />
+  <StrutsActivity path="/gwlzclient/fwgl-zgsjsp/main.jsp" location="950,1550" dimension="232,48" />
+  <StrutsActivity path="/gwlzclient/fwgl-ljx/main.jsp" location="650,1550" dimension="214,48" />
+  <StrutsActivity path="/gwlzadmin/monitor/list.jsp" location="1850,1650" dimension="202,48" />
+  <StrutsActivity path="/gwlzadmin/monitor/tip.jsp" location="2450,1750" dimension="196,48" />
+  <StrutsActivity path="/gwlzclient/advice/selectAdvice.jsp" location="1250,1850" dimension="250,48" />
+  <StrutsActivity path="/index.jsp" location="1250,1950" dimension="100,48" />
+  <StrutsActivity path="/roc/pdmanager/pdlist.jsp" location="2450,1950" dimension="190,48" />
+  <StrutsActivity path="/roc/hxmanag/hxlist.jsp" location="2750,1850" dimension="178,48" />
+  <StrutsActivity path="/roc/sysman/dppemana.jsp" location="1250,2050" dimension="184,48" />
+  <StrutsActivity path="/roc/pdmanager/tip.jsp" location="2150,2050" dimension="172,48" />
+  <StrutsActivity path="/roc/ticketmana/tacketpricelist.jsp" location="950,2050" dimension="250,48" />
+  <StrutsActivity path="/roc/hbmanager/hblist.jsp" location="2750,2150" dimension="190,48" />
+  <StrutsActivity path="/client/dsppages/units/myUnits.jsp" location="3050,1050" dimension="244,48" />
+  <StrutsActivity path="/client/dsppages/units/userSaleTicketsInfo.jsp" location="3050,750" dimension="316,48" />
+  <StrutsActivity path="/client/dsppages/dgEdit.jsp" location="650,2250" dimension="202,48" />
+  <StrutsActivity path="/client/djppages/luggageInfo.jsp" location="3350,2150" dimension="232,48" />
+  <StrutsActivity path="/client/dsppages/dpEdit.jsp" location="3350,1450" dimension="202,48" />
+  <StrutsActivity path="/client/toflypages/containPage.jsp" location="1850,2350" dimension="244,48" />
+  <StrutsActivity path="/client/dsppages/units/allUserUnits.jsp" location="2750,2350" dimension="274,48" />
+  <StrutsActivity path="/client/dsppages/tip.jsp" location="350,2250" dimension="184,48" />
+  <StrutsActivity path="/client/dsppages/dgqEdit.jsp" location="3350,850" dimension="208,48" />
+  <StrutsActivity path="/client/dsppages/dspBottom.jsp" location="1550,2150" dimension="220,48" />
+  <StrutsActivity path="/client/dsppages/homePage.jsp" location="50,2150" dimension="214,48" />
+  <StrutsActivity path="/client/dsppages/logs/customerOperLog.jsp" location="3350,950" dimension="286,48" />
+  <StrutsActivity path="/client/dsppages/units/saltPointUnits.jsp" location="3350,2350" dimension="286,48" />
+  <StrutsActivity path="/client/toflypages/mainFramePage.jsp" location="1250,2350" dimension="256,48" />
+  <StrutsActivity path="/client/dsppages/bentchUpdate.jsp" location="3050,950" dimension="238,48" />
+  <StrutsActivity path="/client/toflypages/homePage.jsp" location="2150,2350" dimension="226,48" />
+  <StrutsActivity path="/client/dsppages/dspPage.jsp" location="2450,2050" dimension="208,48" />
+  <StrutsActivity path="/client/dsppages/userFlyInfoList.jsp" location="3350,1550" dimension="256,48" />
+  <StrutsActivity path="/client/dsppages/tipteam.jsp" location="3350,1750" dimension="208,48" />
+  <StrutsActivity path="/client/dsppages/saltTickets.jsp" location="3350,1050" dimension="232,48" />
+  <StrutsActivity path="/client/dsppages/spEdit.jsp" location="50,2250" dimension="202,48" />
+  <StrutsActivity path="/client/dsppages/teamUpDate.jsp" location="3350,1850" dimension="226,48" />
+  <StrutsActivity path="/client/dsppages/logs/userOperLog.jsp" location="50,2350" dimension="262,48" />
+  <StrutsActivity path="/client/dsppages/teamSaltTickets.jsp" location="3350,1650" dimension="256,48" />
+  <StrutsActivity path="/client/dsppages/dspTop.jsp" location="2750,850" dimension="202,48" />
+  <StrutsActivity path="/client/djppages/xxinfo.jsp" location="2450,2350" dimension="202,48" />
+  <StrutsActivity path="/client/djppages/shchDJP.jsp" location="3050,2150" dimension="208,48" />
+  <StrutsActivity path="/client/djppages/shchDJPTEAM.jsp" location="3350,1950" dimension="232,48" />
+  <StrutsActivity path="/client/djppages/djpList.jsp" location="3050,850" dimension="208,48" />
+  <StrutsActivity path="/client/djppages/homePage.jsp" location="3050,1350" dimension="214,48" />
+  <StrutsActivity path="/client/zhzxpages/CCContainPage.jsp" location="2450,2450" dimension="250,48" />
+  <StrutsActivity path="/client/zhzxpages/CCContainPage1.jsp" location="2750,2450" dimension="256,48" />
+  <StrutsActivity path="/client/zhzxpages/CCMainPage.jsp" location="50,2550" dimension="232,48" />
+  <StrutsActivity path="/client/zhzxpages/CCContainPage2.jsp" location="350,2550" dimension="256,48" />
+  <StrutsActivity path="/client/zhzxpages/homePage.jsp" location="950,2550" dimension="220,48" />
+  <StrutsActivity path="profile.jsp" location="1550,1850" dimension="106,48" />
+  <StrutsActivity path="index.jsp" location="1850,1350" dimension="94,48" />
+  <StrutsActivity path="/gwlzclient/fwgl-alldoc/main.jsp" location="2450,850" dimension="232,48" />
+  <StrutsActivity path="/gwlzclient/tip.jsp" location="2150,1050" dimension="154,48" />
+  <StrutsActivity path="" location="650,50" dimension="40,48" />
+  <StrutsActivity path="/tip/tip.jsp" location="350,150" dimension="112,48" />
+  <StrutsActivity path="../../tip/tip.jsp" location="650,150" dimension="142,48" />
+  <StrutsActivity path="../tip/tip.jsp" location="50,250" dimension="124,48" />
+  <StrutsActivity path="/gwlzadmin/tip/tip.jsp" location="350,250" dimension="172,48" />
+  <StrutsActivity path="/gwlzadmin/tip.jsp" location="950,250" dimension="148,48" />
+  <StrutsActivity path="/gwlzadmin/usergroupss/tip.jsp" location="650,450" dimension="220,48" />
+  <StrutsActivity path="/gwlzadmin/usergroups/tip.jsp" location="950,450" dimension="214,48" />
+  <StrutsActivity path="/gwlzadmin/template/list.jsp" location="650,750" dimension="208,48" />
+  <StrutsActivity path="/gwlzadmin/template/tip.jsp" location="650,850" dimension="202,48" />
+  <StrutsActivity path="../doc/main.jsp" location="950,1350" dimension="130,48" />
+  <StrutsActivity path="./doc/main.jsp" location="1850,650" dimension="124,48" />
+  <StrutsActivity path="/gwlzclient/doc/content.jsp" location="1850,950" dimension="202,48" />
+  <StrutsActivity path="/glwzclient/list.jsp" location="350,1450" dimension="160,48" />
+  <StrutsActivity path="/glwzclient/fwgl-qcz/main.jsp" location="650,1450" dimension="214,48" />
+  <StrutsActivity path="/glwzclient/fwgl-qcz/tip.jsp" location="950,1450" dimension="208,48" />
+  <StrutsActivity path="/gwzclient/fwgl-qcz/tip.jsp" location="1850,1450" dimension="202,48" />
+  <StrutsActivity path="/gwzclient/fwgl-qcz/main.jsp" location="2150,950" dimension="208,48" />
+  <StrutsActivity path="/gwlzclient/.jsp" location="350,1550" dimension="136,48" />
+  <StrutsActivity path="/gwlzadmin/defalut.jsp" location="2150,1950" dimension="172,48" />
+  <StrutsActivity path="gwlzadmin/index.jsp" location="2750,1350" dimension="154,48" />
+  <StrutsActivity path="/client/dsppages/spEdit.jsp " location="1850,2150" dimension="208,48" />
+  <StrutsActivity path="/client/units/myUnits.jsp/bentchUpdate.jsp" location="1550,2250" dimension="292,48" />
+  <StrutsActivity path="/client/units/myUnits.jsp" location="2750,2250" dimension="190,48" />
+  <StrutsActivity path="/client/dsppages/log/userOperLog.jsp" location="3050,2250" dimension="256,48" />
+  <StrutsActivity path="/client/dsppages/logs/allUserUnits.jsp" location="650,2350" dimension="268,48" />
+  <StrutsActivity path="/client/dsppages/luggageInfo.jsp" location="3350,2050" dimension="232,48" />
+  <StrutsActivity path="/client/dsppages/units/printDiv.jsp" />
+  <StrutsTransition id="/gwlzclient/docFlowsAction.do,list,/gwlzclient/list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2150,1413" />
+      <AbsolutePoint location="2127,1413" />
+      <AbsolutePoint location="2127,1574" />
+      <AbsolutePoint location="2010,1574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,allUserUnits,/client/dsppages/units/allUserUnits.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1192,2234" />
+      <AbsolutePoint location="1192,2613" />
+      <AbsolutePoint location="3021,2613" />
+      <AbsolutePoint location="3021,2398" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/docFlowsAction.do,tip,/gwlzclient/tip/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2418,1353" />
+      <AbsolutePoint location="2445,1353" />
+      <AbsolutePoint location="2445,574" />
+      <AbsolutePoint location="2450,574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/user/userAction.do,info,/gwlzadmin/user/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="650,613" />
+      <AbsolutePoint location="139,613" />
+      <AbsolutePoint location="139,650" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/rejectAction.do,tip,/gwlzclient/tip/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1547,1650" />
+      <AbsolutePoint location="1547,513" />
+      <AbsolutePoint location="2517,513" />
+      <AbsolutePoint location="2517,550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/dJPAction.do,djpList,/client/djppages/djpList.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3309,1150" />
+      <AbsolutePoint location="3309,874" />
+      <AbsolutePoint location="3258,874" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/docNumOperAction.do,tip,/gwlzclient/tip/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2430,1592" />
+      <AbsolutePoint location="3671,1592" />
+      <AbsolutePoint location="3671,641" />
+      <AbsolutePoint location="2553,641" />
+      <AbsolutePoint location="2553,598" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/adviceAction.do,list,/gwlzclient/advice/selectAdvice.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="906,1874" />
+      <AbsolutePoint location="1250,1874" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/department/departMentsAction.do,query,/gwlzadmin/department/edit.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="950,83" />
+      <AbsolutePoint location="807,83" />
+      <AbsolutePoint location="807,250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/doc/selectTemplateAction.do,openTemplate,/gwlzclient/doc/main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2002,350" />
+      <AbsolutePoint location="2002,-25" />
+      <AbsolutePoint location="933,-25" />
+      <AbsolutePoint location="933,1274" />
+      <AbsolutePoint location="950,1274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/log/logAction.do,info,/gwlzadmin/log/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1785,734" />
+      <AbsolutePoint location="1785,1174" />
+      <AbsolutePoint location="1722,1174" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,dspTop,/client/dsppages/dspTop.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1237,2150" />
+      <AbsolutePoint location="1237,1143" />
+      <AbsolutePoint location="2835,1143" />
+      <AbsolutePoint location="2835,898" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,tipteam,/client/dsppages/tipteam.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="950,2153" />
+      <AbsolutePoint location="867,2153" />
+      <AbsolutePoint location="867,2013" />
+      <AbsolutePoint location="1479,2013" />
+      <AbsolutePoint location="1479,2065" />
+      <AbsolutePoint location="2127,2065" />
+      <AbsolutePoint location="2127,1813" />
+      <AbsolutePoint location="3454,1813" />
+      <AbsolutePoint location="3454,1798" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/docFlowsAction.do,7,/gwlzclient/fwgl-ybj/main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2349,1350" />
+      <AbsolutePoint location="2349,1065" />
+      <AbsolutePoint location="2853,1065" />
+      <AbsolutePoint location="2853,913" />
+      <AbsolutePoint location="2257,913" />
+      <AbsolutePoint location="2257,698" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/docFlowsAction.do,1,/gwlzclient/fwgl-dsh/main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2418,1383" />
+      <AbsolutePoint location="2715,1383" />
+      <AbsolutePoint location="2715,2673" />
+      <AbsolutePoint location="-85,2673" />
+      <AbsolutePoint location="-85,1474" />
+      <AbsolutePoint location="50,1474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,spEdit,/client/dsppages/spEdit.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="982,2234" />
+      <AbsolutePoint location="982,2313" />
+      <AbsolutePoint location="151,2313" />
+      <AbsolutePoint location="151,2298" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/commandCenter.do,mainPage,/client/zhzxpages/CCMainPage.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3205,350" />
+      <AbsolutePoint location="3205,313" />
+      <AbsolutePoint location="-55,313" />
+      <AbsolutePoint location="-55,2574" />
+      <AbsolutePoint location="50,2574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/docFlowsAction.do,4,/gwlzclient/fwgl-zgsjsp/main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2306,1434" />
+      <AbsolutePoint location="2306,1541" />
+      <AbsolutePoint location="1066,1541" />
+      <AbsolutePoint location="1066,1550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/docFlowsAction.do,10,/gwlzclient/fwgl-gd/main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2150,1383" />
+      <AbsolutePoint location="2097,1383" />
+      <AbsolutePoint location="2097,1613" />
+      <AbsolutePoint location="1515,1613" />
+      <AbsolutePoint location="1515,1574" />
+      <AbsolutePoint location="1458,1574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,userOperLog,/client/dsppages/logs/userOperLog.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1012,2234" />
+      <AbsolutePoint location="1012,2413" />
+      <AbsolutePoint location="181,2413" />
+      <AbsolutePoint location="181,2398" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/department/departMentsAction.do,info,/gwlzadmin/department/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="950,113" />
+      <AbsolutePoint location="157,113" />
+      <AbsolutePoint location="157,150" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/doctypes/docTypesAction.do,info,/gwlzadmin/doctypes/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="918,1113" />
+      <AbsolutePoint location="1351,1113" />
+      <AbsolutePoint location="1351,1150" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/parameter/parameterAction.do,info,/gwlzadmin/parameter/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1087,934" />
+      <AbsolutePoint location="1087,1165" />
+      <AbsolutePoint location="454,1165" />
+      <AbsolutePoint location="454,998" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/docFlowsAction.do,6,/gwlzclient/fwgl-spwb/main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2284,1434" />
+      <AbsolutePoint location="2284,1465" />
+      <AbsolutePoint location="2067,1465" />
+      <AbsolutePoint location="2067,1665" />
+      <AbsolutePoint location="2225,1665" />
+      <AbsolutePoint location="2225,1865" />
+      <AbsolutePoint location="1671,1865" />
+      <AbsolutePoint location="1671,1598" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,saltTickets,/client/dsppages/saltTickets.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1102,2192" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,luggageInfo,/client/djppages/luggageInfo.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1012,2234" />
+      <AbsolutePoint location="1012,2241" />
+      <AbsolutePoint location="3466,2241" />
+      <AbsolutePoint location="3466,2198" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,bentchUpdate,/client/dsppages/bentchUpdate.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1207,2150" />
+      <AbsolutePoint location="1207,1041" />
+      <AbsolutePoint location="3169,1041" />
+      <AbsolutePoint location="3169,998" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/user/userAction.do,userInfo,/gwlzadmin/user/edit.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="772,634" />
+      <AbsolutePoint location="772,674" />
+      <AbsolutePoint location="534,674" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/loginAction.do,chooseGroup,/profile.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1375,1434" />
+      <AbsolutePoint location="1375,1513" />
+      <AbsolutePoint location="2673,1513" />
+      <AbsolutePoint location="2673,1874" />
+      <AbsolutePoint location="2562,1874" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/accountie/accountieAction.do,unBoundList,/gwlzadmin/accountie/unbound.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1803,234" />
+      <AbsolutePoint location="1803,874" />
+      <AbsolutePoint location="1782,874" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/auditFinishAction.do,tip,/gwlzclient/tip/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2743,1150" />
+      <AbsolutePoint location="2743,574" />
+      <AbsolutePoint location="2628,574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/monitor/watchesAction.do,list,/gwlzadmin/monitor/list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1951,1750" />
+      <AbsolutePoint location="1951,1698" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,dgEdit,/client/dsppages/dgEdit.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="950,2183" />
+      <AbsolutePoint location="751,2183" />
+      <AbsolutePoint location="751,2250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,xxinfo,/client/djppages/xxinfo.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1102,2192" />
+      <AbsolutePoint location="2551,2374" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/usergroup/userGroupAction.do,info,/gwlzadmin/usergroup/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="324,413" />
+      <AbsolutePoint location="1054,413" />
+      <AbsolutePoint location="1054,398" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/user/userAction.do,list,/gwlzadmin/user/list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="894,574" />
+      <AbsolutePoint location="950,574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,userSaleTicketsInfo,/client/dsppages/units/userSaleTicketsInfo.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1042,2234" />
+      <AbsolutePoint location="1042,2413" />
+      <AbsolutePoint location="3741,2413" />
+      <AbsolutePoint location="3741,774" />
+      <AbsolutePoint location="3366,774" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,myUnits,/client/dsppages/units/printDiv.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1102,2192" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,teamUpDate,/client/dsppages/teamUpDate.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1102,2192" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/loginAction.do,zhzxMain,/client/zhzxpages/zhzxMain.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1500,1413" />
+      <AbsolutePoint location="2067,1413" />
+      <AbsolutePoint location="2067,1274" />
+      <AbsolutePoint location="3460,1274" />
+      <AbsolutePoint location="3460,1350" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,saltPointUnits,/client/dsppages/units/saltPointUnits.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1102,2192" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/dJPAction.do,homePage,/client/djppages/homePage.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3157,1234" />
+      <AbsolutePoint location="3157,1350" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,teamSaltTickets,/client/dsppages/teamSaltTickets.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1102,2192" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/doc/getDocAction.do,docContent,/gwlzclient/doc/main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="903,1650" />
+      <AbsolutePoint location="903,1313" />
+      <AbsolutePoint location="1042,1313" />
+      <AbsolutePoint location="1042,1298" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,dspBottom,/client/dsppages/dspBottom.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1222,2234" />
+      <AbsolutePoint location="1222,2265" />
+      <AbsolutePoint location="1479,2265" />
+      <AbsolutePoint location="1479,2183" />
+      <AbsolutePoint location="1550,2183" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/docFinishAction.do,info,/gwlzclient/tip/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2557,434" />
+      <AbsolutePoint location="2557,550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/log/logAction.do,list,/gwlzadmin/log/list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1788,691" />
+      <AbsolutePoint location="1831,691" />
+      <AbsolutePoint location="1831,1074" />
+      <AbsolutePoint location="1728,1074" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,dpEdit,/client/dsppages/dpEdit.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1132,2234" />
+      <AbsolutePoint location="1132,2335" />
+      <AbsolutePoint location="3343,2335" />
+      <AbsolutePoint location="3343,1474" />
+      <AbsolutePoint location="3350,1474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/commandCenter.do,noFlightData,/client/zhzxpages/homePage.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3360,392" />
+      <AbsolutePoint location="3657,392" />
+      <AbsolutePoint location="3657,2574" />
+      <AbsolutePoint location="1170,2574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,mainPage,/client/toflypages/mainFramePage.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1254,2183" />
+      <AbsolutePoint location="1378,2183" />
+      <AbsolutePoint location="1378,2350" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,userFlyInfoList,/client/dsppages/userFlyInfoList.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1102,2192" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/submit/submitAction.do,tip,/gwlzclient/tip/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2450,192" />
+      <AbsolutePoint location="2259,192" />
+      <AbsolutePoint location="2259,465" />
+      <AbsolutePoint location="2539,465" />
+      <AbsolutePoint location="2539,550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/docFlowsAction.do,9,/gwlzclient/fwgl-ljx/main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2254,1434" />
+      <AbsolutePoint location="2254,1441" />
+      <AbsolutePoint location="939,1441" />
+      <AbsolutePoint location="939,1574" />
+      <AbsolutePoint location="864,1574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/dJPAction.do,shchDJP,/client/djppages/shchDJP.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3279,1234" />
+      <AbsolutePoint location="3279,2174" />
+      <AbsolutePoint location="3258,2174" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/docFlowsAction.do,2,/gwlzclient/fwgl-cbcsh/main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2319,1350" />
+      <AbsolutePoint location="2319,1013" />
+      <AbsolutePoint location="5,1013" />
+      <AbsolutePoint location="5,1574" />
+      <AbsolutePoint location="50,1574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/doc/docSessionAction.do,param,/gwlzclient/doc/param.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2067,834" />
+      <AbsolutePoint location="2067,1074" />
+      <AbsolutePoint location="2040,1074" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/loginAction.do,toFlyMain,/client/toflypages/djpMain.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1473,1350" />
+      <AbsolutePoint location="1473,1113" />
+      <AbsolutePoint location="3003,1113" />
+      <AbsolutePoint location="3003,574" />
+      <AbsolutePoint location="3050,574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/ticketpriceAction.do,tacketpricelist,/roc/ticketmana/tacketpricelist.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="684,2074" />
+      <AbsolutePoint location="950,2074" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/docFlowsAction.do,8,/gwlzclient/fwgl-gd/main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2284,1350" />
+      <AbsolutePoint location="2284,1241" />
+      <AbsolutePoint location="1189,1241" />
+      <AbsolutePoint location="1189,1574" />
+      <AbsolutePoint location="1250,1574" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/loginAction.do,tip,/login.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1500,1374" />
+      <AbsolutePoint location="1550,1374" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/usergroup/userGroupAction.do,list,/gwlzadmin/usergroup/uglist.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="324,353" />
+      <AbsolutePoint location="650,353" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,myUnits,/client/dsppages/units/myUnits.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1132,2234" />
+      <AbsolutePoint location="1132,2313" />
+      <AbsolutePoint location="3615,2313" />
+      <AbsolutePoint location="3615,1074" />
+      <AbsolutePoint location="3294,1074" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/withDrawAction.do,tip,/gwlzclient/tip/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="50,1692" />
+      <AbsolutePoint location="41,1692" />
+      <AbsolutePoint location="41,641" />
+      <AbsolutePoint location="2539,641" />
+      <AbsolutePoint location="2539,598" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/templtes/templateAction.do,list,/gwlzadmin/templtes/list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="279,750" />
+      <AbsolutePoint location="279,513" />
+      <AbsolutePoint location="1354,513" />
+      <AbsolutePoint location="1354,498" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/docnum/docNumAction.do,list,/gwlzadmin/docnum/list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="178,1250" />
+      <AbsolutePoint location="178,1213" />
+      <AbsolutePoint location="1515,1213" />
+      <AbsolutePoint location="1515,474" />
+      <AbsolutePoint location="1550,474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/loginAction.do,djpMain,/client/djppages/djpMain.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1250,1383" />
+      <AbsolutePoint location="1215,1383" />
+      <AbsolutePoint location="1215,1913" />
+      <AbsolutePoint location="3154,1913" />
+      <AbsolutePoint location="3154,1898" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/dJPAction.do,shchDJPTEAM,/client/djppages/shchDJPTEAM.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3193,1192" />
+      <AbsolutePoint location="0,0" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/doc/attacheAction.do,attache,/gwlzclient/doc/attache.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2002,1234" />
+      <AbsolutePoint location="2002,1274" />
+      <AbsolutePoint location="1752,1274" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,tip,/client/dsppages/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="950,2213" />
+      <AbsolutePoint location="442,2213" />
+      <AbsolutePoint location="442,2250" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/commandCenter.do,mainPageContain,/client/zhzxpages/CCContainPage.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3183,350" />
+      <AbsolutePoint location="3183,271" />
+      <AbsolutePoint location="2425,271" />
+      <AbsolutePoint location="2425,1319" />
+      <AbsolutePoint location="2737,1319" />
+      <AbsolutePoint location="2737,2474" />
+      <AbsolutePoint location="2700,2474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/templtes/templateAction.do,info,/gwlzadmin/templtes/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="360,813" />
+      <AbsolutePoint location="1351,813" />
+      <AbsolutePoint location="1351,598" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/docnum/docNumAction.do,info,/gwlzadmin/docnum/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="306,1292" />
+      <AbsolutePoint location="611,1292" />
+      <AbsolutePoint location="611,535" />
+      <AbsolutePoint location="1645,535" />
+      <AbsolutePoint location="1645,550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,homePage,/client/dsppages/homePage.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1102,2150" />
+      <AbsolutePoint location="1102,2113" />
+      <AbsolutePoint location="699,2113" />
+      <AbsolutePoint location="699,2183" />
+      <AbsolutePoint location="264,2183" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/userPageAction.do,info,/gwlzclient/tip/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2965,1450" />
+      <AbsolutePoint location="2965,487" />
+      <AbsolutePoint location="2587,487" />
+      <AbsolutePoint location="2587,550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/usergroup/userGroupAction.do,powers,/gwlzadmin/usergroup/powers.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="324,383" />
+      <AbsolutePoint location="463,383" />
+      <AbsolutePoint location="463,550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/docFlowsAction.do,0,/gwlzclient/fwgl-qcz/main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2320,1434" />
+      <AbsolutePoint location="2320,1465" />
+      <AbsolutePoint location="2555,1465" />
+      <AbsolutePoint location="2555,1713" />
+      <AbsolutePoint location="1803,1713" />
+      <AbsolutePoint location="1803,1474" />
+      <AbsolutePoint location="1764,1474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/usergroup/userGroupAction.do,query,/gwlzadmin/usergroup/edit.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="157,434" />
+      <AbsolutePoint location="157,550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/accountie/accountieAction.do,info,/gwlzadmin/accountie/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1550,205" />
+      <AbsolutePoint location="1537,205" />
+      <AbsolutePoint location="1537,974" />
+      <AbsolutePoint location="1550,974" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/loginAction.do,success,/client/dsppages/dspMain.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1473,1434" />
+      <AbsolutePoint location="1473,1613" />
+      <AbsolutePoint location="633,1613" />
+      <AbsolutePoint location="633,5" />
+      <AbsolutePoint location="2854,5" />
+      <AbsolutePoint location="2854,550" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/flightInfoAction.do,flightInfoList,/roc/hbmanager/hblist.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2478,2174" />
+      <AbsolutePoint location="2750,2174" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/accountie/accountieAction.do,boundList,/gwlzadmin/accountie/bound.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1550,183" />
+      <AbsolutePoint location="1473,183" />
+      <AbsolutePoint location="1473,974" />
+      <AbsolutePoint location="870,974" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/monitor/watchesAction.do,info,/gwlzadmin/monitor/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2112,1774" />
+      <AbsolutePoint location="2450,1774" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/doctypes/docTypesAction.do,list,/gwlzadmin/doctypes/list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="918,1074" />
+      <AbsolutePoint location="1250,1074" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/flightAction.do,pdlist,/roc/pdmanager/pdlist.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2750,1695" />
+      <AbsolutePoint location="2367,1695" />
+      <AbsolutePoint location="2367,1974" />
+      <AbsolutePoint location="2450,1974" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/selectGroupAction.do,success,/index.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1550,1974" />
+      <AbsolutePoint location="1350,1974" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,containPage,/client/toflypages/containPage.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1254,2213" />
+      <AbsolutePoint location="1972,2213" />
+      <AbsolutePoint location="1972,2350" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/docFlowsAction.do,5,/gwlzclient/fwgl-jsldsp/main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2371,1350" />
+      <AbsolutePoint location="2371,598" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/ticketsAllocAction.do,tip,/roc/pdmanager/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2750,2013" />
+      <AbsolutePoint location="2236,2013" />
+      <AbsolutePoint location="2236,2050" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/ticketsAllocAction.do,flightList,/roc/hxmanag/hxlist.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2839,1950" />
+      <AbsolutePoint location="2839,1898" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/commandCenter.do,mainPageContain1,/client/zhzxpages/CCContainPage1.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3050,392" />
+      <AbsolutePoint location="3033,392" />
+      <AbsolutePoint location="3033,1313" />
+      <AbsolutePoint location="3321,1313" />
+      <AbsolutePoint location="3321,2474" />
+      <AbsolutePoint location="3006,2474" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/docFlowsAction.do,3,/gwlzclient/fwgl-cbbssp/main.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2418,1413" />
+      <AbsolutePoint location="3711,1413" />
+      <AbsolutePoint location="3711,613" />
+      <AbsolutePoint location="1959,613" />
+      <AbsolutePoint location="1959,598" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/loginAction.do,admin,/gwlzadmin/index.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1250,1413" />
+      <AbsolutePoint location="-25,1413" />
+      <AbsolutePoint location="-25,2074" />
+      <AbsolutePoint location="50,2074" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,dspPage,/client/dsppages/dspPage.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1215,2150" />
+      <AbsolutePoint location="1215,2141" />
+      <AbsolutePoint location="2554,2141" />
+      <AbsolutePoint location="2554,2098" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzadmin/parameter/parameterAction.do,list,/gwlzadmin/parameter/list.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="950,913" />
+      <AbsolutePoint location="157,913" />
+      <AbsolutePoint location="157,950" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/flightAction.do,flightList,/roc/hxmanag/hxlist.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2839,1734" />
+      <AbsolutePoint location="2839,1850" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/doc/selectTemplateAction.do,info,/gwlzclient/fwgl-qcz/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2154,392" />
+      <AbsolutePoint location="2397,392" />
+      <AbsolutePoint location="2397,1313" />
+      <AbsolutePoint location="1354,1313" />
+      <AbsolutePoint location="1354,1298" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/ticketsAllocAction.do,dppemana,/roc/sysman/dppemana.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2920,2034" />
+      <AbsolutePoint location="2920,2113" />
+      <AbsolutePoint location="1342,2113" />
+      <AbsolutePoint location="1342,2098" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,homePageDJP,/client/toflypages/homePage.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1072,2234" />
+      <AbsolutePoint location="1072,2465" />
+      <AbsolutePoint location="2263,2465" />
+      <AbsolutePoint location="2263,2398" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/commandCenter.do,mainPageContain2,/client/zhzxpages/CCContainPage2.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="3360,378" />
+      <AbsolutePoint location="3685,378" />
+      <AbsolutePoint location="3685,2649" />
+      <AbsolutePoint location="478,2649" />
+      <AbsolutePoint location="478,2598" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,customerOperLog,/client/dsppages/logs/customerOperLog.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1247,2150" />
+      <AbsolutePoint location="1247,1941" />
+      <AbsolutePoint location="3577,1941" />
+      <AbsolutePoint location="3577,998" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/clientAction.do,dgqEdit,/client/dsppages/dgqEdit.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="1192,2234" />
+      <AbsolutePoint location="1192,2703" />
+      <AbsolutePoint location="3771,2703" />
+      <AbsolutePoint location="3771,874" />
+      <AbsolutePoint location="3558,874" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+  <StrutsTransition id="/gwlzclient/counterSignAction.do,tip,/gwlzclient/tip/tip.jsp,1" routingType="0">
+    <AutomaticBendpoints>
+      <AbsolutePoint location="2731,950" />
+      <AbsolutePoint location="2731,588" />
+      <AbsolutePoint location="2628,588" />
+    </AutomaticBendpoints>
+  </StrutsTransition>
+</FlowViewLayout>
+

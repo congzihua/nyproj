@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="baticketsalloc">  
+	<resultMap class="com.roc.syspe.entity.Bagnum" id="ooBagnum">
+	  <result property="id" column="ID"/>
+	  <result property="monday" column="MONDAY"/>
+	  <result property="maxnum" column="MAXNUM"/>
+	</resultMap>
+	<resultMap class="com.roc.syspe.entity.BaTicketsalloc" id="ooBaTicketsalloc">
+	  <result property="id" column="ID"/>
+	   <result property="flightId" column="FLIGHT_ID"/>
+	   <result property="ticketpointId" column="TICKETPOINT_ID"/>
+	   <result property="amount" column="AMOUNT"/>
+	   <result property="lockednum" column="lockednum"/>
+	   <result property="orderdate" column="ORDERDATE"/>	
+	   <result property="createdate" column="CREATEDATE"/>
+	   <result property="deleteFlag" column="DELETE_FLAG"/>
+	   <result property="name" column="name"/>
+	   <result property="flight" column="flight"/>
+	   <result property="ordertime" column="ordertime"/>	 
+    </resultMap>  
+   <resultMap class="com.roc.syspe.entity.BaTicketsalloc" id="ooOpTicketsalloc">
+	  <result property="id" column="ID"/>
+	   <result property="flightId" column="FLIGHT_ID"/>
+	   <result property="ticketpointId" column="TICKETPOINT_ID"/>
+	   <result property="amount" column="AMOUNT"/>
+	   <result property="lockednum" column="lockednum"/>
+	   <result property="orderdate" column="ORDERDATE"/>	
+	   <result property="createdate" column="CREATEDATE"/>
+	   <result property="deleteFlag" column="DELETE_FLAG"/>
+	   <result property="name" column="name"/>
+	   <result property="flight" column="flight"/>	 
+    </resultMap> 
+    <select id="getBagnumList" parameterClass="com.roc.syspe.entity.Bagnum" resultMap="ooBagnum">
+      select * from BAGNUM a      
+    </select>
+     <insert id="insertBagnum" parameterClass="com.roc.syspe.entity.Bagnum">
+        insert into BAGNUM (MONDAY,MAXNUM) values(#monday#,#maxnum#)
+    </insert>      
+    <update id="editBagnum" parameterClass="com.roc.syspe.entity.Bagnum">
+        update BAGNUM set MONDAY=#monday#,MAXNUM=#maxnum#     where id=#id#
+    </update>
+    
+    
+     <select id="ticketsallocList" parameterClass="com.roc.syspe.entity.BaTicketsallocKeyword" resultMap="ooBaTicketsalloc">
+     select a.*,t.name,f.flight from ba_ticketsalloc a, ba_ticketpoint t,ba_flight f where a.flight_id=f.id and a.TICKETPOINT_ID=t.id and a.delete_flag!=1 
+     and a.delete_flag!=1 and a.delete_flag!=1 and a.ORDERDATE>=CURDATE()
+      <isNotEmpty prepend="and" property="orderdate">
+                        (a.ORDERDATE = #orderdate#)
+      </isNotEmpty>
+      order by ORDERDATE,t.name  limit #startNumber#,#endNumber#
+      </select>
+      <select id="piaoEFenPei" parameterClass="com.roc.syspe.entity.BaTicketsallocKeyword" resultMap="ooBaTicketsalloc">
+     select a.*,t.name,f.flight from ba_ticketsalloc a, ba_ticketpoint t,ba_flight f where a.flight_id=f.id and a.TICKETPOINT_ID=t.id and a.delete_flag!=1 
+     and a.delete_flag!=1 and a.delete_flag!=1 and a.ORDERDATE>=CURDATE() and a.ORDERDATE = #orderdate# and a.ORDERTIME=#ordertime# and a.FLIGHT_ID=#flightId# order by t.id
+      </select>
+      <select id="getTSCount" parameterClass="com.roc.syspe.entity.BaTicketsallocKeyword" resultClass="java.lang.Integer">
+      select count(id)  from ba_ticketsalloc     where delete_flag!=1 and  orderdate=#orderdate# and ordertime=#ordertime# and flight_Id=#flightId# and TICKETPOINT_ID=#ticketpointId#
+    </select>
+    <select id="getBaTicketsallocCount" parameterClass="com.roc.syspe.entity.BaTicketsallocKeyword" resultClass="java.lang.Integer">
+      select count(a.id)  from ba_ticketsalloc a, ba_ticketpoint t,ba_flight f where a.flight_id=f.id and a.TICKETPOINT_ID=t.id and a.delete_flag!=1 
+     and a.delete_flag!=1 and a.delete_flag!=1 and a.ORDERDATE>=CURDATE() 
+     <isNotEmpty prepend="and" property="orderdate">
+                        (a.ORDERDATE = #orderdate#)
+      </isNotEmpty>
+    </select>
+      <insert id="insertTicketsalloc" parameterClass="com.roc.syspe.entity.BaTicketsalloc">
+        insert into ba_ticketsalloc (FLIGHT_ID,CREATEDATE,DELETE_FLAG,TICKETPOINT_ID,AMOUNT,LOCKEDNUM,ORDERDATE,ORDERTIME) values(#flightId#,current_timestamp(),0,#ticketpointId#,#amount#,0,#orderdate#,#ordertime#)
+    </insert>      
+    <update id="editDeleTicketsalloc" parameterClass="com.roc.syspe.entity.BaTicketsalloc">
+        update ba_ticketsalloc set DELETE_FLAG=#deleteFlag#
+        where id=#id#
+    </update>
+    <update id="editTicketsalloc" parameterClass="com.roc.syspe.entity.BaTicketsalloc">
+        update ba_ticketsalloc set LOCKEDNUM=#lockednum#
+        where id=#id#
+    </update>   
+    
+     <select id="forSeleCountList" parameterClass="com.roc.syspe.entity.BaTicketsallocKeyword" resultMap="ooBaTicketsalloc">
+      	select a.*,t.name,f.flight from ba_ticketsalloc a, ba_ticketpoint t,ba_flight f where a.flight_id=f.id and a.TICKETPOINT_ID=t.id and a.delete_flag!=1 
+     and a.delete_flag!=1 and a.delete_flag!=1 and FLIGHT_ID =#flightId# and a.ORDERTIME=#ordertime#   and ORDERDATE=#orderdate# <isNotEmpty prepend="and" property="ticketpointId">(a.TICKETPOINT_ID = #ticketpointId#)</isNotEmpty>
+      </select> 
+      <update id="editTicketsallocAmount" parameterClass="com.roc.syspe.entity.BaTicketsalloc">
+        update ba_ticketsalloc set AMOUNT=#amount#
+        where id=#id#
+    </update> 
+</sqlMap>
+

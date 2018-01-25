@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="usergroup">
+
+    
+     <insert id="addug" parameterClass="com.founder.enp.entity.UserGroup">
+        insert into db_gwlz.dis_group (name,mem,dpmid)
+        values (#name#,#mem#,#dpmid#)
+    </insert>
+     <select id="querydmpUg" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.UserGroup">
+     select * from db_gwlz.dis_group where dpmid=#value#
+     </select>
+     <select id="queryUgInfo" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.UserGroup">
+    
+        select * from db_gwlz.dis_group where id=#value#
+    </select>
+         <update id="editug" parameterClass="com.founder.enp.entity.UserGroup" >
+    
+        update db_gwlz.dis_group set name=#name# ,mem=#mem# where id=#id#
+    </update>
+    
+      <update id="updatePowers" parameterClass="com.founder.enp.entity.GpReleation" >
+    
+      insert into  db_gwlz.dis_gpreleation (groupid,powerid) values(#groupid#,#powerid#)
+    </update>
+     <select id="isHaveUser" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+     select count(1) from db_gwlz.dis_ugrelation where groupid=#value#
+     </select>
+     <delete id="deleteUserGroup" parameterClass="java.lang.Integer" >
+     delete from db_gwlz.dis_group where id = #value#
+     </delete>
+      <delete id="deleteGpReleation" parameterClass="java.lang.Integer" >
+     delete from db_gwlz.dis_gpreleation where groupid = #value#
+     </delete>
+      <select id="queryPowersInfo" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.GpReleation" >
+      select * from db_gwlz.dis_gpreleation where groupid=#value#
+     </select>
+     
+     <select id="seleQXSystem" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.GpReleation">
+     	SELECT distinct r.powerid FROM dis_users u,dis_ugrelation ug,dis_gpreleation r
+			where u.userid=ug.userid and ug.groupid =r.groupid and u.userid=#value#
+     </select>
+</sqlMap>
+

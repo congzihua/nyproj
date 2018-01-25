@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="flightinfo">
+     <resultMap class="com.roc.enp.entity.FlightInfo" id="ooFlightInfoResult">
+	  <result property="id" column="ID"/>
+	  <result property="flight_id" column="FLIGHT_ID"/>	
+	  <result property="flight_name" column="flight_name"/>	
+	  <result property="flight_date" column="FLIGHT_DATE"/>
+	  <result property="fly_time" column="FLY_TIME"/>
+	   <result property="createdate" column="CREATEDATE"/>
+	    <result property="delete_Flag" column="DELETE_FLAG"/>
+    </resultMap>
+  
+     <select id="flightInfoList" parameterClass="com.roc.enp.entity.FlightInfoKeyword" resultMap="ooFlightInfoResult">
+     select a.id,a.flight_id,a.flight_date,a.fly_time,a.createdate,b.flight flight_name,a.delete_flag from ba_flightinfo a,ba_flight b where a.flight_id=b.id and a.DELETE_FLAG  !=1   and b.delete_flag !=1
+      			<!--  dynamic prepend="WHERE">
+                    <isNotEmpty prepend="and" property="flight_date">
+                        (flight_date like #flight_date#)
+                    </isNotEmpty>
+                </dynamic> 
+                <dynamic prepend="WHERE">
+                    <isNotEmpty prepend="and" property="fly_time">
+                        (fly_time like #fly_time#)
+                    </isNotEmpty>
+                </dynamic> -->
+                order by ID desc
+                limit #startNumber#,#endNumber#
+      </select>
+       
+       <select id="getFlightInfoListCount" parameterClass="com.roc.enp.entity.FlightInfoKeyword" resultClass="java.lang.Integer">
+      	select count(*)  from ba_flightinfo where DELETE_FLAG !=1 
+      			<!-- dynamic prepend="WHERE">
+                    <isNotEmpty prepend="and" property="flight_date">
+                        (flight_date like #flight_date#)
+                    </isNotEmpty>
+                </dynamic> 
+                <dynamic prepend="WHERE">
+                    <isNotEmpty prepend="and" property="fly_time">
+                        (fly_time like #fly_time#)
+                    </isNotEmpty>
+                </dynamic> -->
+    	</select>
+       
+      <insert id="insertFlightInfo" parameterClass="com.roc.enp.entity.FlightInfo">
+        insert into ba_flightinfo (FLIGHT_ID,FLIGHT_DATE,FLY_TIME,CREATEDATE,DELETE_FLAG) values(#flight_id#,#flight_date#,#fly_time#,current_timestamp(),0)
+        <selectKey resultClass="java.lang.Integer" keyProperty="id">     
+        SELECT LAST_INSERT_ID()
+        </selectKey>   
+      
+    </insert>
+     
+     <!--  insert id="batchInsertFlightInfo" parameterClass="com.roc.enp.entity.FlightInfo">
+        insert into ba_flightinfo (FLIGHT_ID,FLIGHT_DATE,FLY_TIME,CREATEDATE,DELETE_FLAG) values(#flight_id#,#flight_date#,#fly_time#,current_timestamp(),0)
+        <selectKey resultClass="java.lang.Integer" keyProperty="id">     
+        SELECT LAST_INSERT_ID()
+        </selectKey>   
+    </insert>-->
+     
+       <update id="deleteFlightInfo" parameterClass="java.lang.Integer" >
+        update ba_flightinfo set delete_flag=1 where id=#value#
+    </update>
+    <update id="editFlightInfo" parameterClass="com.roc.enp.entity.FlightInfo">
+        update ba_flightinfo set FLIGHT_ID=#flight_id#,FLIGHT_DATE=#flight_date#,FLY_TIME=#fly_time#,CREATEDATE=#createdate#
+        where id=#id#
+    </update>
+    <select id="fightInfoById" parameterClass="java.lang.Integer" resultClass="com.roc.enp.entity.FlightInfo">
+        select a.id,a.flight_id,a.flight_date,a.fly_time,a.createdate,a.delete_flag from ba_flightinfo a where id=#id#
+    </select>
+    <select id="queryAllForSingle" resultClass="com.roc.enp.entity.FlightInfo">
+    	select a.flight_id,a.flight_date,a.fly_time from ba_flightinfo a where a.DELETE_FLAG  !=1
+    </select>
+    <select id="queryByFlightDate" parameterClass="java.lang.String" resultMap="ooFlightInfoResult">
+    	select a.id,a.flight_id,a.flight_date,a.fly_time,a.createdate,b.flight flight_name,a.delete_flag from ba_flightinfo a,ba_flight b where a.flight_id=b.id and a.DELETE_FLAG  !=1 and b.delete_flag !=1 and a.flight_date=#value#
+    </select>  
+</sqlMap>

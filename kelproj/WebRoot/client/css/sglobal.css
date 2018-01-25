@@ -1,0 +1,60 @@
+BODY {
+	SCROLLBAR-FACE-COLOR: buttonface; FONT-SIZE: 9pt; MARGIN: 0px; SCROLLBAR-HIGHLIGHT-COLOR: buttonshadow; SCROLLBAR-SHADOW-COLOR: buttonshadow; SCROLLBAR-ARROW-COLOR: #000000; SCROLLBAR-DARKSHADOW-COLOR: window; 
+}
+A:active {
+	FONT-SIZE: 9pt; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+A:hover {
+	FONT-SIZE: 9pt; COLOR: #ff0000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+A:link {
+	FONT-SIZE: 9pt; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+A:visited {
+	FONT-SIZE: 9pt; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+TD {
+	FONT-SIZE: 9pt; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.content {
+	LINE-HEIGHT: 22px
+}
+.bg_top {
+	BACKGROUND: url(../images/greeting.jpg) no-repeat
+}
+.title {
+	COLOR: #ffffff
+}
+.title_2 {
+	COLOR: #ff6600
+}
+.cursor {
+	CURSOR: pointer
+}
+SELECT {
+	BORDER-RIGHT: #666666 1px solid; BORDER-TOP: #666666 1px solid; FONT-SIZE: 9pt; BORDER-LEFT: #666666 1px solid; BORDER-BOTTOM: #666666 1px solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; 
+}
+INPUT.bg {
+	FONT-SIZE: 9pt; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #cccccc
+}
+TR.listbg {
+	COLOR: #ffffff; BACKGROUND-COLOR: #5c8dde
+}
+TD.listbg {
+	COLOR: #ffffff; BACKGROUND-COLOR: #5c8dde
+}
+TD.dot {
+	BACKGROUND: url(../images/center_dot.gif); HEIGHT: 1px
+}
+FORM {
+	MARGIN: 0px
+}
+TABLE.bg {
+	BACKGROUND-COLOR: #cccccc
+}
+TR.bg {
+	BACKGROUND-COLOR: #eeeeee
+}
+INPUT.button {
+	BORDER-RIGHT: windowtext 1px solid; BORDER-TOP: windowtext 1px solid; FONT: icon; BORDER-LEFT: windowtext 1px solid; BORDER-BOTTOM: windowtext 1px solid
+}

@@ -1,0 +1,91 @@
+BODY {
+	SCROLLBAR-FACE-COLOR: buttonface; FONT-SIZE: 12px; MARGIN: 0px; SCROLLBAR-HIGHLIGHT-COLOR: buttonshadow; SCROLLBAR-SHADOW-COLOR: buttonshadow; SCROLLBAR-ARROW-COLOR: #000000; SCROLLBAR-DARKSHADOW-COLOR: window; 
+}
+.button6 {
+	BORDER-RIGHT: #af6700 1px solid; BORDER-TOP: #ffd16e 1px solid; FONT-SIZE: 12px; BACKGROUND: #ff9600; BORDER-LEFT: #ffd16e 1px solid; COLOR: #ffffff; PADDING-TOP: 3px; BORDER-BOTTOM: #af6700 1px solid; HEIGHT: 21px
+}
+.textbox {
+	BORDER-BOTTOM: #000000 1px solid;
+	BORDER-LEFT: #ffffff 1px solid;
+	BORDER-RIGHT: #ffffff 1px solid;
+	BORDER-TOP: #ffffff 1px solid;
+	
+	text-align:center;
+}
+.textbox1 {
+	BORDER: #000000 1px dotted;
+	
+	text-align:left;
+	line-height:130%;
+}
+.textbox2 {
+	BORDER-BOTTOM: #000000 1px solid;
+	BORDER-LEFT: #ffffff 1px solid;
+	BORDER-RIGHT: #ffffff 1px solid;
+	BORDER-TOP: #ffffff 1px solid;
+	
+	text-align:left;
+}
+.textarea
+{
+	BORDER: #000000 1px dotted;
+	text-align:left;
+}
+.button1 {
+	BACKGROUND-COLOR: #ffffff;
+	BORDER-BOTTOM-STYLE: ridge;
+	BORDER-LEFT-STYLE: ridge;
+	BORDER-RIGHT-STYLE: ridge;
+	BORDER-TOP-STYLE: ridge;
+	COLOR: #0000ff;
+	FONT-FAMILY: "Arial", ����;
+	FONT-SIZE: 12px;
+	TEXT-DECORATION: blink;
+	cursor: hand;
+}
+
+.button2 {
+	BACKGROUND: #d4d0c8;
+	FONT-SIZE: 12px;
+	cursor: hand;
+	WIDTH: 71px;
+	 HEIGHT: 23px
+}
+.button3 {
+	BACKGROUND: #d4d0c8;
+	FONT-SIZE: 12px;
+	cursor: hand;
+	WIDTH: 85px;
+	 HEIGHT: 25px
+}
+.buttoni {
+	BACKGROUND: #D4D0C8;
+	FONT-SIZE: 12px;
+	cursor: hand;
+}
+.button5 {
+	BACKGROUND: #ddddaa;
+	BORDER-LEFT-STYLE: ridge;
+	BORDER-RIGHT-STYLE: ridge;
+	BORDER-TOP-STYLE: ridge;
+	FONT-SIZE: 12px;
+	cursor: hand;
+	button3: "Arial", ����
+}
+table.labellist {
+	border-spacing: "1";
+	border-color: "grey";
+	border-collapse: "collapse";
+	position: relative;
+	font-size: 15px;
+	border-style: solid;
+	top: 5px;
+}
+table.tlist {
+	border-spacing: "2";
+	border-color: "#00002A";
+	border-collapse: "collapse";
+	width: "95%";
+	position: relative;
+	top: 5px;
+}

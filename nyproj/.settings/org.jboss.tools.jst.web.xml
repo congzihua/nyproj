@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<file-systems VERSION="2.0.0" application-name="nyproj"
+ model-entity="FileSystems" workspace-home="./WebRoot/WEB-INF">
+ <file-system NAME="WEB-INF" location="%workspace.home%" model-entity="FileSystemFolder"/>
+ <file-system NAME="WEB-ROOT" info="Content-Type=Web"
+  location="%workspace.home%/.." model-entity="FileSystemFolder"/>
+ <file-system NAME="src" location="%workspace.home%/../../src" model-entity="FileSystemFolder"/>
+ <file-system NAME="lib" location="%workspace.home%/lib" model-entity="FileSystemFolder"/>
+ <file-system NAME="classes" location="%workspace.home%/classes" model-entity="FileSystemFolder"/>
+ <file-system NAME="lib-Java2Word.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\Java2Word.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-activation.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\activation.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-antlr.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\antlr.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-commons-beanutils.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\commons-beanutils.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-commons-digester.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\commons-digester.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-commons-fileupload.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\commons-fileupload.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-commons-logging-api.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\commons-logging-api.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-commons-logging.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\commons-logging.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-commons-validator.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\commons-validator.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-dom4j-full.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\dom4j-full.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-dwr.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\dwr.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibatis-common-2.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\ibatis-common-2.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibatis-dao-2.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\ibatis-dao-2.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-ibatis-sqlmap-2.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\ibatis-sqlmap-2.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jacob.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\jacob.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jakarta-oro.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\jakarta-oro.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jdom-1.0.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\jdom-1.0.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jstl.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\jstl.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jxl.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\jxl.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-log4j-1.2.16.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\log4j-1.2.16.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-mail.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\mail.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-mysql-connector-java-5.1.7-bin.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\mysql-connector-java-5.1.7-bin.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-poi-3.7-20101029.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\poi-3.7-20101029.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-poi-examples-3.7-20101029.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\poi-examples-3.7-20101029.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-poi-ooxml-3.7-20101029.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\poi-ooxml-3.7-20101029.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-poi-ooxml-schemas-3.7-20101029.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\poi-ooxml-schemas-3.7-20101029.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-poi-scratchpad-3.7-20101029.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\poi-scratchpad-3.7-20101029.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-servlet-api.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\servlet-api.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-standard.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\standard.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-struts.jar"
+  location="E:\workspace1\nyproj\WebRoot\WEB-INF\lib\struts.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-javaee.jar"
+  location="D:\MyEclipse Professional 2014\plugins\com.genuitec.eclipse.j2eedt.core_11.5.0.me201311281640\data\libraryset\EE_5\javaee.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-resources.jar"
+  location="D:\Java\jdk1.6.0_20\jre\lib\resources.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-dnsns.jar"
+  location="D:\Java\jdk1.6.0_20\jre\lib\ext\dnsns.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-localedata.jar"
+  location="D:\Java\jdk1.6.0_20\jre\lib\ext\localedata.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-sunjce_provider.jar"
+  location="D:\Java\jdk1.6.0_20\jre\lib\ext\sunjce_provider.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-sunmscapi.jar"
+  location="D:\Java\jdk1.6.0_20\jre\lib\ext\sunmscapi.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-sunpkcs11.jar"
+  location="D:\Java\jdk1.6.0_20\jre\lib\ext\sunpkcs11.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jsf-api.jar"
+  location="D:\MyEclipse Professional 2014\configuration\org.eclipse.osgi\bundles\99\1\.cp\data\1.2\Mojarra\1.2_04\jsf-api.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="lib-jsf-impl.jar"
+  location="D:\MyEclipse Professional 2014\configuration\org.eclipse.osgi\bundles\99\1\.cp\data\1.2\Mojarra\1.2_04\jsf-impl.jar" model-entity="FileSystemJar"/>
+ <file-system NAME="src-1" location="%workspace.home%/../../config" model-entity="FileSystemFolder"/>
+ <web SERVLET_VERSION="2.4" model-entity="JstWeb" model-path="/web.xml">
+  <module URI="/WEB-INF/faces-config.xml" model-entity="WebJSFModule"
+   model-path="/faces-config.xml" src="src" web-root="WEB-ROOT"/>
+ </web>
+</file-systems>

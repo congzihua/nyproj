@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="flight">
+     <resultMap class="com.roc.enp.entity.BaFlight" id="ooBaFlightResult">
+	  <result property="id" column="ID"/>
+	  <result property="flight" column="FLIGHT"/>	
+	  <result property="createdate" column="CREATEDATE"/>
+	   <result property="deleteFlag" column="DELETE_FLAG"/>
+	    <result property="englishname" column="ENGLISHNAME"/>
+    </resultMap>
+     <resultMap class="com.roc.enp.entity.BaTicketpoint" id="ooBaTicketpoint">
+	  <result property="id" column="ID"/>
+	  <result property="name" column="name"/>	
+	  <result property="createdate" column="CREATEDATE"/>
+	   <result property="deleteFlag" column="DELETE_FLAG"/>
+	    <result property="telephone" column="TELEPHONE"/>
+	  
+    </resultMap>
+    <!-- resultMap class="com.roc.enp.entity.BaTicketsalloc" id="ooBaTicketsalloc">
+	  <result property="id" column="ID"/>
+	  <result property="startDate" column="START_DATE"/>	
+	  <result property="endDate" column="END_DATE"/>
+	  <result property="createdate" column="CREATEDATE"/>
+	   <result property="deleteFlag" column="DELETE_FLAG"/>
+	    <result property="amount" column="AMOUNT"/>
+    </resultMap> -->
+     <resultMap class="com.roc.enp.entity.BaTicketprice" id="ooBaTicketprice">
+	  <result property="id" column="ID"/>
+	  <result property="flightId" column="FLIGHT_ID"/>	
+	  <result property="createdate" column="CREATEDATE"/>
+	   <result property="deleteFlag" column="DELETE_FLAG"/>
+	    <result property="discountType" column="DISCOUNT_TYPE"/>
+	     <result property="realAmount" column="REAL_AMOUNT"/>
+	    <result property="flightName" column="flight"/>
+    </resultMap>
+     <select id="flightList" parameterClass="com.roc.enp.entity.BaFlightKeyWord" resultMap="ooBaFlightResult">
+     select * from ba_flight    where DELETE_FLAG !=1  order by ENGLISHNAME 
+      </select>
+       
+      <insert id="insertFlight" parameterClass="com.roc.enp.entity.BaFlight">
+        insert into ba_flight (FLIGHT,CREATEDATE,DELETE_FLAG,ENGLISHNAME) values(#flight#,current_timestamp(),0,#englishname#)
+        <selectKey resultClass="java.lang.Integer" keyProperty="id">     
+        SELECT LAST_INSERT_ID()
+        </selectKey>   
+      
+    </insert>
+     
+     
+       <delete id="deleteBaFlight" parameterClass="java.lang.Integer">
+        delete from ba_flight where id=#value#
+    </delete>
+    <update id="editDeleBaFlight" parameterClass="com.roc.enp.entity.BaFlight">
+        update ba_flight set DELETE_FLAG=#deleteFlag#
+        where id=#id#
+    </update>
+    <update id="editBaFlight" parameterClass="com.roc.enp.entity.BaFlight">
+        update ba_flight set englishname=#englishname#,flight=#flight#
+        where id=#id#
+    </update>
+    
+    <select id="ticketPointList" parameterClass="com.roc.enp.entity.BaTicketpointKeyword" resultMap="ooBaTicketpoint">
+     select * from ba_ticketpoint    where DELETE_FLAG !=1   
+      </select>
+     <insert id="insertTicketPoint" parameterClass="com.roc.enp.entity.BaTicketpoint">
+        insert into ba_ticketpoint (name,CREATEDATE,DELETE_FLAG,telephone) values(#name#,current_timestamp(),0,#telephone#)
+        <selectKey resultClass="java.lang.Integer" keyProperty="id">     
+        SELECT LAST_INSERT_ID()
+        </selectKey>   
+      
+    </insert>
+    <update id="editDeleTicketPoint" parameterClass="com.roc.enp.entity.BaTicketpoint">
+        update ba_ticketpoint set DELETE_FLAG=#deleteFlag#
+        where id=#id#
+    </update>
+    <update id="editTicketPoint" parameterClass="com.roc.enp.entity.BaTicketpoint">
+        update ba_ticketpoint set name=#name#,telephone=#telephone#
+        where id=#id#
+    </update> 
+    
+    <!--  select id="getBaTicketsallocList" parameterClass="com.roc.enp.entity.BaTicketsallocKeyword" resultMap="ooBaTicketsalloc">
+     select * from ba_ticketsalloc order by createdate desc
+            limit #startNumber#,#endNumber#
+    </select>
+     <select id="getBaTicketsallocCount" parameterClass="com.roc.enp.entity.BaTicketsallocKeyword" resultClass="java.lang.Integer">
+      select count(1)  from ba_ticketsalloc       
+    </select-->
+    
+    <select id="ticketpriceList" parameterClass="com.roc.enp.entity.BaTicketpriceKeyword" resultMap="ooBaTicketprice">
+      select  a.*,b.flight from ba_ticketprice  a,ba_flight b  where a.FLIGHT_ID=b.id and a.delete_flag  != 1 and b.delete_flag !=1
+      <isNotEmpty prepend="and" property="flightId">
+                        (a.FLIGHT_ID = #flightId#)
+      </isNotEmpty>
+      <isNotEmpty prepend="and" property="id">
+                        (a.ID = #id#)
+      </isNotEmpty>
+      </select>
+    <insert id="insertTicketprice" parameterClass="com.roc.enp.entity.BaTicketprice">
+        insert into ba_ticketprice (FLIGHT_ID,CREATEDATE,DELETE_FLAG,DISCOUNT_TYPE,REAL_AMOUNT) values(#flightId#,current_timestamp(),0,#discountType#,#realAmount#)
+        <selectKey resultClass="java.lang.Integer" keyProperty="id">     
+        SELECT LAST_INSERT_ID()
+        </selectKey>   
+      
+    </insert>
+    <update id="editDeleTicketprice" parameterClass="com.roc.enp.entity.BaTicketprice" >
+        update ba_ticketprice set DELETE_FLAG=#deleteFlag#
+        where id=#id#
+    </update>    
+    <update id="editTicketprice"    parameterClass="com.roc.enp.entity.BaTicketprice">
+        update ba_ticketprice set DISCOUNT_TYPE=#discountType#,REAL_AMOUNT=#realAmount#
+        where id=#id#
+    </update>
+</sqlMap>
+

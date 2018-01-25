@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="doc">
+ <insert id="addDoc" parameterClass="com.founder.enp.entity.DocEntity">
+        insert into db_gwlz.dis_docs (title,createtime,creator,content,typename,Urgency,publishtime,createOrg,secret,ToOrg,printnum,secretime,createmode,publishlevel,copyto,keywords,publishOrg)
+         values(#title#,sysdate(),#creator#,#content#,#typename#,#urgence#,#publishtime#,#createorg#,#secret#,#toOrg#,#printnum#,#secretime#,#createmode#,#publishlevel#,#copyto#,#keywords#,#publishOrg#)
+         <selectKey resultClass="java.lang.Integer" keyProperty="docid">     
+        SELECT LAST_INSERT_ID()
+        </selectKey>   
+     </insert>
+  <insert id="addAttache" parameterClass="com.founder.enp.entity.Attache">
+        insert into db_gwlz.dis_attachments (title,filetype,Filename,Docid)
+         values(#title#,#filetype#,#filename#,#docid#)
+     </insert>
+    <insert id="addFlows" parameterClass="com.founder.enp.entity.Flows">
+        insert into db_gwlz.dis_flows (powergroup,docid,status,sendtime,Fatherid,flag,processorid,version,operationtor,flowname,flowtor,advice,opertime)
+         values(#powergroup#,#docid#,#status#,sysdate(),#fatherid#,#flag#,#processorid#,#version#,#operationtor#,#flowName#,#flowtor#,#advice#,sysdate())
+     </insert>
+  <update id="updateDoc" parameterClass="com.founder.enp.entity.DocEntity">
+  
+  update db_gwlz.dis_docs set typename=#typename#, title=#title#,creator=#creator#,urgency=#urgence#,maketime=#maketime#,publishtime=#publishtime#,createOrg=#createorg#,secret=#secret#,toorg=#toOrg#,printnum=#printnum#,secretime=#secretime#,createmode=#createmode#,docnum=#docnum#,publishlevel=#publishlevel#,copyto=#copyto#,keywords=#keywords#,publishOrg=#publishOrg#
+  where docid=#docid#
+  </update>
+  <select id="flowslist" parameterClass="com.founder.enp.entity.DocFlowsKeyWord" resultClass="com.founder.enp.entity.ViewBean">
+     select title,a.docid,b.id as flowid,date_format(createtime,'%Y-%m-%d') as createtime,date_format(opertime,'%Y-%m-%d') as opertime,date_format(maketime,'%Y-%m-%d') as maketime ,typename,urgency,status,flag,b.operationtor from db_gwlz.dis_docs a inner join db_gwlz.dis_flows b on a.docid = b.docid 
+     <dynamic prepend="where">
+			<isNotEmpty prepend="and" property="userid">
+				<![CDATA[ b.processorid=#userid#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="powergroup">
+				<![CDATA[b.powergroup = #powergroup#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="powergroup">
+				<![CDATA[version = 1]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="title">
+				<![CDATA[a.title like #title#]]>
+			</isNotEmpty>
+			
+			<isNotEmpty prepend="and" property="startDate">
+				<![CDATA[createtime >= #startDate#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endDate">
+				<![CDATA[createtime<=concat(#endDate#,' 23:59:59')]]>
+			</isNotEmpty>
+			
+		</dynamic>
+		    order by b.id desc
+		 limit #startNumber#,#endNumber#
+  </select>
+  <select id="flowscount" parameterClass="com.founder.enp.entity.DocFlowsKeyWord" resultClass="java.lang.Integer">
+     select count(1) from db_gwlz.dis_docs a inner join db_gwlz.dis_flows b on a.docid = b.docid 
+     
+     <dynamic prepend="where">
+			<isNotEmpty prepend="and" property="userid">
+				<![CDATA[ b.processorid=#userid#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="powergroup">
+				<![CDATA[b.powergroup = #powergroup#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="powergroup">
+				<![CDATA[version = 1]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="title">
+				<![CDATA[a.title like #title#]]>
+			</isNotEmpty>
+			
+			<isNotEmpty prepend="and" property="startDate">
+				<![CDATA[createtime >= #startDate#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endDate">
+				<![CDATA[createtime<=concat(#endDate#,' 23:59:59')]]>
+			</isNotEmpty>
+			
+		</dynamic>
+  </select>
+   <select id="getDoc" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.DocEntity">
+     select Title,typename,Urgency as urgence,date_format(maketime,'%Y-%m-%d') as maketime,date_format(publishtime,'%Y-%m-%d') as publishtime,date_format(createtime,'%Y-%m-%d') as createtime,createOrg,docnum,secret,ToOrg,printnum,secretime,createmode,publishlevel,copyto,keywords,publishOrg,creator,content from db_gwlz.dis_docs where docid=#value#
+  </select>
+   <select id="getDocAttache" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.Attache">
+     select * from db_gwlz.dis_attachments where docid=#value#
+  </select>
+  <select id="checkDeleteDoc" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+  
+  select count(1) from db_gwlz.dis_flows where flag=1 and id=#value#
+  </select>
+  <update id="deleteDoc" parameterClass="java.lang.Integer" >
+  
+   update db_gwlz.dis_flows set powergroup=9 where id=#value#
+  </update>
+  <update id="restoreDoc" parameterClass="java.lang.Integer" >
+   update db_gwlz.dis_flows set powergroup=0 where id=#value#
+  </update>
+   <select id="getFlows" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.Flows">
+   select * from db_gwlz.dis_flows where id=#value#
+  </select>
+   <update id="updateFlows" parameterClass="com.founder.enp.entity.Flows" >
+   update db_gwlz.dis_flows set status=#status#,flag=#flag#,operationtor=#operationtor#,opertime=#opertime#,advice=#advice#, version=#version# where id=#id#
+  </update>
+  <select id="checkSubmitDoc" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+    select count(1) from db_gwlz.dis_flows where flag not in (0,5) and id=#value#
+  </select>
+   <select id="selectParentFlows" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+    select fatherid from db_gwlz.dis_flows  where id=#value#
+  </select>
+   <select id="selectLeafFlow" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+    select id from db_gwlz.dis_flows  where fatherid=#value#
+  </select>
+   <update id="updateParentStatus" parameterClass="com.founder.enp.entity.Flows" >
+   update db_gwlz.dis_flows set status=#status# where id=#id#
+  </update>
+  <select id="checkWithDrawDoc" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+    select count(1) from db_gwlz.dis_flows where flag not in (0,2) and fatherid=#value#
+  </select>
+   <select id="checkWithDrawDocSelf" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+    select count(1) from db_gwlz.dis_flows where flag = 0 and id=#value#
+  </select>
+  <select id="checkOpenStatus" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+    select count(1) from db_gwlz.dis_flows where docid = (select distinct docid from db_gwlz.dis_flows where fatherid=#value#) and processorid = (select distinct processorid from db_gwlz.dis_flows where fatherid=#value#) and flag=1;
+  </select>
+  <update id="setReadFlag" parameterClass="com.founder.enp.entity.Flows">
+   update db_gwlz.dis_flows set flag=1 where docid=#docid# and processorid=#processorid#
+  </update>
+  <delete id="withDrawDoc" parameterClass="java.lang.Integer">
+  delete from db_gwlz.dis_flows where fatherid=#value#
+  </delete>
+   <select id="getFlowsRecord" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.Flows">
+    select opertime,flowName,status,Advice,flowtor ,sendtime from db_gwlz.dis_flows  where docid=#value# and flag not in (0,2)
+  </select>
+  <select id="checkModify" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+  select count(1) from db_gwlz.dis_watches where docid=#value#
+  </select>
+  
+  <update id="updateCheckModify" parameterClass="com.founder.enp.entity.Watches">
+  update db_gwlz.dis_watches set docid=#docid# where userid=#userid#
+  </update>
+  <update id="updateUnCheckModify" parameterClass="com.founder.enp.entity.Watches">
+  update db_gwlz.dis_watches set docid=0 where userid=#userid#
+  </update>
+  <select id="getMaxAttacheID" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+  select Max(attacheid) from db_gwlz.dis_attachments 
+  </select>
+  <delete id="deleteAttache" parameterClass="java.lang.Integer">
+  delete from db_gwlz.dis_attachments where attacheid=#value#
+  </delete>
+  <select id="checkRejectModifyDoc" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+  select count(1) from db_gwlz.dis_flows where id=#value# and flag &lt;&gt;0 and flag &lt;&gt;2 and flag &lt;&gt;5
+  </select>
+  <select id="checkRejectDoc" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+  select count(1) from db_gwlz.dis_flows where id=#value# and flag &lt;&gt;0 and flag &lt;&gt;2
+  </select>
+  <update id="updateFlowsNew" parameterClass="com.founder.enp.entity.Flows">
+  update db_gwlz.dis_flows set version=0 where docid=#docid# and Processorid=#processorid# and powergroup=#powergroup#
+  </update>
+  <select id="checkCounterSign" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+  
+  select count(1) from db_gwlz.dis_flows where id=#value# and flag &lt;&gt;2
+  
+  </select>
+  <select id="getConterSignProcessorids" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.User">
+  
+  select userid,name from db_gwlz.dis_users where userid in (select processorid from db_gwlz.dis_flows where fatherid=#value# and flag = 2 and flag is null )
+  </select>
+  <select id="checkCounterSignISSubmit" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+  select count(1) from db_gwlz.dis_flows where fatherid=#value# and flag=2
+  </select>
+  <update id="updateConterSignStatus" parameterClass="com.founder.enp.entity.Flows">
+  update db_gwlz.dis_flows set status=#status#,advice=#advice#,opertime=#opertime#,flag=#flag#,operationtor=#operationtor# where fatherid=#id# and flag=2
+  </update>
+  <select id="chekcIsCounterSign" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+  select count(1) from db_gwlz.dis_flows where id=#value# and flag &lt;&gt; 5
+  </select>
+  <update id="withDrowCounterSignUser" parameterClass="com.founder.enp.entity.Flows">
+  update db_gwlz.dis_flows set status=#status#,flag=#flag#,advice='',operationtor=#operationtor#,opertime=sysdate() where fatherid=#id# and processorid=#processorid# and flag=2
+  </update>
+  <select id="getDocCreator" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.User">
+  select userid,name from db_gwlz.dis_users where userid in (select distinct processorid from db_gwlz.dis_flows where powergroup=0 and docid=#value#)
+  </select>
+  
+   <select id="getFlowsFinishList" parameterClass="com.founder.enp.entity.DocFlowsKeyWord" resultClass="com.founder.enp.entity.ViewBean">
+     select title,a.docid,b.id as flowid,date_format(createtime,'%Y-%m-%d') as createtime,date_format(maketime,'%Y-%m-%d') as maketime ,typename,urgency,status,flag,b.operationtor from db_gwlz.dis_docs a inner join db_gwlz.dis_flows b on a.docid = b.docid 
+     <dynamic prepend="where">
+			
+			<isNotEmpty prepend="and" property="powergroup">
+				<![CDATA[b.powergroup = 7]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="powergroup">
+				<![CDATA[ b.docid in (select distinct docid from db_gwlz.dis_flows where processorid=#userid#)]]>
+			</isNotEmpty>
+		    <isNotEmpty prepend="and" property="powergroup">
+				<![CDATA[ b.docid not in (select docid from db_gwlz.dis_flows where processorid=#userid# and powergroup=8)]]>
+			</isNotEmpty>
+		</dynamic>
+		    order by b.id desc
+		 limit #startNumber#,#endNumber#
+  </select>
+  <select id="getFlowsFinishListCount" parameterClass="com.founder.enp.entity.DocFlowsKeyWord" resultClass="java.lang.Integer">
+     select count(1) from db_gwlz.dis_docs a inner join db_gwlz.dis_flows b on a.docid = b.docid 
+     <dynamic prepend="where">
+			
+			<isNotEmpty prepend="and" property="powergroup">
+				<![CDATA[b.powergroup = 7]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="powergroup">
+				<![CDATA[ b.docid  in (select distinct docid from db_gwlz.dis_flows where processorid=#userid#)]]>
+			</isNotEmpty>
+			 <isNotEmpty prepend="and" property="powergroup">
+				<![CDATA[ b.docid   not in (select docid from db_gwlz.dis_flows where processorid=#userid# and powergroup=8)]]>
+			</isNotEmpty>
+		</dynamic>
+  </select>
+  <select id="getUserFinishDoc" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.Flows">
+  
+  select distinct docid from db_gwlz.dis_flows where processorid=#value#
+  </select>
+  <update id="updateFlowsBackUpFlag" parameterClass="com.founder.enp.entity.Flows">
+  
+  update db_gwlz.dis_flows set version = 0 where docid=#docid# and processorid=#processorid#
+  </update>
+  <select id="getFlowsFinishAllList" parameterClass="com.founder.enp.entity.DocFlowsKeyWord" resultClass="com.founder.enp.entity.ViewBean">
+     select  a.docid,title,b.id as flowid,date_format(opertime,'%Y-%m-%d') as opertime,date_format(createtime,'%Y-%m-%d') as createtime,date_format(maketime,'%Y-%m-%d') as maketime ,typename,urgency,status,flag,b.operationtor from db_gwlz.dis_docs a inner join db_gwlz.dis_flows b on a.docid = b.docid 
+     <dynamic prepend="where">
+			
+			<isNotEmpty prepend="and" property="powergroup">
+				<![CDATA[b.powergroup = 8]]>
+			</isNotEmpty>
+			
+			<isNotEmpty prepend="and" property="title">
+				<![CDATA[a.title like #title#]]>
+			</isNotEmpty>
+			
+			<isNotEmpty prepend="and" property="startDate">
+				<![CDATA[createtime >= #startDate#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endDate">
+				<![CDATA[createtime<=concat(#endDate#,' 23:59:59')]]>
+			</isNotEmpty>
+		</dynamic>
+		 group by docid  desc
+		 limit #startNumber#,#endNumber#
+  </select>
+  <select id="getFlowsFinishAllListCount" parameterClass="com.founder.enp.entity.DocFlowsKeyWord" resultClass="java.lang.Integer">
+     select count(distinct a.docid) from db_gwlz.dis_docs a inner join db_gwlz.dis_flows b on a.docid = b.docid 
+     <dynamic prepend="where">
+			
+			<isNotEmpty prepend="and" property="powergroup">
+				<![CDATA[b.powergroup = 8]]>
+			</isNotEmpty>
+			
+			<isNotEmpty prepend="and" property="title">
+				<![CDATA[a.title like #title#]]>
+			</isNotEmpty>
+			
+			<isNotEmpty prepend="and" property="startDate">
+				<![CDATA[createtime >= #startDate#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endDate">
+				<![CDATA[createtime<=concat(#endDate#,' 23:59:59')]]>
+			</isNotEmpty>
+			
+		</dynamic>
+  </select>
+  <delete id="delGarbageDoc" parameterClass="java.lang.Integer">
+  delete from db_gwlz.dis_docs where docid=#value#
+  </delete>
+    <delete id="delGarbageFlow" parameterClass="java.lang.Integer">
+  delete from db_gwlz.dis_flows where docid=#value#
+  </delete>
+  <select id="getPowerGroupAdvice" parameterClass="com.founder.enp.entity.DocFlowsKeyWord" resultClass="com.founder.enp.entity.Flows">
+  select date_format(opertime,'%Y-%m-%d') as opertime,Advice,flowtor from db_gwlz.dis_flows where powergroup=#powergroup# and flag=1  and docid=#docid# and FlowName &lt;&gt; 'counterSign'
+  </select>
+  
+    <select id="getPowerGroupAdviceLeader" parameterClass="com.founder.enp.entity.DocFlowsKeyWord" resultClass="com.founder.enp.entity.Flows">
+  select date_format(opertime,'%Y-%m-%d') as opertime,Advice,flowtor from db_gwlz.dis_flows where powergroup=#powergroup# and flag=1  and docid=#docid#
+  </select>
+  
+  <select id="getSounterSignAdvice" parameterClass="com.founder.enp.entity.DocFlowsKeyWord" resultClass="com.founder.enp.entity.Flows">
+  select date_format(opertime,'%Y-%m-%d') as opertime,Advice,flowtor from db_gwlz.dis_flows where FlowName='counterSign' and powergroup not in (4,5) and flag=1 and docid=#docid#
+  </select>
+  <select id="getTaskList" parameterClass="com.founder.enp.entity.DocFlowsKeyWord" resultClass="com.founder.enp.entity.ViewBean">
+     select title,a.docid,powergroup,b.id as flowid,date_format(createtime,'%Y-%m-%d') as createtime,date_format(opertime,'%Y-%m-%d') as opertime,date_format(sendtime,'%Y-%m-%d') as sendtime,date_format(maketime,'%Y-%m-%d') as maketime ,typename,urgency,status,flag,b.operationtor from db_gwlz.dis_docs a inner join db_gwlz.dis_flows b on a.docid = b.docid 
+      <dynamic prepend="where">
+		<isNotEmpty prepend="and" property="userid">
+				<![CDATA[ b.processorid=#userid#]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="userid">
+				<![CDATA[ flag in (0,2,5) ]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="userid">
+				<![CDATA[ powergroup <> 8]]>
+		</isNotEmpty>
+	  </dynamic>
+	    order by b.id desc
+		 limit #startNumber#,#endNumber#
+  </select>
+  <select id="getTaskListCount" parameterClass="com.founder.enp.entity.DocFlowsKeyWord" resultClass="java.lang.Integer">
+   select count(1) from db_gwlz.dis_docs a inner join db_gwlz.dis_flows b on a.docid = b.docid 
+      <dynamic prepend="where">
+		<isNotEmpty prepend="and" property="userid">
+				<![CDATA[ processorid=#userid#]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="userid">
+				<![CDATA[ flag in (0,2) ]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="userid">
+				<![CDATA[ powergroup <> 8]]>
+		</isNotEmpty>
+	  </dynamic>
+  </select>
+  <select id="getAuditor" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.Flows">
+   
+   select name as operationtor from db_gwlz.dis_users where userid in (select processorid from db_gwlz.dis_flows where docid=#value# and powergroup=1 and flag = 1)
+  
+  </select>
+    <select id="getFinisher" parameterClass="java.lang.Integer" resultClass="java.lang.String">
+   
+   select  operationtor from db_gwlz.dis_flows where docid=#value# and powergroup=6 and version = 1
+  
+  </select>
+  <select id="getDocTitle" parameterClass="java.lang.Integer" resultClass="java.lang.String">
+  
+  select title from db_gwlz.dis_docs where docid = (select docid from db_gwlz.dis_flows where id=#value#)
+  </select>
+</sqlMap>
+

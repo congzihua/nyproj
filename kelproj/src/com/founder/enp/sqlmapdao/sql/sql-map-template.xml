@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="template">
+
+ <insert id="add" parameterClass="com.founder.enp.entity.Template">
+        insert into db_gwlz.Dis_doctemplets(templetname,filename)
+        values (#templetname#,#filename#)
+    </insert>
+    <select id="queryTemplateCount" parameterClass="com.founder.enp.entity.TemplateKeyWord" resultClass="java.lang.Integer">
+      select count(1) from db_gwlz.Dis_doctemplets
+      <dynamic prepend="WHERE">
+                    <isNotEmpty prepend="and" property="templetname">
+                        (templetname like #templetname#)
+                    </isNotEmpty>
+                </dynamic> 
+     </select>
+     <select id="listTemplate" parameterClass="com.founder.enp.entity.TemplateKeyWord" resultClass="com.founder.enp.entity.Template">
+     select * from db_gwlz.Dis_doctemplets
+      <dynamic prepend="WHERE">
+                  
+                    <isNotEmpty prepend="and" property="templetname">
+                        (templetname like #templetname#)
+                    </isNotEmpty>
+                </dynamic> 
+                order by templetid desc
+               
+            limit #startNumber#,#endNumber#
+     </select>
+     <update id="updateParameter" parameterClass="com.founder.enp.entity.Parameter">
+     update db_gwlz.dis_parameter set templateip=#templateip#,attacheip=#attacheip#,contentip=#contentip#,docsbackip=#docsbackip#,httpupload=#httpupload#,httpdnload=#httpdnload#
+     </update>
+     <select id="listParameter" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.Parameter"> 
+       select * from db_gwlz.dis_parameter
+     </select>
+     <select id="selectTemplate" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.Template"> 
+       select * from db_gwlz.dis_doctemplets where templetid=#value#
+     </select>
+     <select id="checkName" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+     
+     select count(1) from db_gwlz.dis_doctemplets where templetname=#value#
+     
+     </select>
+     <update id="updateTemplate" parameterClass="com.founder.enp.entity.Template">
+     
+      update db_gwlz.dis_doctemplets set filename=#filename# where templetid=#templetid#
+     </update>
+     <delete id="deletetemplate" parameterClass="java.lang.Integer">
+     
+       delete from db_gwlz.dis_doctemplets where templetid=#value#
+     </delete>
+     <select id="isDelTemplate" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+      select count(1) from dis_doctypes where templetid=#value#
+     </select>
+     <select id="getAllTemplate" resultClass="com.founder.enp.entity.Template">
+     select * from db_gwlz.dis_doctemplets
+     
+     </select>
+</sqlMap>
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="log">
+    <insert id="recordLog" parameterClass="com.founder.enp.entity.LogEntity">
+        insert into db_gwlz.dis_logs(account,Actiontype,Action,IP,Logtime) values(#account#,#actiontype#,#action#,#ip#,sysdate())
+
+    </insert>
+    <delete id="deletelog" parameterClass="java.lang.Integer">
+    delete from db_gwlz.dis_logs where logid=#value#
+    </delete>
+    <select id="getLogList" parameterClass="com.founder.enp.entity.LogKeyWord" resultClass="com.founder.enp.entity.LogEntity">
+    select account,logid,actiontype,action,ip,logtime from db_gwlz.dis_logs 
+    
+    <dynamic prepend="where">
+			<isNotEmpty prepend="and" property="startDate">
+				<![CDATA[logtime >= #startDate#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endDate">
+				<![CDATA[logtime<=concat(#endDate#,' 23:59:59')]]>
+			</isNotEmpty>
+		</dynamic>
+		    order by logid desc
+               
+         limit #startNumber#,#endNumber#
+    </select>
+     <select id="getLogCount" parameterClass="com.founder.enp.entity.LogKeyWord" resultClass="java.lang.Integer">
+      select count(1) from db_gwlz.dis_logs
+      <dynamic prepend="where">
+			<isNotEmpty prepend="and" property="startDate">
+				<![CDATA[logtime >= #startDate#]]>
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endDate">
+				<![CDATA[logtime<=concat(#endDate#,' 23:59:59')]]>
+			</isNotEmpty>
+		</dynamic>
+    </select>
+</sqlMap>
+

@@ -1,0 +1,886 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+	<title>换领登记牌系统</title>
+	
+		
+		<script type="text/javascript" src="js/calendar/src/utils.js"></script>
+		<script type="text/javascript" src="js/calendar/src/calendar.js"></script>
+		<script type="text/javascript" src="js/verify.js"></script>
+		<!-- import the language module -->
+		<script type="text/javascript"
+			src="js/calendar/lang/calendar-zh.js"></script>
+		<script type="text/javascript" src="js/worktable.js"></script>
+		<script type="text/javascript"
+			src="js/calendar/src/calendar-setup.js"></script>
+		<LINK href="css/tab1.css" type=text/css rel=stylesheet>
+	
+	
+	
+
+		<STYLE type="text/css">
+<!--
+textarea{overflow-y:auto;padding:0;width:100%;height:70px;border:1px solid gray;}
+.article {
+BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; FILTER: revealTrans(transition=23,duration=0.5) blendTrans(duration=0.5); POSITION: absolute; VISIBILITY: hidden
+; background-color: #FFCC00; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px}
+-->
+</STYLE>
+<SCRIPT >
+<!--
+function todjp() {
+	var url = "djp_info.html";
+window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
+} 
+
+//-->
+</script>
+	</head>
+	<body oncontextmenu="if (!event.ctrlKey){return true;}">	
+	<form>
+	
+
+
+<div align="center">
+	<div  style="width=1024" align="center">
+		<font  style="font-family:'宋体';font-size:40px;font-weight:1000; color:#FF0000" >值 登 机 系 统</font><br/>
+		 
+	
+		
+	</div>
+	</div>
+
+<table width="500" border="0" align="center"  cellpadding="0" cellspacing="1" >
+  <tr>
+    <td align="right">姓名：</td>
+    <td >
+		<input type="text" name="" value=""/>
+	</td>
+    <td align="right">证件号码：</td>
+    <td>
+		<input type="text" name="" value=""/>
+	</td>
+    <td align="center"><input type="button" value="查询"/></td>
+    
+	
+  </tr>
+  </table>
+
+
+
+    </form>
+<table width="1024" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
+
+  <tr bgcolor="#FFFFFF">
+     <th>序号</th>
+    <th>姓名</th>
+    <th>证件类型</th>
+    <th>证件号码</th>
+    <th>目的地</th>
+    <th>日期</th>
+    <th>VIP</th>
+    <th>联系电话</th>
+    <th>状态</th>
+    <th>票价</th>
+    <th>操作</th>
+  </tr>
+  <tr bgcolor="#FFFFFF">
+     <td>1</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td>
+	<input type="button" value="出登机牌" onclick="todjp();"/>
+	
+	</td>
+  </tr>
+  <tr bgcolor="#FFFFFF">
+     <td>2</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>3</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>4</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>5</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>6</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>7</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>8</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>9</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>10</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>11</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>12</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>13</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>14</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>15</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>16</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>17</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>18</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>19</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>20</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>21</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>22</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>23</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr> <tr bgcolor="#FFFFFF">
+    <td>24</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>25</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>26</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>27</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>28</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>29</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>30</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>31</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>32</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>33</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>34</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>35</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>36</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>37</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>38</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>39</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>40</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>41</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>42</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>43</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>44</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>45</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>46</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>47</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>48</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>49</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>50</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>51</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>52</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>53</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>54</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>55</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>56</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+   <tr bgcolor="#FFFFFF">
+    <td>57</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+  
+   <tr bgcolor="#FFFFFF">
+    <td>58</td>
+    <td>阿郎</td>
+    <td>身份证</td>
+    <td>111119870415361X</td>
+    <td>库尔勒</td>
+    <td>2011-12-11 16：40</td>
+    <td>否</td>
+    <td>010-88558877</td>
+    <td>售票</td>
+    <td>1650元</td>
+    <td><input type="button" value="出登机牌" onclick="javascript:todjp();"/>
+	</td>
+  </tr>
+</table>
+
+</body>
+
+</html>	

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="doctypes"> 
+ 
+ <select id="queryDocTypesCount" parameterClass="com.founder.enp.entity.DocTypesKeyWord" resultClass="java.lang.Integer">
+ 
+ select count(1) from db_gwlz.dis_doctypes 
+              <dynamic prepend="WHERE">
+                    <isNotEmpty prepend="and" property="typename">
+                        (typename like #typename#)
+                    </isNotEmpty>
+                </dynamic> 
+ </select>
+ <select id="listDocTypes" parameterClass="com.founder.enp.entity.DocTypesKeyWord" resultClass="com.founder.enp.entity.DocTypes">
+   select doctypeid,typename from db_gwlz.dis_doctypes 
+      <dynamic prepend="WHERE">
+                    <isNotEmpty prepend="and" property="typename">
+                        (typename like #typename#)
+                    </isNotEmpty>
+                </dynamic> 
+                order by doctypeid desc
+               
+            limit #startNumber#,#endNumber#
+     </select>
+     <insert id="addDocTypes" parameterClass="com.founder.enp.entity.DocTypes">
+     
+        insert into db_gwlz.dis_doctypes (typename,templetid) values(#typename#,#template.templetid#)
+         <selectKey resultClass="java.lang.Integer" keyProperty="doctypeid">     
+        SELECT LAST_INSERT_ID()
+        </selectKey>   
+      
+     </insert>
+     <select id="getDocTypesInfo" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.DocTypes">
+      select * from db_gwlz.dis_doctypes where doctypeid = #value#
+     </select>
+     <delete id="deleteDocTypes" parameterClass="java.lang.Integer">
+      delete from db_gwlz.dis_doctypes where doctypeid=#value#
+     </delete>
+     <update id="editDoctypes" parameterClass="com.founder.enp.entity.DocTypes">
+      update db_gwlz.dis_doctypes set typename=#typename#,templetid=#templetid# where doctypeid=#doctypeid#
+     </update>
+     <delete id="deldocnum" parameterClass="java.lang.Integer">
+     delete from db_gwlz.Dis_docnum where  doctypeid = #value#
+     </delete>
+     <select id="getAllDoctypes" resultClass="com.founder.enp.entity.DocTypes">
+      select * from db_gwlz.dis_doctypes order by doctypeid desc
+     </select>
+     <insert id="insertDocNum" parameterClass="com.founder.enp.entity.DocNum">
+     insert into db_gwlz.dis_docnum (doctypeid,year,nextnum) values(#doctypeid#,#year#,#nextnum#)
+     </insert>
+     <update id="updateDocNum" parameterClass="com.founder.enp.entity.DocNum">
+     update db_gwlz.dis_docnum set year=#year#,nextnum=#nextnum# where docnumid=#docnumid#
+     </update>
+      <select id="getDocNum" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.DocNum">
+      select docnumid,a.doctypeid,year,nextnum,typename from db_gwlz.dis_doctypes a inner join db_gwlz.dis_docnum b on a.doctypeid = b.doctypeid where b.doctypeid=#doctypeid#
+     </select>
+     <select id="getDocTypesFromDmp" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.DocTypes">
+     select * from db_gwlz.dis_doctypes where dmpid=#value#
+     </select>
+     <select id="getDocIDFromDocTypeName" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+     select doctypeid from db_gwlz.dis_doctypes where typename=#value#
+     </select>
+     <select id="checkGetDocNum" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+	  select count(1) from db_gwlz.dis_watches where doctypeid=#value#
+	  </select>
+</sqlMap>
+

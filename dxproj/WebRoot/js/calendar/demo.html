@@ -1,0 +1,34 @@
+<html>
+  <head>
+
+<!-- UTF-8 is the recommended encoding for your pages -->
+    <meta http-equiv="content-type" content="text/xml; charset=utf-8" />
+    <title>Zapatec DHTML Calendar</title>
+
+<!-- Loading Theme file(s) -->
+    <link rel="stylesheet" href="themes/winxp.css" />
+
+<!-- import the calendar script -->
+<script type="text/javascript" src="/enpadmin/calendar/src/utils.js"></script>
+<script type="text/javascript" src="/enpadmin/calendar/src/calendar.js"></script>
+
+<!-- import the language module -->
+<script type="text/javascript" src="/enpadmin/calendar/src/calendar-setup.js"></script>
+<script type="text/javascript" src="/enpadmin/calendar/lang/calendar-zh.js"></script>
+</head>
+<body>
+<INPUT TYPE="text" id="openDate" NAME="model.openDate">
+<input type="button" value=" ... " id='button8b' />
+<script type="text/javascript">//<![CDATA[
+  Zapatec.Calendar.setup({
+    firstDay          : 6,
+    step              : 1,
+    electric          : false,
+    inputField        : "openDate",
+    button            : "button8b",
+    ifFormat          : "%Y-%m-%d",
+    daFormat          : "%Y-%m-%d"
+  });
+//]]></script>
+  </body>
+</html>

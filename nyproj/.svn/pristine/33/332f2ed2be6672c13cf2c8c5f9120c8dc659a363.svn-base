@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="user">
+     
+     <select id="queryUserInfo" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.User">
+     select * from db_gwlz.dis_users where userid=#value#
+     </select>
+     <select id="queryUserGroup" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.UGRelation">
+     select * from db_gwlz.dis_UGRelation where userid=#value#
+     </select>
+     <select id="list" parameterClass="com.founder.enp.entity.UserKeyWord" resultClass="com.founder.enp.entity.User">
+     select * from db_gwlz.dis_users where DELETE_FLAG !=1 
+      
+                   <isNotEmpty prepend="and" property="dmpid">
+                        (dmpid = #dmpid#)
+                    </isNotEmpty>
+                    <isNotEmpty prepend="and" property="userName">
+                        (name like #userName#)
+                    </isNotEmpty>
+              
+                order by orders asc, userid desc
+               
+            limit #startNumber#,#endNumber#
+     </select>
+       <select id="getLoginCount" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+     select count(*) from db_gwlz.dis_users where account=#value#
+     </select>
+      <insert id="insertUser" parameterClass="com.founder.enp.entity.User">
+        insert into db_gwlz.dis_Users (account,name,password,dmpid,email,phone,other,type,im,orders,delete_flag) values(#account#,#name#,#password#,#dmpid#,#email#,#phone#,#other#,#type#,#im#,#orders#,#delete_Flag#)
+        <selectKey resultClass="java.lang.Integer" keyProperty="userid">     
+        SELECT LAST_INSERT_ID()
+        </selectKey>   
+      
+    </insert>
+     <insert id="insertUGRelation" parameterClass="com.founder.enp.entity.UGRelation">
+        insert into db_gwlz.dis_ugrelation(userid,groupid)
+        values (#userid#,#groupid#)
+    </insert>
+     <select id="queryUserCount" parameterClass="com.founder.enp.entity.UserKeyWord" resultClass="java.lang.Integer">
+      select count(1) from db_gwlz.dis_users where DELETE_FLAG !=1 
+      
+                   <isNotEmpty prepend="and" property="dmpid">
+                        (dmpid = #dmpid#)
+                    </isNotEmpty>
+                    <isNotEmpty prepend="and" property="userName">
+                        (name like #userName#)
+                    </isNotEmpty>
+                
+     </select>
+       <delete id="deleteUgR" parameterClass="java.lang.Integer">
+        delete from db_gwlz.dis_ugrelation where userid=#value#
+    </delete>
+    <update id="editUser" parameterClass="com.founder.enp.entity.User">
+        update db_gwlz.dis_users set account=#account#,name=#name#,email=#email#,phone=#phone#,other=#other#,type=#type#,im=#im#
+        where userid=#userid#
+    </update>
+    <update id="transfer" parameterClass="com.founder.enp.entity.User">
+       update db_gwlz.dis_users set dmpid=#dmpid# where userid=#userid#
+    </update>
+     <delete id="deleteuser_old" parameterClass="java.lang.Integer">
+        delete from db_gwlz.dis_users where userid=#value#
+    </delete>
+    <update id="deleteuser" parameterClass="java.lang.Integer">
+       update db_gwlz.dis_users set delete_flag=1 where userid=#value#
+    </update>
+    <delete id="deleteuseradvices" parameterClass="java.lang.Integer">
+        delete from db_gwlz.dis_advices where userid=#value#
+    </delete>
+    <delete id="deleteaccountie" parameterClass="java.lang.Integer">
+        delete from db_gwlz.dis_accountie where userid=#value#
+    </delete>
+     <delete id="deleteuserlogs" parameterClass="java.lang.Integer">
+        delete from db_gwlz.dis_logs where userid=#value#
+    </delete>
+    <select id="getAllUser" resultClass="com.founder.enp.entity.User">
+    select * from db_gwlz.dis_users where userid in (select userid from db_gwlz.dis_ugrelation)
+    </select>
+    <select id="getBoundUser" parameterClass="com.founder.enp.entity.UserKeyWord" resultClass="com.founder.enp.entity.User">
+     select * from db_gwlz.dis_users
+                 <dynamic prepend="WHERE">
+                   <isNotEmpty prepend="and" property="userid">
+                         userid in (select leaderid from db_gwlz.dis_accountie where userid=#userid#)
+                    </isNotEmpty>
+                    <isNotEmpty prepend="and" property="userid">
+                         userid &lt;&gt;#userid#
+                    </isNotEmpty>
+                    
+                    <isNotEmpty prepend="and" property="userName">
+                        (name like #userName#)
+                    </isNotEmpty>
+                </dynamic> 
+    </select>
+    <select id="getUnBoundUser" parameterClass="com.founder.enp.entity.UserKeyWord" resultClass="com.founder.enp.entity.User">
+      select * from db_gwlz.dis_users
+                 <dynamic prepend="WHERE">
+                   <isNotEmpty prepend="and" property="userid">
+                         userid not in (select leaderid from db_gwlz.dis_accountie where userid=#userid#)
+                    </isNotEmpty>
+                    <isNotEmpty prepend="and" property="userid">
+                         userid &lt;&gt;#userid#
+                    </isNotEmpty>
+                     <isNotEmpty prepend="and" property="userid">
+                         userid in (select userid from db_gwlz.dis_ugrelation)
+                    </isNotEmpty>
+                    <isNotEmpty prepend="and" property="userName">
+                        (name like #userName#)
+                    </isNotEmpty>
+                </dynamic> 
+    </select>
+    <delete id="boundUser" parameterClass="com.founder.enp.entity.Accountie">
+      insert into db_gwlz.dis_accountie(userid,leaderid) values(#userid#,#leaderid#)
+    </delete>
+    <delete id="UnboundUser" parameterClass="com.founder.enp.entity.Accountie">
+    delete from db_gwlz.dis_accountie where userid=#userid# and leaderid=#leaderid#
+    </delete>
+    <delete id="delboundUser" parameterClass="com.founder.enp.entity.Accountie">
+    delete from db_gwlz.dis_accountie where userid=#userid# or leaderid=#userid#
+    </delete>
+    <select id = "checkUser" parameterClass="com.founder.enp.entity.User" resultClass="com.founder.enp.entity.User">
+    select userid,account,name,dmpid,email,type,phone,other from db_gwlz.dis_users where account=#account# and password=#password# and delete_flag!=1
+    </select>
+    <select id="getDepartFlowsUser" parameterClass="com.founder.enp.entity.DepartFlows" resultClass="com.founder.enp.entity.User">
+    
+    select distinct(a.userid),a.name from db_gwlz.dis_users a inner join db_gwlz.dis_ugrelation b on a.userid=b.userid inner join db_gwlz.dis_gpReleation c on b.groupid = c.groupid where a.dmpid=#departmentid# and c.powerid=#powerid# order by orders asc
+    </select>
+    <select id="getUserMonitorList" parameterClass="com.founder.enp.entity.UserKeyWord" resultClass="com.founder.enp.entity.Watches">
+     select a.id,a.userid,name,ipaddress,logintime,refreshtime,docid,doctypeid from db_gwlz.dis_watches a inner join db_gwlz.dis_users b on a.userid=b.userid
+      <dynamic prepend="WHERE">
+                    <isNotEmpty prepend="and" property="userName">
+                        (name like #userName#)
+                    </isNotEmpty>
+                </dynamic> 
+                order by id desc
+               
+            limit #startNumber#,#endNumber#
+    </select>
+     <select id="getUserMonitorCount" parameterClass="com.founder.enp.entity.UserKeyWord" resultClass="java.lang.Integer">
+      select count(1)  from db_gwlz.dis_watches a inner join db_gwlz.dis_users b on a.userid=b.userid
+    
+      <dynamic prepend="WHERE">
+                    <isNotEmpty prepend="and" property="userName">
+                        (name like #userName#)
+                    </isNotEmpty>
+                </dynamic> 
+    </select>
+    <insert id="addMonitorUser" parameterClass="com.founder.enp.entity.Watches">
+    
+    insert into db_gwlz.dis_watches(userid,ipaddress,logintime,refreshtime,docid,doctypeid) values(#userid#,#ipaddress#,sysdate(),sysdate(),0,0)
+    </insert>
+    <select id="checkLoginSameUser" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+    select count(1) from db_gwlz.dis_watches where userid=#value#
+    </select>
+    <select id="getUserWatchesInfo" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.Watches">
+    select * from db_gwlz.dis_watches where id=#value#
+    </select>
+    <update id="updateMonitorUnLock" parameterClass="java.lang.Integer">
+    update db_gwlz.dis_watches set docid=0,doctypeid=0 where id=#value#
+    </update>
+       <update id="updateDocNumUnLock" parameterClass="java.lang.Integer">
+    update db_gwlz.dis_watches set doctypeid=0 where userid=#value#
+    </update>
+     <update id="updateDocNumLock" parameterClass="com.founder.enp.entity.Watches">
+    update db_gwlz.dis_watches set doctypeid=#doctypeid# where userid=#userid#
+    </update>
+    <update id="orderUser" parameterClass="com.founder.enp.entity.User">
+      
+      update db_gwlz.dis_users set orders=#orders# where userid=#userid#
+    
+    </update>
+    <delete id="delMonitorUser" parameterClass="java.lang.Integer">
+    delete from db_gwlz.dis_watches where id=#value#
+    </delete>
+    <select id="getMonitorID" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+    select id from db_gwlz.dis_watches where userid=#value#
+    </select>
+    <select id="getAdvice" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.Advice">
+    select * from db_gwlz.dis_advices where userid=#value#
+    </select>
+    <delete id="delAdvice" parameterClass="java.lang.Integer" >
+     delete from db_gwlz.dis_advices where adsid=#value#
+    </delete>
+    <insert id="addAdvice" parameterClass="com.founder.enp.entity.Advice">
+    insert into db_gwlz.dis_advices(userid,advice) values(#userid#,#advice#)
+    </insert>
+    <select id="getUserHaveGroupCount" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+    
+    select count(1)  from db_gwlz.dis_ugrelation where userid=#value#
+    
+    </select>
+    <select id="getUserSelGroup" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.SelectGroup">
+    select b.name as dmpname,d.name as groupname,d.id as groupid,a.userid as leaderid from db_gwlz.dis_users a inner join db_gwlz.dis_department b on a.dmpid=b.id inner join db_gwlz.dis_ugrelation c on a.userid=c.userid inner join db_gwlz.dis_group d on c.groupid=d.id where a.userid=#value#
+    </select>
+    <select id="getUserhaveBound" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.UGRelation">
+    
+    select a.leaderid as userid,b.groupid from db_gwlz.dis_accountie a inner join db_gwlz.dis_ugrelation b on a.leaderid=b.userid where a.userid=#value#
+    
+    </select>
+    <select id="getBoundUserPower" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.SelectGroup">
+      select b.name as dmpname,d.name as groupname,d.id as groupid,a.userid as leaderid from db_gwlz.dis_users a inner join db_gwlz.dis_department b on a.dmpid=b.id inner join db_gwlz.dis_ugrelation c on a.userid=c.userid inner join db_gwlz.dis_group d on c.groupid=d.id where a.userid in (select leaderid from db_gwlz.dis_accountie where userid=#value#)
+  
+    </select>
+    <insert id="addUserPage" parameterClass="com.founder.enp.entity.UserPage">
+    
+    insert into db_gwlz.dis_userpage (fileTempPath,fileNumber,selectLogin,userid) values(#fileTempPath#,#fileNumber#,#selectLogin#,#userid#)
+    </insert>
+     <insert id="updateUserPage" parameterClass="com.founder.enp.entity.UserPage">
+    
+   update db_gwlz.dis_userpage set fileTempPath=#fileTempPath#,fileNumber=#fileNumber#,selectLogin=#selectLogin# where userid=#userid#
+    </insert>
+    <select id="getUserPage" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.UserPage">
+    
+    select * from db_gwlz.dis_userpage where userid=#value#
+    </select>
+    <update id="changeUserPwd" parameterClass="com.founder.enp.entity.User">
+    update db_gwlz.dis_users set password=#password# where userid=#userid#
+    </update>
+    <select id="getAdministratorInfo" parameterClass="com.founder.enp.entity.User" resultClass="com.founder.enp.entity.User">    
+    select id as userid, account,password,name from mysql.gwlz_admin where account=#account# and password=#password#    
+    </select>
+</sqlMap>
+

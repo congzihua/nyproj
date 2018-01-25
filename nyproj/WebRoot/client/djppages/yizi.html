@@ -1,0 +1,315 @@
+<html>
+<head>
+<style type="text/css">
+table,th,td
+{
+border:0px solid blue;
+}
+#Layer1{
+    
+	position:absolute;
+	width:200px;
+	z-index:1;
+	left: 600px;
+	top: 60px;
+	border: 1px
+	solid #000000
+}
+#Layer2{
+     position:absolute;
+	 width:105px;
+	 z-index:1px;
+	 left: 450px;
+	 top:80px;
+	 border:2px;
+	 
+	 
+ }
+/* #Layer3{
+     position:absolute;
+	 width:160px;
+	 left: 150px;
+	 top:20px;
+	 border:2px;
+	 
+ }*/
+ #Layer4{
+     margin-top:680px;
+	  }
+</style>
+
+
+
+
+
+</head>
+
+<body>
+
+<script type="text/javascript">
+var oImg = document.getElementsByTagName('img');
+
+function clickme(sId)
+{
+for (var i = 3; i < oImg.length; i++) {
+      if (oImg[i].id == sId) {
+        oImg[i].previousSibling.checked = true;
+        oImg[i].style.border = '1px solid #C00000';
+		oImg[i].src ="../image/30.jpg";
+		//alert(oImg[i].);
+      } else {
+        oImg[i].style.border = '1px solid #000000';
+		oImg[i].src ="../image/20.jpg";	
+      }
+    }
+	
+}
+function xuanzuo(){
+  var temp = document.getElementsByName('tijiao')
+  for(var i=0; i<temp.length;i++){
+    if(temp[i].checked){
+	 alert(temp[i].value);
+	 break;
+	}
+  }
+ }
+//function mousemove(sId){
+//for (var i = 0; i < oImg.length; i++){
+//if (oImg[i].id == sId){
+//oImg[i].src ="../image/20.jpg";
+//}
+//}
+  
+//}
+//document.body.onmousemove=quickalt;
+//function quickalt() {
+//if (event.srcElement.hint)event.srcElement.alt=event.srcElement.hint;
+//if(event.srcElement.alt && event.srcElement.alt!='') {
+//event.srcElement.hint=event.srcElement.alt;
+//altlayer.style.visibility='visible';
+//altlayer.style.left=event.x-1;
+//altlayer.style.top=event.y+16;
+//altlayer.innerHTML=event.srcElement.hint
+//event.srcElement.alt="";
+//}
+//else altlayer.style.visibility='hidden';}
+
+</script>
+<!--<div id = Layer3>
+<tr><th ><img src="../image/41.jpg" width="120" height="650" border="1px"/></th><th></th></tr>-->
+</div>
+<div id = Layer2>
+	<tr><th ><img src="../image/20.jpg" width="35" height="35" border="1px"/></th><th>可选座位</th></tr>
+
+	<tr><th ><img src="../image/38.jpg" width="35" height="35" border="1px"/></th><th>已选座位</th></tr>
+
+	<tr><th ><img src="../image/30.jpg" width="35" height="35" border="1px"/></th><th>选中座位</th></tr>
+</div>
+<form name = "form" action = "" method = "post">
+<div id="Layer1" align="center">
+<table>
+
+<tr>
+<th width="42" height="42"><input type="radio" value= "V1" id= "1" name="tijiao" style="display:none"><img id=1  name="V1" title="V1"src="../image/20.jpg" width="35" height="35" border="1px" onClick="javascript:clickme(this.id);" /></th>
+<th width="42"><input type="radio" value= "V2" id= "2" name="tijiao" style="display:none"><img id =2  title="V2" src="../image/20.jpg" width="35" height="35" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;V&nbsp;</th>
+<th width="53" height="42"><input type="radio" value= "V3" id= "3" name="tijiao" style="display:none"><img id=3  title="V3" src="../image/20.jpg" width="35" height="35" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="53"><input type="radio" value= "V4" id= "4" name="tijiao" style="display:none"><img id =4 title="V4"src="../image/20.jpg" width="35" height="35" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="42" height="42"><input type="radio" value= "V5" id= "5" name="tijiao" style="display:none"><img id=5 title="V5" src="../image/20.jpg" width="35" height="35" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42"><input type="radio" value= "V6" id= "6" name="tijiao" style="display:none"><img id =6  title="V6" src="../image/20.jpg" width="35" height="35" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th>&nbsp;V&nbsp;</th>
+<th width="53" height="42"><input type="radio" value= "V7" id= "7" name="tijiao" style="display:none"><img id=7 title="V7" src="../image/20.jpg" width="35" height="35" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="53"><input type="radio" value= "V8" id= "V8" name="tijiao" style="display:none"><img id =8  title="V8" src="../image/20.jpg" width="35" height="35" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+</table>
+
+<table>
+<tr>
+<th width="20" height="20">A</th>
+<th width="20" height="20">B</th>
+<th width="20" height="20">C</th>
+<th width="42">&nbsp;&nbsp;&nbsp;</th>
+<th width="20" height="20">D</th>
+<th width="20" height="20">E</th>
+<th width="20" height="20">F</th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "1A" id= "9" name="tijiao" style="display:none"><img id=1A title="1A"src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "1B" id= "10" name="tijiao" style="display:none"><img id=1B title="1B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "1C" id= "11" name="tijiao" style="display:none"><img id=1C title="1C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;1&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "1D" id= "12" name="tijiao" style="display:none"><img id=1D title="1D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "1E" id= "13" name="tijiao" style="display:none"><img id=1E title="1E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "1F" id= "14" name="tijiao" style="display:none"><img id=1F title="1F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "2A" id= "9" name="tijiao" style="display:none"><img id=2A title="2A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "2B" id= "10" name="tijiao" style="display:none"><img id=2B  title="2B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "2C" id= "11" name="tijiao" style="display:none"><img id=2C title="2C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;2&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "2D" id= "12" name="tijiao" style="display:none"><img id=2D title="2D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "2E" id= "13" name="tijiao" style="display:none"><img id=2E title="2E"  src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "2F" id= "14" name="tijiao" style="display:none"><img id=2F title="2F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "3A" id= "9" name="tijiao" style="display:none"><img id=3A title="3A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "3B" id= "10" name="tijiao" style="display:none"><img id=3B title="3B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "3C" id= "11" name="tijiao" style="display:none"><img id=3C title="3C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;3&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "3D" id= "12" name="tijiao" style="display:none"><img id=3D title="3D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "3E" id= "13" name="tijiao" style="display:none"><img id=3E title="3E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "3F" id= "14" name="tijiao" style="display:none"><img id=3F title="3F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "4A" id= "9" name="tijiao" style="display:none"><img id=4A title="4A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "4B" id= "10" name="tijiao" style="display:none"><img id=4B title="4B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "4C" id= "11" name="tijiao" style="display:none"><img id=4C title="4C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;4&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "4D" id= "12" name="tijiao" style="display:none"><img id=4D title="4D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="4E" value= "tijiao" id= "13" name="tijiao" style="display:none"><img id=4E title="4E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "4F" id= "14" name="tijiao" style="display:none"><img id=4F title="4F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "5A" id= "9" name="tijiao" style="display:none"><img id=5A title="5A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "5B" id= "10" name="tijiao" style="display:none"><img id=5B title="5B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "5C" id= "11" name="tijiao" style="display:none"><img id=5C title="5C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;5&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "5D" id= "12" name="tijiao" style="display:none"><img id=5D title="5D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "5E" id= "13" name="tijiao" style="display:none"><img id=5E title="5E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "5F" id= "14" name="tijiao" style="display:none"><img id=5F title="5F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "6A" id= "9" name="tijiao" style="display:none"><img id=6A title="6A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "6B" id= "10" name="tijiao" style="display:none"><img id=6B title="6B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "6C" id= "11" name="tijiao" style="display:none"><img id=6C title="6C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;6&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "6D" id= "12" name="tijiao" style="display:none"><img id=6D title="6D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "6E" id= "13" name="tijiao" style="display:none"><img id=6E title="6E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "6F" id= "14" name="tijiao" style="display:none"><img id=6F title="6F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "7A" id= "9" name="tijiao" style="display:none"><img id=7A title="7A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "7B" id= "10" name="tijiao" style="display:none"><img id=7B title="7B"src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "7C" id= "11" name="tijiao" style="display:none"><img id=7C title="7C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;7&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "7D" id= "12" name="tijiao" style="display:none"><img id=7D title="7D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "7E" id= "13" name="tijiao" style="display:none"><img id=7E title="7E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "7F" id= "14" name="tijiao" style="display:none"><img id=7F title="7F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "8A" id= "9" name="tijiao" style="display:none"><img id=8A title="8A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "8B" id= "10" name="tijiao" style="display:none"><img id=8B title="8B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "8C" id= "11" name="tijiao" style="display:none"><img id=8C title="8C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;8&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "8D" id= "12" name="tijiao" style="display:none"><img id=8D title="8D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "8E" id= "13" name="tijiao" style="display:none"><img id=8E title="8E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "8F" id= "14" name="tijiao" style="display:none"><img id=8F title="8F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "9A" id= "9" name="tijiao" style="display:none"><img id=9A title="9A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "9B" id= "10" name="tijiao" style="display:none"><img id=9B title="9B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "tijiao" id= "11" name="tijiao" style="display:none"><img id=9C title="9C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;9&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "9C" id= "12" name="tijiao" style="display:none"><img id=9D title="9D"src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "9E" id= "13" name="tijiao" style="display:none"><img id=9E title="9E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "9F" id= "14" name="tijiao" style="display:none"><img id=9F title="9F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "10A" id= "9" name="tijiao" style="display:none"><img id=10A title="10A"src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "10B" id= "10" name="tijiao" style="display:none"><img id=10B  title="10B"src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "10C" id= "11" name="tijiao" style="display:none"><img id=10C  title="10C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;10&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "10D" id= "12" name="tijiao" style="display:none"><img id=10D  title="10D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "10E" id= "13" name="tijiao" style="display:none"><img id=10E  title="10E"src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "10F" id= "14" name="tijiao" style="display:none"><img id=10F  title="10F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "11A" id= "9" name="tijiao" style="display:none"><img id=11A  title="11A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "11B" id= "10" name="tijiao" style="display:none"><img id=11B title="11B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "11C" id= "11" name="tijiao" style="display:none"><img id=11C  title="11C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;11&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "11D" id= "12" name="tijiao" style="display:none"><img id=11D  title="11D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "11E" id= "13" name="tijiao" style="display:none"><img id=11E  title="11E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "11F" id= "14" name="tijiao" style="display:none"><img id=11F  title="11F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "12A" id= "9" name="tijiao" style="display:none"><img id=12A  title="12A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "12B" id= "10" name="tijiao" style="display:none"><img id=12B  title="12B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "12C" id= "11" name="tijiao" style="display:none"><img id=12C  title="12C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;12&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "12D" id= "12" name="tijiao" style="display:none"><img id=12D  title="12D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "12E" id= "13" name="tijiao" style="display:none"><img id=12E  title="12E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "12F" id= "14" name="tijiao" style="display:none"><img id=12F  title="12F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "13A" id= "9" name="tijiao" style="display:none"><img id=13A  title="13A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "13B" id= "10" name="tijiao" style="display:none"><img id=13B  title="13B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "13C" id= "11" name="tijiao" style="display:none"><img id=13C  title="13C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;13&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "13D" id= "12" name="tijiao" style="display:none"><img id=13D  title="13D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "13E" id= "13" name="tijiao" style="display:none"><img id=13E  title="13E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "13F" id= "14" name="tijiao" style="display:none"><img id=13F  title="13F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "14A" id= "9" name="tijiao" style="display:none"><img id=14A  title="14A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "14B" id= "10" name="tijiao" style="display:none"><img id=14B  title="14B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "14C" id= "11" name="tijiao" style="display:none"><img id=14C  title="14C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;14&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "14D" id= "12" name="tijiao" style="display:none"><img id=14D  title="14D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "14E" id= "13" name="tijiao" style="display:none"><img id=14E  title="14E"src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "14F" id= "14" name="tijiao" style="display:none"><img id=14F  title="14F"src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "15A" id= "9" name="tijiao" style="display:none"><img id=15A  title="15A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "15B" id= "10" name="tijiao" style="display:none"><img id=15B  title="15B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "15C" id= "11" name="tijiao" style="display:none"><img id=15C  title="15C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;15&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "15D" id= "12" name="tijiao" style="display:none"><img id=15D  title="15D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "15E" id= "13" name="tijiao" style="display:none"><img id=15E  title="15E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "15F" id= "14" name="tijiao" style="display:none"><img id=15F  title="15F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "16A" id= "9" name="tijiao" style="display:none"><img id=16A  title="16A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "16B" id= "10" name="tijiao" style="display:none"><img id=16B  title="16B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "16C" id= "11" name="tijiao" style="display:none"><img id=16C  title="16C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;16&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "16D" id= "12" name="tijiao" style="display:none"><img id=16D  title="16D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "16E" id= "13" name="tijiao" style="display:none"><img id=16E  title="16E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "16F" id= "14" name="tijiao" style="display:none"><img id=16F  title="16F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "17A" id= "9" name="tijiao" style="display:none"><img id=17A  title="17A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "17B" id= "10" name="tijiao" style="display:none"><img id=17B  title="17B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "17C" id= "11" name="tijiao" style="display:none"><img id=17C  title="17C" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;17&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "17D" id= "12" name="tijiao" style="display:none"><img id=17D  title="17D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "17E" id= "13" name="tijiao" style="display:none"><img id=17E  title="17E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "17F" id= "14" name="tijiao" style="display:none"><img id=17F  title="17F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "18A" id= "9" name="tijiao" style="display:none"><img id=18A  title="18A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "18B" id= "10" name="tijiao" style="display:none"><img id=18B  title="18B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "18C" id= "11" name="tijiao" style="display:none"><img id=18C  title="18C"src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;18&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "18D" id= "12" name="tijiao" style="display:none"><img id=18D  title="18D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "18E" id= "13" name="tijiao" style="display:none"><img id=18E  title="18E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "18F" id= "14" name="tijiao" style="display:none"><img id=18F   title="18F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+<tr>
+<th width="20" height="20"><input type="radio" value= "19A" id= "9" name="tijiao" style="display:none"><img id=19A  title="19A" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "19B" id= "10" name="tijiao" style="display:none"><img id=19B  title="19B" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "19C" id= "11" name="tijiao" style="display:none"><img id=19C  title="19C"src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="42">&nbsp;19&nbsp;</th>
+<th width="20" height="20"><input type="radio" value= "19D" id= "12" name="tijiao" style="display:none"><img id=19D  title="19D" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "19E" id= "13" name="tijiao" style="display:none"><img id=19E  title="19E" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+<th width="20" height="20"><input type="radio" value= "19F" id= "14" name="tijiao" style="display:none"><img id=19F  title="19F" src="../image/20.jpg" width="20" height="20" border="1px" onClick="javascript:clickme(this.id);"/></th>
+</tr>
+</table>
+
+</div>
+<div id = Layer4 align="center"><input type="button" value="�ύ" name = "submit1" onClick="javascript:xuanzuo();"></div>
+</form>
+</body>
+</html>

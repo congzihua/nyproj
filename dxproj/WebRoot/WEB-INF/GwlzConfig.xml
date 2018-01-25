@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="GBK"?>
+<!--
+	FileName:       GwlzConfig.xml
+	Description:    公文流转 全局配置文件
+	Date:           2009-7-4
+--><gwlz>
+	<!-- =========================================================== -->
+	<!-- 系统定义的数据源信息                         -->
+	<!-- =========================================================== -->
+	<DataSource>
+		<JNDIDataSource>
+			java:comp/env/jdbc/GwlzJNDIAlias
+		</JNDIDataSource>
+	</DataSource>
+	  <!-- =========================================================== -->
+	<!-- 服务器邮件设置                 -->
+	<!-- =========================================================== -->
+	<mail>
+        <account>lygjyl@sina.com</account>
+        <password>lygjyl</password>
+        <smtp>smtp.sina.com</smtp>
+    </mail>
+    <im>
+      <account>admin</account>
+      <password>root</password>
+      <domain>192.168.1.5</domain>
+    </im>
+</gwlz>

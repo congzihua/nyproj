@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE dwr PUBLIC   
+    "-//GetAhead Limited//DTD Direct Web Remoting 1.0//EN"   
+    "http://www.getahead.ltd.uk/dwr/dwr10.dtd">  
+<dwr>  
+    <allow>  
+        <create creator="new" javascript="SysmanagerDWR">  
+            <param name="class" value="com.roc.sysmanager.dwr.SysmanagerDWR" /> 
+            <include method="addFlight"/> 
+            <include method="editFlight"/> 
+            <include method="addTicketpoint"/>
+            <include method="editTicketpoint"/>
+            <include method="addTicketprice"/>
+            <include method="editTicketprice"/>
+            <include method="addTicketsalloc"/>
+            <include method="ticketsallocLocket"/>
+            <include method="ticketsDateUpdate"/>
+            <include method="ticketsInforeturn"/>
+            <include method="ticketsInfoTuiding"/>
+            <include method="djpOrXlqSave"/>
+            <include method="xlqSave"/>
+            <include method="bentchUpdateFlightNo"/>
+            <include method="printTickets"/>
+            <include method="searchForFenPei"/>
+	    	<include method="updatePassword"/>
+	    	<include method="validate"/>
+	    	<include method="getOrderStatus"/>
+	    	<include method="printUpdate"/>
+	    	<include method="djpOrXlqSaveTeam"/>
+	    	<include method="xlqSaveTeam"/>
+	    	<include method="printUpdateTeam"/>
+        </create> 
+        <create  creator="new" javascript="FlightInfoDWR">
+       		 <param name="class" value="com.roc.sysmanager.dwr.FlightInfoDWR" /> 
+       		 <include method="addFlightInfo"/> 
+       		 <include method="updateFlightInfo"/> 
+       		  <include method="deleteFlightInfo"/> 
+       		  <include method="batchAddFlightInfo"/>
+       		   
+        </create>
+        <create  creator="new" javascript="UpdateStatusDWR">
+       		 <param name="class" value="com.roc.sysmanager.dwr.UpdateStatusDWR" /> 
+       		 <include method="updateStatusAtDJP"/> 
+       		 <include method="updateStatusAtDJPForSeatNum"/>
+       		 <include method="upFly"/>
+        </create>
+    </allow>
+</dwr>    

@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+  <data-sources />
+  <form-beans>
+    <form-bean name="departMentsForm" type="com.founder.enp.forms.DepartMentsForm" />
+    <form-bean name="userGroupForm" type="com.founder.enp.forms.UserGroupForm" />
+    <form-bean name="userForm" type="com.founder.enp.forms.UserForm" />
+    <form-bean name="templateForm" type="com.founder.enp.forms.TemplateForm" />
+    <form-bean name="parameterForm" type="com.founder.enp.forms.ParameterForm" />
+    <form-bean name="docTypesForm" type="com.founder.enp.forms.DocTypesForm" />
+    <form-bean name="selectTemplateForm" type="com.founder.enp.forms.SelectTemplateForm" />
+    <form-bean name="docsForm" type="com.founder.enp.forms.DocsForm" />
+    <form-bean name="attacheForm" type="com.founder.enp.forms.AttacheForm" />
+    <form-bean name="submitForm" type="com.founder.enp.forms.SubmitForm" />
+    <form-bean name="docNumOperForm" type="com.founder.enp.forms.DocNumOperForm" />
+    <form-bean name="userPageForm" type="com.founder.enp.forms.UserPageForm" />
+    
+    <form-bean name="baFlightForm" type="com.roc.sysmanager.base.form.BaFlightForm" />
+    
+    <form-bean name="baFlightInfoForm" type="com.roc.sysmanager.base.form.BaFlightInfoForm" >
+    	<!--  	<form-property name="userName" type="java.lang.String" />
+            <form-property name="password" type="java.lang.String" />-->
+            <form-property name="currentPage" type="java.lang.Integer" />
+     </form-bean>
+    
+    <form-bean name="baTicketsAllocForm" type="com.roc.sysmanager.base.form.BaTicketsAllocForm" />
+  </form-beans>
+  <global-exceptions />
+  <global-forwards />
+  <action-mappings >
+    <action name="departMentsForm" path="/gwlzadmin/department/departMentsAction" scope="request" type="com.founder.enp.action.DepartMentAction" validate="false" >
+    <forward name="info" path="/gwlzadmin/department/tip.jsp"></forward>
+    <forward name="query" path="/gwlzadmin/department/edit.jsp"></forward>
+    </action>
+    <action name="userGroupForm" path="/gwlzadmin/usergroup/userGroupAction" scope="request" validate="false"  type="com.founder.enp.action.UserGroupAction" > 
+    <forward name="list" path="/gwlzadmin/usergroup/uglist.jsp"></forward>
+    <forward name="info" path="/gwlzadmin/usergroup/tip.jsp"></forward>
+    <forward name="query" path="/gwlzadmin/usergroup/edit.jsp"></forward>
+    <forward name="powers" path="/gwlzadmin/usergroup/powers.jsp"></forward>
+    </action>
+    <action name="userForm" path="/gwlzadmin/user/userAction" type="com.founder.enp.action.UserAction" scope="request" validate="false" >
+     <forward name="list" path="/gwlzadmin/user/list.jsp"></forward>
+     <forward name="info" path="/gwlzadmin/user/tip.jsp"></forward>
+     <forward name="userInfo" path="/gwlzadmin/user/edit.jsp"></forward>
+    </action>
+    <action
+      path="/gwlzadmin/user/checkAccount"
+      type="com.founder.enp.action.CheckAccountAction" scope="request"
+      validate="false" />
+    <action name="templateForm"
+      path="/gwlzadmin/templtes/templateAction"
+      type="com.founder.enp.action.TemplateAction" scope="request"
+      validate="false" >
+       <forward name="list" path="/gwlzadmin/templtes/list.jsp"></forward>
+     <forward name="info" path="/gwlzadmin/templtes/tip.jsp"></forward>
+      </action>
+    <action name="parameterForm"
+      path="/gwlzadmin/parameter/parameterAction"
+      type="com.founder.enp.action.ParameterAction"
+      validate="false" >
+       <forward name="list" path="/gwlzadmin/parameter/list.jsp"></forward>
+     <forward name="info" path="/gwlzadmin/parameter/tip.jsp"></forward>
+      </action>
+    <action
+      path="/gwlzadmin/templtes/checkTemplateNameAction"
+      type="com.founder.enp.action.CheckTemplateNameAction"
+      validate="false" />
+    <action name="docTypesForm" path="/gwlzadmin/doctypes/docTypesAction" scope="request" type="com.founder.enp.action.DocTypesAction" validate="false" >
+       <forward name="list" path="/gwlzadmin/doctypes/list.jsp"></forward>
+       <forward name="info" path="/gwlzadmin/doctypes/tip.jsp"></forward>
+      </action>
+    <action
+      path="/gwlzadmin/docnum/docNumAction"
+      type="com.founder.enp.action.DocNumAction"
+      validate="false" scope="request" >
+       <forward name="list" path="/gwlzadmin/docnum/list.jsp"></forward>
+       <forward name="info" path="/gwlzadmin/docnum/tip.jsp"></forward>
+      </action>
+    <action name="userForm"
+      path="/gwlzadmin/accountie/accountieAction"
+      type="com.founder.enp.action.AccountieAction"
+      validate="false" scope="request" >
+      <forward name="boundList" path="/gwlzadmin/accountie/bound.jsp"></forward>
+      <forward name="unBoundList" path="/gwlzadmin/accountie/unbound.jsp"></forward>
+      <forward name="info" path="/gwlzadmin/accountie/tip.jsp"></forward>
+      </action>
+    <action
+      path="/gwlzadmin/log/logAction"
+      type="com.founder.enp.action.LogAction"
+      validate="false" scope="request">
+      <forward name="list" path="/gwlzadmin/log/list.jsp"></forward>
+      <forward name="info" path="/gwlzadmin/log/tip.jsp"></forward>
+      </action>
+    <action 
+      path="/gwlzclient/doc/docAction"
+      type="com.founder.enp.action.DocAction"
+      validate="false" scope="request" >
+      </action>
+    <action name="selectTemplateForm"
+      path="/gwlzclient/doc/selectTemplateAction"
+      type="com.founder.enp.action.SelectTemplateAction"
+      validate="false" scope="request">
+       <forward  name="openTemplate" path="/gwlzclient/doc/main.jsp"></forward>
+       <forward name="info" path="/gwlzclient/fwgl-qcz/tip.jsp"></forward>
+      </action>
+    <action name="docsForm"
+      path="/gwlzclient/doc/docSessionAction"
+      type="com.founder.enp.action.DocSessionAction"
+      validate="false" scope="request" >
+      <forward name="param" path="/gwlzclient/doc/param.jsp"></forward>
+      </action>
+    <action name="attacheForm"
+      path="/gwlzclient/doc/attacheAction"
+      type="com.founder.enp.action.AttacheSessionAction"
+      validate="false"  scope="request" >
+      <forward name="attache" path="/gwlzclient/doc/attache.jsp"></forward>
+      </action>
+    <action name="userForm"
+      path="/loginAction"
+      type="com.founder.enp.action.LoginAction"
+      validate="false" scope="request" >
+      	<forward name="success" path="/client/dsppages/dspMain.jsp" redirect="true" />
+      	<forward name="djpMain" path="/client/djppages/djpMain.jsp" redirect="true" />
+	    <forward name="tip" path="/login.jsp"/>
+	    <forward name="admin" path="/gwlzadmin/index.jsp"/>
+	    <forward name="chooseGroup" path="/profile.jsp"></forward>
+	     <forward name="zhzxMain" path="/client/zhzxpages/zhzxMain.jsp"></forward>
+	      <forward name="toSafeMain" path="/client/toflypages/djpMain.jsp"></forward>
+	      <forward name="toFlyMain" path="/nyaddfold/clientfold/ajwindow/toFlyMain.jsp"></forward>
+      </action>
+    <action name="docNumOperForm"
+      path="/gwlzclient/docFlowsAction"
+      type="com.founder.enp.action.DocFlowsAction"
+      validate="false" scope="request">
+      	<forward name="0" path="/gwlzclient/fwgl-qcz/main.jsp"/>
+      	<forward name="1" path="/gwlzclient/fwgl-dsh/main.jsp"/>
+      	<forward name="2" path="/gwlzclient/fwgl-cbcsh/main.jsp"/>
+      	<forward name="3" path="/gwlzclient/fwgl-cbbssp/main.jsp"/>
+      	<forward name="4" path="/gwlzclient/fwgl-zgsjsp/main.jsp"/>
+      	<forward name="5" path="/gwlzclient/fwgl-jsldsp/main.jsp"/>
+      	<forward name="6" path="/gwlzclient/fwgl-spwb/main.jsp"/>
+      	<forward name="7" path="/gwlzclient/fwgl-ybj/main.jsp"/>
+      	<forward name="8" path="/gwlzclient/fwgl-gd/main.jsp"/>
+      	<forward name="9" path="/gwlzclient/fwgl-ljx/main.jsp"/>
+      	<forward name="10" path="/gwlzclient/fwgl-gd/main.jsp"/>
+      	<forward name="list" path="/gwlzclient/list.jsp"/>
+	    <forward name="tip" path="/gwlzclient/tip/tip.jsp"/>
+      </action>
+    <action name="submitForm"
+      path="/gwlzclient/submit/submitAction"
+      type="com.founder.enp.action.SubmitAction"
+      validate="false" scope="request">
+       <forward name="tip" path="/gwlzclient/tip/tip.jsp"/>
+      </action>
+    <action path="/gwlzclient/withDrawAction" validate="false" scope="request" type="com.founder.enp.action.WithDrawAction" >
+    <forward name="tip" path="/gwlzclient/tip/tip.jsp"></forward>
+    </action>
+    <action
+      path="/gwlzclient/doc/getDocAction"
+      type="com.founder.enp.action.GetDocAction"
+      validate="false" scope="request" >
+      <forward name="docContent" path="/gwlzclient/doc/main.jsp"></forward>
+      </action>
+    <action name="submitForm"
+    path="/gwlzclient/rejectAction" 
+    type="com.founder.enp.action.RejectAction" 
+    scope="request" validate="false">
+    
+      <forward name="tip" path="/gwlzclient/tip/tip.jsp"/>
+      </action>
+    <action name="submitForm"
+      path="/gwlzclient/counterSignAction"
+      type="com.founder.enp.action.CounterSignAction"
+      validate="false" scope="request" >
+         <forward name="tip" path="/gwlzclient/tip/tip.jsp"/>
+     </action>
+    <action name="submitForm"
+      path="/gwlzclient/auditFinishAction"
+      type="com.founder.enp.action.AuditFinishAction"
+      validate="false" scope="request">
+      <forward name="tip" path="/gwlzclient/tip/tip.jsp"/>
+      </action>
+    <action name="docNumOperForm"
+      path="/gwlzclient/docNumOperAction"
+      type="com.founder.enp.action.DocNumOperAction"
+      validate="false" scope="request">
+      <forward name="tip" path="/gwlzclient/tip/tip.jsp"/>
+      </action>
+    <action name="userForm"
+      path="/gwlzadmin/monitor/watchesAction" 
+      type="com.founder.enp.action.WatchesAction"
+      validate="false" scope="request">
+      <forward name="list" path="/gwlzadmin/monitor/list.jsp"/>
+       <forward name="info" path="/gwlzadmin/monitor/tip.jsp"></forward>
+      </action>
+    <action name="docsForm"
+      path="/gwlzclient/docFinishAction"
+      type="com.founder.enp.action.DocFinishAction"
+      validate="false" scope="request">
+          <forward name="info" path="/gwlzclient/tip/tip.jsp"></forward>
+      </action>
+    <action
+      path="/gwlzclient/bakupDocAction"
+      type="com.founder.enp.action.BakupDocAction"
+      validate="false" />
+    <action
+      path="/gwlzclient/unloadAction"
+      type="com.founder.enp.action.UnloadAction"
+      validate="false" />
+    <action
+      path="/adviceAction"
+      type="com.founder.enp.action.AdviceAction"
+      validate="false" >
+      
+      <forward name="list" path="/gwlzclient/advice/selectAdvice.jsp"></forward>
+      </action>
+    <action
+      path="/selectGroupAction"
+      type="com.founder.enp.action.SelectGroupAction"
+      validate="false" scope="request" >
+      	<forward name="success" path="/index.jsp" redirect="true" />
+      </action>
+    <action name="userPageForm"
+      path="/gwlzclient/userPageAction"
+      type="com.founder.enp.action.UserPageAction"
+      validate="false" scope="request" >
+      <forward name="info" path="/gwlzclient/tip/tip.jsp"></forward>
+      </action>
+     
+ 
+   <action name="baFlightForm"
+      path="/flightAction" parameter="method"
+      type="com.roc.sysmanager.base.action.FlightAction"
+      validate="false" scope="request" >
+      	<forward name="flightList" path="/roc/hxmanag/hxlist.jsp" />
+      	<forward name="pdlist" path="/roc/pdmanager/pdlist.jsp" />
+      </action>
+ <action name="baTicketsAllocForm"
+      path="/ticketsAllocAction" parameter="method"
+      type="com.roc.sysmanager.base.action.TicketsAllocAction"
+      validate="false" scope="request" >
+      	<forward name="flightList" path="/roc/hxmanag/hxlist.jsp" />
+      <forward name="dppemana" path="/roc/sysman/dppemana.jsp" />   
+      	<forward name="tip" path="/roc/pdmanager/tip.jsp" />   
+      </action>
+  <action 
+      path="/ticketpriceAction" parameter="method"
+      type="com.roc.sysmanager.base.action.TicketpriceAction"
+      validate="false" scope="request" >
+      	<forward name="tacketpricelist" path="/roc/ticketmana/tacketpricelist.jsp" />      
+      </action>
+
+      
+      <action 
+      path="/flightInfoAction" parameter="method"
+      type="com.roc.sysmanager.base.action.FlightInfoAction"
+      name="baFlightInfoForm"
+      validate="false" scope="request" >
+      	<forward name="flightInfoList" path="/roc/hbmanager/hblist.jsp" />      
+      </action>
+
+   
+   <action 
+      path="/clientAction" parameter="method"
+      type="com.roc.sysmanager.base.action.ClientAction"
+      validate="false" scope="request" >
+      	<forward name="dspPage" path="/client/dsppages/dspPage.jsp" />   
+      	<forward name="homePage" path="/client/dsppages/homePage.jsp" /> 
+      	<forward name="dspTop" path="/client/dsppages/dspTop.jsp" />  
+      	<forward name="dspBottom" path="/client/dsppages/dspBottom.jsp" />  
+      	
+      	<forward name="spEdit" path="/client/dsppages/spEdit.jsp"/> 
+      	<forward name="tip" path="/client/dsppages/tip.jsp"/>   
+      	<forward name="dgEdit" path="/client/dsppages/dgEdit.jsp"/> 
+      	<forward name="bentchUpdate" path="/client/dsppages/bentchUpdate.jsp"/> 
+      	<forward name="myUnits" path="/client/dsppages/units/printDiv.jsp"/>
+      	<forward name="userOperLog" path="/client/dsppages/logs/userOperLog.jsp"></forward>
+      	<forward name="customerOperLog" path="/client/dsppages/logs/customerOperLog.jsp"></forward>
+      	<forward name="allUserUnits" path="/client/dsppages/units/allUserUnits.jsp"></forward>
+      	<forward name="userSaleTicketsInfo" path="/client/dsppages/units/userSaleTicketsInfo.jsp"></forward>
+      <forward name="homePageDJP" path="/client/toflypages/homePage.jsp" />  
+      	<forward name="containPage" path="/client/toflypages/containPage.jsp" /> 
+      	<forward name="mainPage" path="/client/toflypages/mainFramePage.jsp" /> 
+      	<forward name="dpEdit" path="/client/dsppages/dpEdit.jsp" /> 
+      	<forward name="dgqEdit" path="/client/dsppages/dgqEdit.jsp" /> 
+      	<forward name="saltTickets" path="/client/dsppages/saltTickets.jsp" /> 
+      	<forward name="userFlyInfoList" path="/client/dsppages/userFlyInfoList.jsp" /> 
+      	<forward name="teamSaltTickets" path="/client/dsppages/teamSaltTickets.jsp" /> 
+      	<forward name="tipteam" path="/client/dsppages/tipteam.jsp" />
+      	<forward name="teamUpDate" path="/client/dsppages/teamUpDate.jsp" />
+      	<forward name="luggageInfo" path="/client/djppages/luggageInfo.jsp" />
+      	<forward name="xxinfo" path="/client/djppages/xxinfo.jsp" />
+      	<forward name="saltPointUnits" path="/client/dsppages/units/saltPointUnits.jsp"></forward>
+      	<!-- 13.1.12 增加跳转页面 -->
+      	<forward name="fly_toFlyMain" path="/nyaddfold/clientfold/ajwindow/toFlyMain.jsp"></forward>
+      	<forward name="fly_homePage" path="/nyaddfold/clientfold/ajwindow/homePage.jsp"></forward>
+      	<forward name="fly_mainFramePage" path="/nyaddfold/clientfold/ajwindow/mainFramePage.jsp"></forward>
+      	<forward name="fly_containPage" path="/nyaddfold/clientfold/ajwindow/containPage.jsp"></forward>
+      </action>
+    <action 
+      path="/dJPAction" parameter="method"
+      type="com.roc.sysmanager.base.action.DJPAction"
+      validate="false" scope="request" >
+      	<forward name="homePage" path="/client/djppages/homePage.jsp" /> 
+      	<forward name="djpList" path="/client/djppages/djpList.jsp" />
+      	<forward name="shchDJP" path="/client/djppages/shchDJP.jsp" />    
+      	<forward name="shchDJPTEAM" path="/client/djppages/shchDJPTEAM.jsp" />      	
+      </action>
+      <action 
+      path="/flightInfoAction" parameter="method"
+      type="com.roc.sysmanager.base.action.FlightInfoAction"
+      name="baFlightInfoForm"
+      validate="false" scope="request" >
+      	<forward name="flightInfoList" path="/roc/hbmanager/hblist.jsp" />      
+      </action>
+       <action 
+      path="/commandCenter" parameter="method"
+      type="com.roc.sysmanager.base.action.CommandCenter"
+      validate="false" scope="request" >
+      	<forward name="mainPage" path="/client/zhzxpages/CCMainPage.jsp" />   
+      	<forward name="noFlightData" path="/client/zhzxpages/homePage.jsp" />
+      	<forward name="mainPageContain" path="/client/zhzxpages/CCContainPage.jsp" />
+      	<forward name="mainPageContain1" path="/client/zhzxpages/CCContainPage1.jsp" />
+      	<forward name="mainPageContain2" path="/client/zhzxpages/CCContainPage2.jsp" />
+      </action>
+ </action-mappings>
+
+  <message-resources parameter="com.yourcompany.struts.ApplicationResources" />
+</struts-config>
+

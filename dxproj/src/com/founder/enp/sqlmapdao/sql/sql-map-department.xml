@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="department">
+
+     <select id="getDepartmentList" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.DepartMent">
+       select id,name,parentid from db_gwlz.dis_department where parentid=#departmentid#
+    </select>
+     <insert id="addDpm" parameterClass="com.founder.enp.entity.DepartMent">
+        insert into db_gwlz.dis_department (name,parentid)
+        values (#name#,#parentid#)
+    </insert>
+    <select id="getDepartMentCount" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+      select count(id) from db_gwlz.dis_department where parentid=#value#
+    </select>
+      <select id="queryDpmInfo" parameterClass="java.lang.Integer" resultClass="com.founder.enp.entity.DepartMent">
+        select * from db_gwlz.dis_department where id=#value#
+    </select>
+    <update id="editdpm" parameterClass="com.founder.enp.entity.DepartMent">
+        update db_gwlz.dis_department set name=#name# where id=#id#
+    </update>
+    <delete id="deleteDmp"  parameterClass="java.lang.Integer">
+      delete from db_gwlz.dis_department where id=#value#
+    </delete>
+     <select id="isHaveZ" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+        select count(1) from db_gwlz.dis_department where parentid=#value#
+    </select>
+    <select id="isHaveGoup" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+        select count(1)  from db_gwlz.dis_group where dpmid=#value#
+    </select>
+    
+</sqlMap>
+

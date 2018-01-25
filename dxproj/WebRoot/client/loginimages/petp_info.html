@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+	<title>票额调配</title>
+	
+		
+		<script type="text/javascript" src="js/calendar/src/utils.js"></script>
+		<script type="text/javascript" src="js/calendar/src/calendar.js"></script>
+		<script type="text/javascript" src="js/verify.js"></script>
+		<!-- import the language module -->
+		<script type="text/javascript"
+			src="js/calendar/lang/calendar-zh.js"></script>
+		<script type="text/javascript" src="js/worktable.js"></script>
+		<script type="text/javascript"
+			src="js/calendar/src/calendar-setup.js"></script>
+		<LINK href="css/tab1.css" type=text/css rel=stylesheet>
+	
+	
+	
+
+		<STYLE type="text/css">
+<!--
+textarea{overflow-y:auto;padding:0;width:100%;height:70px;border:1px solid gray;}
+.article {
+BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; FILTER: revealTrans(transition=23,duration=0.5) blendTrans(duration=0.5); POSITION: absolute; VISIBILITY: hidden
+; background-color: #FFCC00; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px}
+-->
+</STYLE>
+<SCRIPT language=JavaScript1.2>
+<!--
+function Show(divid) {
+divid.filters.revealTrans.apply();
+divid.style.visibility = "visible";
+divid.filters.revealTrans.play();
+} 
+function Hide(divid) {
+divid.filters.revealTrans.apply();
+divid.style.visibility = "hidden";
+divid.filters.revealTrans.play();
+}
+//-->
+</script>
+	</head>
+	<body oncontextmenu="if (!event.ctrlKey){return true;}">	
+	<form>
+	
+	<table width="1024" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
+	<tr bgcolor="#FFFFFF">
+		<td colspan="6" align="center">
+			<font  style="font-family:'宋体';font-size:50px;font-weight:1000;" >票额调配</font>
+		</td>
+	</tr>
+	<tr bgcolor="#FFFFFF">
+	<td colspan="6">
+	<table>
+	<tr>
+	<td  align="right">
+			航程：
+		</td>
+		<td>
+			<input type="radio" name="hx" value="1" />库尔勒
+			<input type="radio" name="hx" value="2" checked='checked'/>鼎新
+		</td>
+		<td  align="right">
+			&nbsp; 日期：
+		</td>
+		 <td><table border="0">
+        <td width="70%" >
+        <input value="2011-12-10" name="compDate" width="100%" readonly="readonly">        </td>
+        <td align="left">
+        	 <span style="cursor: hand"><img	src="images/caldendar.gif" id="caldendar1" /> </span>	    </td> 
+		</table></td>
+	</tr>
+	</table>
+	</td>
+	</tr>
+
+<tr bgcolor="#FFFFFF">
+    <td align="right">南苑：</td>
+    <td ><input type="text" name="hangcheng" value="40"/> 
+		</td>
+    
+  </tr>
+<tr bgcolor="#FFFFFF">
+    <td align="right">专机办：</td>
+    <td ><input type="text" name="hangcheng" value="10"/> 
+		</td>
+	 
+    
+  </tr>
+  <tr bgcolor="#FFFFFF">
+    <td align="right">总装一招：</td>
+    <td ><input type="text" name="hangcheng" value="15"/>  
+		</td>
+	 
+    
+  </tr>
+  <tr bgcolor="#FFFFFF">
+    <td align="right">20基地驻军办：</td>
+    <td ><input type="text" name="hangcheng" value="33"/>  
+		</td>
+     
+  </tr>
+  <tr bgcolor="#FFFFFF">
+    <td align="right">空军试测基地驻军办：</td>
+    <td ><input type="text" name="hangcheng" value="10"/>  
+		</td>
+     
+  </tr>
+	<tr bgcolor="#FFFFFF">
+    <td align="center" colspan="2"><input type="button" name="" value="保存" /><input type="button" name="" value="关闭"  onclick="window.close();"/></td>
+   
+		
+    
+  </tr>	
+</table>
+
+
+    </form>
+
+</body>
+<SCRIPT type="text/javascript" LANGUAGE="JavaScript">
+<!--
+  Zapatec.Calendar.setup({
+    firstDay          : 1,
+    step              : 1,
+    electric          : false,
+    inputField        : "compDate",
+    button            : "caldendar1",
+    ifFormat          : "%Y-%m-%d",
+    daFormat          : "%Y-%m-%d",
+    showsTime         :  false
+  });
+   
+  
+  //-->
+</SCRIPT>
+</html>	

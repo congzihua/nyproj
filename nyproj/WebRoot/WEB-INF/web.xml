@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.4" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee   http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+   <filter>
+    <filter-name>CharsetFilter</filter-name>
+    <filter-class>com.founder.enp.util.CharsetFilter</filter-class>
+    <init-param>
+      <param-name>encoding</param-name>
+      <param-value>UTF-8</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>CharsetFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
+   <filter>
+    <filter-name>loginFilter</filter-name>
+    <filter-class>com.founder.enp.util.LoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>loginFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <servlet>
+    <servlet-name>action</servlet-name>
+    <servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
+    <init-param>
+      <param-name>config</param-name>
+      <param-value>/WEB-INF/struts-config.xml,/WEB-INF/struts-config-czh.xml</param-value>
+    </init-param>
+    <init-param>
+      <param-name>debug</param-name>
+      <param-value>3</param-value>
+    </init-param>
+    <init-param>
+      <param-name>detail</param-name>
+      <param-value>3</param-value>
+    </init-param>
+    <load-on-startup>0</load-on-startup>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetDepartMentTree</servlet-name>
+    <servlet-class>com.founder.enp.servlet.GetDepartMentTree</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetDocTypesTree</servlet-name>
+    <servlet-class>com.founder.enp.servlet.GetDocTypesTree</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>GetUserInfoTree</servlet-name>
+    <servlet-class>com.founder.enp.servlet.GetUserInfoTree</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>DownLoadFile</servlet-name>
+    <servlet-class>com.founder.enp.servlet.DownLoadFile</servlet-class>
+  </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>UploadIEWord</servlet-name>
+    <servlet-class>com.founder.enp.servlet.UploadIEWord</servlet-class>
+  </servlet>
+
+
+
+
+  <servlet-mapping>
+    <servlet-name>action</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetDepartMentTree</servlet-name>
+    <url-pattern>/gwlzadmin/GetDepartMentTree.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetDocTypesTree</servlet-name>
+    <url-pattern>/gwlzadmin/GetDocTypesTree.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetUserInfoTree</servlet-name>
+    <url-pattern>/gwlzadmin/GetUserInfoTree.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DownLoadFile</servlet-name>
+    <url-pattern>/gwlzclient/DownLoadFile.do</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>UploadIEWord</servlet-name>
+    <url-pattern>/UploadIEWord.do</url-pattern>
+  </servlet-mapping>
+  <servlet>  
+    <servlet-name>dwr-invoker</servlet-name>  
+    <servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>  
+    
+</servlet>  
+  
+<servlet-mapping>  
+    <servlet-name>dwr-invoker</servlet-name>  
+    <url-pattern>/dwr/*</url-pattern>  
+</servlet-mapping>  
+  <session-config>
+  <session-timeout>-1</session-timeout>
+  </session-config>
+
+  <resource-ref>
+    <res-ref-name>jdbc/GwlzJNDIAlias</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+    <res-sharing-scope>Shareable</res-sharing-scope>
+  </resource-ref>
+</web-app>
+

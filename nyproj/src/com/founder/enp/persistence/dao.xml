@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE daoConfig
+    PUBLIC "-//ibatis.apache.org//DTD DAO Configuration 2.0//EN"
+    "http://ibatis.apache.org/dtd/dao-2.dtd">
+
+<daoConfig>
+
+	<context>
+
+		<transactionManager type="SQLMAP">
+			<property name="SqlMapConfigResource"
+				value="com/founder/enp/persistence/sql-map-config.xml" />
+			<property name="Pool.PingQuery"
+				value="select 1" />
+			<property name="Pool.PingEnabled" value="false" />
+		</transactionManager>
+		<dao interface="com.founder.enp.iface.DepartMentDao"
+			implementation="com.founder.enp.sqlmapdao.SqlMapDepartMentDao" />
+		<dao interface="com.founder.enp.iface.UserGroupDao"
+			implementation="com.founder.enp.sqlmapdao.SqlMapUserGroupDao" />
+		<dao interface="com.founder.enp.iface.UserDao"
+			implementation="com.founder.enp.sqlmapdao.SqlMapUserDao" />
+		<dao interface="com.founder.enp.iface.TemplateDao"
+			implementation="com.founder.enp.sqlmapdao.SqlMapTemplateDao" />
+		<dao interface="com.founder.enp.iface.ParameterDao"
+			implementation="com.founder.enp.sqlmapdao.SqlMapParameterDao" />
+		<dao interface="com.founder.enp.iface.DocTypesDao"
+			implementation="com.founder.enp.sqlmapdao.SqlMapDocTypesDao" />
+		<dao interface="com.founder.enp.iface.LogDao"
+			implementation="com.founder.enp.sqlmapdao.SqlMapLogDao" />
+		<dao interface="com.founder.enp.iface.DocDao"
+			implementation="com.founder.enp.sqlmapdao.SqlMapDocDao" />
+		<dao implementation="com.roc.sysmanager.base.impl.BaFlightImpl" 
+			interface="com.roc.sysmanager.base.dao.BaFlightDao"/>
+		<dao implementation="com.roc.sysmanager.base.impl.FlightInfoImpl" 
+			interface="com.roc.sysmanager.base.dao.FlightInfoDao"/>
+		<dao implementation="com.roc.sysmanager.base.impl.BaTicketsallocImpl" 
+			interface="com.roc.sysmanager.base.dao.BaTicketsallocDao"/>
+		<dao implementation="com.roc.sysmanager.base.impl.OpOrderticketsImpl" 
+			interface="com.roc.sysmanager.base.dao.OpOrderticeetsDao"/>
+	</context>
+
+</daoConfig>
