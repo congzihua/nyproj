@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.founder.enp.entity.Authorization;
@@ -25,11 +26,18 @@ public class LoginFilter extends HttpServlet implements Filter {
 	}
 
 	// Process the request/response pair
-	public void doFilter(ServletRequest request, ServletResponse response,
+	public void doFilter(ServletRequest req, ServletResponse res,
 			FilterChain filterChain) {
 		try {
-			request.setCharacterEncoding("UTF-8");
-			response.setCharacterEncoding("UTF-8");
+//			req.setCharacterEncoding("UTF-8");
+//			res.setCharacterEncoding("UTF-8");
+			HttpServletRequest request = (HttpServletRequest) req;
+			HttpServletResponse response = (HttpServletResponse) res;
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			response.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE");
+			response.setHeader("Access-Control-Max-Age", "3600");
+			 response.setHeader("Access-Control-Allow-Headers", "x-requested-with,Content-Type");
+			
 			HttpSession session = ((HttpServletRequest) request).getSession();
 			Authorization auth = (Authorization) session
 					.getAttribute("authorization");
@@ -38,12 +46,13 @@ public class LoginFilter extends HttpServlet implements Filter {
 		    if(uri!=null&&uri.trim().toLowerCase().matches(reg)){
 		    	
 		    }else{
-			    if (!uri.endsWith("login.jsp")&&!uri.endsWith("default.jsp") && !uri.endsWith("loginAction.do")&& !uri.endsWith("gettask.jsp")&& !uri.endsWith("dljm.jsp"))
+			    if (!uri.endsWith("login.jsp")&&!uri.endsWith("default.jsp") 
+			    		&& !uri.endsWith("loginAction.do")&& !uri.endsWith("gettask.jsp")&& !uri.endsWith("dljm.jsp"))
 			    {
 			 		if (auth == null || auth.getUserid() == 0) {
 						PrintWriter out = response.getWriter();
 						HttpServletRequest r = (HttpServletRequest) request;
-						out.print("<script>top.location.href='"+r.getContextPath()+"/default.jsp';</script>");
+						out.print("<script>top.location.href='"+r.getContextPath()+"/login.jsp';</script>");
 		
 					} 
 			    }

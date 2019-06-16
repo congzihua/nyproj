@@ -49,7 +49,12 @@ public class LoginAction extends Action {
 		String admin = request.getParameter("admin");
 		user.setAccount(request.getParameter("account"));
 		user.setPassword(request.getParameter("password"));
-		UserService service = new UserService();
+		UserService service = null;
+		try{
+			 service = new UserService();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 		
 		user = service.checkUser(user);
 		Authorization authorization = new Authorization();

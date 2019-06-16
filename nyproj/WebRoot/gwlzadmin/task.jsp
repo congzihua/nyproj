@@ -96,14 +96,18 @@ benchItem = new Item("售票异常明细", 20, "../images/menu_node.gif", 30, 30
 bench.addItem(benchItem);
 workArea.addBench(bench);
 <%}%>
-bench = new Bench("log", "日志管理", 25, 0, 0, 20, 100);
+bench = new Bench("blacklistzj", "黑名单及值机", 25, 0, 0, 20, 100);
+benchItem = new Item("用户黑名单", 20, "../images/doodler.png", 30, 30,"<%=request.getContextPath()%>/blacklistUserAction.do?method=toBlacklistUserList", "main");
+bench.addItem(benchItem);
+benchItem = new Item("设置值班机时间", 20, "../images/wenjiageshi_18.png", 30, 30,"<%=request.getContextPath()%>/dutyTimeAction.do?method=toDutytimePage", "main");
+bench.addItem(benchItem);
+workArea.addBench(bench);
+bench = new Bench("log", "系统操作日志", 25, 0, 0, 20, 100);
 
 benchItem = new Item("系统日志", 20, "../images/doodler.png", 30, 30,"log/logAction.do?oper=list", "main");
 bench.addItem(benchItem);
 benchItem = new Item("操作日志", 20, "../images/wenjiageshi_18.png", 30, 30,"<%=request.getContextPath()%>/clientAction.do?method=seleUserLogList", "main");
 bench.addItem(benchItem);
-
-
 workArea.addBench(bench);
 
 workArea.init();

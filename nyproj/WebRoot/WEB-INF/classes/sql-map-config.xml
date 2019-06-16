@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+	 <properties resource="datasource.properties"></properties>
+    <settings
+        cacheModelsEnabled="true"
+        enhancementEnabled="true"
+        lazyLoadingEnabled="true"
+        maxRequests="512"
+        maxSessions="64"
+        maxTransactions="50"
+        useStatementNamespaces="false"
+    />
+
+    <transactionManager type="JDBC">
+       <dataSource type="DBCP">    
+         <property name="JDBC.Driver" value="com.mysql.jdbc.Driver" />    
+         <property name="JDBC.ConnectionURL" value="${data.host}"/>    
+         <property name="JDBC.Username" value="${data.username}" />    
+         <property name="JDBC.Password" value="${data.password}" />    
+         <property name="Pool.MaximumActiveConnections" value="15"/>  
+		<property name="Pool.MaximumIdleConnections" value="15"/>  
+		<property name="Pool.MaximumWait" value="10000"/>  
+		<property name="Pool.RemoveAbandoned" value="true"/>    
+		<property name="Pool.RemoveAbandonedTimeout" value="1"/>    
+     </dataSource>    
+    </transactionManager>
+
+    <sqlMap resource="com/founder/enp/sqlmapdao/sql/sql-map-department.xml"/>
+    <sqlMap resource="com/founder/enp/sqlmapdao/sql/sql-map-usergroup.xml"/>
+    <sqlMap resource="com/founder/enp/sqlmapdao/sql/sql-map-user.xml"/>
+    <sqlMap resource="com/founder/enp/sqlmapdao/sql/sql-map-template.xml"/>
+    <sqlMap resource="com/founder/enp/sqlmapdao/sql/sql-map-doctypes.xml"/>
+    <sqlMap resource="com/founder/enp/sqlmapdao/sql/sql-map-log.xml"/>
+    <sqlMap resource="com/founder/enp/sqlmapdao/sql/sql-map-doc.xml"/>
+    
+    <sqlMap resource="com/roc/enp/sqlmapdao/sql/sql-map-flight.xml"/>
+    <sqlMap resource="com/roc/enp/sqlmapdao/sql/sql-map-ticketsalloc.xml"/>
+    <sqlMap resource="com/roc/enp/sqlmapdao/sql/sql-map-client.xml"/>
+    <sqlMap resource="com/roc/enp/sqlmapdao/sql/sqlmap-flightinfo.xml"/>
+     <sqlMap resource="com/roc/enp/sqlmapdao/sql/sql-map-unitsandup.xml"/>
+    <sqlMap resource="com/roc/enp/sqlmapdao/sql/sqlmap-blacklist-user.xml"/>
+    <sqlMap resource="com/roc/enp/sqlmapdao/sql/sqlmap-duty.xml"/>
+</sqlMapConfig>

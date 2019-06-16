@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="blacklist">
+    <resultMap class="com.roc.enp.entity.BlacklistUser" id="ooBlacklistUserResult">
+	  <result property="id" column="ID"/>
+	  <result property="name" column="NAME"/>	
+	  <result property="idcard" column="IDCARD"/>	
+	  <result property="certType" column="CERT_TYPE"/>
+	  <result property="createTime" column="CREATE_TIME"/>
+    </resultMap>
+    
+    
+     <select id="getBlackLists" parameterClass="com.roc.enp.entity.BlackUserKeyword" resultMap="ooBlacklistUserResult">
+      select * from blacklist_user where 1=1
+      <isNotEmpty prepend="and" property="name">
+                        (name = #name#)
+      </isNotEmpty>
+       order by ID desc limit #startNumber#,#endNumber#
+    </select>
+     <select id="getBlacklistCount" parameterClass="com.roc.enp.entity.BlackUserKeyword" resultClass="java.lang.Integer">
+      	select count(*)  from blacklist_user 
+      	 where 1=1
+      <isNotEmpty prepend="and" property="name">
+                        (name = #name#)
+      </isNotEmpty> 
+    </select>
+    <insert id="insertBlacklistUserInfo" parameterClass="com.roc.enp.entity.BlacklistUser">
+        insert into blacklist_user (NAME,IDCARD,CERT_TYPE,CREATE_TIME) values(#name#,#idcard#,#certType#,now())
+        <selectKey resultClass="java.lang.Integer" keyProperty="id">     
+        SELECT LAST_INSERT_ID()
+        </selectKey>   
+    </insert>
+    <select id="getUserBlacklistInfoByIdCardAndCertType" parameterClass="com.roc.enp.entity.BlackUserKeyword"  resultMap="ooBlacklistUserResult">
+        select * from blacklist_user a where IDCARD=#idcard# and CERT_TYPE=#certType# limit 1
+    </select>
+    <select id="getInfoById" resultMap="ooBlacklistUserResult" parameterClass="java.lang.Integer">
+      	select * from blacklist_user where id=#value#
+    </select>
+    
+    <delete id="deleteBlacklistInfo" parameterClass="java.lang.Integer" >
+        delete from blacklist_user  where id=#value#
+    </delete>
+    <update id="editBlacklistInfo" parameterClass="com.roc.enp.entity.BlacklistUser">
+        update blacklist_user set NAME=#name#,IDCARD=#idcard#,CERT_TYPE=#certType#
+        where id=#id#
+    </update>
+</sqlMap>
