@@ -127,11 +127,7 @@
 		
 		function addFlightInfo()
 		{
-	        //window.open("<%=request.getContextPath()%>/roc/hbmanager/addOper.jsp","transfer",'top='+(screen.height/2-200)+',left='+(screen.width/2-200)+',width=600,height=450,scrollbars=no,resizable=yes,center:yes');
-			var str    =window.showModalDialog("<%=request.getContextPath()%>/roc/hbmanager/addOper.jsp","dialogWidth=200px;dialogHeight=100px");
-			if(str==1){
-				document.myform.submit();
-			}
+			window.location.href ="<%=request.getContextPath()%>/roc/hbmanager/addOper.jsp";
 		}
 		function editFlightInfo()
 		{
@@ -139,12 +135,8 @@
 			if(id==false){
 				return;
 			}
-			
-		    //window.open("editOper.jsp","transfer",'top='+(screen.height/2-200)+',left='+(screen.width/2-200)+',width=600,height=450,scrollbars=no,resizable=yes,center:yes');
-			var str=window.showModalDialog("<%=request.getContextPath()%>/roc/hbmanager/editOper.jsp?id="+id,"dialogWidth=200px;dialogHeight=100px");
-			if(str==1){
-				document.myform.submit();
-			}
+			var url = "<%=request.getContextPath()%>/roc/hbmanager/editOper.jsp?id="+id;
+			window.location.href =url;
 	 
 		}
 	   function go()
@@ -177,10 +169,7 @@
 	  }
 	  
 	  function batchAddFlightInfo(){
-	  		var str    =window.showModalDialog("<%=request.getContextPath()%>/roc/hbmanager/batchAddOper.jsp","dialogWidth=200px;dialogHeight=100px");
-			if(str==1){
-				document.myform.submit();
-			}
+		  window.location.href = "<%=request.getContextPath()%>/roc/hbmanager/batchAddOper.jsp";
 	  }
 	
 	</script>

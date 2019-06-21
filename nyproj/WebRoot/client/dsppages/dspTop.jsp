@@ -164,7 +164,10 @@ function check()
 			
 		}
 		function newValidate(data){
-			if(data==3){
+			if(data==4){
+				alert("该用户已经被列入黑名单中，如有疑问请在后台移除！");
+				document.getElementById("bc").disabled="";
+			}else if(data==3){
 				alert("该用户已经订票不能再次订票！");
 				document.getElementById("bc").disabled="";
 			}else if(data==2){
@@ -186,12 +189,12 @@ function check()
 		}
 function dgpage(){
 	var url = "dinggaipage.html";
-window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
+	window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
 }
 
 function petp(){
 	var url = "petp_info.html";
-window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
+	window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
 }
 function hbh(){
 	var url = "hbh_info.html";

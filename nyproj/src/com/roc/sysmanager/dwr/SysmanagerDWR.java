@@ -13,9 +13,12 @@ import com.roc.enp.entity.BaFlight;
 import com.roc.enp.entity.BaTicketpoint;
 import com.roc.enp.entity.BaTicketprice;
 import com.roc.enp.entity.BaTicketpriceKeyword;
+import com.roc.enp.entity.BlackUserKeyword;
+import com.roc.enp.entity.BlacklistUser;
 import com.roc.enp.entity.OpUseroper;
 import com.roc.sysmanager.base.action.ExcelUtil;
 import com.roc.sysmanager.base.service.BaTicketsallocService;
+import com.roc.sysmanager.base.service.BlacklistUserService;
 import com.roc.sysmanager.base.service.ClienService;
 import com.roc.sysmanager.base.service.FlightService;
 import com.roc.syspe.entity.BaTicketsalloc;
@@ -518,7 +521,17 @@ public class SysmanagerDWR {
 			return 0;
 		}
 	}
-	public  int validate(Integer flightId,Integer flightinfoId,String orderdate,Integer ticketpointId,String flyTime,String certType,String certNo){
+	public  int validate(Integer flightId,Integer flightinfoId,
+			String orderdate,Integer ticketpointId,String flyTime,
+			String certType,String certNo){
+		BlacklistUserService servcie = new BlacklistUserService();
+		BlackUserKeyword keyword = new BlackUserKeyword();
+		keyword.setCertType(certType);
+		keyword.setIdcard(certNo);
+		BlacklistUser bLUser = servcie.getUserBlacklistInfoByIdCardAndCertType(keyword);
+		if (bLUser != null && bLUser.getIdcard()!= null) {
+			return 4;
+		}
 		int isOrder = isAlreadyOrderTickets(flightinfoId, certType, certNo);
 		if(isOrder > 0){
 			return 3;//该用户已经订过票

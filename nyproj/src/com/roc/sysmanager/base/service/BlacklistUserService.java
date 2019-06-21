@@ -44,7 +44,7 @@ public class BlacklistUserService {
 
 	
 	public void deleteBlacklistInfo(int id) {
-		dao.deleteBlacklistInfo(id);;
+		dao.deleteBlacklistInfo(id);
 	}
 	public void editBlacklistInfo(BlacklistUser blacklistUser) {
 		dao.editBlacklistInfo(blacklistUser);

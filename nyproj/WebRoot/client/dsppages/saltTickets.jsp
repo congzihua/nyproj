@@ -188,7 +188,11 @@ function check()
 			}
 		}
 		function newValidate(data){
-			if(data==3){
+			if(data==4){
+				alert("该用户已经被列入黑名单中，如有疑问请在后台移除！");
+				document.getElementById("bc").disabled="";
+				document.getElementById("gb").disabled="";
+			}else if(data==3){
 				alert("该用户已经订票/或售票不能再次售票！");
 				document.getElementById("bc").disabled="";
 				document.getElementById("gb").disabled="";

@@ -47,13 +47,8 @@ String deleNum = request.getAttribute("deleNum")==null?"":request.getAttribute("
 		}
 		function add()
 		{
-		var url = "<%=request.getContextPath()%>/roc/ticketmana/addOper.jsp";
-			var rv = window.showModalDialog(url,'增加航程信息','dialogWidth=600px;DialogHeight=400px;scrollbars=no;help=no;resizable=no;center:yes');
-			 if(rv == 1){
-		    	 document.forms[0].action="<%=request.getContextPath()%>/ticketpriceAction.do?method=ticketpriceList";
-		       document.forms[0].submit();
-		    }
-	       
+			var url = "<%=request.getContextPath()%>/roc/ticketmana/addOper.jsp";
+	        window.location.href=url;
 		}
 		function edit()
 		{
@@ -83,11 +78,7 @@ String deleNum = request.getAttribute("deleNum")==null?"":request.getAttribute("
 		     var discountType = document.getElementsByName("discountType")[j].value;
 		     var realAmount = document.getElementsByName("realAmount")[j].value;
 		   var url = "<%=request.getContextPath()%>/roc/ticketmana/editOper.jsp?id="+objs.value+"&discountType="+encodeURI(encodeURI(discountType))+"&flightName="+encodeURI(encodeURI(f))+"&realAmount="+encodeURI(encodeURI(realAmount));
-			var rv = window.showModalDialog(url,'修改票价信息','dialogWidth=600px;DialogHeight=500px;scrollbars=no;help=no;resizable=no;center:yes');
-			 if(rv == 1){
-		    	 document.forms[0].action="<%=request.getContextPath()%>/ticketpriceAction.do?method=ticketpriceList";
-		       document.forms[0].submit();
-		    }
+			window.location.href=url;
 		}
 	  
 	

@@ -24,8 +24,11 @@ import com.roc.enp.entity.BaTicketpoint;
 import com.roc.enp.entity.BaTicketpointKeyword;
 import com.roc.enp.entity.BaTicketprice;
 import com.roc.enp.entity.BaTicketpriceKeyword;
+import com.roc.enp.entity.BlackUserKeyword;
+import com.roc.enp.entity.BlacklistUser;
 import com.roc.enp.entity.FlightInfo;
 import com.roc.sysmanager.base.service.BaTicketsallocService;
+import com.roc.sysmanager.base.service.BlacklistUserService;
 import com.roc.sysmanager.base.service.ClienService;
 import com.roc.sysmanager.base.service.FlightInfoService;
 import com.roc.sysmanager.base.service.FlightService;
@@ -259,6 +262,15 @@ public class ClientAction extends DispatchAction {
 		
 		if(!(isU>0)){
 			request.setAttribute("oper", 6);//票点票额不足或没有票额
+			return mapping.findForward("tip");
+		}
+		BlackUserKeyword keyword = new BlackUserKeyword();
+		keyword.setCertType(orderT.getCertType());
+		keyword.setIdcard(orderT.getCertNo());
+		BlacklistUserService servcie = new BlacklistUserService();
+		BlacklistUser bLUser = servcie.getUserBlacklistInfoByIdCardAndCertType(keyword);
+		if (bLUser != null && bLUser.getIdcard()!= null) {
+			request.setAttribute("oper", 10);//用户被列入黑名单中
 			return mapping.findForward("tip");
 		}
 		ClienService service = new ClienService();

@@ -50,6 +50,13 @@ window.setTimeout("window.close();",3000);
 <script>
 window.setTimeout("window.close();",3000);
 </script>
+<%}else if(tip.equals("10")){%>
+
+ 	<p align=center style="color: red">**用户被列入黑名单中，不能进行购票操作！**
+ <a href="javascript:window.close()" style="color:blue">[关闭]</a></p>
+<script>
+window.setTimeout("window.close();",3000);
+</script>
  <%} %>
 　</fieldset>
   </body>
