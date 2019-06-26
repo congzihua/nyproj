@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<td width="20%">
     		<table border="0">
 						        <td width="70%" >
-						        <input value="" name="orderdate" width="100%" readonly="readonly">        </td>
+						        <input value="" name="orderdate" width="100%" readonly="readonly" id="orderdate">        </td>
 						        <td align="left">
 						        	 <span style="cursor: hand"><img	src="<%=request.getContextPath()%>/images/caldendar.gif" id="caldendar1" /> </span>	 
 						        	
@@ -113,7 +113,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     daFormat          : "%Y-%m-%d",
     showsTime         :  false
   });
-   
-  
   //-->
 </SCRIPT>

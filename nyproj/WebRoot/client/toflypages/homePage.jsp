@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<td width="20%">
     		<table border="0">
 						        <td width="70%" >
-						        <input value="" name="orderdate" width="100%" readonly="readonly">        </td>
+						        <input value="" name="orderdate" id="orderdate" width="100%" readonly="readonly">        </td>
 						        <td align="left">
 						        	 <span style="cursor: hand"><img	src="<%=request.getContextPath()%>/images/caldendar.gif" id="caldendar1" /> </span>	 
 						        	
@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</td>
     		<td>起飞时间：</td>
     		<td>
-    			<select name="hour">
+    			<select name="hour" id="hour">
     				
     				<option value="07">07</option>
     				<option value="08">08</option>
@@ -81,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     				<option value="20">20</option>    				
     			</select>
     			:
-    			<select name="minue">
+    			<select name="minue"  id="minue">
     				<option value="00">00</option>    				
     				<option value="10">10</option>    				
     				<option value="20">20</option>    				

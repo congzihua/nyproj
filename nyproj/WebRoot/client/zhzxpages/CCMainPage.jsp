@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<jsp:directive.page import="java.util.*" />
 <% 
 Integer num=(Integer)request.getAttribute("howMany"); 
 String flightdate=(String)request.getAttribute("odate");
