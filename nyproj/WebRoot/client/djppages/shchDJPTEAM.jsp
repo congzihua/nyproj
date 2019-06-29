@@ -63,7 +63,9 @@
 		<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/util.js'></script> 
 		<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 		<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'></script>
-	
+			<script type="text/javascript" src="<%=request.getContextPath()%>/js/common.js?version=1"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/layer/layer.js"></script>
 	
 
 <STYLE type="text/css">

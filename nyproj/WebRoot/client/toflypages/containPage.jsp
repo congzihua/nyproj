@@ -66,9 +66,9 @@ String flightDate = request.getAttribute("orderdate")==null?"": request.getAttri
 				 <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';"> 已安检：</font>&nbsp; 
 				 <font style="font-size:20px;font-weight:15;font-family:'黑体';color: #b22222" >${safeCheck+dengJi}</font>
 				<script type="text/javascript">
-					if(parent.frames("message").document.getElementById("info")){
-						parent.frames("message").document.getElementById("info").innerHTML='已安检：${safeCheck+dengJi}';
-						parent.frames("message").document.getElementById("txmv").focus();
+					if(window.parent.message.contentWindow.document.getElementById("info")){
+						window.parent.message.contentWindow.document.getElementById("info").innerHTML='已安检：${safeCheck+dengJi}';
+						window.parent.message.contentWindow.document.getElementById("txmv").focus();
 					}
 					
 				</script>

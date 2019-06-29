@@ -55,7 +55,7 @@ href="<%=request.getContextPath()%>/loginimages/User_Login.css" type=text/css re
       type=password name='password'> </LI></UL>
     <UL>
       <LI class=user_main_text>系&nbsp; &nbsp; 统</LI>
-      <LI class=user_main_input><select id="admin" name="admin">
+      <LI class=user_main_input ><select id="admin" name="admin" style="height: 12">
 									
 									<option value="2">订售票系统</option>
 									<option value="3">值登机系统</option>

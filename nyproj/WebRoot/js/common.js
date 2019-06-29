@@ -1,3 +1,31 @@
+
+if(!window.layer){
+  window.layer = parent.layer;
+  window.layenWin = parent;
+}else{
+	  window.layenWin = window;
+}
+if(!window.showModalDialog){
+  window.showModalDialog = function(url, _, options){
+	var matchs = options.match(/dialogWidth:(.*px)\D*dialogHeight:(.*px)/);
+	layer.open({
+      type: 2,
+      area: [matchs[1], matchs[2]],
+      maxmin: true,
+      content: url,
+      success: function(layero, index){
+    	  var iframeWin = layenWin[layero.find('iframe')[0]['name']];
+    	  iframeWin.close = function(){
+    		  layer.closeAll();
+    	  }
+      },
+    });
+  }
+}
+function close() {
+	var index=parent.layer.getFrameIndex(window.name);
+	parent.layer.close(index);
+}
 var net = new Object();
 net.READY_STATE_UNINITIALIZED = 0;
 net.READY_STATE_LOADING = 1;
@@ -60,7 +88,7 @@ window.showModalDialog_new = function(url,mixedVar,features){
 	//因window.showmodaldialog 与 window.open 参数不一样，所以封装的时候用正则去格式化一下参数
 	if(features) var features = features.replace(/(dialog)|(px)/ig,"").replace(/;/g,',').replace(/\:/g,"=");
 	//window.open("Sample.htm",null,"height=200,width=400,status=yes,toolbar=no,menubar=no");
-	//window.showModalDialog("modal.htm",obj,"dialogWidth=200px;dialogHeight=100px"); 
+	//window.showModalDialog("modal.htm",obj,"dialogWidth=200px;dialogHeight=100px");
 	var left = (window.screen.width - parseInt(features.match(/width[\s]*=[\s]*([\d]+)/i)[1]))/2;
 	var top = (window.screen.height - parseInt(features.match(/height[\s]*=[\s]*([\d]+)/i)[1]))/2;
 	window.myNewWindow = window.open(url,"_blank",features);

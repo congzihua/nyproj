@@ -55,6 +55,9 @@
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/worktable.js"></script>
 		<script type="text/javascript"
 			src="<%=request.getContextPath()%>/js/calendar/src/calendar-setup.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/common.js?version=1"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/layer/layer.js"></script>
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css">
 	
 	

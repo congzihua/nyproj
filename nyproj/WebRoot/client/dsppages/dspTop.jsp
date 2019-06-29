@@ -49,7 +49,7 @@
 			<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/util.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'> </script>
-	
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/common.js?version=1"></script>
 	
 
 		<STYLE type="text/css">
@@ -267,7 +267,7 @@ divid.filters.revealTrans.play();
   </tr>  
   <tr bgcolor="#FFFFFF">
     <td align="right" width="15%">团体：</td>
-    <td width="18%"><select id='teamflag' name="teamflag" style="width: 100%" onPropertyChange="isTeam();">
+    <td width="18%"><select id='teamflag' name="teamflag" style="width: 100%" onchange="isTeam();">
 			<option value="0">否</option>
 			<option value="1">是</option>
 		</select>	</td>

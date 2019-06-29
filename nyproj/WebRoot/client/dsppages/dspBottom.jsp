@@ -27,6 +27,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/common.js?version=1"></script>
 	<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/util.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'> </script>
@@ -81,8 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if(data){
 			var url = "<%=request.getContextPath()%>/clientAction.do?method=tgSp&id="+idValue;
 			var rv = window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
-			if(rv == 1)
-				document.forms[0].submit();
+			document.forms[0].submit();
 		}else{
 			alert("信息状态已经改变，请重新选择！");
 			document.forms[0].submit();	
@@ -96,8 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if(data){
 			var url = "<%=request.getContextPath()%>/clientAction.do?method=toDGQ&id="+idValue;
 			var rv = window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
-			if(rv == 1)
-				document.forms[0].submit();
+			document.forms[0].submit();
 		}else{
 			alert("信息状态已经改变，请重新选择！");
 			document.forms[0].submit();	
@@ -294,8 +293,12 @@ divid.filters.revealTrans.play();
 </div>
  <div align="left" style="width:  100%;border:0" >
 <FONT  style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt">
-&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 舱  单&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input name="string" type="text" size="15" onChange="n = 0;"></font> 
-      <input      type="button" value="查找" onclick="findInPage(document.getElementById('string').value);"> 
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+ &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 舱  单&nbsp;
+   &nbsp; &nbsp; &nbsp; &nbsp; 
+<input id="string" name="string" type="text" size="15" onChange="n = 0;"></font> 
+      <input      type="button" value="查找" onclick="findInPage();"> 
 		</FONT>
  <table width="96%" border="0" align="left"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
   
@@ -429,7 +432,8 @@ var NS4 = (document.layers);    // Which browser?
 var IE4 = (document.all);
 var win = window;    // window to search.
 var n   = 0;
-function findInPage(str) {
+function findInPage() {
+  var str = document.getElementById('string').value;
   var txt, i, found;
   if (str == "")
     return false;

@@ -55,9 +55,9 @@ if("succ".equals(message)){
    	<td width="40%"> 
    	    
    	<font color="red" >光标聚焦到此对话框进行扫描</font> 
-   	<input width="100%" type="text" id="txmv" name="txmv" value="" onkeyup="dataUp();"> 
+   	<input width="100%" type="text" id="txmv" name="txmv" value="" "> 
    	</td> 
-   	<td align="left" width="40%" id="info" style="font-size:30px;text-shadow:Red;font-family:'黑体';color: red" nowrap="nowrap"> 
+   	<td align="left" width="40%" id="info" style="font-size:16px;text-shadow:Red;font-family:'黑体';color: red" nowrap="nowrap"> 
    	  
    	</td> 
    </tr> 
@@ -110,6 +110,9 @@ var info1 = '正在扫描中...';
 				}
 			}
 			document.getElementById("txmv").focus();
+			$("#txmv").bind("input propertychange",function(){
+				dataUp();
+			});
 //-->
 </script>
 

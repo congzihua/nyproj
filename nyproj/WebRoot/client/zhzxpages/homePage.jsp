@@ -25,6 +25,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/calendar/src/utils.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/calendar/src/calendar.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/verify.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/layer/layer.js"></script>
 		<!-- import the language module -->
 		<script type="text/javascript"
 			src="<%=request.getContextPath()%>/js/calendar/lang/calendar-zh.js"></script>
