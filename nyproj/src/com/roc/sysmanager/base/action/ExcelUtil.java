@@ -35,7 +35,6 @@ public class ExcelUtil {
 			String str=strArr[0];
 			String mUrl=str+"/client/excel/Modeul.xls";
 			
-//			String tUrl=str+"/client/excel/"+targName+".xls";
 			wb = Workbook.getWorkbook(new File(mUrl));
 			wwb=Workbook.createWorkbook(new File(tUrl),wb);
 			WritableSheet wws = wwb.getSheet(0);
@@ -100,7 +99,7 @@ public class ExcelUtil {
 		//killProcess("EXCEL.EXE");
 		String targName = String.valueOf(System.currentTimeMillis());
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
-		String path = "D:/piaoju/"+format.format(new Date())+"/"+operName;
+		String path = ArgsUnit.getDataOutDir()+format.format(new Date())+"/"+operName;
 		File f = new File(path);
 		if(!f.exists()){
 			f.mkdirs();
@@ -233,9 +232,6 @@ public class ExcelUtil {
 	 
 	 
 	 
-	 public static void main(String [] ar){
-	  
-	 }
 	 //"excel.exe"杀死进程方法
 	 private static void killProcess(String processName) throws IOException{
 		 Process process = Runtime.getRuntime().exec("tasklist"); 	
