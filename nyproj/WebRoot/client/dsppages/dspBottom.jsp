@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	}
   	function saltTeamTickets(data,name,status){
   		var url = "<%=request.getContextPath()%>/clientAction.do?method=toSaltTeamTickets&flightinfoId="+data+"&name="+encodeURI(encodeURI(name))+"&status="+status;
-		window.showModalDialog(url, window, "dialogWidth: 1500px; dialogHeight: 650px; help: no; scroll: yes; status: no");
+  		window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 600px; help: no; scroll: yes; status: no");
 		document.forms[0].submit();	
   	} 
   	

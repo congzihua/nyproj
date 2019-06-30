@@ -264,7 +264,7 @@ divid.filters.revealTrans.play();
   </tr>  
   <tr bgcolor="#FFFFFF">
     <td align="right" width="15%">团体：</td>
-    <td width="18%"><select id='teamflag' name="teamflag" style="width: 100%" onPropertyChange="isTeam();">
+    <td width="18%"><select id='teamflag' name="teamflag" style="width: 100%" onchange="isTeam();">
 			<option value="0" <%=flightinfo.getTeamflag()==null||flightinfo.getTeamflag().trim().equals("0")?"selected=\"selected\"":"" %>>否</option>
 			<option value="1" <%=flightinfo.getTeamflag()!=null&&flightinfo.getTeamflag().trim().equals("1")?"selected='selected'":""%>>是</option>
 		</select>	</td>

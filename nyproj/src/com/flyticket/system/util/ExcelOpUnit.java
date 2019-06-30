@@ -164,7 +164,7 @@ public class ExcelOpUnit {
 	 		sheet.addMergedRegion(new CellRangeAddress(i, i, 0, 6));
 	 		SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
 	 		long tLong = System.currentTimeMillis();
-	 		String path ="d:/out_excels/"+format.format(new Date());
+	 		String path =ArgsUnit.getDataOutDir()+format.format(new Date());
 	 		String oldFilePath = path+"/"+tLong+".xls";
 	 		String newFilePath = path+"/"+(++tLong)+".xls";
 	 	    File fileDirs = new File(path);
