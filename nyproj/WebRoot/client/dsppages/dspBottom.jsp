@@ -127,7 +127,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function xiugaiHandle(data){
 		if(data){
 			var url = "<%=request.getContextPath()%>/clientAction.do?method=toEdpage&id="+idValue;
-			window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
+			layer.open({
+                type: 2,
+                title: "修改",
+                shadeClose: true,
+                shade: 0.4,
+                area: ['90%', '90%'],
+                content: url,
+                btn: ['','关闭'],
+                yes: function(index){
+                    //当点击‘确定’按钮的时候，获取弹出层返回的值
+                    var res = window["layui-layer-iframe" + index].callbackdata();
+                   
+                    //最后关闭弹出层
+                    layer.close(index);
+                },
+                cancel: function(){
+                    //右上角关闭回调
+                }
+            });
+			
+			//window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
 			document.forms[0].submit();
 		}else{
 			alert("信息状态已经改变，请重新选择！");

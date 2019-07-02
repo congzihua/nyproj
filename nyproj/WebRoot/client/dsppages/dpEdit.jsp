@@ -31,9 +31,6 @@
 	<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/util.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'> </script>
-	
-	
-
 		<STYLE type="text/css">
 <!--
 .tearea{overflow-y:auto;padding:0;width:99%;height:70px;border:1px solid gray;}
@@ -233,7 +230,7 @@ divid.filters.revealTrans.play();
 			<td align="center" colspan="6">  
 				<input id="bc" type="button" value="保存" onclick="check()"/>
 				<input id="bc" type="button" value="退订" onclick="qren(${id})"/>
-				<input id="cl" type="button" value="关 闭" onclick="window.close();"/>
+				<input id="cl" type="button" value="关 闭" onclick="layer.closeAll('iframe');"/>
 				</td>
 		</tr>
 		
