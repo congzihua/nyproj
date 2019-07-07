@@ -22,10 +22,7 @@ if(!window.showModalDialog){
     });
   }
 }
-function close() {
-	var index=parent.layer.getFrameIndex(window.name);
-	parent.layer.close(index);
-}
+
 var net = new Object();
 net.READY_STATE_UNINITIALIZED = 0;
 net.READY_STATE_LOADING = 1;

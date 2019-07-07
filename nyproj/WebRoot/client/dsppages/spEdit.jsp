@@ -40,7 +40,7 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 ; background-color: #FFCC00; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px}
 -->
 </STYLE>
-<SCRIPT language=JavaScript1.2>
+<script type="text/javascript">
 <!--
 window.name="mytable";
 function check()

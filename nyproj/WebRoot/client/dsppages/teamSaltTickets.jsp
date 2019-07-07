@@ -84,7 +84,6 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'> </script>
 <SCRIPT language=JavaScript1.2>
 <!--
-window.name="mytab";
 function selectAll1(data){
 	var isSele = document.getElementById("checkId");
 	var cAll = document.getElementsByName(check_name);
@@ -245,7 +244,7 @@ function check(data)
 		
 	</div>
 	
-	<form action="<%=request.getContextPath()%>/clientAction.do?method=saltTeamsTicket" method="post" target="mytab">&nbsp; 
+	<form action="<%=request.getContextPath()%>/clientAction.do?method=saltTeamsTicket" method="post" target="_self">&nbsp; 
 	<table id="listtable" width="99%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">	
  
  <%List<OpOrdertickets> list = (List<OpOrdertickets>)request.getAttribute("list");
