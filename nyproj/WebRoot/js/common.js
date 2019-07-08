@@ -6,9 +6,9 @@ if(!window.layer){
 	  window.layenWin = window;
 }
 if(!window.showModalDialog){
-  window.showModalDialog = function(url, _, options){
+  window.showModalDialog = function(url, _, options, callback){
 	var matchs = options.match(/dialogWidth:(.*px)\D*dialogHeight:(.*px)/);
-	layer.open({
+	var id = layer.open({
       type: 2,
       area: [matchs[1], matchs[2]],
       maxmin: true,
@@ -16,13 +16,13 @@ if(!window.showModalDialog){
       success: function(layero, index){
     	  var iframeWin = layenWin[layero.find('iframe')[0]['name']];
     	  iframeWin.close = function(){
-    		  layer.closeAll();
+    		  callback && callback(iframeWin.returnValue)
+    		  layer.close(id);
     	  }
       },
     });
   }
 }
-
 var net = new Object();
 net.READY_STATE_UNINITIALIZED = 0;
 net.READY_STATE_LOADING = 1;

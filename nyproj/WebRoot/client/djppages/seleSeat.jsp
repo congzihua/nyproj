@@ -100,7 +100,6 @@ function xuanzuo(){
 	 
 	}
   }
-  alert("请选择座位！");
  }
 //function mousemove(sId){
 //for (var i = 0; i < oImg.length; i++){
