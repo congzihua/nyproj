@@ -85,6 +85,8 @@
 		  function query()
 		  {
 		     var name = document.getElementById("name").value;
+		     if(name !=null && name != '')
+		    	 name = encodeURI(name);
 		     window.location.href = "<%=request.getContextPath()%>/blacklistUserAction.do?method=toBlacklistUserList&name="+name;
 		  } 
 		  function add()
