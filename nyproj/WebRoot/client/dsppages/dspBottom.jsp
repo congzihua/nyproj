@@ -12,7 +12,7 @@ List<BaTicketsalloc> tilist = request.getAttribute("ticketsPointC")==null?null:(
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
   <head>
     <base href="<%=basePath%>">
@@ -31,6 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/util.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'> </script>
+	<script type='text/javascript' src='<%=request.getContextPath()%>/js/jquery.min.js'></script> 
 	<script type="text/javascript">
 		
   	function init(data){
@@ -333,14 +334,14 @@ function Hide(divid) {
   <tr bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'">
      <!--td align="center" width="6%"><%=++i %></td>-->
       <td align="center" width="9%">${item.ticketpointname}</td>
-    <td align="center" width="8%">${item.name}</td>
-    <td align="center" width="6%">${item.certType}</td>
+    <td  class="highlightRow" align="center" width="8%">${item.name}</td>
+    <td  class="highlightRow" align="center" width="6%">${item.certType}</td>
    
-    <td align="center" width="12%">${item.certNo}</td>
+    <td  class="highlightRow" align="center" width="12%">${item.certNo}</td>
     
-    <td align="center" width="5%"><c:if test="${item.vipFlag==1}">是</c:if></td>
-    <td align="center" width="11%">${item.linkphone}</td>
-    <td align="center" width="5%"><c:if test="${item.status==0}">订 &nbsp; 票</c:if>
+    <td  class="highlightRow" align="center" width="5%"><c:if test="${item.vipFlag==1}">是</c:if></td>
+    <td  class="highlightRow" align="center" width="11%">${item.linkphone}</td>
+    <td  class="highlightRow" align="center" width="5%"><c:if test="${item.status==0}">订 &nbsp; 票</c:if>
     <c:if test="${item.status==1}">确认订票</c:if>
     <c:if test="${item.status==2}">已售票</c:if>
     <c:if test="${item.status==3}">换登机牌</c:if>
@@ -351,8 +352,8 @@ function Hide(divid) {
    
      
         </td>
-    <td align="center" width="12%"><fmt:formatDate  value="${item.createdate}" pattern="MM.dd"/></td>
-    <td align="center" width="6%" onMouseOver="Show(www_zzjs<%=i%>);" onMouseOut="Hide(www_zzjs<%=i%>);">
+    <td  class="highlightRow" align="center" width="12%"><fmt:formatDate  value="${item.createdate}" pattern="MM.dd"/></td>
+    <td  class="highlightRow" align="center" width="6%" onMouseOver="Show(www_zzjs<%=i%>);" onMouseOut="Hide(www_zzjs<%=i%>);">
 		<c:choose>
           <c:when test="${fn:length(item.teamName) > 4}">
               <c:out value="${fn:substring(item.teamName, 0, 4)}..." />
@@ -363,7 +364,7 @@ function Hide(divid) {
       </c:choose>   
      <div id="www_zzjs<%=i%>" class="article">${item.teamName}</div>
 	</td>
-    <td width="8%" align="center" onMouseOver="Show(www_zzjs_net<%=i%>);" onMouseOut="Hide(www_zzjs_net<%=i%>);">
+    <td  class="highlightRow" width="8%" align="center" onMouseOver="Show(www_zzjs_net<%=i%>);" onMouseOut="Hide(www_zzjs_net<%=i%>);">
       <c:choose>
           <c:when test="${fn:length(item.remark) > 5}">
               <c:out value="${fn:substring(item.remark, 0, 5)}..." />
@@ -375,7 +376,7 @@ function Hide(divid) {
    
      <div id="www_zzjs_net<%=i%>" class="article">${item.remark}</div>
     </td>
-    <td align="left" width="18%"> 
+    <td   align="left" width="18%"> 
       
     <c:if test="${item.status==0}">	
     	<c:if test="${item.teamflag==null||item.teamflag==0}">
@@ -434,49 +435,21 @@ var win = window;    // window to search.
 var n   = 0;
 function findInPage() {
   var str = document.getElementById('string').value;
-  var txt, i, found;
   if (str == "")
     return false;
-  // Find next occurance of the given string on the page, wrap around to the
-  // start of the page if necessary.
-  if (NS4) {
-    // Look for match starting at the current point. If not found, rewind
-    // back to the first match.
-    if (!win.find(str))
-      while(win.find(str, false, true))
-        n++;
-    else
-      n++;
-    // If not found in either direction, give message.
-    if (n == 0)
-      alert("Not found.");
-  }
-  if (IE4) {
-    txt = win.document.body.createTextRange();
-    // Find the nth match from the top of the page.
-    for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) {
-      txt.moveStart("character", 1);
-      txt.moveEnd("textedit");
-    }
-    // If found, mark it and scroll it into view.
-    if (found) {
-      txt.moveStart("character", -1);
-      txt.findText(str);
-      txt.select();
-      txt.scrollIntoView();
-      n++;
-    }
-    // Otherwise, start over at the top of the page and find first match.
-    else {
-      if (n > 0) {
-        n = 0;
-        findInPage(str);
-      }
-      // Not found anywhere, give message.
-      else
-        alert("Not found.");
-    }
-  }
+ //1.获取要高亮显示的行			
+ var rowNode = $('.highlightRow');			
+ //2.获取搜索的内容			
+ var searchContent = $("#string").val();
+ //3.遍历整行内容，添加高亮颜色			
+ 
+ //3.遍历整行内容，添加高亮颜色			
+ rowNode.each(function() {			
+	var word = $(this).html();	
+	word = word.replace(searchContent, '<span name="sp"  style="color:red;">' + searchContent + '</span>');
+	$(this).html(word);	
+  });
+  
   return false;
 }
 

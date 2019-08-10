@@ -263,7 +263,8 @@ function check(type,flightinfoId)
 				if(value!=null && typeof(value)!="undefined")
 					document.getElementById("seatNum").value=value;
 			});
-			
+			if(rv!=null)
+				document.getElementById("seatNum").value=rv;
 			
 		}
 		function onHandleM1(data){

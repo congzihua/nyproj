@@ -173,7 +173,7 @@ java.util.List<BaFlight> list = service.queryBaFlight(keyword);
 										时间:	
 									</td>
 									<td colspan="3" align="left" nowrap="nowrap">
-							<select name="hour">		    				
+							<select name="hour" id="hour">		    				
 		    				<option value="07">07</option>
 		    				<option value="08">08</option>
 		    				<option value="09" selected="selected">09</option>
@@ -191,7 +191,7 @@ java.util.List<BaFlight> list = service.queryBaFlight(keyword);
 		    				
 		    			</select>
 		    			:
-		    			<select name="minute">
+		    			<select name="minute" id="minute">
 		    				<option value="00">00</option>		    				
 		    				<option value="10">10</option>		    				
 		    				<option value="20">20</option>		    				

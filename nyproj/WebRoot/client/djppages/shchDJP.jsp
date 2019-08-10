@@ -200,11 +200,12 @@ function check(data,type,flightinfoId)
 		}
 		function seleSeat(data){
 			var url = "<%=request.getContextPath()%>/client/djppages/seleSeat.jsp?id="+data;
-
 			var rv = window.showModalDialog(url, window, "dialogWidth: 432px; dialogHeight: 700px; help: no; scroll: yes; status: no", function(value){
 				if(value!=null && typeof(value)!="undefined")
 					document.getElementById("seatNum").value=value;
 			});
+			if(rv!=null && typeof(rv)!="undefined"v && rv!= '')
+				document.getElementById("seatNum").value=rv;
 		}
 		function onHandleM1(data){
 
