@@ -127,11 +127,9 @@ public class ExcelUtil {
 		                 Dispatch.get(excel,"PrintOut"); 
 		                 
 		               
-		}catch (Exception e)
-		{
+		}catch (Exception e){
 			e.printStackTrace();
-		}finally
-		{ 		
+		}finally{ 		
 			ComThread.Release();
 			xl = null;
 			

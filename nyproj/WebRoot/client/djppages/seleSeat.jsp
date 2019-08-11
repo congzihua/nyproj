@@ -93,9 +93,7 @@ for (var i = 0; i < chd.length; i++) {
 }
 function xuanzuo(){
   var temp = document.getElementsByName('tijiao');
-  alert(temp.length);
   for(var i=0; i<temp.length;i++){
-	  alert(i);
     if(temp[i].checked){
 		  window.returnValue =temp[i].value;
 		  window.close();
