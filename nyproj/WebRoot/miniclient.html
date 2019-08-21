@@ -1,0 +1,2079 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://webservice.dxplat.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="DataServer" targetNamespace="http://webservice.dxplat.com/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://webservice.dxplat.com/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://webservice.dxplat.com/">
+  <xs:element name="GetCo2Control" type="tns:GetCo2Control"/>
+  <xs:element name="GetCo2ControlResponse" type="tns:GetCo2ControlResponse"/>
+  <xs:element name="GetCurtainControl" type="tns:GetCurtainControl"/>
+  <xs:element name="GetCurtainControlResponse" type="tns:GetCurtainControlResponse"/>
+  <xs:element name="GetDataByDate8503" type="tns:GetDataByDate8503"/>
+  <xs:element name="GetDataByDate8503Response" type="tns:GetDataByDate8503Response"/>
+  <xs:element name="GetDataNew8503" type="tns:GetDataNew8503"/>
+  <xs:element name="GetDataNew8503Response" type="tns:GetDataNew8503Response"/>
+  <xs:element name="GetDeviceInfo" type="tns:GetDeviceInfo"/>
+  <xs:element name="GetDeviceInfoResponse" type="tns:GetDeviceInfoResponse"/>
+  <xs:element name="GetDownWind" type="tns:GetDownWind"/>
+  <xs:element name="GetDownWindResponse" type="tns:GetDownWindResponse"/>
+  <xs:element name="GetEnviDataByDate" type="tns:GetEnviDataByDate"/>
+  <xs:element name="GetEnviDataByDateResponse" type="tns:GetEnviDataByDateResponse"/>
+  <xs:element name="GetFilmIllControl" type="tns:GetFilmIllControl"/>
+  <xs:element name="GetFilmIllControlResponse" type="tns:GetFilmIllControlResponse"/>
+  <xs:element name="GetHotboardSoil" type="tns:GetHotboardSoil"/>
+  <xs:element name="GetHotboardSoilResponse" type="tns:GetHotboardSoilResponse"/>
+  <xs:element name="GetImage" type="tns:GetImage"/>
+  <xs:element name="GetImageFileList" type="tns:GetImageFileList"/>
+  <xs:element name="GetImageFileListResponse" type="tns:GetImageFileListResponse"/>
+  <xs:element name="GetImageResponse" type="tns:GetImageResponse"/>
+  <xs:element name="GetInloopControl" type="tns:GetInloopControl"/>
+  <xs:element name="GetInloopControlResponse" type="tns:GetInloopControlResponse"/>
+  <xs:element name="GetInmoonControl" type="tns:GetInmoonControl"/>
+  <xs:element name="GetInmoonControlResponse" type="tns:GetInmoonControlResponse"/>
+  <xs:element name="GetMeteorologicalDataByDate" type="tns:GetMeteorologicalDataByDate"/>
+  <xs:element name="GetMeteorologicalDataByDateResponse" type="tns:GetMeteorologicalDataByDateResponse"/>
+  <xs:element name="GetNewEnviData" type="tns:GetNewEnviData"/>
+  <xs:element name="GetNewEnviDataResponse" type="tns:GetNewEnviDataResponse"/>
+  <xs:element name="GetOutSunControl" type="tns:GetOutSunControl"/>
+  <xs:element name="GetOutSunControlResponse" type="tns:GetOutSunControlResponse"/>
+  <xs:element name="GetOutskyControl" type="tns:GetOutskyControl"/>
+  <xs:element name="GetOutskyControlResponse" type="tns:GetOutskyControlResponse"/>
+  <xs:element name="GetRelay" type="tns:GetRelay"/>
+  <xs:element name="GetRelayMap" type="tns:GetRelayMap"/>
+  <xs:element name="GetRelayMapResponse" type="tns:GetRelayMapResponse"/>
+  <xs:element name="GetRelayResponse" type="tns:GetRelayResponse"/>
+  <xs:element name="GetSensorHistoryData" type="tns:GetSensorHistoryData"/>
+  <xs:element name="GetSensorHistoryDataResponse" type="tns:GetSensorHistoryDataResponse"/>
+  <xs:element name="GetSensorNewData" type="tns:GetSensorNewData"/>
+  <xs:element name="GetSensorNewDataResponse" type="tns:GetSensorNewDataResponse"/>
+  <xs:element name="GetSkylightControl" type="tns:GetSkylightControl"/>
+  <xs:element name="GetSkylightControlResponse" type="tns:GetSkylightControlResponse"/>
+  <xs:element name="GetSysPara" type="tns:GetSysPara"/>
+  <xs:element name="GetSysParaResponse" type="tns:GetSysParaResponse"/>
+  <xs:element name="GetWaterControl" type="tns:GetWaterControl"/>
+  <xs:element name="GetWaterControlResponse" type="tns:GetWaterControlResponse"/>
+  <xs:element name="GetWaterCurtionControl" type="tns:GetWaterCurtionControl"/>
+  <xs:element name="GetWaterCurtionControlResponse" type="tns:GetWaterCurtionControlResponse"/>
+  <xs:element name="SetCo2control" type="tns:SetCo2control"/>
+  <xs:element name="SetCo2controlResponse" type="tns:SetCo2controlResponse"/>
+  <xs:element name="SetCurtainControl" type="tns:SetCurtainControl"/>
+  <xs:element name="SetCurtainControlResponse" type="tns:SetCurtainControlResponse"/>
+  <xs:element name="SetDeviceSysPara" type="tns:SetDeviceSysPara"/>
+  <xs:element name="SetDeviceSysParaResponse" type="tns:SetDeviceSysParaResponse"/>
+  <xs:element name="SetDownwind" type="tns:SetDownwind"/>
+  <xs:element name="SetDownwindResponse" type="tns:SetDownwindResponse"/>
+  <xs:element name="SetFilmillcontrol" type="tns:SetFilmillcontrol"/>
+  <xs:element name="SetFilmillcontrolResponse" type="tns:SetFilmillcontrolResponse"/>
+  <xs:element name="SetHotboardSoil" type="tns:SetHotboardSoil"/>
+  <xs:element name="SetHotboardSoilResponse" type="tns:SetHotboardSoilResponse"/>
+  <xs:element name="SetInloopcontrol" type="tns:SetInloopcontrol"/>
+  <xs:element name="SetInloopcontrolResponse" type="tns:SetInloopcontrolResponse"/>
+  <xs:element name="SetInmooncontrol" type="tns:SetInmooncontrol"/>
+  <xs:element name="SetInmooncontrolResponse" type="tns:SetInmooncontrolResponse"/>
+  <xs:element name="SetOutskycontrol" type="tns:SetOutskycontrol"/>
+  <xs:element name="SetOutskycontrolResponse" type="tns:SetOutskycontrolResponse"/>
+  <xs:element name="SetOutsuncontrol" type="tns:SetOutsuncontrol"/>
+  <xs:element name="SetOutsuncontrolResponse" type="tns:SetOutsuncontrolResponse"/>
+  <xs:element name="SetRelay" type="tns:SetRelay"/>
+  <xs:element name="SetRelayResponse" type="tns:SetRelayResponse"/>
+  <xs:element name="SetSkylightcontrol" type="tns:SetSkylightcontrol"/>
+  <xs:element name="SetSkylightcontrolResponse" type="tns:SetSkylightcontrolResponse"/>
+  <xs:element name="SetWaterControl" type="tns:SetWaterControl"/>
+  <xs:element name="SetWaterControlResponse" type="tns:SetWaterControlResponse"/>
+  <xs:element name="SetWaterCurtionControl" type="tns:SetWaterCurtionControl"/>
+  <xs:element name="SetWaterCurtionControlResponse" type="tns:SetWaterCurtionControlResponse"/>
+  <xs:element name="UpdateUserPassWord" type="tns:UpdateUserPassWord"/>
+  <xs:element name="UpdateUserPassWordResponse" type="tns:UpdateUserPassWordResponse"/>
+  <xs:complexType name="SetOutsuncontrol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="tns:outsuncontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="outsuncontrol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="closeIll1" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeIll2" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTemp1" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTemp2" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTime" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTimeSlot1" type="xs:string"/>
+      <xs:element minOccurs="0" name="closeTimeSlot2" type="xs:string"/>
+      <xs:element minOccurs="0" name="controlMode" type="xs:string"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="enabled" type="xs:string"/>
+      <xs:element minOccurs="0" name="openIll1" type="xs:int"/>
+      <xs:element minOccurs="0" name="openIll2" type="xs:int"/>
+      <xs:element minOccurs="0" name="openIllSource" type="xs:string"/>
+      <xs:element minOccurs="0" name="openTemp1" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTemp2" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTime" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTimeSlot1" type="xs:string"/>
+      <xs:element minOccurs="0" name="openTimeSlot2" type="xs:string"/>
+      <xs:element minOccurs="0" name="version" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetOutsuncontrolResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetFilmIllControl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetFilmIllControlResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:filmillcontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="filmillcontrol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="controlModeS" type="xs:string"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="enabledS" type="xs:string"/>
+      <xs:element minOccurs="0" name="enabledW" type="xs:string"/>
+      <xs:element minOccurs="0" name="illCloseW" type="xs:int"/>
+      <xs:element minOccurs="0" name="illHourS" type="xs:int"/>
+      <xs:element minOccurs="0" name="illOpenW" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTimeW" type="xs:int"/>
+      <xs:element minOccurs="0" name="startTimeS" type="xs:string"/>
+      <xs:element minOccurs="0" name="stopTimeS" type="xs:string"/>
+      <xs:element minOccurs="0" name="tempCloseW" type="xs:int"/>
+      <xs:element minOccurs="0" name="version" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetImageFileList">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg3" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetImageFileListResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetWaterCurtionControl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="tns:watercurtioncontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="watercurtioncontrol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="controlModeS" type="xs:string"/>
+      <xs:element minOccurs="0" name="controlModeW" type="xs:string"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="enabledS" type="xs:string"/>
+      <xs:element minOccurs="0" name="enabledW" type="xs:string"/>
+      <xs:element minOccurs="0" name="illCloseDownW" type="xs:int"/>
+      <xs:element minOccurs="0" name="illOpenDownW" type="xs:int"/>
+      <xs:element minOccurs="0" name="illOpenUpW" type="xs:int"/>
+      <xs:element minOccurs="0" name="season" type="xs:string"/>
+      <xs:element minOccurs="0" name="tempCloseS" type="xs:int"/>
+      <xs:element minOccurs="0" name="tempCloseW" type="xs:int"/>
+      <xs:element minOccurs="0" name="tempDecCloseW" type="xs:int"/>
+      <xs:element minOccurs="0" name="tempDecOpenW" type="xs:int"/>
+      <xs:element minOccurs="0" name="tempOpenS" type="xs:int"/>
+      <xs:element minOccurs="0" name="tempOpenW" type="xs:int"/>
+      <xs:element minOccurs="0" name="version" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetWaterCurtionControlResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetWaterControl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetWaterControlResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:watercontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="watercontrol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="closeTime1" type="xs:string"/>
+      <xs:element minOccurs="0" name="closeTime2" type="xs:string"/>
+      <xs:element minOccurs="0" name="closeTime3" type="xs:string"/>
+      <xs:element minOccurs="0" name="closeValue" type="xs:int"/>
+      <xs:element minOccurs="0" name="controlMode" type="xs:string"/>
+      <xs:element minOccurs="0" name="controlType" type="xs:string"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="enabled" type="xs:string"/>
+      <xs:element minOccurs="0" name="execType" type="xs:string"/>
+      <xs:element minOccurs="0" name="openTime1" type="xs:string"/>
+      <xs:element minOccurs="0" name="openTime2" type="xs:string"/>
+      <xs:element minOccurs="0" name="openTime3" type="xs:string"/>
+      <xs:element minOccurs="0" name="openValue" type="xs:int"/>
+      <xs:element minOccurs="0" name="startTime1" type="xs:string"/>
+      <xs:element minOccurs="0" name="startTime2" type="xs:string"/>
+      <xs:element minOccurs="0" name="startTime3" type="xs:string"/>
+      <xs:element minOccurs="0" name="stopTime1" type="xs:string"/>
+      <xs:element minOccurs="0" name="stopTime2" type="xs:string"/>
+      <xs:element minOccurs="0" name="stopTime3" type="xs:string"/>
+      <xs:element minOccurs="0" name="tempDiff" type="xs:int"/>
+      <xs:element minOccurs="0" name="version" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetWaterControl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="tns:watercontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetWaterControlResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetSensorHistoryData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg3" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="arg4" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetSensorHistoryDataResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:sensorHistoryData"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sensorHistoryData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="airHumidity" type="xs:float"/>
+      <xs:element minOccurs="0" name="airTemperature" type="xs:float"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="evaporation" type="xs:float"/>
+      <xs:element name="isScan" type="xs:int"/>
+      <xs:element minOccurs="0" name="lightIntensity" type="xs:float"/>
+      <xs:element name="monitorNum" type="xs:int"/>
+      <xs:element minOccurs="0" name="PAR" type="xs:float"/>
+      <xs:element minOccurs="0" name="pressure" type="xs:float"/>
+      <xs:element minOccurs="0" name="rainFall" type="xs:float"/>
+      <xs:element minOccurs="0" name="reciveDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="soilHumidity1" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilHumidity2" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilHumidity3" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilHumidity4" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilTemperature1" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilTemperature2" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilTemperature3" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilTemperature4" type="xs:float"/>
+      <xs:element minOccurs="0" name="sunshineTime" type="xs:float"/>
+      <xs:element minOccurs="0" name="windDirection" type="xs:float"/>
+      <xs:element minOccurs="0" name="windSpeed" type="xs:float"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetMeteorologicalDataByDate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg3" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="arg4" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetMeteorologicalDataByDateResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:deviceData"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deviceData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="airHumidity1" type="xs:float"/>
+      <xs:element minOccurs="0" name="airHumidity2" type="xs:float"/>
+      <xs:element minOccurs="0" name="airPressure" type="xs:float"/>
+      <xs:element minOccurs="0" name="airTemperature1" type="xs:float"/>
+      <xs:element minOccurs="0" name="airTemperature2" type="xs:float"/>
+      <xs:element minOccurs="0" name="co2" type="xs:float"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="ec1" type="xs:float"/>
+      <xs:element minOccurs="0" name="ec2" type="xs:float"/>
+      <xs:element minOccurs="0" name="evaporation" type="xs:float"/>
+      <xs:element name="height" type="xs:float"/>
+      <xs:element minOccurs="0" name="illumination" type="xs:float"/>
+      <xs:element minOccurs="0" name="illuminationHour" type="xs:float"/>
+      <xs:element minOccurs="0" name="k" type="xs:float"/>
+      <xs:element minOccurs="0" name="lightEffective" type="xs:float"/>
+      <xs:element minOccurs="0" name="nh4" type="xs:float"/>
+      <xs:element minOccurs="0" name="no3" type="xs:float"/>
+      <xs:element minOccurs="0" name="ph" type="xs:float"/>
+      <xs:element name="pointX" type="xs:float"/>
+      <xs:element name="pointY" type="xs:float"/>
+      <xs:element minOccurs="0" name="radiation" type="xs:float"/>
+      <xs:element minOccurs="0" name="rainFall" type="xs:float"/>
+      <xs:element name="rainShow" type="xs:int"/>
+      <xs:element minOccurs="0" name="reciveTime" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="simpleTime" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="soilHumidity1" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilHumidity2" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilHumidity3" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilHumidity4" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilTemperature1" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilTemperature2" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilTemperature3" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilTemperature4" type="xs:float"/>
+      <xs:element minOccurs="0" name="waterHeight" type="xs:float"/>
+      <xs:element minOccurs="0" name="windDirection" type="xs:float"/>
+      <xs:element minOccurs="0" name="windDirectionT" type="xs:string"/>
+      <xs:element minOccurs="0" name="windSpeed" type="xs:float"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetDownWind">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetDownWindResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:downwind"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="downwind">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="closeHumi" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTemp" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTempDec" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTime" type="xs:int"/>
+      <xs:element minOccurs="0" name="controlMode" type="xs:string"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="enabled" type="xs:string"/>
+      <xs:element minOccurs="0" name="judgeProd" type="xs:int"/>
+      <xs:element minOccurs="0" name="keepHumi" type="xs:int"/>
+      <xs:element minOccurs="0" name="keepTemp" type="xs:int"/>
+      <xs:element minOccurs="0" name="openHumi" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTemp" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTempDec" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTime" type="xs:int"/>
+      <xs:element minOccurs="0" name="stall" type="xs:int"/>
+      <xs:element minOccurs="0" name="stallDelay" type="xs:int"/>
+      <xs:element minOccurs="0" name="version" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetEnviDataByDate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg3" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="arg4" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetEnviDataByDateResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:deviceEnviData"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deviceEnviData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="airHumidity" type="xs:float"/>
+      <xs:element minOccurs="0" name="airTemperature" type="xs:float"/>
+      <xs:element minOccurs="0" name="co1" type="xs:float"/>
+      <xs:element minOccurs="0" name="co2" type="xs:float"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="dissolutionO2" type="xs:float"/>
+      <xs:element minOccurs="0" name="no2" type="xs:float"/>
+      <xs:element minOccurs="0" name="pm10" type="xs:float"/>
+      <xs:element minOccurs="0" name="pm25" type="xs:float"/>
+      <xs:element minOccurs="0" name="reciveTime" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="simpleTime" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="so2" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilPh" type="xs:float"/>
+      <xs:element minOccurs="0" name="sql" type="xs:string"/>
+      <xs:element minOccurs="0" name="waterPh" type="xs:float"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetImage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg3" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetImageResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:base64Binary"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetSysPara">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetSysParaResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:deviceSysPara"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deviceSysPara">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="dataProd" type="xs:int"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="gateWay" type="xs:string"/>
+      <xs:element minOccurs="0" name="localIp" type="xs:string"/>
+      <xs:element minOccurs="0" name="selfPhone" type="xs:string"/>
+      <xs:element minOccurs="0" name="serverIp" type="xs:string"/>
+      <xs:element minOccurs="0" name="serverPort" type="xs:int"/>
+      <xs:element minOccurs="0" name="smsCenter" type="xs:string"/>
+      <xs:element minOccurs="0" name="syncProd" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetCo2control">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="tns:co2Control"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="co2Control">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="closeCo2" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeIll" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTimeSlot1" type="xs:string"/>
+      <xs:element minOccurs="0" name="closeTimeSlot2" type="xs:string"/>
+      <xs:element minOccurs="0" name="closeTimeSlot3" type="xs:string"/>
+      <xs:element minOccurs="0" name="controlMode" type="xs:string"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="enabled" type="xs:string"/>
+      <xs:element minOccurs="0" name="openCo2" type="xs:int"/>
+      <xs:element minOccurs="0" name="openIll" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTimeSlot1" type="xs:string"/>
+      <xs:element minOccurs="0" name="openTimeSlot2" type="xs:string"/>
+      <xs:element minOccurs="0" name="openTimeSlot3" type="xs:string"/>
+      <xs:element minOccurs="0" name="startTimeSlot1" type="xs:string"/>
+      <xs:element minOccurs="0" name="startTimeSlot2" type="xs:string"/>
+      <xs:element minOccurs="0" name="startTimeSlot3" type="xs:string"/>
+      <xs:element minOccurs="0" name="stopTimeSlot1" type="xs:string"/>
+      <xs:element minOccurs="0" name="stopTimeSlot2" type="xs:string"/>
+      <xs:element minOccurs="0" name="stopTimeSlot3" type="xs:string"/>
+      <xs:element minOccurs="0" name="version" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetCo2controlResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetDataByDate8503">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg3" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="arg4" type="xs:dateTime"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetDataByDate8503Response">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:deviceData8503"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deviceData8503">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="airHumidity1" type="xs:float"/>
+      <xs:element minOccurs="0" name="airTemperature1" type="xs:float"/>
+      <xs:element minOccurs="0" name="co2" type="xs:float"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="ec1" type="xs:float"/>
+      <xs:element minOccurs="0" name="ec2" type="xs:float"/>
+      <xs:element minOccurs="0" name="illumination" type="xs:float"/>
+      <xs:element minOccurs="0" name="reciveTime" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="soilHumidity1" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilTemperature1" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilTemperature2" type="xs:float"/>
+      <xs:element minOccurs="0" name="soilTemperature3" type="xs:float"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetInmooncontrol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="tns:inmooncontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="inmooncontrol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="closeIll1" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeIll2" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTemp1" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTemp2" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTime" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTimeSlot1" type="xs:string"/>
+      <xs:element minOccurs="0" name="closeTimeSlot2" type="xs:string"/>
+      <xs:element minOccurs="0" name="controlMode" type="xs:string"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="enabled" type="xs:string"/>
+      <xs:element minOccurs="0" name="openIll1" type="xs:int"/>
+      <xs:element minOccurs="0" name="openIll2" type="xs:int"/>
+      <xs:element minOccurs="0" name="openIllSource" type="xs:string"/>
+      <xs:element minOccurs="0" name="openTemp1" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTemp2" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTime" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTimeSlot1" type="xs:string"/>
+      <xs:element minOccurs="0" name="openTimeSlot2" type="xs:string"/>
+      <xs:element minOccurs="0" name="version" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetInmooncontrolResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UpdateUserPassWord">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg3" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UpdateUserPassWordResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetOutSunControl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetOutSunControlResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:outsuncontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetDeviceSysPara">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="tns:deviceSysPara"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetDeviceSysParaResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetSkylightcontrol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="tns:skylightcontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="skylightcontrol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="closeHumi" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTemp" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTempDec" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTime" type="xs:int"/>
+      <xs:element minOccurs="0" name="controlMode" type="xs:string"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="enabled" type="xs:string"/>
+      <xs:element minOccurs="0" name="judgeProd" type="xs:int"/>
+      <xs:element minOccurs="0" name="keepHumi" type="xs:int"/>
+      <xs:element minOccurs="0" name="keepTemp" type="xs:int"/>
+      <xs:element minOccurs="0" name="openHumi" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTemp" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTempDec" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTime" type="xs:int"/>
+      <xs:element minOccurs="0" name="stall" type="xs:int"/>
+      <xs:element minOccurs="0" name="stallDelay" type="xs:int"/>
+      <xs:element minOccurs="0" name="version" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetSkylightcontrolResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetDataNew8503">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetDataNew8503Response">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:deviceData8503"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetCurtainControl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="tns:curtaincontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="curtaincontrol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="closeIll" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTemp" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTime" type="xs:int"/>
+      <xs:element minOccurs="0" name="controlMode" type="xs:string"/>
+      <xs:element minOccurs="0" name="delayOpen" type="xs:int"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="enabled" type="xs:string"/>
+      <xs:element minOccurs="0" name="execOrder" type="xs:int"/>
+      <xs:element minOccurs="0" name="openIll" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTemp" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTime" type="xs:int"/>
+      <xs:element minOccurs="0" name="orderDelay" type="xs:int"/>
+      <xs:element minOccurs="0" name="stall" type="xs:int"/>
+      <xs:element minOccurs="0" name="stallDelay" type="xs:int"/>
+      <xs:element minOccurs="0" name="startTime" type="xs:string"/>
+      <xs:element minOccurs="0" name="stopTime" type="xs:string"/>
+      <xs:element minOccurs="0" name="version" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetCurtainControlResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetHotboardSoil">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetHotboardSoilResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:hotboardSoil"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="hotboardSoil">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="enabledH" type="xs:string"/>
+      <xs:element minOccurs="0" name="enabledS" type="xs:string"/>
+      <xs:element minOccurs="0" name="tempCloseH" type="xs:int"/>
+      <xs:element minOccurs="0" name="tempCloseS" type="xs:int"/>
+      <xs:element minOccurs="0" name="tempOpenH" type="xs:int"/>
+      <xs:element minOccurs="0" name="tempOpenS" type="xs:int"/>
+      <xs:element minOccurs="0" name="version" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetInmoonControl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetInmoonControlResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:inmooncontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetSensorNewData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetSensorNewDataResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:deviceData"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetFilmillcontrol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="tns:filmillcontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetFilmillcontrolResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetOutskyControl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetOutskyControlResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:outskycontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="outskycontrol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="closeHumi" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTemp" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTime" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTimeSlot1" type="xs:string"/>
+      <xs:element minOccurs="0" name="closeTimeSlot2" type="xs:string"/>
+      <xs:element minOccurs="0" name="controlMode" type="xs:string"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="enabled" type="xs:string"/>
+      <xs:element minOccurs="0" name="openHumi" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTemp" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTime" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTimeSlot1" type="xs:string"/>
+      <xs:element minOccurs="0" name="openTimeSlot2" type="xs:string"/>
+      <xs:element minOccurs="0" name="version" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetRelay">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetRelayResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:deviceRelayMap"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deviceRelayMap">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element name="num" type="xs:int"/>
+      <xs:element minOccurs="0" name="relayName" type="xs:string"/>
+      <xs:element name="relayNo" type="xs:int"/>
+      <xs:element name="relayType" type="xs:int"/>
+      <xs:element name="sate" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetInloopcontrol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="tns:inloopcontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="inloopcontrol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="closeHumi" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTemp" type="xs:int"/>
+      <xs:element minOccurs="0" name="closeTimeSlot1" type="xs:string"/>
+      <xs:element minOccurs="0" name="closeTimeSlot2" type="xs:string"/>
+      <xs:element minOccurs="0" name="closeTimeSlot3" type="xs:string"/>
+      <xs:element minOccurs="0" name="closeTimeSlot4" type="xs:string"/>
+      <xs:element minOccurs="0" name="controlMode" type="xs:string"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="enabled" type="xs:string"/>
+      <xs:element minOccurs="0" name="openHumi" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTemp" type="xs:int"/>
+      <xs:element minOccurs="0" name="openTimeSlot1" type="xs:string"/>
+      <xs:element minOccurs="0" name="openTimeSlot2" type="xs:string"/>
+      <xs:element minOccurs="0" name="openTimeSlot3" type="xs:string"/>
+      <xs:element minOccurs="0" name="openTimeSlot4" type="xs:string"/>
+      <xs:element minOccurs="0" name="version" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetInloopcontrolResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetHotboardSoil">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="tns:hotboardSoil"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetHotboardSoilResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetInloopControl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetInloopControlResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:inloopcontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetCurtainControl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetCurtainControlResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:curtaincontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetDownwind">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="tns:downwind"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetDownwindResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetCo2Control">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetCo2ControlResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:co2Control"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetDeviceInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetDeviceInfoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:device"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="device">
+    <xs:sequence>
+      <xs:element name="co2Version" type="xs:int"/>
+      <xs:element name="curtainVersion" type="xs:int"/>
+      <xs:element minOccurs="0" name="deviceID" type="xs:string"/>
+      <xs:element minOccurs="0" name="deviceName" type="xs:string"/>
+      <xs:element minOccurs="0" name="devicePhone" type="xs:string"/>
+      <xs:element name="deviceVersion" type="xs:int"/>
+      <xs:element name="downVersion" type="xs:int"/>
+      <xs:element name="exePos" type="xs:int"/>
+      <xs:element name="filmVersion" type="xs:int"/>
+      <xs:element name="hardVersion" type="xs:int"/>
+      <xs:element name="height" type="xs:float"/>
+      <xs:element name="hotVersion" type="xs:int"/>
+      <xs:element name="inloopVersion" type="xs:int"/>
+      <xs:element name="langVersion" type="xs:int"/>
+      <xs:element minOccurs="0" name="lineState" type="xs:string"/>
+      <xs:element minOccurs="0" name="manager" type="xs:string"/>
+      <xs:element minOccurs="0" name="managerPhone" type="xs:string"/>
+      <xs:element name="mapVersion" type="xs:int"/>
+      <xs:element name="moonVersion" type="xs:int"/>
+      <xs:element name="paraVersion" type="xs:int"/>
+      <xs:element minOccurs="0" name="plant" type="xs:string"/>
+      <xs:element minOccurs="0" name="plantEnd" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="plantPeriod" type="xs:string"/>
+      <xs:element minOccurs="0" name="plantStart" type="xs:dateTime"/>
+      <xs:element name="pointX" type="xs:float"/>
+      <xs:element name="pointY" type="xs:float"/>
+      <xs:element minOccurs="0" name="remarks" type="xs:string"/>
+      <xs:element minOccurs="0" name="setPosition" type="xs:string"/>
+      <xs:element name="skylightVersion" type="xs:int"/>
+      <xs:element name="softVersion" type="xs:int"/>
+      <xs:element name="sunVersion" type="xs:int"/>
+      <xs:element name="userID" type="xs:int"/>
+      <xs:element name="watchCurtainVersion" type="xs:int"/>
+      <xs:element name="waterVersion" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetOutskycontrol">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="tns:outskycontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetOutskycontrolResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetRelay">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:int"/>
+      <xs:element name="arg4" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SetRelayResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetNewEnviData">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetNewEnviDataResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:deviceEnviData"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetWaterCurtionControl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetWaterCurtionControlResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:watercurtioncontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetRelayMap">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetRelayMapResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:deviceRelayMap"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetSkylightControl">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetSkylightControlResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:skylightcontrol"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="InterruptedException" type="tns:InterruptedException"/>
+  <xs:complexType name="InterruptedException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="IOException" type="tns:IOException"/>
+  <xs:complexType name="IOException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="GetFilmIllControlResponse">
+    <wsdl:part element="tns:GetFilmIllControlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetImageFileListResponse">
+    <wsdl:part element="tns:GetImageFileListResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetDownwindResponse">
+    <wsdl:part element="tns:SetDownwindResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetImageFileList">
+    <wsdl:part element="tns:GetImageFileList" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetWaterCurtionControl">
+    <wsdl:part element="tns:SetWaterCurtionControl" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetWaterControl">
+    <wsdl:part element="tns:GetWaterControl" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetCo2ControlResponse">
+    <wsdl:part element="tns:GetCo2ControlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetDeviceSysParaResponse">
+    <wsdl:part element="tns:SetDeviceSysParaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetWaterControl">
+    <wsdl:part element="tns:SetWaterControl" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetSensorHistoryData">
+    <wsdl:part element="tns:GetSensorHistoryData" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetImage">
+    <wsdl:part element="tns:GetImage" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetSysPara">
+    <wsdl:part element="tns:GetSysPara" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetOutSunControlResponse">
+    <wsdl:part element="tns:GetOutSunControlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetCurtainControlResponse">
+    <wsdl:part element="tns:SetCurtainControlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetDataByDate8503">
+    <wsdl:part element="tns:GetDataByDate8503" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetInmooncontrol">
+    <wsdl:part element="tns:SetInmooncontrol" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateUserPassWord">
+    <wsdl:part element="tns:UpdateUserPassWord" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetWaterControlResponse">
+    <wsdl:part element="tns:GetWaterControlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetDeviceInfoResponse">
+    <wsdl:part element="tns:GetDeviceInfoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetSkylightcontrol">
+    <wsdl:part element="tns:SetSkylightcontrol" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetDataNew8503">
+    <wsdl:part element="tns:GetDataNew8503" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetCurtainControl">
+    <wsdl:part element="tns:SetCurtainControl" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetEnviDataByDateResponse">
+    <wsdl:part element="tns:GetEnviDataByDateResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetSkylightcontrolResponse">
+    <wsdl:part element="tns:SetSkylightcontrolResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetFilmillcontrolResponse">
+    <wsdl:part element="tns:SetFilmillcontrolResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetInmoonControl">
+    <wsdl:part element="tns:GetInmoonControl" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetFilmillcontrol">
+    <wsdl:part element="tns:SetFilmillcontrol" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetHotboardSoilResponse">
+    <wsdl:part element="tns:GetHotboardSoilResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetOutskyControl">
+    <wsdl:part element="tns:GetOutskyControl" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetSkylightControlResponse">
+    <wsdl:part element="tns:GetSkylightControlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetRelay">
+    <wsdl:part element="tns:GetRelay" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetInloopcontrol">
+    <wsdl:part element="tns:SetInloopcontrol" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetDownWindResponse">
+    <wsdl:part element="tns:GetDownWindResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetHotboardSoil">
+    <wsdl:part element="tns:SetHotboardSoil" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetInloopControl">
+    <wsdl:part element="tns:GetInloopControl" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetCurtainControl">
+    <wsdl:part element="tns:GetCurtainControl" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetDownwind">
+    <wsdl:part element="tns:SetDownwind" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetRelayResponse">
+    <wsdl:part element="tns:GetRelayResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetDeviceInfo">
+    <wsdl:part element="tns:GetDeviceInfo" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetWaterCurtionControlResponse">
+    <wsdl:part element="tns:SetWaterCurtionControlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetOutskycontrol">
+    <wsdl:part element="tns:SetOutskycontrol" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetRelay">
+    <wsdl:part element="tns:SetRelay" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetNewEnviDataResponse">
+    <wsdl:part element="tns:GetNewEnviDataResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetNewEnviData">
+    <wsdl:part element="tns:GetNewEnviData" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetRelayMapResponse">
+    <wsdl:part element="tns:GetRelayMapResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetWaterCurtionControl">
+    <wsdl:part element="tns:GetWaterCurtionControl" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetSensorHistoryDataResponse">
+    <wsdl:part element="tns:GetSensorHistoryDataResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetSkylightControl">
+    <wsdl:part element="tns:GetSkylightControl" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetOutsuncontrol">
+    <wsdl:part element="tns:SetOutsuncontrol" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetDataByDate8503Response">
+    <wsdl:part element="tns:GetDataByDate8503Response" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetFilmIllControl">
+    <wsdl:part element="tns:GetFilmIllControl" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetOutskyControlResponse">
+    <wsdl:part element="tns:GetOutskyControlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetImageResponse">
+    <wsdl:part element="tns:GetImageResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetInloopcontrolResponse">
+    <wsdl:part element="tns:SetInloopcontrolResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetCurtainControlResponse">
+    <wsdl:part element="tns:GetCurtainControlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="IOException">
+    <wsdl:part element="tns:IOException" name="IOException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetMeteorologicalDataByDate">
+    <wsdl:part element="tns:GetMeteorologicalDataByDate" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetDownWind">
+    <wsdl:part element="tns:GetDownWind" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetEnviDataByDate">
+    <wsdl:part element="tns:GetEnviDataByDate" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetCo2control">
+    <wsdl:part element="tns:SetCo2control" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetCo2controlResponse">
+    <wsdl:part element="tns:SetCo2controlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetRelayResponse">
+    <wsdl:part element="tns:SetRelayResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetMeteorologicalDataByDateResponse">
+    <wsdl:part element="tns:GetMeteorologicalDataByDateResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetOutSunControl">
+    <wsdl:part element="tns:GetOutSunControl" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetWaterControlResponse">
+    <wsdl:part element="tns:SetWaterControlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetDeviceSysPara">
+    <wsdl:part element="tns:SetDeviceSysPara" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetInmoonControlResponse">
+    <wsdl:part element="tns:GetInmoonControlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetInloopControlResponse">
+    <wsdl:part element="tns:GetInloopControlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetOutsuncontrolResponse">
+    <wsdl:part element="tns:SetOutsuncontrolResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InterruptedException">
+    <wsdl:part element="tns:InterruptedException" name="InterruptedException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetHotboardSoil">
+    <wsdl:part element="tns:GetHotboardSoil" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetSensorNewData">
+    <wsdl:part element="tns:GetSensorNewData" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetHotboardSoilResponse">
+    <wsdl:part element="tns:SetHotboardSoilResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="UpdateUserPassWordResponse">
+    <wsdl:part element="tns:UpdateUserPassWordResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetCo2Control">
+    <wsdl:part element="tns:GetCo2Control" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetInmooncontrolResponse">
+    <wsdl:part element="tns:SetInmooncontrolResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetSysParaResponse">
+    <wsdl:part element="tns:GetSysParaResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="SetOutskycontrolResponse">
+    <wsdl:part element="tns:SetOutskycontrolResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetWaterCurtionControlResponse">
+    <wsdl:part element="tns:GetWaterCurtionControlResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetSensorNewDataResponse">
+    <wsdl:part element="tns:GetSensorNewDataResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetRelayMap">
+    <wsdl:part element="tns:GetRelayMap" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="GetDataNew8503Response">
+    <wsdl:part element="tns:GetDataNew8503Response" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="DataServiceInf">
+    <wsdl:operation name="SetOutsuncontrol">
+      <wsdl:input message="tns:SetOutsuncontrol" name="SetOutsuncontrol">
+    </wsdl:input>
+      <wsdl:output message="tns:SetOutsuncontrolResponse" name="SetOutsuncontrolResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:IOException" name="IOException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:InterruptedException" name="InterruptedException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetFilmIllControl">
+      <wsdl:input message="tns:GetFilmIllControl" name="GetFilmIllControl">
+    </wsdl:input>
+      <wsdl:output message="tns:GetFilmIllControlResponse" name="GetFilmIllControlResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetImageFileList">
+      <wsdl:input message="tns:GetImageFileList" name="GetImageFileList">
+    </wsdl:input>
+      <wsdl:output message="tns:GetImageFileListResponse" name="GetImageFileListResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetWaterCurtionControl">
+      <wsdl:input message="tns:SetWaterCurtionControl" name="SetWaterCurtionControl">
+    </wsdl:input>
+      <wsdl:output message="tns:SetWaterCurtionControlResponse" name="SetWaterCurtionControlResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:IOException" name="IOException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:InterruptedException" name="InterruptedException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetWaterControl">
+      <wsdl:input message="tns:GetWaterControl" name="GetWaterControl">
+    </wsdl:input>
+      <wsdl:output message="tns:GetWaterControlResponse" name="GetWaterControlResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetWaterControl">
+      <wsdl:input message="tns:SetWaterControl" name="SetWaterControl">
+    </wsdl:input>
+      <wsdl:output message="tns:SetWaterControlResponse" name="SetWaterControlResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:IOException" name="IOException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:InterruptedException" name="InterruptedException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSensorHistoryData">
+      <wsdl:input message="tns:GetSensorHistoryData" name="GetSensorHistoryData">
+    </wsdl:input>
+      <wsdl:output message="tns:GetSensorHistoryDataResponse" name="GetSensorHistoryDataResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeteorologicalDataByDate">
+      <wsdl:input message="tns:GetMeteorologicalDataByDate" name="GetMeteorologicalDataByDate">
+    </wsdl:input>
+      <wsdl:output message="tns:GetMeteorologicalDataByDateResponse" name="GetMeteorologicalDataByDateResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDownWind">
+      <wsdl:input message="tns:GetDownWind" name="GetDownWind">
+    </wsdl:input>
+      <wsdl:output message="tns:GetDownWindResponse" name="GetDownWindResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEnviDataByDate">
+      <wsdl:input message="tns:GetEnviDataByDate" name="GetEnviDataByDate">
+    </wsdl:input>
+      <wsdl:output message="tns:GetEnviDataByDateResponse" name="GetEnviDataByDateResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetImage">
+      <wsdl:input message="tns:GetImage" name="GetImage">
+    </wsdl:input>
+      <wsdl:output message="tns:GetImageResponse" name="GetImageResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysPara">
+      <wsdl:input message="tns:GetSysPara" name="GetSysPara">
+    </wsdl:input>
+      <wsdl:output message="tns:GetSysParaResponse" name="GetSysParaResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCo2control">
+      <wsdl:input message="tns:SetCo2control" name="SetCo2control">
+    </wsdl:input>
+      <wsdl:output message="tns:SetCo2controlResponse" name="SetCo2controlResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:IOException" name="IOException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:InterruptedException" name="InterruptedException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataByDate8503">
+      <wsdl:input message="tns:GetDataByDate8503" name="GetDataByDate8503">
+    </wsdl:input>
+      <wsdl:output message="tns:GetDataByDate8503Response" name="GetDataByDate8503Response">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInmooncontrol">
+      <wsdl:input message="tns:SetInmooncontrol" name="SetInmooncontrol">
+    </wsdl:input>
+      <wsdl:output message="tns:SetInmooncontrolResponse" name="SetInmooncontrolResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:IOException" name="IOException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:InterruptedException" name="InterruptedException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserPassWord">
+      <wsdl:input message="tns:UpdateUserPassWord" name="UpdateUserPassWord">
+    </wsdl:input>
+      <wsdl:output message="tns:UpdateUserPassWordResponse" name="UpdateUserPassWordResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutSunControl">
+      <wsdl:input message="tns:GetOutSunControl" name="GetOutSunControl">
+    </wsdl:input>
+      <wsdl:output message="tns:GetOutSunControlResponse" name="GetOutSunControlResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDeviceSysPara">
+      <wsdl:input message="tns:SetDeviceSysPara" name="SetDeviceSysPara">
+    </wsdl:input>
+      <wsdl:output message="tns:SetDeviceSysParaResponse" name="SetDeviceSysParaResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:IOException" name="IOException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:InterruptedException" name="InterruptedException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetSkylightcontrol">
+      <wsdl:input message="tns:SetSkylightcontrol" name="SetSkylightcontrol">
+    </wsdl:input>
+      <wsdl:output message="tns:SetSkylightcontrolResponse" name="SetSkylightcontrolResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:IOException" name="IOException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:InterruptedException" name="InterruptedException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataNew8503">
+      <wsdl:input message="tns:GetDataNew8503" name="GetDataNew8503">
+    </wsdl:input>
+      <wsdl:output message="tns:GetDataNew8503Response" name="GetDataNew8503Response">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCurtainControl">
+      <wsdl:input message="tns:SetCurtainControl" name="SetCurtainControl">
+    </wsdl:input>
+      <wsdl:output message="tns:SetCurtainControlResponse" name="SetCurtainControlResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:IOException" name="IOException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:InterruptedException" name="InterruptedException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetHotboardSoil">
+      <wsdl:input message="tns:GetHotboardSoil" name="GetHotboardSoil">
+    </wsdl:input>
+      <wsdl:output message="tns:GetHotboardSoilResponse" name="GetHotboardSoilResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInmoonControl">
+      <wsdl:input message="tns:GetInmoonControl" name="GetInmoonControl">
+    </wsdl:input>
+      <wsdl:output message="tns:GetInmoonControlResponse" name="GetInmoonControlResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSensorNewData">
+      <wsdl:input message="tns:GetSensorNewData" name="GetSensorNewData">
+    </wsdl:input>
+      <wsdl:output message="tns:GetSensorNewDataResponse" name="GetSensorNewDataResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetFilmillcontrol">
+      <wsdl:input message="tns:SetFilmillcontrol" name="SetFilmillcontrol">
+    </wsdl:input>
+      <wsdl:output message="tns:SetFilmillcontrolResponse" name="SetFilmillcontrolResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:IOException" name="IOException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:InterruptedException" name="InterruptedException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutskyControl">
+      <wsdl:input message="tns:GetOutskyControl" name="GetOutskyControl">
+    </wsdl:input>
+      <wsdl:output message="tns:GetOutskyControlResponse" name="GetOutskyControlResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelay">
+      <wsdl:input message="tns:GetRelay" name="GetRelay">
+    </wsdl:input>
+      <wsdl:output message="tns:GetRelayResponse" name="GetRelayResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInloopcontrol">
+      <wsdl:input message="tns:SetInloopcontrol" name="SetInloopcontrol">
+    </wsdl:input>
+      <wsdl:output message="tns:SetInloopcontrolResponse" name="SetInloopcontrolResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:IOException" name="IOException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:InterruptedException" name="InterruptedException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetHotboardSoil">
+      <wsdl:input message="tns:SetHotboardSoil" name="SetHotboardSoil">
+    </wsdl:input>
+      <wsdl:output message="tns:SetHotboardSoilResponse" name="SetHotboardSoilResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:IOException" name="IOException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:InterruptedException" name="InterruptedException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetInloopControl">
+      <wsdl:input message="tns:GetInloopControl" name="GetInloopControl">
+    </wsdl:input>
+      <wsdl:output message="tns:GetInloopControlResponse" name="GetInloopControlResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurtainControl">
+      <wsdl:input message="tns:GetCurtainControl" name="GetCurtainControl">
+    </wsdl:input>
+      <wsdl:output message="tns:GetCurtainControlResponse" name="GetCurtainControlResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDownwind">
+      <wsdl:input message="tns:SetDownwind" name="SetDownwind">
+    </wsdl:input>
+      <wsdl:output message="tns:SetDownwindResponse" name="SetDownwindResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:IOException" name="IOException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:InterruptedException" name="InterruptedException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCo2Control">
+      <wsdl:input message="tns:GetCo2Control" name="GetCo2Control">
+    </wsdl:input>
+      <wsdl:output message="tns:GetCo2ControlResponse" name="GetCo2ControlResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeviceInfo">
+      <wsdl:input message="tns:GetDeviceInfo" name="GetDeviceInfo">
+    </wsdl:input>
+      <wsdl:output message="tns:GetDeviceInfoResponse" name="GetDeviceInfoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetOutskycontrol">
+      <wsdl:input message="tns:SetOutskycontrol" name="SetOutskycontrol">
+    </wsdl:input>
+      <wsdl:output message="tns:SetOutskycontrolResponse" name="SetOutskycontrolResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:IOException" name="IOException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:InterruptedException" name="InterruptedException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetRelay">
+      <wsdl:input message="tns:SetRelay" name="SetRelay">
+    </wsdl:input>
+      <wsdl:output message="tns:SetRelayResponse" name="SetRelayResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewEnviData">
+      <wsdl:input message="tns:GetNewEnviData" name="GetNewEnviData">
+    </wsdl:input>
+      <wsdl:output message="tns:GetNewEnviDataResponse" name="GetNewEnviDataResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWaterCurtionControl">
+      <wsdl:input message="tns:GetWaterCurtionControl" name="GetWaterCurtionControl">
+    </wsdl:input>
+      <wsdl:output message="tns:GetWaterCurtionControlResponse" name="GetWaterCurtionControlResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelayMap">
+      <wsdl:input message="tns:GetRelayMap" name="GetRelayMap">
+    </wsdl:input>
+      <wsdl:output message="tns:GetRelayMapResponse" name="GetRelayMapResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSkylightControl">
+      <wsdl:input message="tns:GetSkylightControl" name="GetSkylightControl">
+    </wsdl:input>
+      <wsdl:output message="tns:GetSkylightControlResponse" name="GetSkylightControlResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DataServerSoapBinding" type="tns:DataServiceInf">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="SetOutsuncontrol">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SetOutsuncontrol">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SetOutsuncontrolResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IOException">
+        <soap:fault name="IOException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InterruptedException">
+        <soap:fault name="InterruptedException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetFilmIllControl">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetFilmIllControl">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetFilmIllControlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetWaterCurtionControl">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SetWaterCurtionControl">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SetWaterCurtionControlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IOException">
+        <soap:fault name="IOException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InterruptedException">
+        <soap:fault name="InterruptedException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetImageFileList">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetImageFileList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetImageFileListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWaterControl">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetWaterControl">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetWaterControlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetWaterControl">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SetWaterControl">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SetWaterControlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IOException">
+        <soap:fault name="IOException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InterruptedException">
+        <soap:fault name="InterruptedException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetSensorHistoryData">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetSensorHistoryData">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetSensorHistoryDataResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMeteorologicalDataByDate">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetMeteorologicalDataByDate">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetMeteorologicalDataByDateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDownWind">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetDownWind">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetDownWindResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEnviDataByDate">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetEnviDataByDate">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetEnviDataByDateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetImage">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetImage">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetImageResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysPara">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetSysPara">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetSysParaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCo2control">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SetCo2control">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SetCo2controlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IOException">
+        <soap:fault name="IOException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InterruptedException">
+        <soap:fault name="InterruptedException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataByDate8503">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetDataByDate8503">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetDataByDate8503Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInmooncontrol">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SetInmooncontrol">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SetInmooncontrolResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IOException">
+        <soap:fault name="IOException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InterruptedException">
+        <soap:fault name="InterruptedException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateUserPassWord">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="UpdateUserPassWord">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="UpdateUserPassWordResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutSunControl">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetOutSunControl">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetOutSunControlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDeviceSysPara">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SetDeviceSysPara">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SetDeviceSysParaResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IOException">
+        <soap:fault name="IOException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InterruptedException">
+        <soap:fault name="InterruptedException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetSkylightcontrol">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SetSkylightcontrol">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SetSkylightcontrolResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IOException">
+        <soap:fault name="IOException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InterruptedException">
+        <soap:fault name="InterruptedException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetDataNew8503">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetDataNew8503">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetDataNew8503Response">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetCurtainControl">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SetCurtainControl">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SetCurtainControlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IOException">
+        <soap:fault name="IOException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InterruptedException">
+        <soap:fault name="InterruptedException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetHotboardSoil">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetHotboardSoil">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetHotboardSoilResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInmoonControl">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetInmoonControl">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetInmoonControlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSensorNewData">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetSensorNewData">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetSensorNewDataResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetFilmillcontrol">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SetFilmillcontrol">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SetFilmillcontrolResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IOException">
+        <soap:fault name="IOException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InterruptedException">
+        <soap:fault name="InterruptedException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutskyControl">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetOutskyControl">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetOutskyControlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelay">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetRelay">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetRelayResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetInloopcontrol">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SetInloopcontrol">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SetInloopcontrolResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IOException">
+        <soap:fault name="IOException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InterruptedException">
+        <soap:fault name="InterruptedException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetHotboardSoil">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SetHotboardSoil">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SetHotboardSoilResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IOException">
+        <soap:fault name="IOException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InterruptedException">
+        <soap:fault name="InterruptedException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetInloopControl">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetInloopControl">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetInloopControlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurtainControl">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetCurtainControl">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetCurtainControlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetDownwind">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SetDownwind">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SetDownwindResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IOException">
+        <soap:fault name="IOException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InterruptedException">
+        <soap:fault name="InterruptedException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetCo2Control">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetCo2Control">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetCo2ControlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDeviceInfo">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetDeviceInfo">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetDeviceInfoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetOutskycontrol">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SetOutskycontrol">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SetOutskycontrolResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IOException">
+        <soap:fault name="IOException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InterruptedException">
+        <soap:fault name="InterruptedException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SetRelay">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="SetRelay">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="SetRelayResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNewEnviData">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetNewEnviData">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetNewEnviDataResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetWaterCurtionControl">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetWaterCurtionControl">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetWaterCurtionControlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRelayMap">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetRelayMap">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetRelayMapResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSkylightControl">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="GetSkylightControl">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="GetSkylightControlResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DataServer">
+    <wsdl:port binding="tns:DataServerSoapBinding" name="DataServicePort">
+      <soap:address location="http://123.56.121.166:8080/DXAgriPlat/webservice/DataServer"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

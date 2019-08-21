@@ -90,8 +90,6 @@ public class ExcelUtil {
 			}
 		}
 		
-		
-		
 	}
 	
 	public static void proceed(OpOrdertickets orderT,String operName) throws Exception{
@@ -107,25 +105,29 @@ public class ExcelUtil {
 		String tUrl=path+"/"+targName+".xls";
 		printByExcel(orderT,operName,tUrl);
 		ActiveXComponent xl = null;
-		try
-		{
-		ComThread.InitSTA();
-		xl = new ActiveXComponent("Excel.Application"); 
-//		new Variant(false)  打印时是否显示文档       false不显示   
-		Dispatch.put(xl, "Visible", new Variant(false)); 
-		        Dispatch workbooks = xl.getProperty("Workbooks").toDispatch(); 
-		   
-		        String url1=ExcelUtil.class.getClassLoader().getResource("/").getPath();
-		       
-		        	String[] strArr=url1.split("/WEB-INF");
-		        		String str=strArr[0];
-//		打开文档 		
-		        			str=str.substring(1);
-		        			
-		                 Dispatch excel=Dispatch.call(workbooks,"Open",tUrl).toDispatch(); 
-		 
-		                 Dispatch.get(excel,"PrintOut"); 
-		                 
+		try{
+			ComThread.InitSTA();
+			xl = new ActiveXComponent("Excel.Application"); 
+			//		new Variant(false)  打印时是否显示文档       false不显示   
+			Dispatch.put(xl, "Visible", new Variant(false)); 
+		    Dispatch workbooks = xl.getProperty("Workbooks").toDispatch(); 
+		    String url1=ExcelUtil.class.getClassLoader().getResource("/").getPath();
+		    String[] strArr=url1.split("/WEB-INF");
+		    String str=strArr[0];
+           //		打开文档 		
+		    str=str.substring(1);
+		    Dispatch excel=Dispatch.call(workbooks,"Open",tUrl).toDispatch(); 
+		    Dispatch.get(excel,"PrintOut"); 
+		 // 开始打印
+            if (excel != null) {
+                // Dispatch.call(excel, "PrintOut");
+                // 增加以下三行代码解决文件无法删除bug
+                Dispatch.call(excel, "save");
+                Dispatch.call(excel, "Close", new Variant(true));
+                excel = null;
+            }
+            xl.invoke("Quit", new Variant[] {});
+            xl = null;            
 		               
 		}catch (Exception e){
 			e.printStackTrace();
@@ -254,5 +256,31 @@ public class ExcelUtil {
 			 
 				}  
 		 }
+	 }
+	 
+	 public static void main(String [] ar){
+			ActiveXComponent xl = null;
+			try
+			{
+			ComThread.InitSTA();
+			xl = new ActiveXComponent("Excel.Application"); 
+//			new Variant(false)  打印时是否显示文档       false不显示   
+			Dispatch.put(xl, "Visible", new Variant(false));
+			        Dispatch workbooks = xl.getProperty("Workbooks").toDispatch(); 
+			        			
+			                 Dispatch excel=Dispatch.call(workbooks,"Open","d:/da.xls").toDispatch(); 
+			 
+//			                 Dispatch.get(excel,"PrintOut"); 
+			                 
+			               
+			}catch (Exception e)
+			{
+				e.printStackTrace();
+			}finally
+			{ 		
+				ComThread.Release();
+				xl = null;
+				
+			}
 	 }
 }
