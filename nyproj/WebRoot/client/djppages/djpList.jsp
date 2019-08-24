@@ -29,14 +29,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/util.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'> </script>
-	<script type="text/javascript" src="<%=request.getContextPath()%>/js/common.js?version=1"></script> 
-	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript">
 		
   
   	function sp(data){
-  		
-  		
 		var url = "<%=request.getContextPath()%>/clientAction.do?method=editSp&id="+data;
 		window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
 		document.forms[0].submit();
@@ -81,7 +77,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</script>
 	<STYLE type="text/css">
 <!--
-.row {}
 .article {
 BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; FILTER: revealTrans(transition=23,duration=0.5) blendTrans(duration=0.5); POSITION: absolute; VISIBILITY: hidden
 ; background-color: #FFCCFF; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px}
@@ -99,19 +94,11 @@ margin:0px;
 
 -->
 </STYLE>
-<SCRIPT language=JavaScript1.2>
-<!--
+<SCRIPT type="text/javascript">
 function Show(divid) {
-divid.filters.revealTrans.apply();
-divid.style.visibility = "visible";
-divid.filters.revealTrans.play();
 } 
 function Hide(divid) {
-divid.filters.revealTrans.apply();
-divid.style.visibility = "hidden";
-divid.filters.revealTrans.play();
 }
-//-->
 </script>
   </head>
   
@@ -164,9 +151,9 @@ divid.filters.revealTrans.play();
  <table id="txtBox" style='top: 0px;' width="1024" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
 
   <p align="center">
-      <font size="3"><input id="findValue" name="string" type="text" size="15" onChange="n = 0;"></font> 
+      <font size="3"><input id="string" name="string" type="text" size="15" onChange="n = 0;"></font> 
     
-      <input      type="button" value="查找" onclick="findInPage();"> 
+      <input      type="button" value="查找" onclick="findInPage(document.getElementById('string').value);"> 
 	</p>   
   
   <tr bgcolor="#F0F0F0">
@@ -185,12 +172,12 @@ divid.filters.revealTrans.play();
  
   <%int i = 0; %>
   <c:forEach var="item" items="${infoList}">
-  <tr  bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'">
+  <tr bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'">
      <td align="center" width="5%"><%=++i %></td>
-    <td class="columns" align="center" width="10%">${item.name}</td>
+    <td align="center" width="10%">${item.name}</td>
     <td align="center" width="10%">${item.certType}</td>
    
-    <td class="columns" align="center" width="15%">${item.certNo}</td>
+    <td align="center" width="15%">${item.certNo}</td>
     <td align="center" width="6%">${item.seatNum}</td>
     <td align="center" width="5%"><c:if test="${item.vipFlag==1}">是</c:if></td>
     <td align="center" width="10%">${item.linkphone}</td>
@@ -203,7 +190,7 @@ divid.filters.revealTrans.play();
     <c:if test="${item.teamflag==1}">${item.teamName}</c:if>
     <c:if test="${item.teamflag==0}">&nbsp;</c:if>
     </td>
-    <td width="8%" align="center" onMouseOver="Show(www_zzjs_net<%=i%>);" onMouseOut="Hide(www_zzjs_net<%=i%>);">
+    <td width="8%" align="center" onMouseOver="Show('www_zzjs_net<%=i%>');" onMouseOut="Hide('www_zzjs_net<%=i%>');">
       <c:choose>
           <c:when test="${fn:length(item.remark) > 8}">
               <c:out value="${fn:substring(item.remark, 0, 8)}..." />
@@ -229,25 +216,62 @@ divid.filters.revealTrans.play();
 </form>  
 </body>
 </html>
-<script type="text/javascript">
-<!--
-function findInPage() {
-  var searchContent = $('#findValue').val();
-  if (searchContent == null || searchContent == '') return;
-  //1.获取要高亮显示的行
-  var rowNode = $('.columns');
-  //2.获取搜索的内容
-  //3.遍历整行内容，添加高亮颜色
-  rowNode.each(function() {
-		var word = $(this).text();
-		word = word.replace(searchContent, '<span style="color:red;">' + searchContent + '</span>');
-		$(this).html(word);
-   });
-  return;
-}
-//-->
-</script>
 
+
+<script type="text/javascript">
+var NS4 = (document.layers);    // Which browser?
+var IE4 = (document.all);
+var win = window;    // window to search.
+var n   = 0;
+function findInPage(str) {
+  var txt, i, found;
+  if (str == "")
+    return false;
+  // Find next occurance of the given string on the page, wrap around to the
+  // start of the page if necessary.
+  if (NS4) {
+    // Look for match starting at the current point. If not found, rewind
+    // back to the first match.
+    if (!win.find(str))
+      while(win.find(str, false, true))
+        n++;
+    else
+      n++;
+    // If not found in either direction, give message.
+    if (n == 0)
+      alert("Not found.");
+  }
+  if (IE4) {
+    txt = win.document.body.createTextRange();
+    // Find the nth match from the top of the page.
+    for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) {
+      txt.moveStart("character", 1);
+      txt.moveEnd("textedit");
+    }
+    // If found, mark it and scroll it into view.
+    if (found) {
+      txt.moveStart("character", -1);
+      txt.findText(str);
+      txt.select();
+      txt.scrollIntoView();
+      n++;
+    }
+    // Otherwise, start over at the top of the page and find first match.
+    else {
+      if (n > 0) {
+        n = 0;
+        findInPage(str);
+      }
+      // Not found anywhere, give message.
+      else
+        alert("Not found.");
+    }
+  }
+  return false;
+}
+
+
+</script>
 
 
 

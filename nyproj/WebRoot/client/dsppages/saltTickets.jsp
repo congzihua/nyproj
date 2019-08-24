@@ -66,6 +66,7 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 </STYLE>
 <script type="text/javascript">
 <!--
+window.name="mypage";
 <%if(request.getAttribute("message")!=null && request.getAttribute("message").toString().trim().equals("1")){%>
 		alert("订票信息保存成功！");
 	<%}else if(request.getAttribute("message")!=null && request.getAttribute("message").toString().trim().equals("0")){%>
@@ -237,7 +238,7 @@ divid.filters.revealTrans.play();
 		</div>
 	</div>
 	<div style="width: 94%" align="left">	
-	<form action="<%=request.getContextPath()%>/clientAction.do?method=addSaltTicketsInfo" method="post" target="_self">
+	<form action="<%=request.getContextPath()%>/clientAction.do?method=addSaltTicketsInfo" method="post" target="mypage">
 	<input type="hidden" id="flightId" name="flightId" value="${flightId}"/>
 	<input type="hidden" id="orderdate" name="orderdate" value="${orderdate}"/>
 	<input type="hidden" id="flyTime" name="flyTime" value="${flyTime}"/>

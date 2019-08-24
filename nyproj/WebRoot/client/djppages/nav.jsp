@@ -13,8 +13,7 @@
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">
-	<script type="text/javascript" src="<%=request.getContextPath()%>/js/common.js?version=1"></script> 
+	<meta http-equiv="expires" content="0"> 
 	<script type="text/javascript">
 	
 		function tc(){
@@ -37,7 +36,7 @@
 		<div align="center">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr valign="top">
-      <th height="22" scope="col" width="35%"><div align="left"><span><font style="font-size:12";style="font-family:'宋体'" color="blue"><%=authorization.getName() +"："%> 您好！ 登录时间：<%=authorization.getRtime() %></font></span> &nbsp; &nbsp; &nbsp; &nbsp; <span><a href="<%=request.getContextPath()%>/client/djppages/homePage.jsp" target="main"><font style="font-size: 12" color="#FF0000">首页</font></a></span>|
+      <th height="20" scope="col" width="35%"><div align="left"><span><font style="font-size:12";style="font-family:'宋体'" color="blue"><%=authorization.getName() +"："%> 您好！ 登录时间：<%=authorization.getRtime() %></font></span> &nbsp; &nbsp; &nbsp; &nbsp; <span><a href="<%=request.getContextPath()%>/client/djppages/homePage.jsp" target="main"><font style="font-size: 12" color="#FF0000">首页</font></a></span>|
       <span><a href="<%=request.getContextPath()%>/client/djppages/luggageInfo.jsp" target="main"><font style="font-size:12";style="font-family:'宋体'" color="#FF0000">乘客信息</font></a></span></div></th>
       <th width="65%" scope="col"><div align="right"><a href="#" onclick="uppassword();"><font style="font-size:12";style="font-family:'宋体'" color="#FF0000">修改密码</font></a>|<a href="#" onclick="tc();"><font style="font-size:12";style="font-family:'宋体'" color="#FF0000"> 退出</font></a>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div></th>
     </tr>

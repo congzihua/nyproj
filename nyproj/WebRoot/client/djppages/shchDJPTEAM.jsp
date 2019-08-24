@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@page import="com.roc.syspe.entity.OpOrdertickets"%>
 
- <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%
 	OpOrdertickets flightinfo = (OpOrdertickets)request.getAttribute("flightinfo");
 	java.util.List<BaTicketpoint> tpList = (java.util.List<BaTicketpoint>)request.getAttribute("tpList");
@@ -19,27 +19,27 @@
  	if(hourandmin==null||hourandmin.length<2){
     	Integer oi = 0,mi = 0;
     	mi = Integer.valueOf(m)-30;
-
+    	
     	if(mi < 0){
     		if(o.equals("00")){
     			oi = 23;
     		}else{
     			oi = Integer.valueOf(o)-1;
     		}
-    		mi += 60;
-    		m = mi.toString().length()>1?mi.toString():("0"+mi.toString()) ;
-    		o = oi.toString().length()>1?oi.toString():("0"+oi.toString()) ;
+    		mi += 60; 
+    		m = mi.toString().length()>1?mi.toString():("0"+mi.toString()) ; 
+    		o = oi.toString().length()>1?oi.toString():("0"+oi.toString()) ; 
     	}else{
-    		m = mi.toString().length()>1?mi.toString():("0"+mi.toString()) ;
-    	}
+    		m = mi.toString().length()>1?mi.toString():("0"+mi.toString()) ;    		
+    	}	
     }
  	String hour = hourandmin==null||hourandmin.length<2?o:hourandmin[0];
- 	String minute = hourandmin==null||hourandmin.length<2?m:hourandmin[1];
+ 	String minute = hourandmin==null||hourandmin.length<2?m:hourandmin[1]; 	
  	Authorization auth = (Authorization)request.getSession(true).getAttribute("authorization");
  	Integer status = Integer.valueOf(flightinfo.getStatus());
  	SimpleDateFormat format1 = new SimpleDateFormat("yyyyMMdd");
 					String f = format1.format(new java.util.Date());
-					int f1 = (Integer.valueOf(f.substring(0,4))-2);
+					int f1 = (Integer.valueOf(f.substring(0,4))-2);					
 					f= f1+f.substring(4);
  %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -60,11 +60,11 @@
 		<script type="text/javascript"
 			src="<%=request.getContextPath()%>/js/calendar/src/calendar-setup.js"></script>
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css"></link>
-		<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/util.js'></script>
-		<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script>
+		<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/util.js'></script> 
+		<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 		<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'></script>
-			<script type="text/javascript" src="<%=request.getContextPath()%>/js/common.js?version=1"></script>
-
+	
+	
 
 <STYLE type="text/css">
 
@@ -74,10 +74,10 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 
 </STYLE>
 
-
+	
 <SCRIPT language="JavaScript" >
 var printIds = "";
-var printNames = "";
+var printNames = ""; 
 var printCertType = "";
 var printCertNo = "";
 var printVipFlag ="";
@@ -90,35 +90,35 @@ function check(type,flightinfoId)
 			var vipFlag = document.getElementsByName("vipFlag");
 			var seatSele = document.getElementsByName("seatSele");
 			var ids = '';
-
-
+			
+			
 			for (var i = 0; i < member.length; i++){
-				if (member[i].checked==true){
+				if (member[i].checked==true){  
 					ids += member[i].value+","
-					printNames +=name[i].value+",";
+					printNames +=name[i].value+","; 
 					printCertType +=certType[i].value+",";
 					printCertNo += certNo[i].value+",";
-
+					
 					printVipFlag +=vipFlag[i].value+",";
-
+					
 				}
 			}
 			if(ids==null||ids==""){
 				alert("请选择要打印登机牌的乘客");
 					return false;
 			}
-
-			ids = ids.substring(0,ids.length-1);
-			printNames =printNames.substring(0,printNames.length-1);
+			
+			ids = ids.substring(0,ids.length-1);			
+			printNames =printNames.substring(0,printNames.length-1); 
 			printCertType = printCertType.substring(0,printCertType.length-1);
 			printCertNo = printCertNo.substring(0,printCertNo.length-1);
 			printVipFlag = printVipFlag.substring(0,printVipFlag.length-1);
-
-			var luggSum = document.getElementById("luggSum");
+						
+			var luggSum = document.getElementById("luggSum");	
 			var djpCount = document.getElementById("djpCount");
-
-
-
+			
+			
+			
 			var gate = document.getElementById("gate");
 			if(gate.value==null || gate.value==""){
 				alert("登机口信息不能为空， 请填写！");
@@ -130,30 +130,30 @@ function check(type,flightinfoId)
 				alert("航班号不能为空，请先设定航班号！");
 				return;
 			}
-			var weightSum = document.getElementById("weightSum");
-			var luggSum = document.getElementById("luggSum");
+			var weightSum = document.getElementById("weightSum");	
+			var luggSum = document.getElementById("luggSum");	
 			var re = /^[0-9]+.?[0-9]*$/;
-			var re1 = /^[0-9]*$/;    //判断字符串是否为数字
+			var re1 = /^[0-9]*$/;    //判断字符串是否为数字  
 			if (jsTrim(luggSum.value)!='' && !re1.test(jsTrim(luggSum.value)))
-		    {
+		    { 
 				 alert("行李数请输入正整数！");
 				        luggSum.focus();
 				        return false;
-			}
+			}			
 			if(jsTrim(weightSum.value)!=''&&!re.test(jsTrim(weightSum.value))){
 				 alert("行李重量请输入数字！");
 				        weightSum.focus();
 				        return false;
-			}
-
+			}    
+			
 			document.getElementById("tuipiao").disabled="disabled";
 			document.getElementById("bc").disabled="disabled";
 			document.getElementById("cl").disabled="disabled";
 			var flyhour = document.getElementById("flyhour");
 			var flyminute = document.getElementById("flyminute");
-			var status = document.getElementById("status").value;
+			var status = document.getElementById("status").value;	
 			printIds = ids;
-			SysmanagerDWR.djpOrXlqSaveTeam(ids,'<%=auth.getUserid()%>',type,document.getElementById("seatNum").value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,jsTrim(luggSum.value),jsTrim(weightSum.value),flightinfoId,status,onHandleM1);
+			SysmanagerDWR.djpOrXlqSaveTeam(ids,'<%=auth.getUserid()%>',type,document.getElementById("seatNum").value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,jsTrim(luggSum.value),jsTrim(weightSum.value),flightinfoId,status,onHandleM1);		
 		}
 		function changebox(parm){
 			var member = document.getElementsByName("member");
@@ -165,28 +165,28 @@ function check(type,flightinfoId)
 				}
 			}
 		}
-
+		
 		function prxlq(type,flightinfoId)
-		{
+		{	
 			var vv = document.getElementById("panduan").value;
 			if(vv==0){
 				alert("请先打印完登机牌再打印行李签！");
 				return;
 			}
-			var seatNum = document.getElementById("seatNum");
-			var luggSum = document.getElementById("luggSum");
+			var seatNum = document.getElementById("seatNum");			
+			var luggSum = document.getElementById("luggSum");	
 			var gate = document.getElementById("gate");
-
-			var weightSum = document.getElementById("weightSum");
+			
+			var weightSum = document.getElementById("weightSum");	
 			var re = /^[0-9]+.?[0-9]*$/;
-			var re1 = /^[0-9]*$/;    //判断字符串是否为数字
+			var re1 = /^[0-9]*$/;    //判断字符串是否为数字      
 			if(luggSum.value==null||luggSum.value==""){
 				alert("行李件数不能为空，请填写！");
 				luggSum.focus();
 				return;
 			}
 		     if (!re1.test(luggSum.value))
-		    {
+		    { 
 				 alert("行李数请输入正整数！");
 				        luggSum.focus();
 				        return false;
@@ -213,7 +213,7 @@ function check(type,flightinfoId)
 			if(jsTrim(weightSum.value)!=""&&jsTrim(weightSum.value)!=null){
 				wsums +=parseFloat(jsTrim(weightSum.value),10);
 			}
-
+			
 			if(jsTrim(weightSum1)!=""&&jsTrim(weightSum1)!=null){
 				wsums += parseFloat(weightSum1,10);
 			}
@@ -227,15 +227,15 @@ function check(type,flightinfoId)
 			var vipFlag = document.getElementsByName("vipFlag");
 			var member = document.getElementsByName("member");
 			for (var i = 0; i < member.length; i++){
-				 if (member[i].checked==true){
+				 if (member[i].checked==true){  
 					ids += member[i].value+","
-					printNames +=name[i].value+",";
+					printNames +=name[i].value+","; 
 					printCertType +=certType[i].value+",";
 					printCertNo += certNo[i].value+",";
 					printVipFlag +=vipFlag[i].value+",";
-
-				}
-
+					
+				}			
+				
 			}
 			if(ids==null||ids==""){
 				alert("请选择乘客!");
@@ -250,8 +250,8 @@ function check(type,flightinfoId)
 			var flightno= document.getElementById("flightNo").value;
 			var flydate=document.getElementById("orderdate").value;
 			//var flightTo=document.getElementById("flightTo").value;
-			SysmanagerDWR.xlqSaveTeam(ids,'<%=auth.getUserid()%>',type,document.getElementById("seatNum").value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,lugs,wsums,flightinfoId,type,jsTrim(luggSum.value),onHandleM2);
-
+			SysmanagerDWR.xlqSaveTeam(ids,'<%=auth.getUserid()%>',type,document.getElementById("seatNum").value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,lugs,wsums,flightinfoId,type,jsTrim(luggSum.value),onHandleM2);		
+			
 		}
 		function seleSeat(data,seleSeatCount){
 			var url = "<%=request.getContextPath()%>/client/djppages/seleSeatTEAM.jsp?id="+data+"&count="+seleSeatCount;
@@ -259,13 +259,9 @@ function check(type,flightinfoId)
 			//for(var i=0;i<size.length;i++){
 				//alert(size[i].checked);
 			//}
-			var rv = window.showModalDialog(url, window, "dialogWidth: 432px; dialogHeight: 700px; help: no; scroll: yes; status: no", function(value){
-				if(value!=null && typeof(value)!="undefined")
-					document.getElementById("seatNum").value=value;
-			});
+			var rv = window.showModalDialog(url, window, "dialogWidth: 432px; dialogHeight: 700px; help: no; scroll: yes; status: no");
 			if(rv!=null)
 				document.getElementById("seatNum").value=rv;
-			
 		}
 		function onHandleM1(data){
 			if(data=="0"){
@@ -280,31 +276,31 @@ function check(type,flightinfoId)
 				document.getElementById("cl").disabled="";
 			}else if(data=="5"){
 				alert("信息保存失败，你选择的信息状态已经改变，请核查后重新选择！");
-
+				
 			}else {
-
+				
 		//		if(!ForValid()){
 		//		alert("未安装IE插件，请检查!");
 		//		return;
 		//		}
-			//	//if (typeof(document.utxB) == 'undefined')
+			//	//if (typeof(document.utxB) == 'undefined') 
 			//{
 			//	alert('未安装IE插件，请检查!');
 			//	return;
-		    //	}
+		    //	}	
 		   if(window.confirm("信息保存成功，是否进行打印操作！")){
 	         	PrintLab1(data);
-			    // window.returnValue=1;
+			    // window.returnValue=1; 
 				//	window.opener=null;
 				//		window.open("","_self");
-				//		window.close();
+				//		window.close();	
 			}else{
-				 //window.returnValue=1;
+				 //window.returnValue=1; 
 				//	window.opener=null;
 				//		window.open("","_self");
-				//		window.close();
+				//		window.close();	
 			}
-
+			
 			document.getElementById("luggSum1").value=jsTrim(document.getElementById("luggSum").value);
 			document.getElementById("weightSum1").value=jsTrim(document.getElementById("weightSum").value);
 			document.getElementById("seatNum").value="";
@@ -320,10 +316,10 @@ function check(type,flightinfoId)
 				document.getElementById("tuipiao").disabled="";
 				document.getElementById("bc").disabled="";
 				document.getElementById("cl").disabled="";
-			}else{
+			}else{		
 				 if(window.confirm("信息保存成功，是否进行打印操作！")){
-	         		PrintLab2(data);
-	         	 }
+	         		PrintLab2(data);	
+	         	 }			
 				var luggSum = document.getElementById("luggSum");
 			var weightSum = document.getElementById("weightSum");
 			var lugs = 0,wsums=0;
@@ -338,7 +334,7 @@ function check(type,flightinfoId)
 			if(jsTrim(weightSum.value)!=""&&jsTrim(weightSum.value)!=null){
 				wsums +=parseFloat(jsTrim(weightSum.value),10);
 			}
-
+			
 			if(jsTrim(weightSum1)!=""&&jsTrim(weightSum1)!=null){
 				wsums += parseFloat(weightSum1,10);
 			}
@@ -362,41 +358,41 @@ var varItem1 = 'HB1^RQ1^VIP1^ZW1^MDD1^SFD1^DJK1^DJSJ1^XM1^ZJHM1^1234567890123';
 var varItem2 = '北京^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
 
 function PrintLab1(data){
-
-
+	
+	
     var flightNo = document.getElementById("flightNo").value;
     var flydate = document.getElementById("orderdate").value;
-
-
+  
+    
     var flightTo = document.getElementById("flight").value;
     var gate = document.getElementById("gate").value;
     var flyhour = document.getElementById("flyhour").value;
     var flyminute = document.getElementById("flyminute").value;
     var flytime = flyhour+":"+flyminute;
-
-
-
-
-	if (typeof(document.utxB) == "undefined")
+   
+   
+	
+	
+	if (typeof(document.utxB) == "undefined") 
 	{
 		alert('未安装IE插件，请检查!');
 		return;
-    	}
-
+    	}	
+	
 	var _strTemplateName = "MB1.PRN";
+	
+	var _strPort = "LPT1";	
 
-	var _strPort = "LPT1";
-
-    	var ErrorCode = "未获得返回值";
-
+    	var ErrorCode = "未获得返回值"; 
+	
      varItem1 ='';
      var idAr =printIds.split(',');
      //printNames   printIds
-	//printCertType
+	//printCertType 
 	//printCertNo;
 	//printVipFlag;
 	var vipFlag="";
-
+	
      for(var i = 0;i<idAr.length;i++){
 	   if(printVipFlag.split(",")[i]==1){
 	   		vipFlag="是";
@@ -405,17 +401,17 @@ function PrintLab1(data){
 	   }
 	   var certNo = printCertNo.split(",")[i];
 	   if(certNo.length==18){
-	    	certNo=certNo.substring(0,8)+"******"+certNo.substring(14);
+	    	certNo=certNo.substring(0,6)+"******"+certNo.substring(14);
 	   }
-	    varItem1 =   flightNo+'^'+flydate+'^'+vipFlag+'^'+data.split(",")[i]+'^'+flightTo+'^北京^'+gate+'^'+flytime+'^'+printNames.split(",")[i]+'^'+certNo+'^'+idAr[i];
-
-	    	if (varItem1.length > 0)
+	    varItem1 =   flightNo+'^'+flydate+'^'+vipFlag+'^'+data.split(",")[i]+'^'+flightTo+'^北京^'+gate+'^'+flytime+'^'+printNames.split(",")[i]+'^'+certNo+'^'+idAr[i];   
+	    	
+	    	if (varItem1.length > 0) 
 			{
-	    		var IClass = document.utxB;
-	       	ErrorCode = document.utxB.PrintLab(_strTemplateName,varItem1 ,_strPort);
-	    	}
+	    		var IClass = document.utxB;    	
+	       	ErrorCode = document.utxB.PrintLab(_strTemplateName,varItem1 ,_strPort); 
+	    	}	
 		}
-    	//alert(ErrorCode);
+    	//alert(ErrorCode);    	
 }
 <%
   	//String flightDate = request.getAttribute("flightDate")==null?"": request.getAttribute("flightDate").toString().trim();
@@ -445,67 +441,67 @@ function PrintLab1(data){
 
 
 function PrintLab2(data){
-
-	if (typeof(document.utxB) == "undefined")
+	
+	if (typeof(document.utxB) == "undefined") 
 	{
 		alert('未安装IE插件，请检查!');
 		return;
-    	}
+    	}	
     var luggSum = document.getElementById("luggSum").value;
     var weightSum = document.getElementById("weightSum").value;
-    var flightTo = document.getElementById("flight").value;
-    var flightNo = document.getElementById("flightNo").value;
+    var flightTo = document.getElementById("flight").value;    
+    var flightNo = document.getElementById("flightNo").value;    
     var monandday = document.getElementById("monandday").value;
-
-
+    
+    
 	var _strTemplateName = "MB2.PRN";
-
-	var _strPort = "LPT2";
-	var ErrorCode = "未获得返回值";
+	
+	var _strPort = "LPT2";	
+	var ErrorCode = "未获得返回值";  
 	 for(var i = 0;i<jsTrim(luggSum);i++){
     	    ErrorCode = "未获得返回值";
-    	    varItem2 = '北京^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+printNames.split(",")[0]+'^'+data.split(";")[i]+'^51296829^'+flightTo+'^'+printIds.split(',')[1];
-	    	if (varItem2.length > 0)
+    	    varItem2 = '北京^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+printNames.split(",")[0]+'^'+data.split(";")[i]+'^51296829^'+flightTo+'^'+printIds.split(',')[1];  
+	    	if (varItem2.length > 0) 
 		{
-	    		var IClass = document.utxB;
-	        	ErrorCode = document.utxB.PrintLab(_strTemplateName,varItem2 ,_strPort);
-	     }
-
-
-	 }
-	  SysmanagerDWR.printUpdateTeam(printIds,data,myHandle);
-
-
+	    		var IClass = document.utxB;    	
+	        	ErrorCode = document.utxB.PrintLab(_strTemplateName,varItem2 ,_strPort); 
+	     }	
+	    
+	    
+	 }	
+	  SysmanagerDWR.printUpdateTeam(printIds,data,myHandle);   
+	    	
+	    	
 }
 function myHandle(data){
-
+	
 }
 
 function ForValid()
 {
-	if (typeof(document.utxB) == "undefined")
+	if (typeof(document.utxB) == "undefined") 
 	{
 		alert('未安装IE插件，请检查!');
 		return;
     	}
-
-
+ 
+	
 	ErrorCode = document.utxB.ForValid();
-
-
-    	//openWaitIMG(false);
+	
+    	
+    	//openWaitIMG(false); 
 }
 
 -->
 
 </SCRIPT>
 	</head>
-	<body oncontextmenu="if (!event.ctrlKey){return false;}">
+	<body oncontextmenu="if (!event.ctrlKey){return false;}">	
 	<object id="utxB" name="utxB" width="0" height="0" visible="true" classid="clsid:860C7EA3-E6E5-428c-B314-FEFECBC72F4D" ></object>
 	<div align="center" >
-
+ 
   <div align="left" style="width: 1024">
-
+  
 <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';"> 目的地：</FONT><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color:#B22222"> ${flightinfo.flight} &nbsp; </FONT>
 <FONT style="FONT-SIZE: 20px;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt"> 航班号：<font color="#b22222">${flightinfo.flightNo} &nbsp; &nbsp; &nbsp;</font></FONT>
 <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">乘机时间: </FONT><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color:#B22222">&nbsp;<%=new SimpleDateFormat("yyyy-MM-dd").format(flightinfo.getFlightDate()) %>&nbsp;<%=flightinfo.getFlyTime() %> &nbsp; 星期 <%=weeks%></FONT>
@@ -515,61 +511,61 @@ function ForValid()
 	<form action="<%=request.getContextPath()%>/clientAction.do?method=editOrderInfo" method="post" target="dspBottom">
 	<input type="hidden" id="flightId" name="flightId" value="${flightinfo.flightId}"/>
 	<input type="hidden" id="orderdate" name="orderdate" value="<fmt:formatDate value="${flightinfo.flightDate}" pattern="yyyy-MM-dd"/>"/>
-	<input type="hidden" name="flyTime" value="${flightinfo.flyTime}"/>
-	<input type="hidden" name="flightinfoId" value="${flightinfo.id}"/>
+	<input type="hidden" id="flyTime" name="flyTime" value="${flightinfo.flyTime}"/>
+	<input type="hidden" id="flightinfoId" name="flightinfoId" value="${flightinfo.id}"/>
 	<input type="hidden" id="id" name="id" value="${id}"/>
 	<input type="hidden" id="flightNo" name="flightNo" value="${flightinfo.flightNo }" />
 	<input type="hidden" id="status" name="status" value="${flightinfo.status}" />
 	<input type="hidden" id="djpCount" value="<%=ooList.size()%>" />
-	 <input type="hidden" value="<fmt:formatDate value="${flightinfo.flightDate}" pattern="MM月dd日"/>" name="monandday" id="monandday"  readonly="readonly"/>
+	 <input type="hidden" value="<fmt:formatDate value="${flightinfo.flightDate}" pattern="MM月dd日"/>" name="monandday" id="monandday"  readonly="readonly"/> 
 	 <input type="hidden" id="flight" value="${flightinfo.flight}"/>
 	 <input id="panduan" type="hidden" value="<%=flightinfo.getGate()==null||flightinfo.getGate().trim().equals("")?"0":"1" %>"/>
-	<table width="1024" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
-
+	<table width="1024" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">	
+  
   <tr bgcolor="#FFFFFF">
-
+    
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">座位：</FONT></td>
-    <td width="18%" nowrap="nowrap"><input type="text" style="width: 55%" id="seatNum" name="seatNum" value="" readonly="readonly"/>
+    <td width="18%" nowrap="nowrap"><input type="text" style="width: 55%" id="seatNum" name="seatNum" value="" readonly="readonly"/> 
     <input type="button" name="xz" onclick="seleSeat(${flightinfo.flightinfoId},<%=ooList.size()%>);" value="选 择" /></td>
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">登机口：</FONT></td>
     <td width="18%"><input type="text" id="gate" name="gate" value="${flightinfo.gate==null ||flightinfo.gate=='' ?'4-6':flightinfo.gate}"/></td>
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">登机时间：</FONT></td>
-
-
+    
+	
     <td width="18%" colspan="2">
     <select id="flyhour" name="flyhour">
-
-		<option value="06" <%if("06".equals(hour)){ %>selected="selected"<%} %>>06</option>
-		<option value="07" <%if("07".equals(hour)){ %>selected="selected"<%} %>>07</option>
-		<option value="08" <%if("08".equals(hour)){ %>selected="selected"<%} %>>08</option>
-		<option value="09" <%if("09".equals(hour)){ %>selected="selected"<%} %>>09</option>
-		<option value="10" <%if("10".equals(hour)){ %>selected="selected"<%} %>>10</option>
-		<option value="11" <%if("11".equals(hour)){ %>selected="selected"<%} %>>11</option>
-		<option value="12" <%if("12".equals(hour)){ %>selected="selected"<%} %>>12</option>
-		<option value="13" <%if("13".equals(hour)){ %>selected="selected"<%} %>>13</option>
-		<option value="14" <%if("14".equals(hour)){ %>selected="selected"<%} %>>14</option>
-		<option value="15" <%if("15".equals(hour)){ %>selected="selected"<%} %>>15</option>
-		<option value="16" <%if("16".equals(hour)){ %>selected="selected"<%} %>>16</option>
-		<option value="17" <%if("17".equals(hour)){ %>selected="selected"<%} %>>17</option>
-		<option value="18" <%if("18".equals(hour)){ %>selected="selected"<%} %>>18</option>
-		<option value="19" <%if("19".equals(hour)){ %>selected="selected"<%} %>>19</option>
-		<option value="20" <%if("20".equals(hour)){ %>selected="selected"<%} %>>20</option>
-
-</select>
-:
-<select id="flyminute" name="flyminute">
-		<option value="00" <%if("00".equals(minute)){ %>selected="selected"<%} %>>00</option>
-
-		<option value="10" <%if("10".equals(minute)){ %>selected="selected"<%} %>>10</option>
-
-		<option value="20" <%if("20".equals(minute)){ %>selected="selected"<%} %>>20</option>
-
-		<option value="30" <%if("30".equals(minute)){ %>selected="selected"<%} %>>30</option>
-
-		<option value="40" <%if("40".equals(minute)){ %>selected="selected"<%} %>>40</option>
-
-		<option value="50" <%if("50".equals(minute)){ %>selected="selected"<%} %>>50</option>
-
+		   
+		<option value="06" <%if("06".equals(hour)){ %>selected="selected"<%} %>>06</option>     
+		<option value="07" <%if("07".equals(hour)){ %>selected="selected"<%} %>>07</option>     
+		<option value="08" <%if("08".equals(hour)){ %>selected="selected"<%} %>>08</option>     
+		<option value="09" <%if("09".equals(hour)){ %>selected="selected"<%} %>>09</option>     
+		<option value="10" <%if("10".equals(hour)){ %>selected="selected"<%} %>>10</option>     
+		<option value="11" <%if("11".equals(hour)){ %>selected="selected"<%} %>>11</option>     
+		<option value="12" <%if("12".equals(hour)){ %>selected="selected"<%} %>>12</option>     
+		<option value="13" <%if("13".equals(hour)){ %>selected="selected"<%} %>>13</option>     
+		<option value="14" <%if("14".equals(hour)){ %>selected="selected"<%} %>>14</option>     
+		<option value="15" <%if("15".equals(hour)){ %>selected="selected"<%} %>>15</option>     
+		<option value="16" <%if("16".equals(hour)){ %>selected="selected"<%} %>>16</option>     
+		<option value="17" <%if("17".equals(hour)){ %>selected="selected"<%} %>>17</option>     
+		<option value="18" <%if("18".equals(hour)){ %>selected="selected"<%} %>>18</option>     
+		<option value="19" <%if("19".equals(hour)){ %>selected="selected"<%} %>>19</option>     
+		<option value="20" <%if("20".equals(hour)){ %>selected="selected"<%} %>>20</option>     
+		   
+</select>                                                                                   
+:                                                                                           
+<select id="flyminute" name="flyminute">                                                                   
+		<option value="00" <%if("00".equals(minute)){ %>selected="selected"<%} %>>00</option>   
+		
+		<option value="10" <%if("10".equals(minute)){ %>selected="selected"<%} %>>10</option>   
+		   
+		<option value="20" <%if("20".equals(minute)){ %>selected="selected"<%} %>>20</option>   
+		
+		<option value="30" <%if("30".equals(minute)){ %>selected="selected"<%} %>>30</option>   
+		
+		<option value="40" <%if("40".equals(minute)){ %>selected="selected"<%} %>>40</option>   
+		   
+		<option value="50" <%if("50".equals(minute)){ %>selected="selected"<%} %>>50</option>   
+		
 
 										</select></td>
   </tr>
@@ -582,12 +578,12 @@ function ForValid()
     <input type="button" id="tuipiao" name="tuipiao" value="打印行李签" onclick="prxlq(3,${flightinfo.flightinfoId});"/>&nbsp;&nbsp;
   		<input type="button" id="cl" name="cl" value="关 闭" onclick="window.close();"/>
     </td>
-
-   </tr>
+    
+   </tr> 
   <tr bgcolor="#FFFFFF" align="left" >
   	<td colspan="7">
   		<input type="button" style="margin-left: 10px; " id="bc" name="bc" value="打印登机牌" onclick="check(3,${flightinfo.flightinfoId})"/>&nbsp;&nbsp;
-
+  		
   	</td>
   </tr>
   <tr bgcolor="#F0F0F0">
@@ -627,11 +623,11 @@ function ForValid()
   <td align="center"></td>
   <%
   	}else{
-   %>
+   %> 
     <td align="center">是</td>
    <%} %>
   </tr>
-
+		
 	<%} %>
 </table>
 </form>

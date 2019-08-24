@@ -92,7 +92,7 @@ for (var i = 0; i < chd.length; i++) {
 	
 }
 function xuanzuo(){
-  var temp = document.getElementsByName('tijiao');
+  var temp = document.getElementsByName('tijiao')
   for(var i=0; i<temp.length;i++){
     if(temp[i].checked){
 		  window.returnValue =temp[i].value;
@@ -100,6 +100,7 @@ function xuanzuo(){
 	 
 	}
   }
+  alert("请选择座位！");
  }
 //function mousemove(sId){
 //for (var i = 0; i < oImg.length; i++){
