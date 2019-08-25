@@ -1155,7 +1155,6 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 			id =  ol1.get(0).getId();
 			OpOrderticketsKeyword kw1 = new OpOrderticketsKeyword();
 			kw1.setSeleFlightInfo(Integer.valueOf(id));
-			System.out.println(id);
 			List<OpOrdertickets> ol = service.allInfoList(kw1);
 			request.setAttribute("list", ol);
 		}	

@@ -108,19 +108,13 @@ margin:0px;
 
 -->
 </STYLE>
-<SCRIPT language=JavaScript1.2>
-<!--
+<SCRIPT type="text/javascript">
 function Show(divid) {
-divid.filters.revealTrans.apply();
-divid.style.visibility = "visible";
-divid.filters.revealTrans.play();
+document.getElementById(divid).style.display="block";
 } 
 function Hide(divid) {
-divid.filters.revealTrans.apply();
-divid.style.visibility = "hidden";
-divid.filters.revealTrans.play();
+	document.getElementById(divid).style.display="none";
 }
-//-->
 </script>
   </head>
   
@@ -213,6 +207,7 @@ divid.filters.revealTrans.play();
     <th>联系电话</th>
     <th>状态</th>  
     <th>团队名称</th>  
+     <th>行李数</th>  
     <th>行李编码</th>
     
   </tr>
@@ -241,19 +236,14 @@ divid.filters.revealTrans.play();
     <c:if test="${item.teamflag==1}">${item.teamName}</c:if>
     <c:if test="${item.teamflag==0}">&nbsp;</c:if>
     </td>
-    <td align="center" onMouseOver="Show(www_zzjs_net<%=i%>);" onMouseOut="Hide(www_zzjs_net<%=i%>);">
-      <c:choose>
-          <c:when test="${fn:length(item.bagNum) > 8}">
-              <c:out value="${fn:substring(item.bagNum, 0, 8)}..." />
-          </c:when>
-         <c:otherwise>
-            <c:out value="${item.bagNum}" />
-          </c:otherwise>
-      </c:choose>
-     <div id="www_zzjs_net<%=i%>" class="article">${item.bagNum}</div>
+    <td align="center">
+    	${item.luggSum}
     </td>
-    
+    <td align="center" >
+       ${item.bagNums}
+    </td>
   </tr>
+  
   </c:forEach>
 </table>
 </form>  

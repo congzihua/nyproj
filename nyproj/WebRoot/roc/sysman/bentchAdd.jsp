@@ -97,11 +97,11 @@ java.util.List<BaTicketpoint> tpList = service.queryBaTicketpoint(kw);
 		</script>
 	</head>
 	<body>
-	<div align="center">
+	<div align="left" style="width: 85%">
 		<form  
 			action="<%=request.getContextPath()%>/ticketsAllocAction.do?method=bentchAddInfo"
 			method="post" target="mypage">			
-			<table height="100%" cellspacing="0" cellpadding="0" width="100%"
+			<table  cellspacing="0" cellpadding="0" width="85%"
 				border="0">
 				<tr>
 					<td valign="top" width="80%" >
@@ -168,19 +168,15 @@ java.util.List<BaTicketpoint> tpList = service.queryBaTicketpoint(kw);
 									</td>
 									<td colspan="3" align="left" nowrap="nowrap">
 										<table border="0">
-						        <td width="35%" >
+						        <td width="30%" >
 						        <input id='orderdate' value="" name="orderdate" width="100%" readonly="readonly">        </td>
 						        <td align="left">
 						        	 <span style="cursor: hand"><img	src="<%=request.getContextPath()%>/images/caldendar.gif" id="caldendar1" /> </span>	 
 						        	<font color='red'>*</font> &nbsp; &nbsp;至
 						        	   </td> 
-							
-								
-								
-								
-						        <td width="35%" >
+						        <td width="30%" >
 						        <input id='orderdate1' value="" name="orderdate1" width="100%" readonly="readonly">        </td>
-						        <td align="left">
+						       	 <td align="left">
 						        	 <span style="cursor: hand"><img	src="<%=request.getContextPath()%>/images/caldendar.gif" id="caldendar2" /> </span>	 
 						        	<font color='red'>*</font> 
 						        	   </td> 
@@ -216,11 +212,11 @@ java.util.List<BaTicketpoint> tpList = service.queryBaTicketpoint(kw);
 										<%for(BaTicketpoint bf:tpList){ %>
 										<tr align="middle">
 										<td >
-										<input type="hidden" name="ticketpointId" value="<%=bf.getId()%>"><%=bf.getName()%>:										
+										<input type="hidden" id="ticketpointId" name="ticketpointId" value="<%=bf.getId()%>"><%=bf.getName()%>:										
 									</td>
 									<td colspan="3" align="left">									
 											
-										<input type="text" name="amount" value="" />张						
+										<input type="text" id="amount" name="amount" value="" />张						
 										
 									</td>
 									</tr>
@@ -233,8 +229,8 @@ java.util.List<BaTicketpoint> tpList = service.queryBaTicketpoint(kw);
 									</td>
 								</tr>
 								
-								<tr align="middle">
-									<td colspan="4">
+								<tr valign="bottom">
+									<td colspan="4" align="center">
 										<input type="button"  id="bc" 	value=" 保存" onclick="check();" />&nbsp; &nbsp; &nbsp; 
 										<input type="reset" id="cz" value=" 重置 " />
 									</td>

@@ -32,7 +32,7 @@
         </selectKey>   
     </insert>
     <select id="getUserBlacklistInfoByIdCardAndCertType" parameterClass="com.roc.enp.entity.BlackUserKeyword"  resultMap="ooBlacklistUserResult">
-        select * from blacklist_user a where IDCARD=#idcard# and CERT_TYPE=#certType# limit 1
+        select * from blacklist_user a where IDCARD=#idcard# limit 1
     </select>
     <select id="getInfoById" resultMap="ooBlacklistUserResult" parameterClass="java.lang.Integer">
       	select * from blacklist_user where id=#value#
