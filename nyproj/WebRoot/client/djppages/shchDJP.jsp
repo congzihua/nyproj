@@ -57,7 +57,8 @@
 			src="<%=request.getContextPath()%>/js/calendar/src/calendar-setup.js"></script>
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css">
 	
-	
+	   <script type="text/javascript" src="<%=request.getContextPath()%>/js/Scripts/reconnecting-websocket.min.js"></script>
+	   <script type="text/javascript" src="<%=request.getContextPath()%>/js/Scripts/offline.min.js"></script>
 	
 
 		<STYLE type="text/css">
@@ -73,7 +74,6 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'> </script>
 <SCRIPT language="JavaScript">
-<!--
 function check(data,type,flightinfoId)
 		{	      
 			var seatNum = document.getElementById("seatNum");			
@@ -286,24 +286,18 @@ function check(data,type,flightinfoId)
 				document.getElementById("cl").disabled="";	
 			}
 	}
-//-->
 </script>
 <SCRIPT LANGUAGE="JavaScript">
-<!--
-
-//"航班号#DATA1#^日期#DATA2#^VIP#DATA3#^座位号#DATA4#^目的地#DATA5#^始发地#DATA6#^登机口#DATA7#^登记时间#DATA8#^姓名#DATA9#^证件号码#DATA10#"
-
-//"目的地#DATA1#^工号#DATA2#^件数#DATA3#^重量#DATA4#^座位号#DATA5#^航班号#DATA6#^日期#DATA7#^姓名#DATA8#^条形码#DATA9#^号码#DATA10#"
-
-
 //"航班号#DATA1#^日期#DATA2#^VIP#DATA3#^座位号#DATA4#^目的地#DATA5#^始发地#DATA6#^登机口#DATA7#^登记时间#DATA8#^姓名#DATA9#^证件号码#DATA10#^条码ID#DATA11#"
 
 //"目的地#DATA1#^工号#DATA2#^件数#DATA3#^重量#DATA4#^座位号#DATA5#^航班号#DATA6#^日期#DATA7#^姓名#DATA8#^条形码#DATA9#^号码#DATA10#^条码ID#DATA11#"
 
 var varItem1 = 'HB1^RQ1^VIP1^ZW1^MDD1^SFD1^DJK1^DJSJ1^XM1^ZJHM1^1234567890123';
-
 var varItem2 = '北京^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
-
+var varDemo1 = 'djp.frx^';
+var varDemo2 = 'xlp.frx^';
+var socketUrl = 'ws://localhost:7302/PrintServer';
+//登机牌打印
 function PrintLab1(data){
     var flightNo = document.getElementById("flightNo").value;
     var flydate = document.getElementById("flydate").value;
@@ -326,36 +320,37 @@ function PrintLab1(data){
     	certNo=certNo.substring(0,6)+"******"+certNo.substring(14);
 	}
 	varItem1 = flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNum+'^'+flightTo+'^北京^'+gate+'^'+flytime+'^'+name+'^'+certNo+'^'+id;
-	//alert(varItem1);
-	if (typeof(document.utxB) == "undefined") 
-	{
-		alert('未安装IE插件，请检查!');
-		return;
-    	}	
-	
-	var _strTemplateName = "MB1.PRN";
-	
-	var _strPort = "LPT1";	
-
-    	var ErrorCode = "未获得返回值"; 
-	
-        
-    	if (varItem1.length > 0) 
-	{
-    		var IClass = document.utxB;    	
-        	ErrorCode = document.utxB.PrintLab(_strTemplateName,varItem1 ,_strPort); 
-    	}	
-	
-    	//alert(ErrorCode);    	
+	 var pData  = varDemo1+varItem1;
+     buildSocket();
+     socket.onopen = function (event) {
+         socketStatus = true;
+         if (socket.readyState == 1) {
+             socket.send(pData);
+         }
+     }
+     socket.onmessage = function (event) {
+         socketStatus = false;
+         pData = '';
+         socket.close();
+     };
+     socket.onerror = function (evnt) {
+         socketStatus = false;
+     };
+     socket.onclose = function (event) {
+         socketStatus = false;
+         socket = null;
+     };
 }
-
-function PrintLab2(data){
-	
-	if (typeof(document.utxB) == "undefined") 
-	{
-		alert('未安装IE插件，请检查!');
-		return;
-    	}	
+function buildSocket() {
+    if ('WebSocket' in window) {
+        socket = new ReconnectingWebSocket(socketUrl);
+    } else if ('MozWebSocket' in window) {
+        socket = new MozWebSocket(socketUrl);
+    } else {
+        socket = new SockJS(socketUrl);
+    }
+};
+function PrintLab2(data){	
     var luggSum = document.getElementById("luggSum").value;
     var weightSum = document.getElementById("weightSum").value;
     var flightTo = document.getElementById("flightTo").value;
@@ -365,17 +360,32 @@ function PrintLab2(data){
     var monandday = document.getElementById("monandday").value;
     var lsum = document.getElementById("luggSum").value;
 	
-	var _strTemplateName = "MB2.PRN";
 	
-	var _strPort = "LPT2";	
-	var ErrorCode = "未获得返回值";
 	for(var i=0;i<lsum;i++){
 		varItem2 = '北京^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+name+'^'+data.split(';')[i]+'^51296829^'+flightTo+'^'+id;
     	        
     	if (varItem2.length > 0) 
 		{
-    		var IClass = document.utxB;    	
-        	ErrorCode = document.utxB.PrintLab(_strTemplateName,varItem2 ,_strPort); 
+    		 var pData  = varDemo2+varItem2;
+    	     buildSocket();
+    	     socket.onopen = function (event) {
+                 socketStatus = true;
+                 if (socket.readyState == 1) {
+                     socket.send(data);
+                 }
+             }
+             socket.onmessage = function (event) {
+                 socketStatus = false;
+                 data = '';
+                 socket.close();
+             };
+             socket.onerror = function (evnt) {
+                 socketStatus = false;
+             };
+             socket.onclose = function (event) {
+                 socketStatus = false;
+                 socket = null;
+             };
     	}	
     }
 		SysmanagerDWR.printUpdate(document.getElementById("id").value,data,myHandle);
@@ -384,22 +394,6 @@ function PrintLab2(data){
 function myHandle(data){
 	
 }
-function ForValid()
-{
-	if (typeof(document.utxB) == "undefined") 
-	{
-		alert('未安装IE插件，请检查!');
-		return;
-    	}
- 
-	
-	ErrorCode = document.utxB.ForValid();
-	
-    	alert(ErrorCode);
-    	//openWaitIMG(false); 
-}
-
--->
 
 </SCRIPT>
 	</head>

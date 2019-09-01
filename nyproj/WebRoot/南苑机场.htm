@@ -1,0 +1,94 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+    <TITLE> Test </TITLE>
+    <script src="Scripts/reconnecting-websocket.min.js"></script>
+    <script src="Scripts/offline.min.js"></script>
+    <SCRIPT LANGUAGE="JavaScript">
+
+        //登机牌---"航班号#DATA1#^日期#DATA2#^VIP#DATA3#^座位号#DATA4#^目的地#DATA5#^始发地#DATA6#^登机口#DATA7#^登记时间#DATA8#^姓名#DATA9#^证件号码#DATA10#^条码ID#DATA11#"
+        //行李牌---"始发地#DATA1#^工号#DATA2#^件数#DATA3#^重量#DATA4#^座位号#DATA5#^航班号#DATA6#^日期#DATA7#^姓名#DATA8#^行李编号#DATA9#^号码#DATA10#^目的地#DATA11#^条码ID#DATA12#"
+
+//        var varItem1 = '4008^2012-01-22^是^1-A^库尔勒^北京^4-6^08:30^科比布莱恩提^220111198804153641^12';
+//        var varItem2 = '北京^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
+//        var varDemo = 'demo.frx^123456789^登机牌';  
+//        var varItem1 = 'djp.frx^航班号^日期^VIP^座位号^目的地^始发地^登机口^登记时间^姓名^证件号码^条码'; 
+//        var varItem2 = 'xlp.frx^始发地^工号^件数^重量^座位号^航班号^日期^姓名^行李编号^号码^目的地^条码'; 
+        var varItem1 = 'djp.frx^4008^2012-01-22^是^1-A^库尔勒^北京^4-6^08:30^科比布莱恩提^220111198804153641^183362'; 
+        var varItem2 = 'xlp.frx^北京^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988'; 
+               
+        var url = 'ws://localhost:7302/PrintServer';
+        var socket = null;
+        var data = '';
+        function buildSocket() {
+            if ('WebSocket' in window) {
+                socket = new ReconnectingWebSocket(url);
+            } else if ('MozWebSocket' in window) {
+                socket = new MozWebSocket(url);
+            } else {
+                socket = new SockJS(url);
+            }
+        };
+        //打印登机牌
+        function PrintLab1() {
+            data = varItem1;
+            buildSocket();
+            socket.onopen = function (event) {
+                socketStatus = true;
+                if (socket.readyState == 1) {
+                    socket.send(data);
+                }
+            }
+            socket.onmessage = function (event) {
+                socketStatus = false;
+                data = '';
+                socket.close();
+            };
+            socket.onerror = function (evnt) {
+                socketStatus = false;
+            };
+            socket.onclose = function (event) {
+                socketStatus = false;
+                socket = null;
+            };
+        };
+        //打印行李牌
+        function PrintLab2() { 
+            data = varItem2;
+            buildSocket();
+            socket.onopen = function (event) {
+                socketStatus = true;
+                if (socket.readyState == 1) {
+                    socket.send(data);
+                }
+            }
+            socket.onmessage = function (event) {
+                socketStatus = false;
+                data = '';
+                socket.close();
+            };
+            socket.onerror = function (evnt) {
+                socketStatus = false;
+            };
+            socket.onclose = function (event) {
+                socketStatus = false;
+                socket = null;
+            };
+        }
+
+    </SCRIPT>
+</HEAD>
+<BODY>   
+    <div>
+        <a href="javascript:PrintLab1();">登机牌打印</a>
+    </div>
+    </br></br>
+    <div>
+        <a href="javascript:PrintLab2();">行李牌打印</a>
+    </div>
+</BODY>
+</HTML>
+
+
+
+

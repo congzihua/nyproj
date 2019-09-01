@@ -246,7 +246,7 @@ function check(data)
 	</div>
 	
 	<form action="<%=request.getContextPath()%>/clientAction.do?method=saltTeamsTicket" method="post" target="mytab">&nbsp; 
-	<table id="listtable" width="99%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">	
+	<table id="listtable" width="95%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">	
  
  <%List<OpOrdertickets> list = (List<OpOrdertickets>)request.getAttribute("list");
 		int size = list.size(); %>

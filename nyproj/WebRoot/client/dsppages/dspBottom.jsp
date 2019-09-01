@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	}
   	function saltTeamTickets(data,name,status){
   		var url = "<%=request.getContextPath()%>/clientAction.do?method=toSaltTeamTickets&flightinfoId="+data+"&name="+encodeURI(encodeURI(name))+"&status="+status;
-  		window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 600px; help: no; scroll: yes; status: no");
+  		window.showModalDialog(url, window, "dialogWidth: 1300px; dialogHeight: 650px; help: no; scroll: yes; status: no");
 		document.forms[0].submit();	
   	} 
   	
@@ -298,7 +298,7 @@ function Hide(divid) {
  &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;
   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 舱  单&nbsp;
    &nbsp; &nbsp; &nbsp; &nbsp; 
-<input id="string" name="string" type="text" size="15" onChange="n = 0;"></font> 
+<input id="string" name="string" type="text" size="15" onChange="nextIndex = 0;"></font> 
       <input      type="button" value="查找" onclick="findInPage();"> 
 		</FONT>
  <table width="96%" border="0" align="left"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
@@ -428,29 +428,51 @@ function Hide(divid) {
 </form> 
 </body>
 </html>
-<script language="JavaScript">
-var NS4 = (document.layers);    // Which browser?
-var IE4 = (document.all);
-var win = window;    // window to search.
-var n   = 0;
+<script type="text/javascript">
+//在整个文本中查找第几个，从0开始
+var nextIndex = 0;
+//上一次需要查找的字符串
+var searchValue = '';
+
 function findInPage() {
-  var str = document.getElementById('string').value;
-  if (str == "")
-    return false;
- //1.获取要高亮显示的行			
- var rowNode = $('.highlightRow');			
- //2.获取搜索的内容			
- var searchContent = $("#string").val();
- //3.遍历整行内容，添加高亮颜色			
- 
- //3.遍历整行内容，添加高亮颜色			
- rowNode.each(function() {			
-	var word = $(this).html();	
-	word = word.replace(searchContent, '<span name="sp"  style="color:red;">' + searchContent + '</span>');
-	$(this).html(word);	
-  });
-  
-  return false;
+	var searchText = document.getElementById('string').value;
+	//判断搜索字符是否为空
+	if (!searchText){
+		alert('搜索字符串为空');
+		return;
+	}
+	//判断搜索条件是否已经改变
+	if(searchText && searchText != searchValue && nextIndex > 0){
+		searchValue = searchText;
+		nextIndex = 0;
+	}else{
+		searchValue = searchText;
+	}
+	var txt = document.body.createTextRange();
+	//搜索str
+	var found = '';
+	//查找第nextIndex个的字符串。之所以要用循环，是因为TextRange对象每次都是新生成的，所以查找初始位置每次都会还原。那么要查找第n次出现的字符串，就需要调用findText()方法多次，且每次查找都要重新设置开始位置和结束位置。
+	for (i = 0; i <= nextIndex && (found = txt.findText(searchValue))==true; i++) {
+		txt.moveStart("character", 1);
+		txt.moveEnd("textedit");
+	}
+	//选中本次查找的字符串
+	if (found) {
+                        //这里设置为-1，表示为倒序查找。之所以要这样做，是因为此时我们已经查找到了第nextIndex出现的字符串，那么此时如果设置为倒序查找，且将开始位置设置为末尾，那么此时调用findText()方法查找，则会刚好查到我们上一次查到的字符串
+		txt.moveStart("character", -1);
+		txt.findText(searchValue);
+		txt.select();
+        //滚动屏幕到合适位置
+		txt.scrollIntoView();
+		nextIndex++;
+	}else{
+		//循环查找
+		if (nextIndex > 0) { 
+			nextIndex = 0; 
+			findInPage(); 
+		}
+	}
+  	return;
 }
 
 

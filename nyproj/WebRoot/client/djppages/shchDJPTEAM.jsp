@@ -279,28 +279,10 @@ function check(type,flightinfoId)
 				
 			}else {
 				
-		//		if(!ForValid()){
-		//		alert("未安装IE插件，请检查!");
-		//		return;
-		//		}
-			//	//if (typeof(document.utxB) == 'undefined') 
-			//{
-			//	alert('未安装IE插件，请检查!');
-			//	return;
-		    //	}	
+		
 		   if(window.confirm("信息保存成功，是否进行打印操作！")){
 	         	PrintLab1(data);
-			    // window.returnValue=1; 
-				//	window.opener=null;
-				//		window.open("","_self");
-				//		window.close();	
-			}else{
-				 //window.returnValue=1; 
-				//	window.opener=null;
-				//		window.open("","_self");
-				//		window.close();	
 			}
-			
 			document.getElementById("luggSum1").value=jsTrim(document.getElementById("luggSum").value);
 			document.getElementById("weightSum1").value=jsTrim(document.getElementById("weightSum").value);
 			document.getElementById("seatNum").value="";
@@ -350,16 +332,13 @@ function check(type,flightinfoId)
 //-->
 </script>
 <SCRIPT LANGUAGE="JavaScript">
-<!--
-
-
 var varItem1 = 'HB1^RQ1^VIP1^ZW1^MDD1^SFD1^DJK1^DJSJ1^XM1^ZJHM1^1234567890123';
 
 var varItem2 = '北京^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
-
+var varDemo1 = 'djp.frx^';
+var varDemo2 = 'xlp.frx^';
+var socketUrl = 'ws://localhost:7302/PrintServer';
 function PrintLab1(data){
-	
-	
     var flightNo = document.getElementById("flightNo").value;
     var flydate = document.getElementById("orderdate").value;
   
@@ -369,28 +348,10 @@ function PrintLab1(data){
     var flyhour = document.getElementById("flyhour").value;
     var flyminute = document.getElementById("flyminute").value;
     var flytime = flyhour+":"+flyminute;
-   
-   
-	
-	
-	if (typeof(document.utxB) == "undefined") 
-	{
-		alert('未安装IE插件，请检查!');
-		return;
-    	}	
-	
-	var _strTemplateName = "MB1.PRN";
-	
-	var _strPort = "LPT1";	
-
-    	var ErrorCode = "未获得返回值"; 
 	
      varItem1 ='';
      var idAr =printIds.split(',');
-     //printNames   printIds
-	//printCertType 
-	//printCertNo;
-	//printVipFlag;
+    
 	var vipFlag="";
 	
      for(var i = 0;i<idAr.length;i++){
@@ -404,18 +365,32 @@ function PrintLab1(data){
 	    	certNo=certNo.substring(0,6)+"******"+certNo.substring(14);
 	   }
 	    varItem1 =   flightNo+'^'+flydate+'^'+vipFlag+'^'+data.split(",")[i]+'^'+flightTo+'^北京^'+gate+'^'+flytime+'^'+printNames.split(",")[i]+'^'+certNo+'^'+idAr[i];   
-	    	
 	    	if (varItem1.length > 0) 
 			{
-	    		var IClass = document.utxB;    	
-	       	ErrorCode = document.utxB.PrintLab(_strTemplateName,varItem1 ,_strPort); 
+	    		 var pData  = varDemo1+varItem1;
+	    		 buildSocket();
+	    	     socket.onopen = function (event) {
+	    	         socketStatus = true;
+	    	         if (socket.readyState == 1) {
+	    	             socket.send(pData);
+	    	         }
+	    	     }
+	    	     socket.onmessage = function (event) {
+	    	         socketStatus = false;
+	    	         pData = '';
+	    	         socket.close();
+	    	     };
+	    	     socket.onerror = function (evnt) {
+	    	         socketStatus = false;
+	    	     };
+	    	     socket.onclose = function (event) {
+	    	         socketStatus = false;
+	    	         socket = null;
+	    	     };
 	    	}	
 		}
-    	//alert(ErrorCode);    	
 }
 <%
-  	//String flightDate = request.getAttribute("flightDate")==null?"": request.getAttribute("flightDate").toString().trim();
-  	//out.print("日期是："+flightDate);
   	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
   	java.util.Date date = flightinfo.getFlightDate();
   	java.util.Calendar c = java.util.Calendar.getInstance();
@@ -439,7 +414,15 @@ function PrintLab1(data){
 	}
    %>
 
-
+   function buildSocket() {
+	    if ('WebSocket' in window) {
+	        socket = new ReconnectingWebSocket(socketUrl);
+	    } else if ('MozWebSocket' in window) {
+	        socket = new MozWebSocket(socketUrl);
+	    } else {
+	        socket = new SockJS(socketUrl);
+	    }
+	};
 function PrintLab2(data){
 	
 	if (typeof(document.utxB) == "undefined") 
@@ -453,20 +436,33 @@ function PrintLab2(data){
     var flightNo = document.getElementById("flightNo").value;    
     var monandday = document.getElementById("monandday").value;
     
-    
-	var _strTemplateName = "MB2.PRN";
-	
-	var _strPort = "LPT2";	
-	var ErrorCode = "未获得返回值";  
+   
 	 for(var i = 0;i<jsTrim(luggSum);i++){
     	    ErrorCode = "未获得返回值";
     	    varItem2 = '北京^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+printNames.split(",")[0]+'^'+data.split(";")[i]+'^51296829^'+flightTo+'^'+printIds.split(',')[1];  
 	    	if (varItem2.length > 0) 
 		{
-	    		var IClass = document.utxB;    	
-	        	ErrorCode = document.utxB.PrintLab(_strTemplateName,varItem2 ,_strPort); 
+	    		 var pData  = varDemo2+varItem2;
+	    	     buildSocket();
+	    	     socket.onopen = function (event) {
+	                 socketStatus = true;
+	                 if (socket.readyState == 1) {
+	                     socket.send(data);
+	                 }
+	             }
+	             socket.onmessage = function (event) {
+	                 socketStatus = false;
+	                 data = '';
+	                 socket.close();
+	             };
+	             socket.onerror = function (evnt) {
+	                 socketStatus = false;
+	             };
+	             socket.onclose = function (event) {
+	                 socketStatus = false;
+	                 socket = null;
+	             };	
 	     }	
-	    
 	    
 	 }	
 	  SysmanagerDWR.printUpdateTeam(printIds,data,myHandle);   
@@ -491,16 +487,13 @@ function ForValid()
     	
     	//openWaitIMG(false); 
 }
-
--->
-
 </SCRIPT>
 	</head>
 	<body oncontextmenu="if (!event.ctrlKey){return false;}">	
 	<object id="utxB" name="utxB" width="0" height="0" visible="true" classid="clsid:860C7EA3-E6E5-428c-B314-FEFECBC72F4D" ></object>
 	<div align="center" >
  
-  <div align="left" style="width: 1024">
+  <div align="left" style="width: 100%">
   
 <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';"> 目的地：</FONT><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color:#B22222"> ${flightinfo.flight} &nbsp; </FONT>
 <FONT style="FONT-SIZE: 20px;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt"> 航班号：<font color="#b22222">${flightinfo.flightNo} &nbsp; &nbsp; &nbsp;</font></FONT>
@@ -520,7 +513,7 @@ function ForValid()
 	 <input type="hidden" value="<fmt:formatDate value="${flightinfo.flightDate}" pattern="MM月dd日"/>" name="monandday" id="monandday"  readonly="readonly"/> 
 	 <input type="hidden" id="flight" value="${flightinfo.flight}"/>
 	 <input id="panduan" type="hidden" value="<%=flightinfo.getGate()==null||flightinfo.getGate().trim().equals("")?"0":"1" %>"/>
-	<table width="1024" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">	
+	<table width="100%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">	
   
   <tr bgcolor="#FFFFFF">
     
