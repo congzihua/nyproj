@@ -74,7 +74,7 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'> </script>
 <SCRIPT language="JavaScript">
-function check(data,type,flightinfoId)
+    function check(data,type,flightinfoId)
 		{	      
 			var seatNum = document.getElementById("seatNum");			
 			var luggSum = document.getElementById("luggSum");	
@@ -220,19 +220,8 @@ function check(data,type,flightinfoId)
 				alert("信息保存失败，你选择的信息状态已经改变，请核查后重新选择！");
 				
 			}else {
-				
-		
-		   if(window.confirm("信息保存成功，是否进行打印操作！")){
+		    if(window.confirm("信息保存成功，是否进行打印操作！")){
 	         	PrintLab1(data);
-			     //window.returnValue=1; 
-				//	window.opener=null;
-				//		window.open("","_self");
-				//		window.close();	
-			}else{
-				// window.returnValue=1; 
-				//	window.opener=null;
-				//		window.open("","_self");
-				//		window.close();	
 			}
 			var luggSum = document.getElementById("luggSum");
 			var weightSum = document.getElementById("weightSum");
@@ -245,8 +234,8 @@ function check(data,type,flightinfoId)
 			document.getElementById("tuipiao").disabled="";
 				document.getElementById("bc").disabled="";
 				document.getElementById("cl").disabled="";
-		}
-	}
+		   }
+	    }
 		function onHandleM2(data){
 			if(data=="0"||data=="-1"){
 				alert("信息保存失败或生成行李编码失败！");
@@ -257,9 +246,6 @@ function check(data,type,flightinfoId)
 				 if(window.confirm("信息保存成功，是否进行打印操作！")){
 	         		PrintLab2(data);	
 	         	 }			
-				//window.opener=null;
-				//window.open("","_self");
-				//window.close();
 				var luggSum = document.getElementById("luggSum");
 			var weightSum = document.getElementById("weightSum");
 			var lugs = 0,wsums=0;
@@ -294,8 +280,8 @@ function check(data,type,flightinfoId)
 
 var varItem1 = 'HB1^RQ1^VIP1^ZW1^MDD1^SFD1^DJK1^DJSJ1^XM1^ZJHM1^1234567890123';
 var varItem2 = '北京^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
-var varDemo1 = 'djp.frx^';
-var varDemo2 = 'xlp.frx^';
+var varDemo1 = 'MB1.PRN^LPT1^';
+var varDemo2 = 'MB2.PRN^LPT2^';
 var socketUrl = 'ws://localhost:7302/PrintServer';
 //登机牌打印
 function PrintLab1(data){
@@ -341,6 +327,7 @@ function PrintLab1(data){
          socket = null;
      };
 }
+var socket = null;
 function buildSocket() {
     if ('WebSocket' in window) {
         socket = new ReconnectingWebSocket(socketUrl);
@@ -363,20 +350,19 @@ function PrintLab2(data){
 	
 	for(var i=0;i<lsum;i++){
 		varItem2 = '北京^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+name+'^'+data.split(';')[i]+'^51296829^'+flightTo+'^'+id;
-    	        
     	if (varItem2.length > 0) 
 		{
     		 var pData  = varDemo2+varItem2;
-    	     buildSocket();
-    	     socket.onopen = function (event) {
+    		 buildSocket();
+             socket.onopen = function (event) {
                  socketStatus = true;
                  if (socket.readyState == 1) {
-                     socket.send(data);
+                     socket.send(pData);
                  }
              }
              socket.onmessage = function (event) {
                  socketStatus = false;
-                 data = '';
+                 pData = '';
                  socket.close();
              };
              socket.onerror = function (evnt) {
