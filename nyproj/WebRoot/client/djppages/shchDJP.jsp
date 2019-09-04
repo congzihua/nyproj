@@ -279,7 +279,7 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 //"目的地#DATA1#^工号#DATA2#^件数#DATA3#^重量#DATA4#^座位号#DATA5#^航班号#DATA6#^日期#DATA7#^姓名#DATA8#^条形码#DATA9#^号码#DATA10#^条码ID#DATA11#"
 
 var varItem1 = 'HB1^RQ1^VIP1^ZW1^MDD1^SFD1^DJK1^DJSJ1^XM1^ZJHM1^1234567890123';
-var varItem2 = '北京^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
+var varItem2 = '北京南郊^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
 var varDemo1 = 'MB1.PRN^LPT1^';
 var varDemo2 = 'MB2.PRN^LPT2^';
 var socketUrl = 'ws://localhost:7302/PrintServer';
@@ -305,7 +305,12 @@ function PrintLab1(data){
     if(certNo.length==18){
     	certNo=certNo.substring(0,6)+"******"+certNo.substring(14);
 	}
-	varItem1 = flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNum+'^'+flightTo+'^北京^'+gate+'^'+flytime+'^'+name+'^'+certNo+'^'+id;
+    if(seatNum == null || seatNum == '') {
+    	alert("座位不能为空！");
+    	return;
+    }
+    
+	varItem1 = flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNum+'^'+flightTo+'^北京南郊^'+gate+'^'+flytime+'^'+name+'^'+certNo+'^'+id;
 	 var pData  = varDemo1+varItem1;
      buildSocket();
      socket.onopen = function (event) {
@@ -349,7 +354,7 @@ function PrintLab2(data){
 	
 	
 	for(var i=0;i<lsum;i++){
-		varItem2 = '北京^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+name+'^'+data.split(';')[i]+'^51296829^'+flightTo+'^'+id;
+		varItem2 = '北京南郊^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+name+'^'+data.split(';')[i]+'^51296829^'+flightTo+'^'+id;
     	if (varItem2.length > 0) 
 		{
     		 var pData  = varDemo2+varItem2;

@@ -44,7 +44,7 @@ public class ExcelUtil {
 			certNo.setString(orderT.getCertNo());//证件号码
 			Label from = (Label)wws.getWritableCell(0,2);
 			String startAddress = ArgsUnit.getStartAddress();
-			from.setString((startAddress.contains("北京")?"北京南苑":startAddress));
+			from.setString((startAddress.contains("北京")?"北京南郊":startAddress));
 			Label to = (Label)wws.getWritableCell(0,3);
 			to.setString(orderT.getFlight());//"鼎新"
 			Label fn = (Label)wws.getWritableCell(1,2);

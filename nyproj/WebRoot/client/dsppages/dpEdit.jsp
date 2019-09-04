@@ -40,6 +40,7 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 -->
 </STYLE>
 <script type="text/javascript">
+window.name="mypage";
 function check()
 		{	      
 			var name = document.getElementById("name");
@@ -136,7 +137,7 @@ function check()
 			订 票 信 息 修 改 
 		</FONT>
 		</div>
-	<form action="<%=request.getContextPath()%>/clientAction.do?method=orderInfoEdit" method="post" target="_self">
+	<form action="<%=request.getContextPath()%>/clientAction.do?method=orderInfoEdit" method="post" target="mypage">
 	<input type="hidden" name="flightId" value="${flightinfo.flightId}"/>
 	<input type="hidden" name="orderdate" value="<fmt:formatDate value="${flightinfo.flightDate}" pattern="yyyy-MM-dd"/>"/>
 	<input type="hidden" name="flyTime" value="${flightinfo.flyTime}"/>

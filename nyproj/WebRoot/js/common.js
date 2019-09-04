@@ -1,28 +1,4 @@
 
-if(!window.layer){
-  window.layer = parent.layer;
-  window.layenWin = parent;
-}else{
-	  window.layenWin = window;
-}
-if(!window.showModalDialog){
-  window.showModalDialog = function(url, _, options, callback){
-	var matchs = options.match(/dialogWidth:(.*px)\D*dialogHeight:(.*px)/);
-	var id = layer.open({
-      type: 2,
-      area: [matchs[1], matchs[2]],
-      maxmin: true,
-      content: url,
-      success: function(layero, index){
-    	  var iframeWin = layenWin[layero.find('iframe')[0]['name']];
-    	  iframeWin.close = function(){
-    		  callback && callback(iframeWin.returnValue)
-    		  layer.close(id);
-    	  }
-      }
-    });
-  }
-}
 var net = new Object();
 net.READY_STATE_UNINITIALIZED = 0;
 net.READY_STATE_LOADING = 1;

@@ -214,26 +214,26 @@ divid.filters.revealTrans.play();
 </script>
 	</head>
 	<body oncontextmenu="if (!event.ctrlKey){return true;}">
-	<div align="left">
-		<div style="width: 96%" align="center">
+	<div align="center">
+		<div style="width: 98%" align="center">
 		<FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt">
 			目的地：</FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #b22222; HEIGHT: 9pt">&nbsp; ${flightinfo.flight} &nbsp; </FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt"> 航班号：<font color="#b22222">${flightinfo.flightNo} &nbsp; &nbsp; &nbsp;</font></FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt">乘机日期：</FONT>&nbsp; <FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt"><fmt:formatDate value="${flightinfo.flightDate}" pattern="yyyy-MM-dd"/> &nbsp;${flightinfo.flyTime} &nbsp; 星期 <%=weeks%>
 		</FONT>
 		</div>
-		<div style="width: 96%" align="center">
+		<div style="width: 98%" align="center">
 		<FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt">
 			订 票 信 息 表
 		</FONT>
 		</div>
 	</div>
-	<div style="width: 94%" align="left">	
+	<div style="width: 98%" align="center">	
 	<form action="<%=request.getContextPath()%>/clientAction.do?method=addOrderInfo" method="post" target="dspBottom">
 	<input type="hidden" id="flightId" name="flightId" value="${flightinfo.flightId}"/>
 	<input type="hidden" id="orderdate" name="orderdate" value="<fmt:formatDate value="${flightinfo.flightDate}" pattern="yyyy-MM-dd"/>"/>
 	<input type="hidden" id="flyTime" name="flyTime" value="${flightinfo.flyTime}"/>
 	<input type="hidden" id="flightinfoId" name="flightinfoId" value="${flightinfo.id}"/>
 	<input type="hidden" id="ordertime" name="ordertime" value="${flightinfo.flyTime}"/>
-	<table width="100%" border="0" align="left"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">	
+	<table width="98%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">	
  
   <tr bgcolor="#FFFFFF">
     <td align="right" width="15%">姓名：</td>

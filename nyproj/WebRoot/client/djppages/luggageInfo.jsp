@@ -61,9 +61,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 	}
 	function xxInfo(data){
-		
 			var url = "<%=request.getContextPath()%>/clientAction.do?method=toXxinfoPage&id="+data+"&fid="+document.getElementById("fid").value;
-			window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 550px; help: no; scroll: no; status: no");
+			window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 650px; help: no; scroll: no; status: no");
 			
 			
 		
@@ -208,7 +207,6 @@ function Hide(divid) {
     <th>状态</th>  
     <th>团队名称</th>  
      <th>行李数</th>  
-    <th>行李编码</th>
     
   </tr>
   <%int i = 0; %>
@@ -238,9 +236,6 @@ function Hide(divid) {
     </td>
     <td align="center">
     	${item.luggSum}
-    </td>
-    <td align="center" >
-       ${item.bagNums}
     </td>
   </tr>
   

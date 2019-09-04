@@ -282,7 +282,7 @@ divid.filters.revealTrans.play();
 		<tr align="center" bgcolor="#FFFFFF">
 			<td align="center" colspan="6">  
 				<input id="bc" type="button" value="保存并打印" onclick="check()"/>
-				<input id="cl" type="button" value="关 闭" onclick="close();"/>
+				<input id="cl" type="button" value="关 闭" onclick="javascript:window.close();"/>
 				</td>
 		</tr>
 		

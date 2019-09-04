@@ -128,7 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function xiugaiHandle(data){
 		if(data){
 			var url = "<%=request.getContextPath()%>/clientAction.do?method=toEdpage&id="+idValue;
-			window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
+			window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 600px; help: no; scroll: no; status: no");
 			document.forms[0].submit();
 		}else{
 			alert("信息状态已经改变，请重新选择！");
@@ -239,8 +239,8 @@ function Hide(divid) {
   
   <body oncontextmenu="if (!event.ctrlKey){return false;}">
   <form action="<%=request.getContextPath()%>/clientAction.do?method=toBottomList" method="post">
-  <div align="left">
-  <div style="width: 96%;" align="center">
+  <div align="center">
+  <div style="width: 98%;" align="center">
 		<FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt">
 			&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 票额分配一览表  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
 			
@@ -248,7 +248,7 @@ function Hide(divid) {
 			<img alt="刷新" onclick="shux();" src="<%=request.getContextPath()%>/images/Refresh.png" width="20" height="20">
 		</FONT>
 	</div>	
-	 <div style="width: 96%;" align="left">
+	 <div style="width: 98%;" align="left">
    <table width=" 100%" border="1" align="left" style="border-collapse:collapse; border-color:#333333;
 	font-size:14px;">
   <tr>
@@ -292,7 +292,7 @@ function Hide(divid) {
   </tr>
 </table>
 </div>
- <div align="left" style="width:  100%;border:0" >
+ <div align="center" style="width:100%;border:0" >
 <FONT  style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt">
 &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
  &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;
@@ -301,29 +301,26 @@ function Hide(divid) {
 <input id="string" name="string" type="text" size="15" onChange="nextIndex = 0;"></font> 
       <input      type="button" value="查找" onclick="findInPage();"> 
 		</FONT>
- <table width="96%" border="0" align="left"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
-  
+ <table width="98%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
   <tr bgcolor="#F0F0F0">
-     <!--  th width="6%">序号</th>-->
      <th width="9%">售票点</th>
     <th width="8%">姓名</th>
-    
     <th width="6%">证件类型</th>
     <th width="12%">证件号码</th>    
     <th width="5%">VIP</th>
     <th width="11%">联系电话</th>
-    <th width="5%">状态</th> 
+    <th width="6%">状态</th> 
     <th width="12%">订票日期</th>   
     <th width="6%">团体</th>
     <th width="8%">备注</th>
-    <th width="18%">操作</th>
+    <th  width="18%">操作</th>
   </tr>
   </table>
   </div>
 
-<div align="left" style=" height:351px;overflow-y:auto;width:  96%;top: 0px;margin: 0px">
+<div  align="center"  style=" height:351px;overflow-y:auto;width:100%;top: 0px;margin: 0px">
  <!--  hr color="#0033FF" />-->
- <table width="100%" border="0" align="left"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
+ <table width="98%" border="0"  align="center"   cellpadding="0" cellspacing="1" bgcolor="#3366FF">
   
   <input type="hidden" name="flightinfoId" value="${flightinfoId}"/>
 	<input type="hidden" name="orderdate" value="<%=request.getAttribute("orderdate").toString()%>"/>
@@ -332,7 +329,6 @@ function Hide(divid) {
   <%int i = 0; %>
   <c:forEach var="item" items="${oporderList}">
   <tr bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'">
-     <!--td align="center" width="6%"><%=++i %></td>-->
       <td align="center" width="9%">${item.ticketpointname}</td>
     <td  class="highlightRow" align="center" width="8%">${item.name}</td>
     <td  class="highlightRow" align="center" width="6%">${item.certType}</td>
@@ -341,7 +337,7 @@ function Hide(divid) {
     
     <td  class="highlightRow" align="center" width="5%"><c:if test="${item.vipFlag==1}">是</c:if></td>
     <td  class="highlightRow" align="center" width="11%">${item.linkphone}</td>
-    <td  class="highlightRow" align="center" width="5%"><c:if test="${item.status==0}">订 &nbsp; 票</c:if>
+    <td  class="highlightRow" align="center" width="6%"><c:if test="${item.status==0}">订 &nbsp; 票</c:if>
     <c:if test="${item.status==1}">确认订票</c:if>
     <c:if test="${item.status==2}">已售票</c:if>
     <c:if test="${item.status==3}">换登机牌</c:if>
@@ -364,7 +360,7 @@ function Hide(divid) {
       </c:choose>   
      <div id="www_zzjs<%=i%>" class="article">${item.teamName}</div>
 	</td>
-    <td  class="highlightRow" width="8%" align="center" onMouseOver="Show(www_zzjs_net<%=i%>);" onMouseOut="Hide(www_zzjs_net<%=i%>);">
+    <td  class="highlightRow" width="9%" align="center" onMouseOver="Show(www_zzjs_net<%=i%>);" onMouseOut="Hide(www_zzjs_net<%=i%>);">
       <c:choose>
           <c:when test="${fn:length(item.remark) > 5}">
               <c:out value="${fn:substring(item.remark, 0, 5)}..." />
@@ -376,7 +372,7 @@ function Hide(divid) {
    
      <div id="www_zzjs_net<%=i%>" class="article">${item.remark}</div>
     </td>
-    <td   align="left" width="18%"> 
+    <td   align="left" width="18%" > 
       
     <c:if test="${item.status==0}">	
     	<c:if test="${item.teamflag==null||item.teamflag==0}">

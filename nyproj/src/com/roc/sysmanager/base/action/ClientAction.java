@@ -1173,7 +1173,25 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		
 		kw.setId(Integer.valueOf(id));
-		OpOrdertickets ol1 = service.allInfoList(kw).get(0);			
+		OpOrdertickets ol1 = service.allInfoList(kw).get(0);	
+		if(ol1 != null) {
+			int luggSum = 0;
+			String bagNum = ol1.getBagNum();
+			if (bagNum != null && bagNum.trim().length() > 0) {
+				String[] bagNums = bagNum.split(";");
+				luggSum = bagNums.length;
+				bagNum = "";
+				for (int i = 0;i < bagNums.length;i++) {
+					String bm = bagNums[i];
+					if (i > 0){
+						bagNum += "<br/>";
+					}
+					bagNum += bm;
+				}
+			}
+			ol1.setLuggSum(luggSum);
+			ol1.setBagNums(bagNum);
+		}
 		request.setAttribute("flightinfo",ol1);
 		BaTicketpointKeyword kw1 = new BaTicketpointKeyword();
 		FlightService service1 = new FlightService();

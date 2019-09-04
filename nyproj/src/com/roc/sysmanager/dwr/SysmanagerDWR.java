@@ -272,7 +272,7 @@ public class SysmanagerDWR {
 			return "5";//登机牌状态与元状态不匹配
 		}
 		String startAddress = ArgsUnit.getStartAddress();
-		return service.updateForDjp(order,useroper)?flightNo+"^"+flightDate+"^"+vipText+"^"+seatNum+"^"+flightTo+"^"+(startAddress.contains("北京")?"北京南苑":startAddress)+"^"+gate+"^"+gateTime+"^"+name+"^"+certNo:"1";
+		return service.updateForDjp(order,useroper)?flightNo+"^"+flightDate+"^"+vipText+"^"+seatNum+"^"+flightTo+"^"+(startAddress.contains("北京")?"北京南郊":startAddress)+"^"+gate+"^"+gateTime+"^"+name+"^"+certNo:"1";
 		
 	}
 	//换登机牌团队
