@@ -274,15 +274,12 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 	}
 </script>
 <SCRIPT LANGUAGE="JavaScript">
-//"航班号#DATA1#^日期#DATA2#^VIP#DATA3#^座位号#DATA4#^目的地#DATA5#^始发地#DATA6#^登机口#DATA7#^登记时间#DATA8#^姓名#DATA9#^证件号码#DATA10#^条码ID#DATA11#"
-
-//"目的地#DATA1#^工号#DATA2#^件数#DATA3#^重量#DATA4#^座位号#DATA5#^航班号#DATA6#^日期#DATA7#^姓名#DATA8#^条形码#DATA9#^号码#DATA10#^条码ID#DATA11#"
-
-var varItem1 = 'HB1^RQ1^VIP1^ZW1^MDD1^SFD1^DJK1^DJSJ1^XM1^ZJHM1^1234567890123';
-var varItem2 = '北京南郊^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
+var varItem1 = 'MB1.PRN^LPT1^4008^2012-01-22^是^1-A^库尔勒^北京^4-6^08:30^科比布莱恩提^220111198804153641^12';
+var varItem2 = 'MB2.PRN^LPT2^北京^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
 var varDemo1 = 'MB1.PRN^LPT1^';
 var varDemo2 = 'MB2.PRN^LPT2^';
 var socketUrl = 'ws://localhost:7302/PrintServer';
+var socket = null;
 //登机牌打印
 function PrintLab1(data){
     var flightNo = document.getElementById("flightNo").value;
@@ -291,7 +288,7 @@ function PrintLab1(data){
     if(vipFlag==1){
     	vipFlag = "是";
     }else{
-    	vipFlag = "";
+    	vipFlag = " ";
     }
     var seatNum = document.getElementById("seatNum").value;
     var flightTo = document.getElementById("flightTo").value;
@@ -332,7 +329,7 @@ function PrintLab1(data){
          socket = null;
      };
 }
-var socket = null;
+
 function buildSocket() {
     if ('WebSocket' in window) {
         socket = new ReconnectingWebSocket(socketUrl);

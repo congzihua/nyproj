@@ -357,7 +357,7 @@ function PrintLab1(data){
 	   if(printVipFlag.split(",")[i]==1){
 	   		vipFlag="是";
 	   }else{
-	   		vipFlag="";
+	   		vipFlag=" ";
 	   }
 	   var certNo = printCertNo.split(",")[i];
 	   if(certNo.length==18){

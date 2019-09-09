@@ -98,10 +98,14 @@ function check(data,status)
 				window.returnValue=1; 
 				window.opener=null;
 				window.open("","_self");
-				window.close();	
+				window.close();
 			}else if(data == 6){
 				alert("信息状态已经改变，请重新选择！");
 				
+			}else if(data == 10){
+				alert("该日已经有订票信息，确认改签日期");				
+				document.getElementById("bc").disabled="";
+				document.getElementById("cl").disabled="";
 			}else{
 				alert("改签失败！");				
 				document.getElementById("bc").disabled="";

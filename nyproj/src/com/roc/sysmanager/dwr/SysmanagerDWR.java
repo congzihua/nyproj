@@ -170,6 +170,17 @@ public class SysmanagerDWR {
 		}else{
 			return 1;//当日无航班信息
 		}
+		OpOrderticketsKeyword opOrderticketKw = new OpOrderticketsKeyword();
+		
+		opOrderticketKw.setId(Integer.valueOf(id));
+		OpOrdertickets orderInfo = cService.getOrderticketsList(opOrderticketKw).get(0);
+		int newFlightInfoId = order.getId();
+		String certNo = orderInfo.getCertNo();
+		String certType = orderInfo.getCertType();
+		int orderNum = isAlreadyOrderTickets(newFlightInfoId, certType, certNo);
+		if(orderNum > 0){
+			return 10;//该日已经有订票信息，确认改签日期
+		}
 		com.roc.syspe.entity.OpOrderticketsKeyword okw = new com.roc.syspe.entity.OpOrderticketsKeyword();
 		okw.setTicketPointId(orderTicketPointId);
 		okw.setSeleFlightInfo(order.getId());//航班信息的id
