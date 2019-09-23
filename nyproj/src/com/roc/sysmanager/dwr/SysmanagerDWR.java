@@ -327,7 +327,6 @@ public class SysmanagerDWR {
 					if(Long.valueOf(f)>Long.valueOf(certNo.substring(6,14))){
 						//判断年龄是不是已经超过2岁，2岁不进行分配座位，只出登机牌
 						if(seatArray.length>0&& k<seatArray.length&&(seatArray[k]!=null && seatArray[k].trim().length()>0)){
-							
 							order.setSeatNum(seatArray[k]);
 							k++;
 						}else{
@@ -429,9 +428,6 @@ public class SysmanagerDWR {
 			
 			kw.setId(Integer.valueOf(idArray[i]));
 			ol1 =  service.getOrderticketsList(kw).get(0);
-			if(!this.getOrderStatus(Integer.valueOf(idArray[i]), origStatus)){
-				return "-1";//登机牌状态与元状态不匹配
-			}
 			OpOrdertickets order = new OpOrdertickets();
 			if("身份证".equals(ol1.getCertType())||"户口薄".equals(ol1.getCertType())){
 				String certNo = ol1.getCertNo();

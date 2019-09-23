@@ -348,7 +348,7 @@ function PrintLab2(data){
     var id = document.getElementById("id").value;
     var monandday = document.getElementById("monandday").value;
     var lsum = document.getElementById("luggSum").value;
-	
+   
 	
 	for(var i=0;i<lsum;i++){
 		varItem2 = '北京南郊^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+name+'^'+data.split(';')[i]+'^51296829^'+flightTo+'^'+id;
@@ -356,26 +356,28 @@ function PrintLab2(data){
 		{
     		 var pData  = varDemo2+varItem2;
     		 buildSocket();
-             socket.onopen = function (event) {
-                 socketStatus = true;
-                 if (socket.readyState == 1) {
-                     socket.send(pData);
-                 }
-             }
-             socket.onmessage = function (event) {
-                 socketStatus = false;
-                 pData = '';
-                 socket.close();
-             };
-             socket.onerror = function (evnt) {
-                 socketStatus = false;
-             };
-             socket.onclose = function (event) {
-                 socketStatus = false;
-                 socket = null;
-             };
+		     socket.onopen = function (event) {
+		         socketStatus = true;
+		         if (socket.readyState == 1) {
+		             socket.send(pData);
+		         }
+		     }
+		     socket.onmessage = function (event) {
+		         socketStatus = false;
+		         pData = '';
+		         socket.close();
+		     };
+		     socket.onerror = function (evnt) {
+		         socketStatus = false;
+		     };
+		     socket.onclose = function (event) {
+		         socketStatus = false;
+		         socket = null;
+		     };
     	}	
     }
+	
+	
 		SysmanagerDWR.printUpdate(document.getElementById("id").value,data,myHandle);
     		
 }
@@ -386,7 +388,6 @@ function myHandle(data){
 </SCRIPT>
 	</head>
 	<body oncontextmenu="if (!event.ctrlKey){return false;}">	
-	<object id="utxB" name="utxB" width="1" height="1" visible="true" classid="clsid:860C7EA3-E6E5-428c-B314-FEFECBC72F4D" ></object>
 	<div style="width: 1024" align="center">
 		<FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt">
 			换 登 机 牌
@@ -409,7 +410,7 @@ function myHandle(data){
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">座位：</FONT></td>
     <td width="18%" nowrap="nowrap"><input type="text" style="width: 55%" id="seatNum" name="seatNum" value="${flightinfo.seatNum}" readonly="readonly"/> <input type="button" name="xz" onclick="seleSeat(${flightinfo.flightinfoId});" value="选 择" /></td>
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">登机口：</FONT></td>
-    <td width="18%"><input type="text" id="gate" name="gate" value="${flightinfo.gate==null ||flightinfo.gate=='' ?'5':flightinfo.gate}"/></td>
+    <td width="18%"><input type="text" id="gate" name="gate" value="${flightinfo.gate==null ||flightinfo.gate=='' ?'1':flightinfo.gate}"/></td>
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">登机时间：</FONT></td>
     <td width="18%">
     <select id="flyhour" name="flyhour">

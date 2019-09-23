@@ -31,51 +31,39 @@
                 socket = new SockJS(url);
             }
         };
+        
+        window.onload = function(){
+    	    buildSocket();
+        };
+        
+        socket.onopen = function (event) {                
+        }
+        socket.onmessage = function (event) {
+            socketStatus = false;
+            data = '';           
+        };
+        socket.onerror = function (evnt) {
+            socketStatus = false;
+        };
+        socket.onclose = function (event) {
+            socketStatus = false;
+            socket = null;
+        };       
         //打印登机牌
         function PrintLab1() {
-            data = varItem1;
-            buildSocket();
-            socket.onopen = function (event) {
-                socketStatus = true;
-                if (socket.readyState == 1) {
-                    socket.send(data);
-                }
+            data = varItem1;      
+            socketStatus = true;
+            if (socket.readyState == 1) {
+                socket.send(data);
             }
-            socket.onmessage = function (event) {
-                socketStatus = false;
-                data = '';
-                socket.close();
-            };
-            socket.onerror = function (evnt) {
-                socketStatus = false;
-            };
-            socket.onclose = function (event) {
-                socketStatus = false;
-                socket = null;
-            };
         };
         //打印行李牌
         function PrintLab2() { 
             data = varItem2;
-            buildSocket();
-            socket.onopen = function (event) {
-                socketStatus = true;
-                if (socket.readyState == 1) {
-                    socket.send(data);
-                }
+            socketStatus = true;
+            if (socket.readyState == 1) {
+                socket.send(data);
             }
-            socket.onmessage = function (event) {
-                socketStatus = false;
-                data = '';
-                socket.close();
-            };
-            socket.onerror = function (evnt) {
-                socketStatus = false;
-            };
-            socket.onclose = function (event) {
-                socketStatus = false;
-                socket = null;
-            };
         }
 
     </SCRIPT>

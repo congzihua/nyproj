@@ -461,13 +461,16 @@ function findInPage() {
         //滚动屏幕到合适位置
 		txt.scrollIntoView();
 		nextIndex++;
+		return;
 	}else{
 		//循环查找
 		if (nextIndex > 0) { 
 			nextIndex = 0; 
 			findInPage(); 
+			return;
 		}
 	}
+	alert("信息未发现~");
   	return;
 }
 

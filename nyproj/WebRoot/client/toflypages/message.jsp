@@ -72,7 +72,7 @@ var info1 = '正在扫描中...';
   function dataUp(){
   	var message=document.getElementById("info");
 	//message.innerHTML=info1;
-  	if(document.getElementById("txmv").value!=null && document.getElementById("txmv").value!='' && parseFloat(document.getElementById("txmv").value)>10000){
+  	if(document.getElementById("txmv").value!=null && document.getElementById("txmv").value!='' && parseFloat(document.getElementById("txmv").value)>100000){
   		
   		window.setTimeout("mydata();",800);
     }else{
@@ -84,7 +84,7 @@ var info1 = '正在扫描中...';
   function mydata(){
     var txm  = document.getElementById("txmv");  
     var re = /^[0-9]*$/; 
-  	if (txm.value!=null && txm.value !='' && re.test(txm.value)&&parseFloat(document.getElementById("txmv").value)>10000)    {
+  	if (txm.value!=null && txm.value !='' && re.test(txm.value)&&parseFloat(document.getElementById("txmv").value)>100000)    {
   			var message=document.getElementById("info");
 			//message.innerHTML='正在提交数据...';
 			
@@ -108,8 +108,7 @@ var info1 = '正在扫描中...';
 					//message.innerHTML="<font color='red'>条形码验证成功！</font>";
 				   parent.document.getElementById("uncharge").src="<%=request.getContextPath()%>/clientAction.do?method=toPageAtDJP1&orderdate=<%=orderdate %>&flightId=<%=flightId%>&flyTime=<%=flyTime%>";
 					parent.document.getElementById("charged").src="<%=request.getContextPath()%>/clientAction.do?method=toPageAtDJP2&orderdate=<%=orderdate %>&flightId=<%=flightId%>&flyTime=<%=flyTime%>&id="+data;
-				      
-				    
+					message.innerHTML="";
 				    document.getElementById("txmv").value='';
 				      document.getElementById("txmv").focus();
 
