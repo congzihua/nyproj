@@ -24,8 +24,11 @@ import com.roc.enp.entity.BaTicketpoint;
 import com.roc.enp.entity.BaTicketpointKeyword;
 import com.roc.enp.entity.BaTicketprice;
 import com.roc.enp.entity.BaTicketpriceKeyword;
+import com.roc.enp.entity.BlackUserKeyword;
+import com.roc.enp.entity.BlacklistUser;
 import com.roc.enp.entity.FlightInfo;
 import com.roc.sysmanager.base.service.BaTicketsallocService;
+import com.roc.sysmanager.base.service.BlacklistUserService;
 import com.roc.sysmanager.base.service.ClienService;
 import com.roc.sysmanager.base.service.FlightInfoService;
 import com.roc.sysmanager.base.service.FlightService;
@@ -259,6 +262,15 @@ public class ClientAction extends DispatchAction {
 		
 		if(!(isU>0)){
 			request.setAttribute("oper", 6);//票点票额不足或没有票额
+			return mapping.findForward("tip");
+		}
+		BlackUserKeyword keyword = new BlackUserKeyword();
+		keyword.setCertType(orderT.getCertType());
+		keyword.setIdcard(orderT.getCertNo());
+		BlacklistUserService servcie = new BlacklistUserService();
+		BlacklistUser bLUser = servcie.getUserBlacklistInfoByIdCardAndCertType(keyword);
+		if (bLUser != null && bLUser.getIdcard()!= null) {
+			request.setAttribute("oper", 10);//用户被列入黑名单中
 			return mapping.findForward("tip");
 		}
 		ClienService service = new ClienService();
@@ -1143,7 +1155,6 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 			id =  ol1.get(0).getId();
 			OpOrderticketsKeyword kw1 = new OpOrderticketsKeyword();
 			kw1.setSeleFlightInfo(Integer.valueOf(id));
-			System.out.println(id);
 			List<OpOrdertickets> ol = service.allInfoList(kw1);
 			request.setAttribute("list", ol);
 		}	
@@ -1162,7 +1173,25 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		
 		kw.setId(Integer.valueOf(id));
-		OpOrdertickets ol1 = service.allInfoList(kw).get(0);			
+		OpOrdertickets ol1 = service.allInfoList(kw).get(0);	
+		if(ol1 != null) {
+			int luggSum = 0;
+			String bagNum = ol1.getBagNum();
+			if (bagNum != null && bagNum.trim().length() > 0) {
+				String[] bagNums = bagNum.split(";");
+				luggSum = bagNums.length;
+				bagNum = "";
+				for (int i = 0;i < bagNums.length;i++) {
+					String bm = bagNums[i];
+					if (i > 0){
+						bagNum += "<br/>";
+					}
+					bagNum += bm;
+				}
+			}
+			ol1.setLuggSum(luggSum);
+			ol1.setBagNums(bagNum);
+		}
 		request.setAttribute("flightinfo",ol1);
 		BaTicketpointKeyword kw1 = new BaTicketpointKeyword();
 		FlightService service1 = new FlightService();

@@ -16,13 +16,8 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.founder.enp.entity.Authorization;
-import com.founder.enp.entity.EmailServer;
-import com.founder.enp.entity.GpReleation;
-import com.founder.enp.entity.UGRelation;
 import com.founder.enp.entity.User;
-import com.founder.enp.entity.UserGroup;
 import com.founder.enp.entity.UserPage;
-import com.founder.enp.entity.Watches;
 import com.founder.enp.service.UserGroupService;
 import com.founder.enp.service.UserService;
 
@@ -54,7 +49,12 @@ public class LoginAction extends Action {
 		String admin = request.getParameter("admin");
 		user.setAccount(request.getParameter("account"));
 		user.setPassword(request.getParameter("password"));
-		UserService service = new UserService();
+		UserService service = null;
+		try{
+			 service = new UserService();
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
 		
 		user = service.checkUser(user);
 		Authorization authorization = new Authorization();

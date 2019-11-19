@@ -188,7 +188,11 @@ function check()
 			}
 		}
 		function newValidate(data){
-			if(data==3){
+			if(data==4){
+				alert("该用户已经被列入黑名单中，如有疑问请在后台移除！");
+				document.getElementById("bc").disabled="";
+				document.getElementById("gb").disabled="";
+			}else if(data==3){
 				alert("该用户已经订票/或售票不能再次售票！");
 				document.getElementById("bc").disabled="";
 				document.getElementById("gb").disabled="";
@@ -302,7 +306,7 @@ divid.filters.revealTrans.play();
   </tr>  
   <tr bgcolor="#FFFFFF">
     <td align="right" width="15%">团体：</td>
-    <td width="18%"><select id='teamflag' name="teamflag" style="width: 100%" onPropertyChange="isTeam();">
+    <td width="18%"><select id='teamflag' name="teamflag" style="width: 100%" onchange="isTeam();">
 			<option value="0" <%=request.getAttribute("teamflag")==null||request.getAttribute("teamflag").toString().trim().equals("0")?"selected=\"selected\"":"" %>>否</option>
 			<option value="1" <%=request.getAttribute("teamflag")!=null&&request.getAttribute("teamflag").toString().trim().equals("1")?"selected='selected'":""%>>是</option>
 		</select>	</td>
@@ -321,7 +325,7 @@ divid.filters.revealTrans.play();
 			
 			<td align="center" colspan="6">  
 				<input id="bc" type="button" value="保 存" onclick="check()"/>
-				<input id="gb" type="button" value="关闭" onclick="window.close();"/>
+				<input id="gb" type="button" value="关闭" onclick="window.close();"/> 
 				</td>
 		</tr>
 		

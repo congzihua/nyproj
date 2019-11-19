@@ -11,6 +11,8 @@
 <title>
 订售票主页面
 </title>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/layer/layer.js"></script>
 </head>
 <frameset rows="160,*" frameborder="0" border="0" id="appMainFrame">
 	<frame id="dspTop" name="dspTop" scrolling="auto" noresize="noresize"  src="<%=request.getContextPath()%>/clientAction.do?method=toTopInfoPage&flightinfoId=<%=flightinfoId%>" marginheight="0">

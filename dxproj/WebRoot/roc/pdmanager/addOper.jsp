@@ -51,17 +51,16 @@ String path = request.getContextPath();
 		function onHandleM(data){
 			if(data){
 				alert("订票点信息增加成功！");
-				window.returnValue=1; 
-				window.opener=null;
-				window.open("","_self");
-				window.close();	
+				fh();
 			}else{
 			document.getElementById("bc").disabled="";
 			document.getElementById("cz").disabled="";
 				alert("订票点信息增加失败！");
 			}
 		}
-		
+		function fh(){
+			window.location.href ="<%=request.getContextPath()%>/flightAction.do?method=listTicketpoint"
+		}
 		</script>
 	</head>
 	<body>
@@ -101,7 +100,7 @@ String path = request.getContextPath();
 								<tr align="middle">
 									<td colspan="4">
 										<input type="button"  id="bc" 	value=" 保存" onclick="check();" />&nbsp; &nbsp; &nbsp; 
-										<input type="reset" id="cz" value=" 重置 " />
+										<input type="button" id="cz" value=" 返回 " onclick="fh();"/>
 									</td>
 								</tr>
 							</table>

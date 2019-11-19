@@ -61,17 +61,17 @@ String id = request.getParameter("id");
 		function onHandleM(data){
 			if(data){
 				alert("航程信息修改成功！");
-				window.returnValue=1; 
-				window.opener=null;
-				window.open("","_self");
-				window.close();	
+				fh();
 			}else{
 			document.getElementById("bc").disabled="";
 			document.getElementById("cz").disabled="";
 				alert("航程信息修改失败！");
 			}
 		}
-		
+		function fh(){
+			var url = "<%=request.getContextPath()%>/flightAction.do?method=list";
+			window.location.href = url;
+		}
 		</script>
 	</head>
 	<body>
@@ -111,7 +111,7 @@ String id = request.getParameter("id");
 								<tr align="middle">
 									<td colspan="4">
 										<input type="button"  id="bc" 	value=" 保存" onclick="check('<%=id%>');" />&nbsp; &nbsp; &nbsp; 
-										<input type="reset" id="cz" value=" 重置 " />
+										<input type="button" id="cz" value="  返回" onclick="fh();"/>
 									</td>
 								</tr>
 							</table>

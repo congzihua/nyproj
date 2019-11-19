@@ -154,7 +154,7 @@ java.util.List<BaTicketpoint> tpList = service.queryBaTicketpoint(kw);
 									
 									<table border="0">
 						        <td width="70%" >
-						        <input value="" name="orderdate" width="100%" readonly="readonly">        </td>
+						        <input value="" name="orderdate" width="100%" id="orderdate" readonly="readonly">        </td>
 						        <td align="left">
 						        	 <span style="cursor: hand"><img	src="<%=request.getContextPath()%>/images/caldendar.gif" id="caldendar1" /> </span>	 
 						        	<font color='red'>*</font> 
@@ -171,16 +171,16 @@ java.util.List<BaTicketpoint> tpList = service.queryBaTicketpoint(kw);
 										时间:										
 									</td>
 									<td colspan="3" align="left">
-										<select name="hour">
+										<select id="hour" name="hour">
 		    				
 		    				<option value="07">07</option>
 		    				<option value="08">08</option>
-		    				<option value="09" selected="selected">09</option>
+		    				<option value="09">09</option>
 		    				<option value="10">10</option>
 		    				<option value="11">11</option>
 		    				<option value="12">12</option>
 		    				<option value="13">13</option>
-		    				<option value="14">14</option>
+		    				<option value="14"  selected="selected">14</option>
 		    				<option value="15">15</option>
 		    				<option value="16">16</option>
 		    				<option value="17">17</option>
@@ -190,14 +190,14 @@ java.util.List<BaTicketpoint> tpList = service.queryBaTicketpoint(kw);
 		    				
 		    			</select>
 		    			:
-		    			<select name="minute">
+		    			<select name="minute" id="minute">
 		    				<option value="00">00</option>
 		    				
 		    				<option value="10">10</option>
 		    				
 		    				<option value="20">20</option>
 		    				
-		    				<option value="30">30</option>
+		    				<option value="30"  selected="selected">30</option>
 		    				
 		    				<option value="40">40</option>
 		    				
@@ -214,7 +214,7 @@ java.util.List<BaTicketpoint> tpList = service.queryBaTicketpoint(kw);
 										票额:									
 									</td>
 									<td colspan="3" align="left">
-									<input type="text" name="amount" value="" />
+									<input type="text" name="amount"  id="amount" value="" />
 									<font color='red'>*</font>
 									</td>
 								</tr>

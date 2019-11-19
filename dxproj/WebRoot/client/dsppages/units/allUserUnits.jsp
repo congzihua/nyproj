@@ -81,7 +81,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	
 	function printCertificate(){
-		if (confirm('确定打印吗？')) { 
+		if (confirm('确定打印吗？')) {
 	　　		//window.print();
 			document.getElementById("np").style.display='none';
 			document.getElementById("myid").focus();  
@@ -180,7 +180,7 @@ divid.filters.revealTrans.play();
 </table>
 </div>
 </div>
-<div id="myid" style="width:630px;text-align:center;border:0px solid red">
+<div id="myid"  style="margin:0 auto;width:630px;text-align:center;border:0px solid red">
 <table width="100%" border="2" cellspacing="0" cellpadding="0" align="center">	
 <tr>
    

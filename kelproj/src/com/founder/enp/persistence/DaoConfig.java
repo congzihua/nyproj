@@ -10,6 +10,7 @@ package com.founder.enp.persistence;
 * 完成日期：2009-07-4
 */
 
+import java.io.IOException;
 import java.io.Reader;
 import java.util.Properties;
 
@@ -24,24 +25,20 @@ public class DaoConfig {
     private static final DaoManager daoManager;
 
     static {
-        try {
-            daoManager = newDaoManager(null);
-        } catch (Exception ex) {
-            throw new RuntimeException("Description.  Cause: " + ex, ex);
-        }
+    	daoManager = newDaoManager(null);
     }
 
     public static DaoManager getDaoManager() {
         return daoManager;
     }
 
-    public static DaoManager newDaoManager(Properties props) {
-        try {
-            Reader reader = Resources.getResourceAsReader(resource);
-            return DaoManagerBuilder.buildDaoManager(reader, props);
-        } catch (Exception ex) {
-            throw new RuntimeException(
-                    "Could not initialize DaoConfig.  Cause: " + ex, ex);
-        }
+    public static DaoManager newDaoManager(Properties props)  {
+    	 Reader reader = null;
+		try {
+			reader = Resources.getResourceAsReader(resource);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+         return DaoManagerBuilder.buildDaoManager(reader, props);
     }
 }

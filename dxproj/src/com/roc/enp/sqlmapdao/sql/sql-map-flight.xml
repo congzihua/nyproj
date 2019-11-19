@@ -112,5 +112,6 @@
         update ba_ticketprice set DISCOUNT_TYPE=#discountType#,REAL_AMOUNT=#realAmount#
         where id=#id#
     </update>
+   
 </sqlMap>
 

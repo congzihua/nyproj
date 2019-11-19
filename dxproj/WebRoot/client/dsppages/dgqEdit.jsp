@@ -98,10 +98,14 @@ function check(data,status)
 				window.returnValue=1; 
 				window.opener=null;
 				window.open("","_self");
-				window.close();	
+				window.close();
 			}else if(data == 6){
 				alert("信息状态已经改变，请重新选择！");
 				
+			}else if(data == 10){
+				alert("该日已经有订票信息，确认改签日期");				
+				document.getElementById("bc").disabled="";
+				document.getElementById("cl").disabled="";
 			}else{
 				alert("改签失败！");				
 				document.getElementById("bc").disabled="";
@@ -199,7 +203,7 @@ function check(data,status)
     <td align="right" width="15%">联系电话：</td>
     <td width="18%">${flightinfo.linkphone}</td>
     <td align="right" width="15%">VIP：</td>
-    <td width="18%"><select name="vipFlag" style="width: 96%" disabled="disabled">
+    <td width="18%"><select id='vipFlag' name="vipFlag" style="width: 96%" disabled="disabled">
 			<option value="0"  <%=flightinfo.getVipFlag()!=null && flightinfo.getVipFlag().equals("0")?"selected='selected'":"" %>>否</option>
 			<option value="1"  <%=flightinfo.getVipFlag()!=null && flightinfo.getVipFlag().equals("1")?"selected='selected'":"" %>>是</option>
 		</select>	</td>

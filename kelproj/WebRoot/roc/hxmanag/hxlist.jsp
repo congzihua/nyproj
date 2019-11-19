@@ -83,12 +83,7 @@ String deleNum = request.getAttribute("deleNum")==null?"":request.getAttribute("
 		function add()
 		{	
 			var url = "<%=request.getContextPath()%>/roc/hxmanag/addHX.jsp";
-			var rv = window.showModalDialog(url,'增加航程信息','dialogWidth=600px;DialogHeight=400px;scrollbars=no;help=no;resizable=no;center:yes');
-			 if(rv == 1){
-		    	 document.forms[0].action="<%=request.getContextPath()%>/flightAction.do?method=list";
-		       document.forms[0].submit();
-		    }
-	        
+			window.location.href =url;
 		}
 		function edit()
 		{
@@ -117,12 +112,7 @@ String deleNum = request.getAttribute("deleNum")==null?"":request.getAttribute("
 		    var f = document.getElementsByName("flight")[j].value;
 		     var ename = document.getElementsByName("englishname")[j].value;
 		   var url = "<%=request.getContextPath()%>/roc/hxmanag/editHX.jsp?id="+objs.value+"&f="+encodeURI(encodeURI(f))+"&ename="+encodeURI(encodeURI(ename));
-			var rv = window.showModalDialog(url,'修改航程信息','dialogWidth=600px;DialogHeight=400px;scrollbars=no;help=no;resizable=no;center:yes');
-			 if(rv == 1){
-		    	document.forms[0].action="<%=request.getContextPath()%>/flightAction.do?method=list";
-		       document.forms[0].submit();
-		    }
-	 
+		   window.location.href =url;
 		}
 	 
 	

@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>指挥中心系统首页</title>
-    
+    <meta http-equiv="content-type" content="text/xml; charset=utf-8" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -25,6 +25,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/calendar/src/utils.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/calendar/src/calendar.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/verify.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/layer/layer.js"></script>
 		<!-- import the language module -->
 		<script type="text/javascript"
 			src="<%=request.getContextPath()%>/js/calendar/lang/calendar-zh.js"></script>
@@ -43,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<td width="20%">
     		<table border="0">
 						        <td width="70%" >
-						        <input value="" name="orderdate" width="100%" readonly="readonly">        </td>
+						        <input value="" id='orderdate' name="orderdate" width="100%" readonly="readonly">        </td>
 						        <td align="left">
 						        	 <span style="cursor: hand"><img	src="<%=request.getContextPath()%>/images/caldendar.gif" id="caldendar1" /> </span>	 
 						        	

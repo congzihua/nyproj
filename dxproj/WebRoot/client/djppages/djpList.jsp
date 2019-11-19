@@ -33,8 +33,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
   
   	function sp(data){
-  		
-  		
 		var url = "<%=request.getContextPath()%>/clientAction.do?method=editSp&id="+data;
 		window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
 		document.forms[0].submit();
@@ -96,19 +94,11 @@ margin:0px;
 
 -->
 </STYLE>
-<SCRIPT language=JavaScript1.2>
-<!--
+<SCRIPT type="text/javascript">
 function Show(divid) {
-divid.filters.revealTrans.apply();
-divid.style.visibility = "visible";
-divid.filters.revealTrans.play();
 } 
 function Hide(divid) {
-divid.filters.revealTrans.apply();
-divid.style.visibility = "hidden";
-divid.filters.revealTrans.play();
 }
-//-->
 </script>
   </head>
   
@@ -161,9 +151,9 @@ divid.filters.revealTrans.play();
  <table id="txtBox" style='top: 0px;' width="1024" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
 
   <p align="center">
-      <font size="3"><input name="string" type="text" size="15" onChange="n = 0;"></font> 
+      <font size="3"><input id="string" name="string" type="text" size="15" onChange="n = 0;"></font> 
     
-      <input      type="button" value="查找" onclick="findInPage(document.getElementById('string').value);"> 
+      <input      type="button" value="查找" onclick="findInPage();"> 
 	</p>   
   
   <tr bgcolor="#F0F0F0">
@@ -177,7 +167,7 @@ divid.filters.revealTrans.play();
     <th  width="12%">状态</th>  
     <th width="10%">团队名称</th>  
     <th width="8%">备注</th>
-    <th width="8%">操作</th>
+    <th width="11%">操作</th>
   </tr>
  
   <%int i = 0; %>
@@ -200,7 +190,7 @@ divid.filters.revealTrans.play();
     <c:if test="${item.teamflag==1}">${item.teamName}</c:if>
     <c:if test="${item.teamflag==0}">&nbsp;</c:if>
     </td>
-    <td width="8%" align="center" onMouseOver="Show(www_zzjs_net<%=i%>);" onMouseOut="Hide(www_zzjs_net<%=i%>);">
+    <td width="8%" align="center" onMouseOver="Show('www_zzjs_net<%=i%>');" onMouseOut="Hide('www_zzjs_net<%=i%>');">
       <c:choose>
           <c:when test="${fn:length(item.remark) > 8}">
               <c:out value="${fn:substring(item.remark, 0, 8)}..." />
@@ -211,12 +201,12 @@ divid.filters.revealTrans.play();
       </c:choose>
      <div id="www_zzjs_net<%=i%>" class="article">${item.remark}</div>
     </td>
-    <td align="center" width="8%"> 
+    <td align="center" width="11%"> 
      <c:if test="${item.teamflag==1}">   
-	<input type="button" style="width: 60px" value="换登机牌" onclick="dgpage1(${item.id},${item.status});"/>
+	<input type="button" style="width: 70px" value="换登机牌" onclick="dgpage1(${item.id},${item.status});"/>
 	</c:if> 
 	<c:if test="${item.teamflag==0||item.teamflag==null||item.teamflag==''}">   
-	<input type="button" style="width: 60px" value="换登机牌" onclick="dgpage(${item.id},${item.status});"/>
+	<input type="button" style="width: 70px" value="换登机牌" onclick="dgpage(${item.id},${item.status});"/>
 	</c:if> 
 	</td>
   </tr>
@@ -228,66 +218,53 @@ divid.filters.revealTrans.play();
 </html>
 
 
-<script language="JavaScript">
-var NS4 = (document.layers);    // Which browser?
-var IE4 = (document.all);
-var win = window;    // window to search.
-var n   = 0;
-function findInPage(str) {
-  var txt, i, found;
-  if (str == "")
-    return false;
-  // Find next occurance of the given string on the page, wrap around to the
-  // start of the page if necessary.
-  if (NS4) {
-    // Look for match starting at the current point. If not found, rewind
-    // back to the first match.
-    if (!win.find(str))
-      while(win.find(str, false, true))
-        n++;
-    else
-      n++;
-    // If not found in either direction, give message.
-    if (n == 0)
-      alert("Not found.");
-  }
-  if (IE4) {
-    txt = win.document.body.createTextRange();
-    // Find the nth match from the top of the page.
-    for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) {
-      txt.moveStart("character", 1);
-      txt.moveEnd("textedit");
-    }
-    // If found, mark it and scroll it into view.
-    if (found) {
-      txt.moveStart("character", -1);
-      txt.findText(str);
-      txt.select();
-      txt.scrollIntoView();
-      n++;
-    }
-    // Otherwise, start over at the top of the page and find first match.
-    else {
-      if (n > 0) {
-        n = 0;
-        findInPage(str);
-      }
-      // Not found anywhere, give message.
-      else
-        alert("Not found.");
-    }
-  }
-  return false;
+<script type="text/javascript">
+var nextIndex = 0;
+//上一次需要查找的字符串
+var searchValue = '';
+
+function findInPage() {
+	var searchText = document.getElementById('string').value;
+	//判断搜索字符是否为空
+	if (!searchText){
+		alert('搜索字符串为空');
+		return;
+	}
+	//判断搜索条件是否已经改变
+	if(searchText && searchText != searchValue && nextIndex > 0){
+		searchValue = searchText;
+		nextIndex = 0;
+	}else{
+		searchValue = searchText;
+	}
+	var txt = document.body.createTextRange();
+	//搜索str
+	var found = '';
+	//查找第nextIndex个的字符串。之所以要用循环，是因为TextRange对象每次都是新生成的，所以查找初始位置每次都会还原。那么要查找第n次出现的字符串，就需要调用findText()方法多次，且每次查找都要重新设置开始位置和结束位置。
+	for (i = 0; i <= nextIndex && (found = txt.findText(searchValue))==true; i++) {
+		txt.moveStart("character", 1);
+		txt.moveEnd("textedit");
+	}
+	//选中本次查找的字符串
+	if (found) {
+                      //这里设置为-1，表示为倒序查找。之所以要这样做，是因为此时我们已经查找到了第nextIndex出现的字符串，那么此时如果设置为倒序查找，且将开始位置设置为末尾，那么此时调用findText()方法查找，则会刚好查到我们上一次查到的字符串
+		txt.moveStart("character", -1);
+		txt.findText(searchValue);
+		txt.select();
+      //滚动屏幕到合适位置
+		txt.scrollIntoView();
+		nextIndex++;
+	}else{
+		//循环查找
+		if (nextIndex > 0) { 
+			nextIndex = 0; 
+			findInPage(); 
+		}
+	}
+	return;
 }
 
-<!--
-function selectAll(theField){
-var tempval=eval("document."+theField)
-tempval.focus()
-tempval.select()
-}
-//-->
-</script>
+
 </script>
 
 

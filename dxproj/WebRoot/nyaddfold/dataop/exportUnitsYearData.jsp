@@ -83,7 +83,7 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 <SCRIPT language=JavaScript1.2>
 
 	function check(){
-		var startdate = document.getElementById("startdate").value;		
+		var startdate = document.getElementById("startDate").value;		
 		
 		if(window.confirm("导出统计数据需要几分钟您确定要导出吗？")){
 			//document.getElementById("buttonId").disabled="disabled";

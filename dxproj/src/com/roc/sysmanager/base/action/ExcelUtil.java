@@ -1,12 +1,16 @@
 package com.roc.sysmanager.base.action;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
+
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WriteException;
 
 import com.flyticket.system.util.ArgsUnit;
 import com.jacob.activeX.ActiveXComponent;
@@ -14,13 +18,7 @@ import com.jacob.com.ComThread;
 import com.jacob.com.Dispatch;
 import com.jacob.com.Variant;
 import com.roc.syspe.entity.OpOrdertickets;
-import com.sun.corba.se.spi.orbutil.fsm.Input;
-
-import jxl.Workbook;
-import jxl.read.biff.BiffException;
-import jxl.write.Label;
-import jxl.write.WritableSheet;
-import jxl.write.WriteException;
+//import com.sun.corba.se.spi.orbutil.fsm.Input;
 
 public class ExcelUtil {
 
@@ -37,7 +35,6 @@ public class ExcelUtil {
 			String str=strArr[0];
 			String mUrl=str+"/client/excel/Modeul.xls";
 			
-//			String tUrl=str+"/client/excel/"+targName+".xls";
 			wb = Workbook.getWorkbook(new File(mUrl));
 			wwb=Workbook.createWorkbook(new File(tUrl),wb);
 			WritableSheet wws = wwb.getSheet(0);
@@ -47,7 +44,7 @@ public class ExcelUtil {
 			certNo.setString(orderT.getCertNo());//证件号码
 			Label from = (Label)wws.getWritableCell(0,2);
 			String startAddress = ArgsUnit.getStartAddress();
-			from.setString((startAddress.contains("北京")?"北京南苑":startAddress));
+			from.setString((startAddress.contains("北京")?"北京南郊":startAddress));
 			Label to = (Label)wws.getWritableCell(0,3);
 			to.setString(orderT.getFlight());//"鼎新"
 			Label fn = (Label)wws.getWritableCell(1,2);
@@ -93,8 +90,6 @@ public class ExcelUtil {
 			}
 		}
 		
-		
-		
 	}
 	
 	public static void proceed(OpOrdertickets orderT,String operName) throws Exception{
@@ -102,7 +97,7 @@ public class ExcelUtil {
 		//killProcess("EXCEL.EXE");
 		String targName = String.valueOf(System.currentTimeMillis());
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
-		String path = "D:/piaoju/"+format.format(new Date())+"/"+operName;
+		String path = ArgsUnit.getDataOutDir()+format.format(new Date())+"/"+operName;
 		File f = new File(path);
 		if(!f.exists()){
 			f.mkdirs();
@@ -110,31 +105,33 @@ public class ExcelUtil {
 		String tUrl=path+"/"+targName+".xls";
 		printByExcel(orderT,operName,tUrl);
 		ActiveXComponent xl = null;
-		try
-		{
-		ComThread.InitSTA();
-		xl = new ActiveXComponent("Excel.Application"); 
-//		new Variant(false)  打印时是否显示文档       false不显示   
-		Dispatch.put(xl, "Visible", new Variant(false)); 
-		        Dispatch workbooks = xl.getProperty("Workbooks").toDispatch(); 
-		   
-		        String url1=ExcelUtil.class.getClassLoader().getResource("/").getPath();
-		       
-		        	String[] strArr=url1.split("/WEB-INF");
-		        		String str=strArr[0];
-//		打开文档 		
-		        			str=str.substring(1);
-		        			
-		                 Dispatch excel=Dispatch.call(workbooks,"Open",tUrl).toDispatch(); 
-		 
-		                 Dispatch.get(excel,"PrintOut"); 
-		                 
+		try{
+			ComThread.InitSTA();
+			xl = new ActiveXComponent("Excel.Application"); 
+			//		new Variant(false)  打印时是否显示文档       false不显示   
+			Dispatch.put(xl, "Visible", new Variant(false)); 
+		    Dispatch workbooks = xl.getProperty("Workbooks").toDispatch(); 
+		    String url1=ExcelUtil.class.getClassLoader().getResource("/").getPath();
+		    String[] strArr=url1.split("/WEB-INF");
+		    String str=strArr[0];
+           //		打开文档 		
+		    str=str.substring(1);
+		    Dispatch excel=Dispatch.call(workbooks,"Open",tUrl).toDispatch(); 
+		    Dispatch.get(excel,"PrintOut"); 
+		 // 开始打印
+            if (excel != null) {
+                // Dispatch.call(excel, "PrintOut");
+                // 增加以下三行代码解决文件无法删除bug
+                Dispatch.call(excel, "save");
+                Dispatch.call(excel, "Close", new Variant(true));
+                excel = null;
+            }
+            xl.invoke("Quit", new Variant[] {});
+            xl = null;            
 		               
-		}catch (Exception e)
-		{
+		}catch (Exception e){
 			e.printStackTrace();
-		}finally
-		{ 		
+		}finally{ 		
 			ComThread.Release();
 			xl = null;
 			
@@ -235,9 +232,6 @@ public class ExcelUtil {
 	 
 	 
 	 
-	 public static void main(String [] ar){
-	  
-	 }
 	 //"excel.exe"杀死进程方法
 	 private static void killProcess(String processName) throws IOException{
 		 Process process = Runtime.getRuntime().exec("tasklist"); 	
@@ -262,5 +256,31 @@ public class ExcelUtil {
 			 
 				}  
 		 }
+	 }
+	 
+	 public static void main(String [] ar){
+			ActiveXComponent xl = null;
+			try
+			{
+			ComThread.InitSTA();
+			xl = new ActiveXComponent("Excel.Application"); 
+//			new Variant(false)  打印时是否显示文档       false不显示   
+			Dispatch.put(xl, "Visible", new Variant(false));
+			        Dispatch workbooks = xl.getProperty("Workbooks").toDispatch(); 
+			        			
+			                 Dispatch excel=Dispatch.call(workbooks,"Open","d:/da.xls").toDispatch(); 
+			 
+//			                 Dispatch.get(excel,"PrintOut"); 
+			                 
+			               
+			}catch (Exception e)
+			{
+				e.printStackTrace();
+			}finally
+			{ 		
+				ComThread.Release();
+				xl = null;
+				
+			}
 	 }
 }

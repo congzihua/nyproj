@@ -10,7 +10,7 @@
 
 		<transactionManager type="SQLMAP">
 			<property name="SqlMapConfigResource"
-				value="com/founder/enp/persistence/sql-map-config.xml" />
+				value="sql-map-config.xml" />
 			<property name="Pool.PingQuery"
 				value="select 1" />
 			<property name="Pool.PingEnabled" value="false" />
@@ -39,6 +39,10 @@
 			interface="com.roc.sysmanager.base.dao.BaTicketsallocDao"/>
 		<dao implementation="com.roc.sysmanager.base.impl.OpOrderticketsImpl" 
 			interface="com.roc.sysmanager.base.dao.OpOrderticeetsDao"/>
+		<dao implementation="com.roc.sysmanager.base.impl.BlacklistUserDaoImpl" 
+			interface="com.roc.sysmanager.base.dao.BlacklistDao"/>
+		<dao implementation="com.roc.sysmanager.base.impl.DutyTimeDaoImpl" 
+			interface="com.roc.sysmanager.base.dao.DutyTimeDao"/>
 	</context>
 
 </daoConfig>

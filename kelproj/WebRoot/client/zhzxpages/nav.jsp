@@ -14,6 +14,7 @@
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0"> 
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/common.js?version=1"></script> 
 	<script type="text/javascript">
 	 function tc(){
 		if(window.confirm("您确定要退出系统吗？")){

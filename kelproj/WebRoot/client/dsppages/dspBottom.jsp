@@ -12,7 +12,7 @@ List<BaTicketsalloc> tilist = request.getAttribute("ticketsPointC")==null?null:(
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
   <head>
     <base href="<%=basePath%>">
@@ -27,9 +27,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/common.js?version=1"></script>
 	<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/util.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'> </script>
+	<script type='text/javascript' src='<%=request.getContextPath()%>/js/jquery.min.js'></script> 
 	<script type="text/javascript">
 		
   	function init(data){
@@ -59,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	}
   	function saltTeamTickets(data,name,status){
   		var url = "<%=request.getContextPath()%>/clientAction.do?method=toSaltTeamTickets&flightinfoId="+data+"&name="+encodeURI(encodeURI(name))+"&status="+status;
-		window.showModalDialog(url, window, "dialogWidth: 1500px; dialogHeight: 650px; help: no; scroll: yes; status: no");
+  		window.showModalDialog(url, window, "dialogWidth: 1300px; dialogHeight: 650px; help: no; scroll: yes; status: no");
 		document.forms[0].submit();	
   	} 
   	
@@ -81,8 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if(data){
 			var url = "<%=request.getContextPath()%>/clientAction.do?method=tgSp&id="+idValue;
 			var rv = window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
-			if(rv == 1)
-				document.forms[0].submit();
+			document.forms[0].submit();
 		}else{
 			alert("信息状态已经改变，请重新选择！");
 			document.forms[0].submit();	
@@ -96,8 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		if(data){
 			var url = "<%=request.getContextPath()%>/clientAction.do?method=toDGQ&id="+idValue;
 			var rv = window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
-			if(rv == 1)
-				document.forms[0].submit();
+			document.forms[0].submit();
 		}else{
 			alert("信息状态已经改变，请重新选择！");
 			document.forms[0].submit();	
@@ -128,7 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function xiugaiHandle(data){
 		if(data){
 			var url = "<%=request.getContextPath()%>/clientAction.do?method=toEdpage&id="+idValue;
-			window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
+			window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 600px; help: no; scroll: no; status: no");
 			document.forms[0].submit();
 		}else{
 			alert("信息状态已经改变，请重新选择！");
@@ -221,17 +221,17 @@ margin:0px;
 
 
 </STYLE>
-<SCRIPT language=JavaScript1.2>
+<SCRIPT >
 <!--
 function Show(divid) {
-divid.filters.revealTrans.apply();
-divid.style.visibility = "visible";
-divid.filters.revealTrans.play();
+//divid.filters.revealTrans.apply();
+//divid.style.visibility = "visible";
+//divid.filters.revealTrans.play();
 } 
 function Hide(divid) {
-divid.filters.revealTrans.apply();
-divid.style.visibility = "hidden";
-divid.filters.revealTrans.play();
+//divid.filters.revealTrans.apply();
+//divid.style.visibility = "hidden";
+//divid.filters.revealTrans.play();
 }
 //-->
 </script>
@@ -239,8 +239,8 @@ divid.filters.revealTrans.play();
   
   <body oncontextmenu="if (!event.ctrlKey){return false;}">
   <form action="<%=request.getContextPath()%>/clientAction.do?method=toBottomList" method="post">
-  <div align="left">
-  <div style="width: 96%;" align="center">
+  <div align="center">
+  <div style="width: 98%;" align="center">
 		<FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt">
 			&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 票额分配一览表  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;
 			
@@ -248,7 +248,7 @@ divid.filters.revealTrans.play();
 			<img alt="刷新" onclick="shux();" src="<%=request.getContextPath()%>/images/Refresh.png" width="20" height="20">
 		</FONT>
 	</div>	
-	 <div style="width: 96%;" align="left">
+	 <div style="width: 98%;" align="left">
    <table width=" 100%" border="1" align="left" style="border-collapse:collapse; border-color:#333333;
 	font-size:14px;">
   <tr>
@@ -292,34 +292,35 @@ divid.filters.revealTrans.play();
   </tr>
 </table>
 </div>
- <div align="left" style="width:  100%;border:0" >
+ <div align="center" style="width:100%;border:0" >
 <FONT  style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt">
-&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 舱  单&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <input name="string" type="text" size="15" onChange="n = 0;"></font> 
-      <input      type="button" value="查找" onclick="findInPage(document.getElementById('string').value);"> 
+&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
+ &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 舱  单&nbsp;
+   &nbsp; &nbsp; &nbsp; &nbsp; 
+<input id="string" name="string" type="text" size="15" onChange="nextIndex = 0;"></font> 
+      <input      type="button" value="查找" onclick="findInPage();"> 
 		</FONT>
- <table width="96%" border="0" align="left"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
-  
+ <table width="98%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
   <tr bgcolor="#F0F0F0">
-     <!--  th width="6%">序号</th>-->
      <th width="9%">售票点</th>
     <th width="8%">姓名</th>
-    
     <th width="6%">证件类型</th>
     <th width="12%">证件号码</th>    
     <th width="5%">VIP</th>
     <th width="11%">联系电话</th>
-    <th width="5%">状态</th> 
+    <th width="6%">状态</th> 
     <th width="12%">订票日期</th>   
     <th width="6%">团体</th>
     <th width="8%">备注</th>
-    <th width="18%">操作</th>
+    <th  width="18%">操作</th>
   </tr>
   </table>
   </div>
 
-<div align="left" style=" height:351px;overflow-y:auto;width:  96%;top: 0px;margin: 0px">
+<div  align="center"  style=" height:351px;overflow-y:auto;width:100%;top: 0px;margin: 0px">
  <!--  hr color="#0033FF" />-->
- <table width="100%" border="0" align="left"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
+ <table width="98%" border="0"  align="center"   cellpadding="0" cellspacing="1" bgcolor="#3366FF">
   
   <input type="hidden" name="flightinfoId" value="${flightinfoId}"/>
 	<input type="hidden" name="orderdate" value="<%=request.getAttribute("orderdate").toString()%>"/>
@@ -328,16 +329,15 @@ divid.filters.revealTrans.play();
   <%int i = 0; %>
   <c:forEach var="item" items="${oporderList}">
   <tr bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'">
-     <!--td align="center" width="6%"><%=++i %></td>-->
       <td align="center" width="9%">${item.ticketpointname}</td>
-    <td align="center" width="8%">${item.name}</td>
-    <td align="center" width="6%">${item.certType}</td>
+    <td  class="highlightRow" align="center" width="8%">${item.name}</td>
+    <td  class="highlightRow" align="center" width="6%">${item.certType}</td>
    
-    <td align="center" width="12%">${item.certNo}</td>
+    <td  class="highlightRow" align="center" width="12%">${item.certNo}</td>
     
-    <td align="center" width="5%"><c:if test="${item.vipFlag==1}">是</c:if></td>
-    <td align="center" width="11%">${item.linkphone}</td>
-    <td align="center" width="5%"><c:if test="${item.status==0}">订 &nbsp; 票</c:if>
+    <td  class="highlightRow" align="center" width="5%"><c:if test="${item.vipFlag==1}">是</c:if></td>
+    <td  class="highlightRow" align="center" width="11%">${item.linkphone}</td>
+    <td  class="highlightRow" align="center" width="6%"><c:if test="${item.status==0}">订 &nbsp; 票</c:if>
     <c:if test="${item.status==1}">确认订票</c:if>
     <c:if test="${item.status==2}">已售票</c:if>
     <c:if test="${item.status==3}">换登机牌</c:if>
@@ -348,8 +348,8 @@ divid.filters.revealTrans.play();
    
      
         </td>
-    <td align="center" width="12%"><fmt:formatDate  value="${item.createdate}" pattern="MM.dd"/></td>
-    <td align="center" width="6%" onMouseOver="Show(www_zzjs<%=i%>);" onMouseOut="Hide(www_zzjs<%=i%>);">
+    <td  class="highlightRow" align="center" width="12%"><fmt:formatDate  value="${item.createdate}" pattern="MM.dd"/></td>
+    <td  class="highlightRow" align="center" width="6%" onMouseOver="Show(www_zzjs<%=i%>);" onMouseOut="Hide(www_zzjs<%=i%>);">
 		<c:choose>
           <c:when test="${fn:length(item.teamName) > 4}">
               <c:out value="${fn:substring(item.teamName, 0, 4)}..." />
@@ -360,7 +360,7 @@ divid.filters.revealTrans.play();
       </c:choose>   
      <div id="www_zzjs<%=i%>" class="article">${item.teamName}</div>
 	</td>
-    <td width="8%" align="center" onMouseOver="Show(www_zzjs_net<%=i%>);" onMouseOut="Hide(www_zzjs_net<%=i%>);">
+    <td  class="highlightRow" width="9%" align="center" onMouseOver="Show(www_zzjs_net<%=i%>);" onMouseOut="Hide(www_zzjs_net<%=i%>);">
       <c:choose>
           <c:when test="${fn:length(item.remark) > 5}">
               <c:out value="${fn:substring(item.remark, 0, 5)}..." />
@@ -372,7 +372,7 @@ divid.filters.revealTrans.play();
    
      <div id="www_zzjs_net<%=i%>" class="article">${item.remark}</div>
     </td>
-    <td align="left" width="18%"> 
+    <td   align="left" width="18%" > 
       
     <c:if test="${item.status==0}">	
     	<c:if test="${item.teamflag==null||item.teamflag==0}">
@@ -424,56 +424,54 @@ divid.filters.revealTrans.play();
 </form> 
 </body>
 </html>
-<script language="JavaScript">
-var NS4 = (document.layers);    // Which browser?
-var IE4 = (document.all);
-var win = window;    // window to search.
-var n   = 0;
-function findInPage(str) {
-  var txt, i, found;
-  if (str == "")
-    return false;
-  // Find next occurance of the given string on the page, wrap around to the
-  // start of the page if necessary.
-  if (NS4) {
-    // Look for match starting at the current point. If not found, rewind
-    // back to the first match.
-    if (!win.find(str))
-      while(win.find(str, false, true))
-        n++;
-    else
-      n++;
-    // If not found in either direction, give message.
-    if (n == 0)
-      alert("Not found.");
-  }
-  if (IE4) {
-    txt = win.document.body.createTextRange();
-    // Find the nth match from the top of the page.
-    for (i = 0; i <= n && (found = txt.findText(str)) != false; i++) {
-      txt.moveStart("character", 1);
-      txt.moveEnd("textedit");
-    }
-    // If found, mark it and scroll it into view.
-    if (found) {
-      txt.moveStart("character", -1);
-      txt.findText(str);
-      txt.select();
-      txt.scrollIntoView();
-      n++;
-    }
-    // Otherwise, start over at the top of the page and find first match.
-    else {
-      if (n > 0) {
-        n = 0;
-        findInPage(str);
-      }
-      // Not found anywhere, give message.
-      else
-        alert("Not found.");
-    }
-  }
-  return false;
+<script type="text/javascript">
+//在整个文本中查找第几个，从0开始
+var nextIndex = 0;
+//上一次需要查找的字符串
+var searchValue = '';
+
+function findInPage() {
+	var searchText = document.getElementById('string').value;
+	//判断搜索字符是否为空
+	if (!searchText){
+		alert('搜索字符串为空');
+		return;
+	}
+	//判断搜索条件是否已经改变
+	if(searchText && searchText != searchValue && nextIndex > 0){
+		searchValue = searchText;
+		nextIndex = 0;
+	}else{
+		searchValue = searchText;
+	}
+	var txt = document.body.createTextRange();
+	//搜索str
+	var found = '';
+	//查找第nextIndex个的字符串。之所以要用循环，是因为TextRange对象每次都是新生成的，所以查找初始位置每次都会还原。那么要查找第n次出现的字符串，就需要调用findText()方法多次，且每次查找都要重新设置开始位置和结束位置。
+	for (i = 0; i <= nextIndex && (found = txt.findText(searchValue))==true; i++) {
+		txt.moveStart("character", 1);
+		txt.moveEnd("textedit");
+	}
+	//选中本次查找的字符串
+	if (found) {
+                        //这里设置为-1，表示为倒序查找。之所以要这样做，是因为此时我们已经查找到了第nextIndex出现的字符串，那么此时如果设置为倒序查找，且将开始位置设置为末尾，那么此时调用findText()方法查找，则会刚好查到我们上一次查到的字符串
+		txt.moveStart("character", -1);
+		txt.findText(searchValue);
+		txt.select();
+        //滚动屏幕到合适位置
+		txt.scrollIntoView();
+		nextIndex++;
+		return;
+	}else{
+		//循环查找
+		if (nextIndex > 0) { 
+			nextIndex = 0; 
+			findInPage(); 
+			return;
+		}
+	}
+	alert("信息未发现~");
+  	return;
 }
 
 

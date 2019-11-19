@@ -13,9 +13,12 @@ import com.roc.enp.entity.BaFlight;
 import com.roc.enp.entity.BaTicketpoint;
 import com.roc.enp.entity.BaTicketprice;
 import com.roc.enp.entity.BaTicketpriceKeyword;
+import com.roc.enp.entity.BlackUserKeyword;
+import com.roc.enp.entity.BlacklistUser;
 import com.roc.enp.entity.OpUseroper;
 import com.roc.sysmanager.base.action.ExcelUtil;
 import com.roc.sysmanager.base.service.BaTicketsallocService;
+import com.roc.sysmanager.base.service.BlacklistUserService;
 import com.roc.sysmanager.base.service.ClienService;
 import com.roc.sysmanager.base.service.FlightService;
 import com.roc.syspe.entity.BaTicketsalloc;
@@ -167,6 +170,17 @@ public class SysmanagerDWR {
 		}else{
 			return 1;//当日无航班信息
 		}
+		OpOrderticketsKeyword opOrderticketKw = new OpOrderticketsKeyword();
+		
+		opOrderticketKw.setId(Integer.valueOf(id));
+		OpOrdertickets orderInfo = cService.getOrderticketsList(opOrderticketKw).get(0);
+		int newFlightInfoId = order.getId();
+		String certNo = orderInfo.getCertNo();
+		String certType = orderInfo.getCertType();
+		int orderNum = isAlreadyOrderTickets(newFlightInfoId, certType, certNo);
+		if(orderNum > 0){
+			return 10;//该日已经有订票信息，确认改签日期
+		}
 		com.roc.syspe.entity.OpOrderticketsKeyword okw = new com.roc.syspe.entity.OpOrderticketsKeyword();
 		okw.setTicketPointId(orderTicketPointId);
 		okw.setSeleFlightInfo(order.getId());//航班信息的id
@@ -269,7 +283,7 @@ public class SysmanagerDWR {
 			return "5";//登机牌状态与元状态不匹配
 		}
 		String startAddress = ArgsUnit.getStartAddress();
-		return service.updateForDjp(order,useroper)?flightNo+"^"+flightDate+"^"+vipText+"^"+seatNum+"^"+flightTo+"^"+(startAddress.contains("北京")?"北京南苑":startAddress)+"^"+gate+"^"+gateTime+"^"+name+"^"+certNo:"1";
+		return service.updateForDjp(order,useroper)?flightNo+"^"+flightDate+"^"+vipText+"^"+seatNum+"^"+flightTo+"^"+(startAddress.contains("北京")?"北京南郊":startAddress)+"^"+gate+"^"+gateTime+"^"+name+"^"+certNo:"1";
 		
 	}
 	//换登机牌团队
@@ -313,7 +327,6 @@ public class SysmanagerDWR {
 					if(Long.valueOf(f)>Long.valueOf(certNo.substring(6,14))){
 						//判断年龄是不是已经超过2岁，2岁不进行分配座位，只出登机牌
 						if(seatArray.length>0&& k<seatArray.length&&(seatArray[k]!=null && seatArray[k].trim().length()>0)){
-							
 							order.setSeatNum(seatArray[k]);
 							k++;
 						}else{
@@ -415,9 +428,6 @@ public class SysmanagerDWR {
 			
 			kw.setId(Integer.valueOf(idArray[i]));
 			ol1 =  service.getOrderticketsList(kw).get(0);
-			if(!this.getOrderStatus(Integer.valueOf(idArray[i]), origStatus)){
-				return "-1";//登机牌状态与元状态不匹配
-			}
 			OpOrdertickets order = new OpOrdertickets();
 			if("身份证".equals(ol1.getCertType())||"户口薄".equals(ol1.getCertType())){
 				String certNo = ol1.getCertNo();
@@ -518,7 +528,17 @@ public class SysmanagerDWR {
 			return 0;
 		}
 	}
-	public  int validate(Integer flightId,Integer flightinfoId,String orderdate,Integer ticketpointId,String flyTime,String certType,String certNo){
+	public  int validate(Integer flightId,Integer flightinfoId,
+			String orderdate,Integer ticketpointId,String flyTime,
+			String certType,String certNo){
+		BlacklistUserService servcie = new BlacklistUserService();
+		BlackUserKeyword keyword = new BlackUserKeyword();
+		keyword.setCertType(certType);
+		keyword.setIdcard(certNo);
+		BlacklistUser bLUser = servcie.getUserBlacklistInfoByIdCardAndCertType(keyword);
+		if (bLUser != null && bLUser.getIdcard()!= null) {
+			return 4;
+		}
 		int isOrder = isAlreadyOrderTickets(flightinfoId, certType, certNo);
 		if(isOrder > 0){
 			return 3;//该用户已经订过票

@@ -50,16 +50,15 @@ List<BaFlight> list=new FlightService().queryBaFlight(bfkw);
 		function onHandleM(data){
 			if(data){
 				alert("航班信息增加成功！");
-				window.returnValue=1; 
-				window.opener=null;
-				window.open("","_self");
-				window.close();	
+				window.location.href ="<%=request.getContextPath()%>/flightInfoAction.do?method=list";
 			}else{
 				alert("航班信息增加失败！(请确认是否重复添加！)");
 			}
 		}
 
-		
+		function fh(){
+			window.location.href ="<%=request.getContextPath()%>/flightInfoAction.do?method=list";
+		}
 		</script>
 	</head>
 	<body>
@@ -80,7 +79,7 @@ List<BaFlight> list=new FlightService().queryBaFlight(bfkw);
 										
 									</td>
 									<td colspan="3" align="left">
-									<select name="flight">
+									<select name="flight" id="flight">
 											<c:forEach var="f" items="<%=list%>">
 													<option value="${f.id}">${f.flight}
 											</c:forEach>
@@ -116,15 +115,15 @@ List<BaFlight> list=new FlightService().queryBaFlight(bfkw);
 										
 									</td>
 									<td colspan="3" align="left">
-										<select name="flyhour">
+										<select name="flyhour" id="flyhour">
 												<option value="07">07</option>
 							    				<option value="08">08</option>
-							    				<option value="09" selected="selected">09</option>
+							    				<option value="09">09</option>
 							    				<option value="10">10</option>
 							    				<option value="11">11</option>
 							    				<option value="12">12</option>
 							    				<option value="13">13</option>
-							    				<option value="14">14</option>
+							    				<option value="14"  selected="selected">14</option>
 							    				<option value="15">15</option>
 							    				<option value="16">16</option>
 							    				<option value="17">17</option>
@@ -133,11 +132,11 @@ List<BaFlight> list=new FlightService().queryBaFlight(bfkw);
 							    				<option value="20">20</option>   
 										</select>
 										:
-										<select name="flyminute">
+										<select name="flyminute" id="flyminute">
 												<option value="00">00</option>    				
 							    				<option value="10">10</option>    				
 							    				<option value="20">20</option>    				
-							    				<option value="30">30</option>    				
+							    				<option value="30"  selected="selected">30</option>    				
 							    				<option value="40">40</option>    				
 							    				<option value="50">50</option>
 										</select>
@@ -148,7 +147,7 @@ List<BaFlight> list=new FlightService().queryBaFlight(bfkw);
 									<td colspan="2" align="center">
 										<html:submit property="submit" styleClass="button2"
 											value=" 保存" onclick="return check();" />
-										<html:reset styleClass="button2" value=" 重置 " />
+										<input type="button" styleClass="button2" value=" 返回 " onclick="fh();"/>
 									</td>
 								</tr>
 							</table>

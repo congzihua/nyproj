@@ -24,6 +24,7 @@
 		<script type="text/javascript"
 			src="<%=request.getContextPath()%>/js/calendar/lang/calendar-zh.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/worktable.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/common.js?version=1"></script>
 		<script type="text/javascript"
 			src="<%=request.getContextPath()%>/js/calendar/src/calendar-setup.js"></script>
 		<LINK href="css/tab1.css" type=text/css rel=stylesheet>
@@ -39,7 +40,7 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 ; background-color: #FFCC00; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px}
 -->
 </STYLE>
-<SCRIPT language=JavaScript1.2>
+<script type="text/javascript">
 <!--
 window.name="mytable";
 function check()
@@ -263,7 +264,7 @@ divid.filters.revealTrans.play();
   </tr>  
   <tr bgcolor="#FFFFFF">
     <td align="right" width="15%">团体：</td>
-    <td width="18%"><select id='teamflag' name="teamflag" style="width: 100%" onPropertyChange="isTeam();">
+    <td width="18%"><select id='teamflag' name="teamflag" style="width: 100%" onchange="isTeam();">
 			<option value="0" <%=flightinfo.getTeamflag()==null||flightinfo.getTeamflag().trim().equals("0")?"selected=\"selected\"":"" %>>否</option>
 			<option value="1" <%=flightinfo.getTeamflag()!=null&&flightinfo.getTeamflag().trim().equals("1")?"selected='selected'":""%>>是</option>
 		</select>	</td>
@@ -281,7 +282,7 @@ divid.filters.revealTrans.play();
 		<tr align="center" bgcolor="#FFFFFF">
 			<td align="center" colspan="6">  
 				<input id="bc" type="button" value="保存并打印" onclick="check()"/>
-				<input id="cl" type="button" value="关 闭" onclick="window.close();"/>
+				<input id="cl" type="button" value="关 闭" onclick="javascript:window.close();"/>
 				</td>
 		</tr>
 		

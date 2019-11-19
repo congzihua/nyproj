@@ -246,7 +246,7 @@ function check(data)
 	</div>
 	
 	<form action="<%=request.getContextPath()%>/clientAction.do?method=saltTeamsTicket" method="post" target="mytab">&nbsp; 
-	<table id="listtable" width="99%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">	
+	<table id="listtable" width="95%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">	
  
  <%List<OpOrdertickets> list = (List<OpOrdertickets>)request.getAttribute("list");
 		int size = list.size(); %>
@@ -325,7 +325,7 @@ function check(data)
  
     
     <td  width="6%">
-    <select  name="priceId" onPropertyChange="sumPrices(<%=size %>);" style="width: 90px">
+    <select  name="priceId" onchange="sumPrices(<%=size %>);" style="width: 90px">
 
     	<%for(BaTicketprice tpr:tprice){%>    	
     	<option value="<%=tpr.getId()+";"+tpr.getRealAmount()%>" <%=tpr.getRealAmount() ==1350||tpr.getRealAmount()==1000?"selected='selected'":"" %>><%=tpr.getDiscountType()+"("+tpr.getRealAmount()+")"%></option>

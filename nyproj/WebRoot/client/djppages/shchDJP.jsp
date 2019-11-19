@@ -348,36 +348,38 @@ function PrintLab2(data){
     var id = document.getElementById("id").value;
     var monandday = document.getElementById("monandday").value;
     var lsum = document.getElementById("luggSum").value;
-   
+    varItem2 = '';
 	
 	for(var i=0;i<lsum;i++){
-		varItem2 = '北京南郊^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+name+'^'+data.split(';')[i]+'^51296829^'+flightTo+'^'+id;
-    	if (varItem2.length > 0) 
-		{
-    		 var pData  = varDemo2+varItem2;
-    		 buildSocket();
-		     socket.onopen = function (event) {
-		         socketStatus = true;
-		         if (socket.readyState == 1) {
-		             socket.send(pData);
-		         }
-		     }
-		     socket.onmessage = function (event) {
-		         socketStatus = false;
-		         pData = '';
-		         socket.close();
-		     };
-		     socket.onerror = function (evnt) {
-		         socketStatus = false;
-		     };
-		     socket.onclose = function (event) {
-		         socketStatus = false;
-		         socket = null;
-		     };
-    	}	
+		if (varItem2.length > 0) {
+			varItem2 += "|";
+		}
+		varItem2 += '北京南郊^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+name+'^'+data.split(';')[i]+'^51296829^'+flightTo+'^'+id;
+		
     }
 	
-	
+	if (varItem2.length > 0) {
+		 var pData  = varDemo2+varItem2;
+		 buildSocket();
+	     socket.onopen = function (event) {
+	         socketStatus = true;
+	         if (socket.readyState == 1) {
+	             socket.send(pData);
+	         }
+	     }
+	     socket.onmessage = function (event) {
+	         socketStatus = false;
+	         pData = '';
+	         socket.close();
+	     };
+	     socket.onerror = function (evnt) {
+	         socketStatus = false;
+	     };
+	     socket.onclose = function (event) {
+	         socketStatus = false;
+	         socket = null;
+	     };
+	}	
 		SysmanagerDWR.printUpdate(document.getElementById("id").value,data,myHandle);
     		
 }

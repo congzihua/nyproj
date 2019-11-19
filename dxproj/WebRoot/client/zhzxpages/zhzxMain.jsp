@@ -4,6 +4,8 @@
 <title>
 指挥中心主页面
 </title>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/layer/layer.js"></script>
 </head>
 <frameset rows="60,20,*" frameborder="0" border="0" id="appMainFrame">
 	<frame name="top" scrolling="no" noresize="noresize"  src="<%=request.getContextPath()%>/client/zhzxpages/top.jsp" marginheight="0">

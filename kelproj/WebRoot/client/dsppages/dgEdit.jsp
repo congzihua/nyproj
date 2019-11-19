@@ -60,6 +60,7 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'> </script>
 <SCRIPT language=JavaScript1.2>
 <!--
+window.name="mypage";
 function check(data,status)
 		{	      
 			var flydate = document.getElementById("flydate");			
@@ -121,7 +122,7 @@ function check(data,status)
 			改 签
 		</FONT>
 		</div>
-	<form action="<%=request.getContextPath()%>/clientAction.do?method=editOrderInfo" method="post" target="dspBottom">&nbsp; 
+	<form action="<%=request.getContextPath()%>/clientAction.do?method=editOrderInfo" method="post" target="mypage">&nbsp; 
 	<input type="hidden" id="flightId" name="flightId" value="${flightinfo.flightId}"/>
 	<input type="hidden" name="orderdate" value="<fmt:formatDate value="${flightinfo.flightDate}" pattern="yyyy-MM-dd"/>"/>
 	<input type="hidden" name="flyTime" value="${flightinfo.flyTime}"/>

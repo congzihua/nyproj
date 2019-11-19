@@ -31,7 +31,6 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 </STYLE>
 <SCRIPT language=JavaScript1.2>
 <!--
-window.name="mytable";
 function check(data)
 		{	      
 			var flightNo = document.getElementById("flightNo");
@@ -67,7 +66,7 @@ function check(data)
 	 <%if(request.getAttribute("message").toString().equals("1")) {%>
 	 
 
-	<form action="" method="post" target="mytable">
+	<form action="" method="post" target="_slef">
 	
 	<input type="hidden" name="flightinfoId" value="${flightinfoId}"/>
 	

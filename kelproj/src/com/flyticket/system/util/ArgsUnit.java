@@ -10,6 +10,7 @@ import com.founder.enp.util.databases.ConfigManager;
 public class ArgsUnit {
 	
 	private static String startAddress = null;
+	private static String dataOutDir = null;
 	
 	public static String getStartAddress(String uri) {
 	    if(startAddress == null){
@@ -47,12 +48,21 @@ public class ArgsUnit {
 	    }
 		return startAddress;
 	}
-	public static void main(String[] args) {
+	public static String getDataOutDir() {
 		String uri = "";
 		ArgsUnit unit = new ArgsUnit();
 		uri =unit.getClass().getClassLoader().getResource("").getPath();
-		System.out.println(uri);
+	    if(dataOutDir == null){
+			Properties properties = new Properties();
+		    try {
+				properties.load(new FileInputStream(uri+"configmap.properties"));
+				dataOutDir = properties.getProperty("dataOutDir");
+		    } catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	    }
+		return dataOutDir;
 	}
-	
-	
 }

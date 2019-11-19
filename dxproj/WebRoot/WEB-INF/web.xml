@@ -100,7 +100,14 @@
   <servlet>  
     <servlet-name>dwr-invoker</servlet-name>  
     <servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>  
-    
+    <init-param>
+	  <param-name>crossDomainSessionSecurity</param-name>
+	  <param-value>false</param-value>
+	</init-param>
+	<init-param>
+	  <param-name>allowScriptTagRemoting</param-name>
+	  <param-value>true</param-value>
+	</init-param>
 </servlet>  
   
 <servlet-mapping>  

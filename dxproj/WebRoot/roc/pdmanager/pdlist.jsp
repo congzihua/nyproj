@@ -52,12 +52,7 @@ String deleNum = request.getAttribute("deleNum")==null?"":request.getAttribute("
 		}
 		function add()
 		{	
-			var url = "<%=request.getContextPath()%>/roc/pdmanager/addOper.jsp";
-			var rv = window.showModalDialog(url,'增加订票点信息','dialogWidth=600px;DialogHeight=400px;scrollbars=no;help=no;resizable=no;center:yes');
-			 if(rv == 1){
-		    	 document.forms[0].action="<%=request.getContextPath()%>/flightAction.do?method=listTicketpoint";
-		       document.forms[0].submit();
-		    }
+			window.location.href ="<%=request.getContextPath()%>/roc/pdmanager/addOper.jsp";
 	        
 		}
 		function edit()
@@ -87,12 +82,7 @@ String deleNum = request.getAttribute("deleNum")==null?"":request.getAttribute("
 		    var name = document.getElementsByName("name")[j].value;
 		     var telephone = document.getElementsByName("telephone")[j].value;
 		   var url = "<%=request.getContextPath()%>/roc/pdmanager/editOper.jsp?id="+objs.value+"&name="+encodeURI(encodeURI(name))+"&telephone="+encodeURI(encodeURI(telephone));
-			var rv = window.showModalDialog(url,'修改订票点信息','dialogWidth=600px;DialogHeight=400px;scrollbars=no;help=no;resizable=no;center:yes');
-			 if(rv == 1){
-		    	 document.forms[0].action="<%=request.getContextPath()%>/flightAction.do?method=listTicketpoint";
-		       document.forms[0].submit();
-		    }
-	 
+		   window.location.href =url;
 		}
 	 
 	

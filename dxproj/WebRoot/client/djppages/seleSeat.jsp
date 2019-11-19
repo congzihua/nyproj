@@ -209,7 +209,7 @@ function xuanzuo(){
 </th>
 
 <th width="20" height="20">
-<%if((k+"C").equals("1C")||(k+"C").equals("19C")||(strList!=null && strList.size()>0&&strList.contains((k)+"C"))){%>
+<%if((k+"C").equals("1C")||(k+"C").equals("18C")||(strList!=null && strList.size()>0&&strList.contains((k)+"C"))){%>
 
 	<img title="<%=(k)+"C"%>"   src="<%=request.getContextPath()%>/image/38.jpg" width="20" height="20" border="1px"/>
 <%}else{%>

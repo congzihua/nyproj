@@ -195,8 +195,28 @@ public class ClienService {
 		return dao.updateForDjpTeam(orderList, seatNums, userOper);
 	}
 	public List<OpOrdertickets> allInfoList(OpOrderticketsKeyword kw) {
-		// TODO Auto-generated method stub
-		return dao.allInfoList(kw);
+		List<OpOrdertickets> tickets =  dao.allInfoList(kw);
+		if (tickets == null || tickets.size() == 0)
+			return tickets;
+		for (OpOrdertickets t:tickets) {
+			String bagNum = t.getBagNum();
+			int luggSum = 0;
+			if (bagNum != null && bagNum.trim().length() > 0) {
+				String[] bagNums = bagNum.split(";");
+				luggSum = bagNums.length;
+				bagNum = "";
+				for (int i = 0;i < bagNums.length;i++) {
+					String bm = bagNums[i];
+					if (i > 0){
+						bagNum += "<br/>";
+					}
+					bagNum += bm;
+				}
+			}
+			t.setLuggSum(luggSum);
+			t.setBagNums(bagNum);
+		}
+		return tickets;
 	}
 	public List<OpOrdertickets> saltPointInfoCounts(com.roc.syspe.entity.OpOrderticketsKeyword kw){
 		

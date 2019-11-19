@@ -42,21 +42,11 @@ public class CharsetFilter implements Filter {
 	 * 执行过滤功能 将参数信息按指定的编码进行转换
 	 */
 	@SuppressWarnings("deprecation")
-	public void doFilter(ServletRequest req, ServletResponse res,
+	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		Map parameterMap = req.getParameterMap();
-		if (!parameterMap.isEmpty()) {
-			Iterator it = parameterMap.keySet().iterator();
-			String value[] = null;
-			while (it.hasNext()) {
-				value = (String[]) parameterMap.get(it.next());
-				for (int i = 0; i < value.length; i++) {
-					value[i] = new String(value[i].getBytes("ISO-8859-1"),
-							encoding);
-				}
-			}
-		}		
-		chain.doFilter(req, res);
+		request.setCharacterEncoding(encoding);
+		response.setCharacterEncoding(encoding);
+		chain.doFilter(request, response);
 	}
 
 	/**

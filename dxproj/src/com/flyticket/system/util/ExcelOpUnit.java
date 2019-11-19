@@ -164,7 +164,7 @@ public class ExcelOpUnit {
 	 		sheet.addMergedRegion(new CellRangeAddress(i, i, 0, 6));
 	 		SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
 	 		long tLong = System.currentTimeMillis();
-	 		String path ="d:/out_excels/"+format.format(new Date());
+	 		String path =ArgsUnit.getDataOutDir()+format.format(new Date());
 	 		String oldFilePath = path+"/"+tLong+".xls";
 	 		String newFilePath = path+"/"+(++tLong)+".xls";
 	 	    File fileDirs = new File(path);
@@ -314,7 +314,7 @@ public class ExcelOpUnit {
 						 row.setHeightInPoints(24F);
 						 String mc = null;
 						 if(startAddress.contains("南苑") || startAddress.contains("北京")){
-							 mc = "南苑保障办";
+							 mc = "北京南郊";
 						 }else if(startAddress.contains("鼎新")){
 							 mc = "鼎新保障办";
 						 }else if(startAddress.contains("库")){

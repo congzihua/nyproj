@@ -119,7 +119,7 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">行李重量：</FONT></td>
     <td width="18%">${flightinfo.weightSum}</td>
     <td align="center"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">行李编号：</FONT></td>
-    <td align="center"><textarea class="tearea" readonly="readonly">${flightinfo.bagNum}</textarea></td>
+    <td align="center" style="size: 16pt"><textarea class="tearea" readonly="readonly">${flightinfo.bagNum}</textarea></td>
    </tr> 
   
   <tr bgcolor="#FFFFFF">

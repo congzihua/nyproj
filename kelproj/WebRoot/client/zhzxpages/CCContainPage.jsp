@@ -1,6 +1,8 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<jsp:directive.page import="com.roc.syspe.entity.OpOrdertickets" />
-<jsp:directive.page import="java.text.SimpleDateFormat;"/>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.roc.syspe.entity.OpOrdertickets"%>
+<%@page import="java.util.*"%>
+<%@ page language="java" pageEncoding="UTF-8"%>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";

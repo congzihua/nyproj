@@ -58,20 +58,20 @@ String minute=hourAndMinute[1];
 			FlightInfoDWR.updateFlightInfo(id,flight,flightName,flydate,flytime,onHandleM);
 		}
 		function onHandleM(data){
-		if(data){
+			if(data){
 				alert("航班信息修改成功！");
-				window.returnValue=1; 
-				window.opener=null;
-				window.open("","_self");
-				window.close();	
+				fh();
 			}else{
 				alert("航班信息修改失败！(请确认是否修改过的航班信息已存在！)");
 			}
 		}
+		function fh(){
+			window.location.href ="<%=request.getContextPath()%>/flightInfoAction.do?method=list";
+		}
 		</script>
 	</head>
 	<body><div align="center">
-			<input type="hidden" name="id" value="<%=id %>"/>
+			<input type="hidden" id="id" name="id" value="<%=id %>"/>
 			<!--  html:hidden property="parentID" name="departMentsForm" />-->
 			<table height="100%" cellspacing="0" cellpadding="0" width="100%"
 				border="0" align="center">
@@ -89,7 +89,7 @@ String minute=hourAndMinute[1];
 										
 									</td>
 									<td colspan="3" align="left">
-									<select name="flight">
+									<select name="flight" id="flight">
 											<%for(int i=0;i<list.size();i++){ 
 												BaFlight baflight=list.get(i);
 												int bfid=baflight.getId();
@@ -127,7 +127,7 @@ String minute=hourAndMinute[1];
 										
 									</td>
 									<td colspan="3" align="left">
-										<select name="flyhour">
+										<select name="flyhour" id="flyhour">
 												<option value="07" <%if("07".equals(hour)){ %>selected<%} %>>07
 												<option value="08" <%if("08".equals(hour)){ %>selected<%} %>>08
 												<option value="09" <%if("09".equals(hour)){ %>selected<%} %>>09
@@ -144,7 +144,7 @@ String minute=hourAndMinute[1];
 												<option value="20" <%if("20".equals(hour)){ %>selected<%} %>>20
 										</select>
 										:
-										<select name="flyminute">
+										<select name="flyminute" id="flyminute">
 												<option value="00" <%if("00".equals(minute)){ %>selected<%} %>>00
 												<option value="10" <%if("10".equals(minute)){ %>selected<%} %>>10
 												<option value="20" <%if("20".equals(minute)){ %>selected<%} %>>20
@@ -159,7 +159,7 @@ String minute=hourAndMinute[1];
 									<td colspan="2">
 										<html:submit property="submit" styleClass="button2"
 											value=" 保存" onclick="return check();" />
-										<html:reset styleClass="button2" value=" 重置 " />
+										<input type="button" styleClass="button2" value=" 返回 " onclick="fh()"/>
 									</td>
 								</tr>
 							</table>

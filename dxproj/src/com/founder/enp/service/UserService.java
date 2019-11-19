@@ -30,14 +30,9 @@ public class UserService {
 	public UserService() {
 		daoMgr = null;
 		dao = null;
-		try {
-			daoMgr = DaoConfig.getDaoManager();
-			dao = (UserDao) daoMgr.getDao(UserDao.class);
-		} catch (Exception ex) {
-			log.error((new StringBuilder(
-					"\u521B\u5EFAdaomanager\u51FA\u73B0\u5F02\u5E38")).append(
-					ex.getMessage()).toString());
-		}
+		daoMgr = DaoConfig.getDaoManager();
+		dao = (UserDao) daoMgr.getDao(UserDao.class);
+
 	}
 
 	public boolean transfer(String dmpid,String strUserIDs)

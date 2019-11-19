@@ -12,8 +12,8 @@
  	List<BaTicketprice> tprice = (List<BaTicketprice>)request.getAttribute("tprice");
  	Authorization auth = (Authorization)request.getSession(true).getAttribute("authorization");
  %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html>
 <head>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -31,9 +31,6 @@
 	<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/util.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'> </script>
-	
-	
-
 		<STYLE type="text/css">
 <!--
 .tearea{overflow-y:auto;padding:0;width:99%;height:70px;border:1px solid gray;}
@@ -42,20 +39,15 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 ; background-color: #FFCC00; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px}
 -->
 </STYLE>
-<SCRIPT language=JavaScript1.2>
-<!--
-window.name="mytable";
+<script type="text/javascript">
+window.name="mypage";
 function check()
 		{	      
-			
 			var name = document.getElementById("name");
-			
 			var certNo = document.getElementById("certNo");
 			var linkphone = document.getElementById("linkphone");
 			var ticketpointId = document.getElementById("ticketpointId");			
-			
 			var remark = document.getElementById("remark");
-			
 			if(name.value==null||name.value==''){
 				alert('姓名不能为空，请重新填写！');
 				name.focus();
@@ -135,24 +127,8 @@ function check()
 			}else{
 				teamName.style.display='';
 			}
-		}	
-function dgpage(){
-	var url = "dinggaipage.html";
-window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
-}
-
-
-function Show(divid) {
-divid.filters.revealTrans.apply();
-divid.style.visibility = "visible";
-divid.filters.revealTrans.play();
-} 
-function Hide(divid) {
-divid.filters.revealTrans.apply();
-divid.style.visibility = "hidden";
-divid.filters.revealTrans.play();
-}
-//-->
+	}
+	
 </script>
 	</head>
 	<body oncontextmenu="if (!event.ctrlKey){return false;}">	
@@ -161,7 +137,7 @@ divid.filters.revealTrans.play();
 			订 票 信 息 修 改 
 		</FONT>
 		</div>
-	<form action="<%=request.getContextPath()%>/clientAction.do?method=orderInfoEdit" method="post" target="mytable">
+	<form action="<%=request.getContextPath()%>/clientAction.do?method=orderInfoEdit" method="post" target="mypage">
 	<input type="hidden" name="flightId" value="${flightinfo.flightId}"/>
 	<input type="hidden" name="orderdate" value="<fmt:formatDate value="${flightinfo.flightDate}" pattern="yyyy-MM-dd"/>"/>
 	<input type="hidden" name="flyTime" value="${flightinfo.flyTime}"/>
@@ -213,7 +189,7 @@ divid.filters.revealTrans.play();
   </tr> 
   <tr bgcolor="#FFFFFF">
     <td align="right" width="15%">团体：</td>
-    <td width="18%"><select id='teamflag' name="teamflag" style="width: 100%" onPropertyChange="isTeam();">
+    <td width="18%"><select id='teamflag' name="teamflag" style="width: 100%" onchange="isTeam();">
 			<option value="0"  <%=flightinfo.getTeamflag()!=null && flightinfo.getTeamflag().equals("0")?"selected='selected'":"" %>>否</option>
 			<option value="1" <%=flightinfo.getTeamflag()!=null && flightinfo.getTeamflag().equals("1")?"selected='selected'":"" %>>是</option>
 		</select>	</td>
@@ -233,7 +209,7 @@ divid.filters.revealTrans.play();
 			<td align="center" colspan="6">  
 				<input id="bc" type="button" value="保存" onclick="check()"/>
 				<input id="bc" type="button" value="退订" onclick="qren(${id})"/>
-				<input id="cl" type="button" value="关 闭" onclick="window.close();"/>
+				<input id="cl" type="button" value="关 闭" onclick="javascript:window.close();"/>
 				</td>
 		</tr>
 		

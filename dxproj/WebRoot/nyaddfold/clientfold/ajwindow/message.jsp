@@ -43,6 +43,8 @@ if("succ".equals(message)){
 <script type='text/javascript' src='<%=request.getContextPath() %>/dwr/util.js'></script> 
 <script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 <script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/UpdateStatusDWR.js'> </script>
+<script type="text/javascript"
+			src="<%=request.getContextPath() %>/js/jquery/jquery-3.2.1.min.js"></script>
   </head>
   
   <body style="margin: 0">
@@ -53,9 +55,9 @@ if("succ".equals(message)){
    	<td width="40%"> 
    	    
    	<font color="red" >光标聚焦到此对话框进行扫描</font> 
-   	<input width="100%" type="text" id="txmv" name="txmv" value="" onpropertychange="dataUp();"> 
+   	<input width="100%" type="text" id="txmv" name="txmv" value="" "> 
    	</td> 
-   	<td align="left" width="40%" id="info" style="font-size:30px;text-shadow:Red;font-family:'黑体';color: red" nowrap="nowrap"> 
+   	<td align="left" width="40%" id="info" style="font-size:16px;text-shadow:Red;font-family:'黑体';color: red" nowrap="nowrap"> 
    	  
    	</td> 
    </tr> 
@@ -70,7 +72,7 @@ var info1 = '正在扫描中...';
   function dataUp(){
   	var message=document.getElementById("info");
 	//message.innerHTML=info1;
-  	if(document.getElementById("txmv").value!=null && document.getElementById("txmv").value!='' &&parseFloat(document.getElementById("txmv").value)>10000 ){
+  	if(document.getElementById("txmv").value!=null && document.getElementById("txmv").value!='' &&parseFloat(document.getElementById("txmv").value)>100000 ){
   		
   		window.setTimeout("mydata();",800);
     }else{
@@ -82,10 +84,9 @@ var info1 = '正在扫描中...';
   function mydata(){
     var txm  = document.getElementById("txmv");  
     var re = /^[0-9]*$/; 
-  	if (txm.value!=null && txm.value !='' && re.test(txm.value) &&parseFloat(txm.value) >10000)    {
+  	if (txm.value!=null && txm.value !='' && re.test(txm.value) &&parseFloat(txm.value) >100000)    {
   			var message=document.getElementById("info");
 			//message.innerHTML='正在提交数据...';
-			
   		 UpdateStatusDWR.upFly(txm.value,<%=flightInfoId%>,onHandleM);
 	 }else{
 		document.getElementById("txmv").value='';
@@ -97,17 +98,21 @@ var info1 = '正在扫描中...';
 					var message=document.getElementById("info");
 					parent.document.getElementById("uncharge").src="<%=request.getContextPath()%>/clientAction.do?method=toFlyAlrSafeCheck&orderdate=<%=orderdate %>&flightId=<%=flightId%>&flyTime=<%=flyTime%>";
 					parent.document.getElementById("charged").src="<%=request.getContextPath()%>/clientAction.do?method=areadyToFly&orderdate=<%=orderdate %>&flightId=<%=flightId%>&flyTime=<%=flyTime%>&id="+data;
-				     document.getElementById("txmv").value='';
+					 message.innerHTML="";
+					document.getElementById("txmv").value='';
 				      document.getElementById("txmv").focus();					
 				}else{
 					document.getElementById("txmv").value='';
 					document.getElementById("txmv").onblur;
 				     var message=document.getElementById("info");
-	 				 message.innerHTML="该乘客不是本次航班或不是待安检状态，请核查...";
+	 				 message.innerHTML="该乘客不是本次航班或不是待登机状态，请核查...";
 				    document.getElementById("txmv").focus();
 				}
 			}
 			document.getElementById("txmv").focus();
+			$("#txmv").bind("input propertychange",function(){
+				dataUp();
+			});
 //-->
 </script>
 

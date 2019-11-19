@@ -148,7 +148,7 @@ function printCertificate(){
 </table>
 </div>
 </div>
-<div id="myid" style="width:630px;text-align:center;border:0px solid red" align="center">
+<div id="myid" style="margin:0 auto;width:630px;text-align:center;border:0px solid red" align="center">
 <table width="100%" border="2" cellspacing="0" cellpadding="0" align="center">	
 <tr>
    

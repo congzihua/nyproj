@@ -23,7 +23,7 @@ int count = (Integer) request.getAttribute("count");
 		<meta http-equiv="expires" content="0">
 		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/admin.css">
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/table.js"></script>
-		<script type="text/javascript" src="<%=request.getContextPath()%>/js/common.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/client/js/common.js"></script>
 			<link rel="stylesheet" type="text/css" media="all"
 			href="<%=request.getContextPath()%>/js/calendar/themes/system.css"
 			title="Calendar Theme - system.css">
@@ -97,7 +97,7 @@ int count = (Integer) request.getAttribute("count");
 		function bentchAdd()
 		{	
 			var url = "<%=request.getContextPath()%>/roc/sysman/bentchAdd.jsp";
-			var rv = window.showModalDialog(url,'批量增加票额信息','dialogWidth=650px;DialogHeight=400px;scrollbars=no;help=no;resizable=no;center:yes');
+			var rv = window.showModalDialog(url,'批量增加票额信息','dialogWidth=730px;DialogHeight=480px;scrollbars=no;help=no;resizable=no;center:yes');
 			  document.forms[0].action="<%=request.getContextPath()%>/ticketsAllocAction.do?method=seleTicketsallocList";
 		       document.forms[0].submit();
 		    
@@ -107,7 +107,7 @@ int count = (Integer) request.getAttribute("count");
 		function fenPei(){
 			var url = "<%=request.getContextPath()%>/roc/sysman/piaoEFenPei.jsp";
 			
-			var rv = window.showModalDialog(url,'批量增加票额信息','dialogWidth=650px;DialogHeight=400px;scrollbars=no;help=no;resizable=no;center:yes');
+			var rv = window.showModalDialog(url,'批量增加票额信息','dialogWidth=700px;DialogHeight=500px;scrollbars=no;help=no;resizable=no;center:yes');
 			  document.forms[0].action="<%=request.getContextPath()%>/ticketsAllocAction.do?method=seleTicketsallocList";
 		       document.forms[0].submit();
 		}

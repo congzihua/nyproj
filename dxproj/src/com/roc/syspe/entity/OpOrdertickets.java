@@ -44,9 +44,15 @@ public class OpOrdertickets {
 	private String teamName;
 	private String month;
 	private String day;
+	private String bagNums;
 	
 	
-	
+	public String getBagNums() {
+		return bagNums;
+	}
+	public void setBagNums(String bagNums) {
+		this.bagNums = bagNums;
+	}
 	public String getMonth() {
 		return month;
 	}

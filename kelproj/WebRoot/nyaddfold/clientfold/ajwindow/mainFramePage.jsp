@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<jsp:directive.page import="java.util.*" />
 <% 
 String flightId=(String)request.getAttribute("flightId"); 
 String flight=java.net.URLEncoder.encode((String)request.getAttribute("flight"),"utf-8");

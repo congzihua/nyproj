@@ -225,6 +225,7 @@ function check(type,flightinfoId)
 			var certNo = document.getElementsByName("certNo");
 			var vipFlag = document.getElementsByName("vipFlag");
 			var member = document.getElementsByName("member");
+			printNames = '';
 			for (var i = 0; i < member.length; i++){
 				 if (member[i].checked==true){  
 					ids += member[i].value+","
@@ -348,25 +349,26 @@ function PrintLab1(data){
      var idAr =printIds.split(',');
     
 	var vipFlag=" ";
-     for(var i = 0;i<idAr.length;i++){
+    for(var i = 0;i<idAr.length;i++){
         vipFlag=" ";
-	   if(printVipFlag.split(",")[i]==1){
+	    if(printVipFlag.split(",")[i]==1){
 	   		vipFlag="是";
-	   }
-	   var certNo = printCertNo.split(",")[i];
-	   if(certNo.length==18){
+	    }
+	    var certNo = printCertNo.split(",")[i];
+	    if(certNo.length==18){
 	    	certNo=certNo.substring(0,6)+"******"+certNo.substring(14);
-	   }
+	    }
 	    var seatNumPostion = data.split(",")[i] == null || data.split(",")[i] == ""?" ":data.split(",")[i];
-	    varItem1 =   flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNumPostion+'^'+flightTo+'^北京南郊^'+gate+'^'+flytime+'^'+printNames.split(",")[i]+'^'+certNo+'^'+idAr[i];   
-	    var pData  = varDemo1+varItem1;
-	    socketStatus = true;
-		if (socket.readyState == 1) {
+	    if (varItem1 != '')
+	    	varItem1 += "|";
+	    varItem1 += flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNumPostion+'^'+flightTo+'^北京南郊^'+gate+'^'+flytime+'^'+printNames.split(",")[i]+'^'+certNo+'^'+idAr[i];   
+    }
+     var pData  = varDemo1+varItem1;
+	 socketStatus = true;
+     if (socket.readyState == 1) {
 		    socket.send(pData);
-		}
-
-	  }
-    
+	 }
+     varItem1 = '';
 	}
 <%
   	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -429,21 +431,21 @@ function PrintLab1(data){
     var flightTo = document.getElementById("flight").value;    
     var flightNo = document.getElementById("flightNo").value;    
     var monandday = document.getElementById("monandday").value;
-     
+    varItem2 = "";
 	 for(var i = 0;i<jsTrim(luggSum);i++){
-    	    varItem2 = '北京南郊^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+printNames.split(",")[0]+'^'+data.split(";")[i]+'^51296829^'+flightTo+'^'+printIds.split(',')[1];  
-	    	if (varItem2.length > 0) 
-		{
-	    		 var pData  = varDemo2+varItem2;
-	    		socketStatus = true;
-	            if (socket.readyState == 1) {
-	                socket.send(pData);
-	            }
-	     }	
-	    
+		if (varItem2.length > 0) {
+			varItem2 += "|";
+		}
+        varItem2 += '北京南郊^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+printNames.split(",")[0]+'^'+data.split(";")[i]+'^51296829^'+flightTo+'^'+printIds.split(',')[1];  
 	 }
-	
-	  SysmanagerDWR.printUpdateTeam(printIds,data,myHandle);   
+	 if (varItem2.length > 0){
+		 var pData  = varDemo2+varItem2;
+			socketStatus = true;
+	     if (socket.readyState == 1) {
+	         socket.send(pData);
+	     }	 
+	 }	
+	 SysmanagerDWR.printUpdateTeam(printIds,data,myHandle);   
 	    	
 	    	
 }

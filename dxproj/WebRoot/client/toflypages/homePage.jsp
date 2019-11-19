@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<td width="20%">
     		<table border="0">
 						        <td width="70%" >
-						        <input value="" name="orderdate" width="100%" readonly="readonly">        </td>
+						        <input value="" name="orderdate" id="orderdate" width="100%" readonly="readonly">        </td>
 						        <td align="left">
 						        	 <span style="cursor: hand"><img	src="<%=request.getContextPath()%>/images/caldendar.gif" id="caldendar1" /> </span>	 
 						        	
@@ -63,14 +63,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</td>
     		<td>起飞时间：</td>
     		<td>
-    			<select name="hour">
+    			<select name="hour" id="hour">
     				
     				<option value="07">07</option>
     				<option value="08">08</option>
-    				<option value="09">09</option>
+    				<option value="09" selected="selected">09</option>
     				<option value="10">10</option>
     				<option value="11">11</option>
-    				<option value="12" selected="selected">12</option>
+    				<option value="12">12</option>
     				<option value="13">13</option>
     				<option value="14">14</option>
     				<option value="15">15</option>
@@ -81,11 +81,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     				<option value="20">20</option>    				
     			</select>
     			:
-    			<select name="minue">
+    			<select name="minue"  id="minue">
     				<option value="00">00</option>    				
     				<option value="10">10</option>    				
     				<option value="20">20</option>    				
-    				<option value="30" selected="selected">30</option>    				
+    				<option value="30">30</option>    				
     				<option value="40">40</option>    				
     				<option value="50">50</option>    				   				
     			</select>
