@@ -1,3 +1,8 @@
 /com/
+/configmap.properties
+/datasource.properties
+/log4j.properties
 /logs/
+/sql-map-config.xml
 /sql/
+/sqlfile/
