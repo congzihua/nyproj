@@ -5,8 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-import com.founder.enp.util.databases.ConfigManager;
-
 public class ArgsUnit {
 	
 	private static String startAddress = null;
@@ -19,10 +17,8 @@ public class ArgsUnit {
 				properties.load(new FileInputStream(uri+"WEB-INF/classes/configmap.properties"));
 				startAddress = properties.getProperty("startaddress");
 		    } catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    }

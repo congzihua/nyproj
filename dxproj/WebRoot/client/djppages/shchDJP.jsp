@@ -275,7 +275,7 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 </script>
 <SCRIPT LANGUAGE="JavaScript">
 var varItem1 = 'MB1.PRN^LPT1^4008^2012-01-22^是^1-A^库尔勒^北京^4-6^08:30^科比布莱恩提^220111198804153641^12';
-var varItem2 = 'MB2.PRN^LPT2^鼎新^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
+var varItem2 = 'MB2.PRN^LPT2^北京^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
 var varDemo1 = 'MB1.PRN^LPT1^';
 var varDemo2 = 'MB2.PRN^LPT2^';
 var socketUrl = 'ws://localhost:7302/PrintServer';
@@ -348,36 +348,38 @@ function PrintLab2(data){
     var id = document.getElementById("id").value;
     var monandday = document.getElementById("monandday").value;
     var lsum = document.getElementById("luggSum").value;
-   
+    varItem2 = '';
 	
 	for(var i=0;i<lsum;i++){
-		varItem2 = '鼎新^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+name+'^'+data.split(';')[i]+'^51296829^'+flightTo+'^'+id;
-		if (varItem2.length > 0) 
-		{
-    		 var pData  = varDemo2+varItem2;
-    		 buildSocket();
-		     socket.onopen = function (event) {
-		         socketStatus = true;
-		         if (socket.readyState == 1) {
-		             socket.send(pData);
-		         }
-		     }
-		     socket.onmessage = function (event) {
-		         socketStatus = false;
-		         pData = '';
-		         socket.close();
-		     };
-		     socket.onerror = function (evnt) {
-		         socketStatus = false;
-		     };
-		     socket.onclose = function (event) {
-		         socketStatus = false;
-		         socket = null;
-		     };
-    	}	
+		if (varItem2.length > 0) {
+			varItem2 += "|";
+		}
+		varItem2 += '鼎新^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+name+'^'+data.split(';')[i]+'^51296829^'+flightTo+'^'+id;
+		
     }
 	
-	
+	if (varItem2.length > 0) {
+		 var pData  = varDemo2+varItem2;
+		 buildSocket();
+	     socket.onopen = function (event) {
+	         socketStatus = true;
+	         if (socket.readyState == 1) {
+	             socket.send(pData);
+	         }
+	     }
+	     socket.onmessage = function (event) {
+	         socketStatus = false;
+	         pData = '';
+	         socket.close();
+	     };
+	     socket.onerror = function (evnt) {
+	         socketStatus = false;
+	     };
+	     socket.onclose = function (event) {
+	         socketStatus = false;
+	         socket = null;
+	     };
+	}	
 		SysmanagerDWR.printUpdate(document.getElementById("id").value,data,myHandle);
     		
 }

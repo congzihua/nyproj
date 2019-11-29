@@ -119,10 +119,10 @@ List<BaFlight> list=new FlightService().queryBaFlight(bfkw);
 										<select name="flyhour" id ="flyhour">
 							    				<option value="07">07</option>
 							    				<option value="08">08</option>
-							    				<option value="09" selected="selected">09</option>
+							    				<option value="09">09</option>
 							    				<option value="10">10</option>
 							    				<option value="11">11</option>
-							    				<option value="12">12</option>
+							    				<option value="12"  selected="selected">12</option>
 							    				<option value="13">13</option>
 							    				<option value="14">14</option>
 							    				<option value="15">15</option>
@@ -137,7 +137,7 @@ List<BaFlight> list=new FlightService().queryBaFlight(bfkw);
 							    				<option value="00">00</option>    				
 							    				<option value="10">10</option>    				
 							    				<option value="20">20</option>    				
-							    				<option value="30">30</option>    				
+							    				<option value="30"  selected="selected">30</option>    				
 							    				<option value="40">40</option>    				
 							    				<option value="50">50</option> 
 										</select>

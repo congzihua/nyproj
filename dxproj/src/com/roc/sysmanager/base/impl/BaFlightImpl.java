@@ -53,7 +53,6 @@ public class BaFlightImpl extends SqlMapDaoTemplate implements BaFlightDao {
 
 	@Override
 	public List<BaFlight> queryBaFlight(BaFlightKeyWord key) {
-		// TODO Auto-generated method stub
 		return queryForList("flightList",key);
 	}
 

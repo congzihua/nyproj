@@ -162,7 +162,7 @@ public class ExcelOpUnit {
 	 		row.createCell(++jj).setCellValue("");	 		
 	 		row.getCell(jj).setCellStyle(styTitle2);
 	 		sheet.addMergedRegion(new CellRangeAddress(i, i, 0, 6));
-	 		SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
+	 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
 	 		long tLong = System.currentTimeMillis();
 	 		String path =ArgsUnit.getDataOutDir()+format.format(new Date());
 	 		String oldFilePath = path+"/"+tLong+".xls";
@@ -407,7 +407,8 @@ public class ExcelOpUnit {
 		 	}
 			SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
 	 		long tLong = System.currentTimeMillis();
-	 		String path ="d:/out_excels/"+format.format(new Date());
+	 		String dataDir = ArgsUnit.getDataOutDir();
+	 		String path =dataDir+format.format(new Date());
 	 		String oldFilePath = path+"/"+tLong+".xls";
 	 		String newFilePath = path+"/"+(tLong)+".encrypt";
 	 	    File fileDirs = new File(path);
