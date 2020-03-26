@@ -5,9 +5,16 @@
 
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%
-	OpOrdertickets ot = new OpOrdertickets();
-	ot = (OpOrdertickets)request.getAttribute("flightinfo");
-	
+	List<OpOrdertickets> ots = (List<OpOrdertickets>)request.getAttribute("flightinfos");
+	String fightInfoids = "";
+	String flightIds = "";
+	for (OpOrdertickets op:ots) {
+		fightInfoids += ","+ op.getId();
+		flightIds += ","+op.getFlightId();
+	}
+	fightInfoids = fightInfoids.substring(1);
+	flightIds = flightIds.substring(1);
+	OpOrdertickets ot = (OpOrdertickets)request.getAttribute("flightinfo");
   	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
   	java.util.Date date = ot.getFlightDate();
   	java.util.Calendar c = java.util.Calendar.getInstance();
@@ -94,7 +101,7 @@ function check()
 				
 			}
 			if(certNo.value==null || certNo.value==''){
-				alert('证件号码不能为空 ，请输入！');
+				alert('证件号码不能为空 ，请输入！');	
 				certNo.focus();
 				return;	
 			}
@@ -157,8 +164,8 @@ function check()
 			var orderdate = document.getElementById("orderdate").value;
 			var flyTime = document.getElementById("flyTime").value;
 			var certType = document.getElementById("certType").value;
-			
-			SysmanagerDWR.validate(flightId,flightinfoId,orderdate,ticketpointId.value,flyTime,certType,certNo.value,newValidate);
+			var flightInfoIds = '<%=fightInfoids%>';
+			SysmanagerDWR.validate(flightId,flightInfoIds,orderdate,ticketpointId.value,flyTime,certType,certNo.value,newValidate);
 			document.getElementById("bc").disabled="disabled";
 					
 			
@@ -210,6 +217,22 @@ divid.filters.revealTrans.apply();
 divid.style.visibility = "hidden";
 divid.filters.revealTrans.play();
 }
+function changeFlight(){
+	var selcFlight = document.getElementById("flight").value;
+	var flightId = document.getElementById("flightId").value;
+	if (selcFlight == flightId) {
+		return;
+	}
+	var str = '${flightInfoJson}';
+	var objArr = eval("(" + str + ")");
+	for(var i in objArr) {
+	   if (objArr[i].flightId == selcFlight) {
+		   document.getElementById("flightId").value = objArr[i].flightId;
+		   document.getElementById("flightinfoId").value=  objArr[i].id;
+	   }
+	}
+
+}
 //-->
 </script>
 	</head>
@@ -217,7 +240,13 @@ divid.filters.revealTrans.play();
 	<div align="center">
 		<div style="width: 98%" align="center">
 		<FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt">
-			目的地：</FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #b22222; HEIGHT: 9pt">&nbsp; ${flightinfo.flight} &nbsp; </FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt"> 航班号：<font color="#b22222">${flightinfo.flightNo} &nbsp; &nbsp; &nbsp;</font></FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt">乘机日期：</FONT>&nbsp; <FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt"><fmt:formatDate value="${flightinfo.flightDate}" pattern="yyyy-MM-dd"/> &nbsp;${flightinfo.flyTime} &nbsp; 星期 <%=weeks%>
+			目的地：</FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #b22222; HEIGHT: 9pt">&nbsp; 
+				<select id="flight" name="flight" onchange="changeFlight();">
+					<%for (OpOrdertickets oot:ots) { %>
+						<option value="<%=oot.getFlightId()%>"><%=oot.getFlight()%></option>
+					<% }%>
+				</select>
+			 &nbsp; </FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt"> 航班号：<font color="#b22222">${flightinfo.flightNo} &nbsp; &nbsp; &nbsp;</font></FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt">乘机日期：</FONT>&nbsp; <FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt"><fmt:formatDate value="${flightinfo.flightDate}" pattern="yyyy-MM-dd"/> &nbsp;${flightinfo.flyTime} &nbsp; 星期 <%=weeks%>
 		</FONT>
 		</div>
 		<div style="width: 98%" align="center">
@@ -228,6 +257,8 @@ divid.filters.revealTrans.play();
 	</div>
 	<div style="width: 98%" align="center">	
 	<form action="<%=request.getContextPath()%>/clientAction.do?method=addOrderInfo" method="post" target="dspBottom">
+	<input type="hidden" id="flightinfoIds" name="flightinfoIds" value="<%=fightInfoids%>"/>
+	<input type="hidden" id="flightIds" name="flightIds" value="<%=flightIds%>"/>
 	<input type="hidden" id="flightId" name="flightId" value="${flightinfo.flightId}"/>
 	<input type="hidden" id="orderdate" name="orderdate" value="<fmt:formatDate value="${flightinfo.flightDate}" pattern="yyyy-MM-dd"/>"/>
 	<input type="hidden" id="flyTime" name="flyTime" value="${flightinfo.flyTime}"/>
@@ -281,7 +312,7 @@ divid.filters.revealTrans.play();
 			
 			<td align="center" colspan="6">  
 				<input id="bc" type="button" value="订票保存" onclick="check()"/>
-				<input id="bc" type="button" value="售 票" onclick="saltTickets()"/>
+				<input id="sp" type="button" value="售 票" onclick="saltTickets()"/>
 				</td>
 		</tr>
 		
@@ -291,4 +322,9 @@ divid.filters.revealTrans.play();
 </div>
 
   </body>
+  <script type="text/javascript">
+	  window.onload=function(){
+		  document.getElementById("flight").value=${flightinfo.flightId};
+	  };
+  </script>
 </html>

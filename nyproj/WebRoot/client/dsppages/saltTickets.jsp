@@ -7,11 +7,11 @@
 
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%
-
+	List<OpOrdertickets> ol2 = (List<OpOrdertickets>)request.getAttribute("flightinfos");
 	java.util.List<BaTicketpoint> tpList = (java.util.List<BaTicketpoint>)request.getAttribute("tpList");
  	List<BaTicketprice> tprice = (List<BaTicketprice>)request.getAttribute("tprice");
 	String ot = (String)request.getAttribute("orderdate");
-	
+	Integer flightId = Integer.valueOf((String)request.getAttribute("flightId"));
   	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
   	java.util.Date date = format.parse(ot);
   	java.util.Calendar c = java.util.Calendar.getInstance();
@@ -207,7 +207,7 @@ function check()
 		}
 function dgpage(){
 	var url = "dinggaipage.html";
-window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
+	window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
 }
 
 
@@ -217,9 +217,25 @@ divid.style.visibility = "visible";
 divid.filters.revealTrans.play();
 } 
 function Hide(divid) {
-divid.filters.revealTrans.apply();
-divid.style.visibility = "hidden";
-divid.filters.revealTrans.play();
+	divid.filters.revealTrans.apply();
+	divid.style.visibility = "hidden";
+	divid.filters.revealTrans.play();
+}
+function changeFlight(){
+	var selcFlight = document.getElementById("flight").value;
+	var flightId = document.getElementById("flightId").value;
+	if (selcFlight == flightId) {
+		return;
+	}
+	var str = '${flightInfoJson}';
+	var objArr = eval("(" + str + ")");
+	for(var i in objArr) {
+	   if (objArr[i].flightId == selcFlight) {
+		   document.getElementById("flightId").value = objArr[i].flightId;
+		   document.getElementById("flightinfoId").value=  objArr[i].id;
+	   }
+	}
+
 }
 //-->
 </script>
@@ -228,7 +244,13 @@ divid.filters.revealTrans.play();
 	<div align="left">
 		<div style="width: 96%" align="center">
 		<FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt">
-			目的地：</FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #b22222; HEIGHT: 9pt">&nbsp; ${flightinfo.flight} &nbsp; </FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt"> 航班号：<font color="#b22222">${flightinfo.flightNo} &nbsp; &nbsp; &nbsp;</font></FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt">乘机日期：</FONT>&nbsp; <FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt"><fmt:formatDate value="${flightinfo.flightDate}" pattern="yyyy-MM-dd"/> &nbsp;${flightinfo.flyTime} &nbsp; 星期 <%=weeks%>
+			目的地：</FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #b22222; HEIGHT: 9pt">&nbsp; 
+			<select id="flight" name="flight" onchange="changeFlight();">
+					<%for (OpOrdertickets oot:ol2) { %>
+						<option value="<%=oot.getFlightId()%>" <%= oot.getFlightId().equals(flightId)?"selected='selected'":""%> ><%=oot.getFlight()%></option>
+					<% }%>
+			</select>
+			&nbsp; </FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt"> 航班号：<font color="#b22222">${flightinfo.flightNo} &nbsp; &nbsp; &nbsp;</font></FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt">乘机日期：</FONT>&nbsp; <FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt"><fmt:formatDate value="${flightinfo.flightDate}" pattern="yyyy-MM-dd"/> &nbsp;${flightinfo.flyTime} &nbsp; 星期 <%=weeks%>
 		</FONT>
 		</div>
 		<div style="width: 96%" align="center">

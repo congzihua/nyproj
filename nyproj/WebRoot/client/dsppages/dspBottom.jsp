@@ -303,17 +303,18 @@ function Hide(divid) {
 		</FONT>
  <table width="98%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
   <tr bgcolor="#F0F0F0">
+  <th width="8%">航程</th>
      <th width="9%">售票点</th>
     <th width="8%">姓名</th>
     <th width="6%">证件类型</th>
-    <th width="12%">证件号码</th>    
+    <th width="10%">证件号码</th>    
     <th width="5%">VIP</th>
-    <th width="11%">联系电话</th>
+    <th width="10%">联系电话</th>
     <th width="6%">状态</th> 
     <th width="12%">订票日期</th>   
     <th width="6%">团体</th>
     <th width="8%">备注</th>
-    <th  width="18%">操作</th>
+    <th  width="15%">操作</th>
   </tr>
   </table>
   </div>
@@ -322,21 +323,22 @@ function Hide(divid) {
  <!--  hr color="#0033FF" />-->
  <table width="98%" border="0"  align="center"   cellpadding="0" cellspacing="1" bgcolor="#3366FF">
   
-  <input type="hidden" name="flightinfoId" value="${flightinfoId}"/>
+  <input type="hidden" name="flightinfoIds" value="${flightinfoIds}"/>
 	<input type="hidden" name="orderdate" value="<%=request.getAttribute("orderdate").toString()%>"/>
-	<input type="hidden" name="flightId" value="${flightId}"/>
+	<input type="hidden" name="flightIds" value="${flightIds}"/>
 	<input type="hidden" name="ordertime" value="${ordertime}"/>
   <%int i = 0; %>
   <c:forEach var="item" items="${oporderList}">
   <tr bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'">
-      <td align="center" width="9%">${item.ticketpointname}</td>
+  	<td align="center" width="8%">${item.flight}</td>
+     <td align="center" width="9%">${item.ticketpointname}</td>
     <td  class="highlightRow" align="center" width="8%">${item.name}</td>
     <td  class="highlightRow" align="center" width="6%">${item.certType}</td>
    
-    <td  class="highlightRow" align="center" width="12%">${item.certNo}</td>
+    <td  class="highlightRow" align="center" width="10%">${item.certNo}</td>
     
     <td  class="highlightRow" align="center" width="5%"><c:if test="${item.vipFlag==1}">是</c:if></td>
-    <td  class="highlightRow" align="center" width="11%">${item.linkphone}</td>
+    <td  class="highlightRow" align="center" width="10%">${item.linkphone}</td>
     <td  class="highlightRow" align="center" width="6%"><c:if test="${item.status==0}">订 &nbsp; 票</c:if>
     <c:if test="${item.status==1}">确认订票</c:if>
     <c:if test="${item.status==2}">已售票</c:if>
@@ -360,7 +362,7 @@ function Hide(divid) {
       </c:choose>   
      <div id="www_zzjs<%=i%>" class="article">${item.teamName}</div>
 	</td>
-    <td  class="highlightRow" width="9%" align="center" onMouseOver="Show(www_zzjs_net<%=i%>);" onMouseOut="Hide(www_zzjs_net<%=i%>);">
+    <td  class="highlightRow" width="8%" align="center" onMouseOver="Show(www_zzjs_net<%=i%>);" onMouseOut="Hide(www_zzjs_net<%=i%>);">
       <c:choose>
           <c:when test="${fn:length(item.remark) > 5}">
               <c:out value="${fn:substring(item.remark, 0, 5)}..." />
@@ -372,7 +374,7 @@ function Hide(divid) {
    
      <div id="www_zzjs_net<%=i%>" class="article">${item.remark}</div>
     </td>
-    <td   align="left" width="18%" > 
+    <td   align="left" width="15%" > 
       
     <c:if test="${item.status==0}">	
     	<c:if test="${item.teamflag==null||item.teamflag==0}">

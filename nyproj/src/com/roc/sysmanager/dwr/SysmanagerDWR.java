@@ -160,30 +160,42 @@ public class SysmanagerDWR {
 		ClienService cService = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setSeleDate(upDate);
-		kw.setSeleFlightId(Integer.valueOf(flightId));
+		//kw.setSeleFlightId(Integer.valueOf(flightId));
 		kw.setFlyTime(flyTime);
 		//查看是否存在航班信息
-		OpOrdertickets order = new OpOrdertickets();
+		//当日航班信息列表
 		List<OpOrdertickets> ol1 = cService.getBaFlightInfoList(kw);
-		if(ol1!=null && ol1.size()>0){
-			order = ol1.get(0);
-		}else{
+		if(ol1== null ||  ol1.size() == 0){
 			return 1;//当日无航班信息
 		}
+		boolean isHasFlight = false;
+		int newFlightInfoId = 0;
+		String flightInfoIds = "";
+		for (OpOrdertickets flightInfo:ol1) {
+			Integer curFlightId = flightInfo.getFlightId();
+			flightInfoIds += ","+flightInfo.getId();
+			if (flightId.equals(curFlightId)) {
+				isHasFlight = true;
+				newFlightInfoId = flightInfo.getId();
+			}
+		}
+		if (!isHasFlight)
+			return 1;//当日无航班信息
+		flightInfoIds = flightInfoIds.substring(1);
 		OpOrderticketsKeyword opOrderticketKw = new OpOrderticketsKeyword();
-		
 		opOrderticketKw.setId(Integer.valueOf(id));
+		//查询原始订单信息
 		OpOrdertickets orderInfo = cService.getOrderticketsList(opOrderticketKw).get(0);
-		int newFlightInfoId = order.getId();
+		
 		String certNo = orderInfo.getCertNo();
 		String certType = orderInfo.getCertType();
-		int orderNum = isAlreadyOrderTickets(newFlightInfoId, certType, certNo);
+		int orderNum = isAlreadyOrderTickets(flightInfoIds, certType, certNo);
 		if(orderNum > 0){
 			return 10;//该日已经有订票信息，确认改签日期
 		}
 		com.roc.syspe.entity.OpOrderticketsKeyword okw = new com.roc.syspe.entity.OpOrderticketsKeyword();
 		okw.setTicketPointId(orderTicketPointId);
-		okw.setSeleFlightInfo(order.getId());//航班信息的id
+		okw.setSeleFlightInfos(flightInfoIds);//航班信息的id
 		okw.setId(id);
 		List<OpOrdertickets>  orderList= cService.groupTiecketCount(okw);
 		OpOrdertickets countOrder = null;
@@ -213,7 +225,7 @@ public class SysmanagerDWR {
 		userOper.setType(5);//改签
 		OpOrdertickets ordertickets = new OpOrdertickets();
 		ordertickets.setId(id);
-		ordertickets.setFlightinfoId(order.getId());
+		ordertickets.setFlightinfoId(newFlightInfoId);
 		ordertickets.setTicketpointId(orderTicketPointId);
 		ordertickets.setStatus(status);
 		ordertickets.setSeatNum("");
@@ -528,7 +540,7 @@ public class SysmanagerDWR {
 			return 0;
 		}
 	}
-	public  int validate(Integer flightId,Integer flightinfoId,
+	public  int validate(Integer flightId,String flightinfoIds,
 			String orderdate,Integer ticketpointId,String flyTime,
 			String certType,String certNo){
 		BlacklistUserService servcie = new BlacklistUserService();
@@ -539,22 +551,22 @@ public class SysmanagerDWR {
 		if (bLUser != null && bLUser.getIdcard()!= null) {
 			return 4;
 		}
-		int isOrder = isAlreadyOrderTickets(flightinfoId, certType, certNo);
+		int isOrder = isAlreadyOrderTickets(flightinfoIds, certType, certNo);
 		if(isOrder > 0){
 			return 3;//该用户已经订过票
 		}
-		int ticketCount = isHasTickets(flightId, flightinfoId, orderdate, ticketpointId, flyTime);
+		int ticketCount = isHasTickets(flightId, flightinfoIds, orderdate, ticketpointId, flyTime);
 		if(!(ticketCount>0)){
 			return 2;//票点票额已经不足，请核查			
 		}
 		return 1;//正常可以保存订票信息
 	}
 	//查看售票点是否有票额 或  当日是否有此人已经订售票或出登机牌
-	private static int isHasTickets(Integer flightId,Integer flightinfoId,String orderdate,Integer ticketpointId,String flyTime){
+	private static int isHasTickets(Integer flightId,String flightinfoIds,String orderdate,Integer ticketpointId,String flyTime){
 		ClienService cService = new ClienService();
 		com.roc.syspe.entity.OpOrderticketsKeyword okw = new com.roc.syspe.entity.OpOrderticketsKeyword();
 		okw.setTicketPointId(ticketpointId);
-		okw.setSeleFlightInfo(flightinfoId);//航班信息的id
+		okw.setSeleFlightInfos(flightinfoIds);//航班信息的id
 		
 		List<OpOrdertickets>  orderList= cService.groupTiecketCount(okw);
 		OpOrdertickets countOrder = null;
@@ -581,12 +593,12 @@ public class SysmanagerDWR {
 		return 1;
 		
 	}
-	private static Integer isAlreadyOrderTickets(Integer flightinfoId,String certType,String certNo){
+	private static Integer isAlreadyOrderTickets(String flightinfoIds,String certType,String certNo){
 		ClienService cService = new ClienService();
 		com.roc.syspe.entity.OpOrderticketsKeyword okw = new com.roc.syspe.entity.OpOrderticketsKeyword();
 		okw.setCertNo(certNo);
 		okw.setCertType(certType);
-		okw.setSeleFlightInfo(flightinfoId);
+		okw.setSeleFlightInfos(flightinfoIds);
 		Integer count = cService.authInfoIsHas(okw);
 		return count;
 		

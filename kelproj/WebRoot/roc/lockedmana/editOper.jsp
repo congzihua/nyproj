@@ -56,7 +56,7 @@ String parentid = request.getParameter("id");
 									</td>
 									<td colspan="3" align="left">
 									<select>
-										<option>库尔勒</option>
+										<option>马兰</option>
 										<option>鼎新</option>
 									</select>
 										<font color='red'>*</font>

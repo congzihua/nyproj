@@ -187,7 +187,10 @@
 	    where a.status not in('8','9') and a.TICKETPOINT_ID=d.id and a.flightinfo_id=b.id and b.flight_id=c.id and b.delete_flag!=1 and c.delete_flag!=1   
     	 <isNotEmpty prepend="and" property="seleFlightInfo">
                         (b.id = #seleFlightInfo#)
-      </isNotEmpty> 
+     	 </isNotEmpty> 
+     	 <isNotEmpty  prepend="and" property="seleFlightInfos">
+     	 	b.id = in (${seleFlightInfos})
+     	 </isNotEmpty>
        <isNotEmpty prepend="and" property="id">
                         (a.id = #id#)
       </isNotEmpty>

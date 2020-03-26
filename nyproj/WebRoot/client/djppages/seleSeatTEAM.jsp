@@ -201,7 +201,7 @@ function xuanzuo(){
 <th width="20" height="20">E</th>
 <th width="20" height="20">F</th>
 </tr>
-<%k = 0;for(int i = 0;i < 19;i++){k++; %>
+<%k = 0;for(int i = 0;i < 18;i++){k++; %>
 <tr>
 <th width="20" height="20">
 <%if(strList!=null && strList.size()>0&&strList.contains((k)+"A")){%>

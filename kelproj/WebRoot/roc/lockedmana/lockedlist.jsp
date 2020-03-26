@@ -236,7 +236,7 @@
 								南苑
 							</td>
 							<td style="cursor:hand" width=20%>
-								库尔勒
+								马兰
 							</td>
 							<td 
 								style="cursor:hand" width="15%">

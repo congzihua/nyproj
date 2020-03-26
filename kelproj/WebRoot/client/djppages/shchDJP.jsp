@@ -274,8 +274,8 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 	}
 </script>
 <SCRIPT LANGUAGE="JavaScript">
-var varItem1 = 'MB1.PRN^LPT1^4008^2012-01-22^是^1-A^库尔勒^库尔勒^4-6^08:30^科比布莱恩提^220111198804153641^12';
-var varItem2 = 'MB2.PRN^LPT2^库尔勒^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
+var varItem1 = 'MB1.PRN^LPT1^4008^2012-01-22^是^1-A^马兰^马兰^4-6^08:30^科比布莱恩提^220111198804153641^12';
+var varItem2 = 'MB2.PRN^LPT2^马兰^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
 var varDemo1 = 'MB1.PRN^LPT1^';
 var varDemo2 = 'MB2.PRN^LPT2^';
 var socketUrl = 'ws://localhost:7302/PrintServer';
@@ -307,7 +307,7 @@ function PrintLab1(data){
     	return;
     }
     
-	varItem1 = flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNum+'^'+flightTo+'^库尔勒^'+gate+'^'+flytime+'^'+name+'^'+certNo+'^'+id;
+	varItem1 = flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNum+'^'+flightTo+'^马兰^'+gate+'^'+flytime+'^'+name+'^'+certNo+'^'+id;
 	 var pData  = varDemo1+varItem1;
      buildSocket();
      socket.onopen = function (event) {
@@ -354,7 +354,7 @@ function PrintLab2(data){
 		if (varItem2.length > 0) {
 			varItem2 += "|";
 		}
-		varItem2 += '库尔勒^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+name+'^'+data.split(';')[i]+'^51296829^'+flightTo+'^'+id;
+		varItem2 += '马兰^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+name+'^'+data.split(';')[i]+'^51296829^'+flightTo+'^'+id;
 		
     }
 	

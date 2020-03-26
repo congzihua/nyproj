@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,9 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+import org.directwebremoting.json.types.JsonObject;
 
+import com.alibaba.fastjson.JSON;
 import com.founder.enp.entity.Authorization;
 import com.founder.enp.util.Global;
 import com.roc.enp.entity.BaFlight;
@@ -26,11 +27,9 @@ import com.roc.enp.entity.BaTicketprice;
 import com.roc.enp.entity.BaTicketpriceKeyword;
 import com.roc.enp.entity.BlackUserKeyword;
 import com.roc.enp.entity.BlacklistUser;
-import com.roc.enp.entity.FlightInfo;
 import com.roc.sysmanager.base.service.BaTicketsallocService;
 import com.roc.sysmanager.base.service.BlacklistUserService;
 import com.roc.sysmanager.base.service.ClienService;
-import com.roc.sysmanager.base.service.FlightInfoService;
 import com.roc.sysmanager.base.service.FlightService;
 import com.roc.sysmanager.dwr.SingleInstanceClientSer;
 import com.roc.syspe.entity.BaTicketsalloc;
@@ -50,14 +49,11 @@ public class ClientAction extends DispatchAction {
 	 */
 	public ActionForward toBlankInfo(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
-		String flightId = request.getParameter("flightId");	
-		request.setAttribute("flightId",flightId);
 		String orderdate = request.getParameter("orderdate");
 		String flyTime= request.getParameter("hour")+":"+request.getParameter("minue");
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setSeleDate(orderdate);
-		kw.setSeleFlightId(Integer.valueOf(flightId));
 		kw.setFlyTime(flyTime);
 		//查看是否存在航班信息
 		List<OpOrdertickets> ol1 = service.getBaFlightInfoList(kw);
@@ -68,8 +64,7 @@ public class ClientAction extends DispatchAction {
 			request.setAttribute("orderdate",orderdate);
 			return mapping.findForward("homePage");
 		}		
-		request.setAttribute("flightinfoId", ol1.get(0).getId());	
-		request.setAttribute("flightId", flightId);
+		request.setAttribute("flightInfoList",ol1);	
 		request.setAttribute("orderdate", orderdate);
 		request.setAttribute("flyTime",flyTime);
 		return mapping.findForward("dspPage");
@@ -85,17 +80,25 @@ public class ClientAction extends DispatchAction {
 	 */
 	public ActionForward toTopInfoPage(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
-		String flightinfoId = request.getParameter("flightinfoId");
+		String flightinfoIds = request.getParameter("flightinfoIds");
 		
 		ClienService service = new ClienService();
-		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
-		
-		kw.setSeleFlightInfo(Integer.valueOf(flightinfoId));
+		String[] finfoIds = flightinfoIds.split(",");
+		List<OpOrdertickets> otList = new ArrayList<OpOrdertickets>();
+		for (String flightInfoId:finfoIds) {
+			OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
+			kw.setSeleFlightInfo(Integer.valueOf(flightInfoId));
+			OpOrdertickets ot = service.getbaFlightInfoForIn(kw);
+			otList.add(ot);
+		}
 		FlightService service1 = new FlightService();
 		BaTicketpointKeyword kw1 = new BaTicketpointKeyword();
 		java.util.List<BaTicketpoint> tpList = service1.queryBaTicketpoint(kw1);
-		OpOrdertickets ol1 = service.getbaFlightInfoForIn(kw);			
-		request.setAttribute("flightinfo", ol1);
+				
+		request.setAttribute("flightinfos", otList);
+		String fInfoJson = JSON.toJSON(otList).toString();
+		request.setAttribute("flightInfoJson",fInfoJson);
+		request.setAttribute("flightinfo", otList.get(0));
 		request.setAttribute("tpList", tpList);
 		return mapping.findForward("dspTop");
 		
@@ -110,23 +113,28 @@ public class ClientAction extends DispatchAction {
 	 */
 	public ActionForward toBottomList(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
-		String flightInfoId = request.getParameter("flightinfoId");
-		request.setAttribute("flightinfoId", Integer.valueOf(flightInfoId));
-		String flightId = request.getParameter("flightId");
+		String flightInfoIds = request.getParameter("flightinfoIds");
+		String[] fids = flightInfoIds.split(",");
+		request.setAttribute("flightinfoId", Integer.valueOf(fids[0]));
+		request.setAttribute("flightinfoIds", flightInfoIds);
+		String[] flightIds = request.getParameter("flightIds").split(",");
+	    String flightId = flightIds[0];
 		request.setAttribute("flightId", Integer.valueOf(flightId));
+		request.setAttribute("flightIds", request.getParameter("flightIds"));
 		String orderdate = request.getParameter("orderdate");
 		request.setAttribute("orderdate", orderdate);
 		String ordertime = request.getParameter("ordertime");
 		request.setAttribute("ordertime", ordertime);
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
-		kw.setSeleFlightInfo(Integer.valueOf(flightInfoId));
+		kw.setSeleFlightInfos(flightInfoIds);
 		
 		List<OpOrdertickets> ol = service.getOrderticketsList(kw);
 		List<OpOrdertickets> ol2 =service.groupTiecketCount(kw);
 		//已用票的订票数
 		kw.setSeleStatus("1");
 		List<OpOrdertickets> ol3 =service.groupTiecketCount(kw);
+		
 		BaTicketsallocKeyword keyword = new BaTicketsallocKeyword();
 		keyword.setFlightId(Integer.valueOf(flightId));
 		keyword.setOrderdate(orderdate);
@@ -854,7 +862,6 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 		request.setAttribute("orderdate", request.getParameter("orderdate"));
 		request.setAttribute("flyTime", request.getParameter("flyTime"));
 		request.setAttribute("flightinfoId", request.getParameter("flightinfoId"));
-		
 		request.setAttribute("ordertime", request.getParameter("ordertime"));
 		
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
@@ -863,7 +870,6 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 		
 		OpOrdertickets ol1 = new ClienService().getbaFlightInfoForIn(kw);			
 		request.setAttribute("flightinfo", ol1);
-		
 		 
 		BaTicketpointKeyword kw1 = new BaTicketpointKeyword();
 		FlightService service1 = new FlightService();
@@ -873,7 +879,19 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 		BaTicketpriceKeyword keyword = new BaTicketpriceKeyword();
 		keyword.setFlightId(Integer.valueOf(request.getParameter("flightId")));
 		List<BaTicketprice> tprice = service2.queryBaTicketpriceList(keyword);
+		ClienService service = new ClienService();
+		String orderdate = request.getParameter("orderdate");
+		String flyTime = request.getParameter("flyTime");
+		
 		request.setAttribute("tprice", tprice);
+		OpOrderticketsKeyword kw2 = new OpOrderticketsKeyword();
+		kw2.setSeleDate(orderdate);
+		kw2.setFlyTime(flyTime);
+		//查看是否存在航班信息
+		List<OpOrdertickets> ol2 = service.getBaFlightInfoList(kw2);
+		request.setAttribute("flightinfos", ol2);
+		String fInfoJson = JSON.toJSON(ol2).toString();
+		request.setAttribute("flightInfoJson",fInfoJson);
 		return mapping.findForward("saltTickets");
 		
 	}

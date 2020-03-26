@@ -3,17 +3,6 @@
 
 <struts-config>
   <data-sources>
-    <!--  data-source key="datasource" type="org.apache.commons.dbcp.BasicDataSource">
-      <set-property property="description" value="test" />   
-      <set-property property="username" value="root" />   
-      <set-property property="password" value="root" />
-      <set-property property="minCount" value="3" />
-      <set-property property="maxCount" value="50" />
-      <set-property property="driverClassName" value="com.mysql.jdbc.Driver" />
-      <set-property property="url" value="jdbc:mysql://127.0.0.1/db_gwlz" />
-      <set-property property="readOnly" value="false" />
-      <set-property property="autoCommit" value="true" />
-    </data-source>-->
   </data-sources>
   <form-beans>
     <form-bean name="departMentsForm" type="com.founder.enp.forms.DepartMentsForm" />
@@ -32,14 +21,13 @@
     <form-bean name="baFlightForm" type="com.roc.sysmanager.base.form.BaFlightForm" />
     
     <form-bean name="baFlightInfoForm" type="com.roc.sysmanager.base.form.BaFlightInfoForm" >
-    	<!--  	<form-property name="userName" type="java.lang.String" />
-            <form-property name="password" type="java.lang.String" />-->
             <form-property name="currentPage" type="java.lang.Integer" />
      </form-bean>
     
     <form-bean name="baTicketsAllocForm" type="com.roc.sysmanager.base.form.BaTicketsAllocForm" />
     <form-bean name="blacklistUserForm" type="com.roc.sysmanager.base.form.BlacklistUserForm" />
     <form-bean name="dutyTimeForm" type="com.roc.sysmanager.base.form.DutyTimeForm" />
+     <form-bean name="baFlightNoForm" type="com.roc.sysmanager.base.form.BaFlightNoForm" />
   </form-beans>
   <global-exceptions />
   <global-forwards />
@@ -347,6 +335,12 @@
       <action path="/dutyTimeAction" parameter="method"
       	type="com.roc.sysmanager.base.action.DutyTimeAction"
      	 name="dutyTimeForm"
+     	 validate="false" scope="request" >
+      		<forward name="toDutytimePage" path="/roc/dutytime/dutyseting.jsp" /> 
+      </action>
+      <action path="/flightNAction" parameter="method"
+      	type="com.roc.sysmanager.base.action.FlightNAction"
+     	 name="baFlightNoForm"
      	 validate="false" scope="request" >
       		<forward name="toDutytimePage" path="/roc/dutytime/dutyseting.jsp" /> 
       </action>

@@ -6,9 +6,6 @@
 <%
 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 String date = request.getAttribute("orderdate")==null||request.getAttribute("orderdate").toString().trim().equals("")?format.format(new Date()):request.getAttribute("orderdate").toString().trim();
-BaFlightKeyWord keyword = new BaFlightKeyWord();
-FlightService service = new FlightService();
-java.util.List<BaFlight> list = service.queryBaFlight(keyword);	
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
@@ -45,14 +42,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <form action="<%=request.getContextPath()%>/clientAction.do?method=toBlankInfo" method="post">
     <table border="0" width="1024" align="center">
     	<tr>
-    		<th>目的地：</th>
-    		<td nowrap="nowrap">
-    			<select id="flightId" name="flightId">
-    			<%for(BaFlight bf:list){ %>
-    				<option value="<%=bf.getId()%>" <%=request.getAttribute("flightId")!=null&&request.getAttribute("flightId").toString().trim().equals(String.valueOf(bf.getId()))?"selected=\'selected\'":""%>><%=bf.getFlight()%></option>
-    			<%}%>
-    			</select>
-    		</td>
     		<th>日期：</th>
     		<td width="20%">
     		<table border="0">
