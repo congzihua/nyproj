@@ -28,7 +28,6 @@ public class OpOrderticketsImpl extends SqlMapDaoTemplate implements OpOrdertice
 	@Override
 	public List<OpOrdertickets> getBaFlightInfoList(
 			OpOrderticketsKeyword keyword) {
-		// TODO Auto-generated method stub
 		return queryForList("baFlightInfoList", keyword);
 	}
 
@@ -122,7 +121,6 @@ public class OpOrderticketsImpl extends SqlMapDaoTemplate implements OpOrdertice
 
 	@Override
 	public List<OpOrdertickets> zhidengjiticketsList(OpOrderticketsKeyword keyword) {
-		// TODO Auto-generated method stub
 		return queryForList("zhidengjiticketsList", keyword);
 	}
 

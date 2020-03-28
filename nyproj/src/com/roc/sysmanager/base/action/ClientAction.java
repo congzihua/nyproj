@@ -1167,29 +1167,29 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 	 */
 	public ActionForward toLuggInfo(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
-		String flightId = request.getParameter("flightId");	
-		request.setAttribute("flightId",flightId);
 		String orderdate = request.getParameter("orderdate");
 		String flyTime= request.getParameter("hour")+":"+request.getParameter("minue");
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setSeleDate(orderdate);
-		kw.setSeleFlightId(Integer.valueOf(flightId));
 		kw.setFlyTime(flyTime);
 		//查看是否存在航班信息
 		List<OpOrdertickets> ol1 = service.getBaFlightInfoList(kw);
-		Integer id = null;
+		String flightInfoIds = "";
 		if(ol1!=null && ol1.size()>0){
-			id =  ol1.get(0).getId();
+			for (OpOrdertickets ot:ol1) {
+				flightInfoIds += "," +ot.getId();
+			}
+			flightInfoIds = flightInfoIds.substring(1);
 			OpOrderticketsKeyword kw1 = new OpOrderticketsKeyword();
-			kw1.setSeleFlightInfo(Integer.valueOf(id));
+			kw1.setSeleFlightInfos(flightInfoIds);
 			List<OpOrdertickets> ol = service.allInfoList(kw1);
 			request.setAttribute("list", ol);
 		}	
 		
-		request.setAttribute("flightId", flightId);
 		request.setAttribute("orderdate", orderdate);
 		request.setAttribute("flyTime",flyTime);
+		request.setAttribute("flightInfoIds",flightInfoIds);
 		return mapping.findForward("luggageInfo");
 		
 	}

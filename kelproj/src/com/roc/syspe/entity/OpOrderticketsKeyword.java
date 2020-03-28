@@ -16,6 +16,7 @@ public class OpOrderticketsKeyword extends PaginatedModel {
 	private Integer seleFlightId;
 	private String flyTime;
 	private Integer seleFlightInfo;
+	private String seleFlightInfos;
 	private Integer ticketPointId;
 	private Integer userId;
 	private String startDate;
@@ -34,6 +35,12 @@ public class OpOrderticketsKeyword extends PaginatedModel {
 	private Integer flightId;
 	
 	
+	public String getSeleFlightInfos() {
+		return seleFlightInfos;
+	}
+	public void setSeleFlightInfos(String seleFlightInfos) {
+		this.seleFlightInfos = seleFlightInfos;
+	}
 	public Integer getYear() {
 		return year;
 	}
