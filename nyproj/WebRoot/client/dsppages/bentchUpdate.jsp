@@ -68,17 +68,17 @@ function check(data)
 
 	<form action="" method="post" target="_slef">
 	
-	<input type="hidden" name="flightinfoId" value="${flightinfoId}"/>
+	<input type="hidden" name="flightinfoIds" value="${flightinfoIds}"/>
 	
 	<table width="500" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">	
   <tr bgcolor="#FFFFFF">
     
      <td align="right" width="15%">航班号：</td>
     
-	<td><input type="text" id="flightNo" name="flightNo" style="width: 65%" value="${flightinfo.flightNo}"/>
+	<td><input type="text" id="flightNo" name="flightNo" style="width: 65%" value="${flightNo}"/>
  
 			  
-				&nbsp; &nbsp; &nbsp; &nbsp; <input id="bc" type="button" value="批量生成" onclick="check('${flightinfoId}')"/>
+				&nbsp; &nbsp; &nbsp; &nbsp; <input id="bc" type="button" value="批量生成" onclick="check('${flightinfoIds}')"/>
 				
 				</td>
 		</tr>

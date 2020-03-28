@@ -76,6 +76,7 @@ function saltTickets(){
 	var flightinfoId = document.getElementById('flightinfoId').value;
 	var ordertime = document.getElementById('ordertime').value;
 	var url = "<%=request.getContextPath()%>/clientAction.do?method=toSp&flightId="+flightId+"&orderdate="+orderdate+"&flyTime="+flyTime+"&ordertime="+ordertime+"&flightinfoId="+flightinfoId;
+	console.log(url);
 	window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
 	parent.dspBottom.document.forms[0].submit();
 }

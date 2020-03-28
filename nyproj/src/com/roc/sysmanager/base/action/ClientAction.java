@@ -5,7 +5,9 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,7 +16,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
-import org.directwebremoting.json.types.JsonObject;
 
 import com.alibaba.fastjson.JSON;
 import com.founder.enp.entity.Authorization;
@@ -347,14 +348,11 @@ public class ClientAction extends DispatchAction {
 	 */
 	public ActionForward toBeanchInfo(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
-		String flightId = request.getParameter("flightId");	
-		request.setAttribute("flightId",flightId);
 		String orderdate = request.getParameter("orderdate");
 		String flyTime= request.getParameter("hour")+":"+request.getParameter("minue");
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setSeleDate(orderdate);
-		kw.setSeleFlightId(Integer.valueOf(flightId));
 		kw.setFlyTime(flyTime);
 		//查看是否存在航班信息
 		List<OpOrdertickets> ol1 = service.getBaFlightInfoList(kw);
@@ -366,8 +364,15 @@ public class ClientAction extends DispatchAction {
 			return mapping.findForward("bentchUpdate");
 		}	
 		request.setAttribute("message", 1);
-		request.setAttribute("flightinfoId", ol1.get(0).getId());	
-		request.setAttribute("flightId", flightId);
+		String flightinfoIds = "";
+		String flightNo = "";
+		for (OpOrdertickets ot:ol1) {
+			flightinfoIds += ","+ot.getId();
+			if (ot.getFlightNo() != null)
+				flightNo = ot.getFlightNo();
+		}
+		request.setAttribute("flightinfoIds", flightinfoIds.substring(1));	
+		request.setAttribute("flightNo", flightNo);
 		request.setAttribute("orderdate", orderdate);
 		request.setAttribute("flyTime", flyTime);
 		return mapping.findForward("bentchUpdate");
@@ -892,8 +897,13 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 		request.setAttribute("flightinfos", ol2);
 		String fInfoJson = JSON.toJSON(ol2).toString();
 		request.setAttribute("flightInfoJson",fInfoJson);
+		Map<Integer,List<BaTicketprice>> prices = new HashMap<>();
+		for (OpOrdertickets t:ol2) {
+			keyword.setFlightId(t.getFlightId());
+			prices.put(t.getFlightId(),service2.queryBaTicketpriceList(keyword));
+		}
+		request.setAttribute("pricesJson",JSON.toJSON(prices).toString());
 		return mapping.findForward("saltTickets");
-		
 	}
 	public ActionForward addSaltTicketsInfo(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
