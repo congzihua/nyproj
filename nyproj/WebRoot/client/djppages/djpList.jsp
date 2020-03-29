@@ -105,11 +105,10 @@ function Hide(divid) {
   <body oncontextmenu="if (!event.ctrlKey){return false;}" background="<%=request.getContextPath()%>/image/bg.jpg">
  
   <form action="<%=request.getContextPath()%>/dJPAction.do?method=toList" method="post">&nbsp; 
-  <input type="hidden" name="flightinfoId" value="${flightinfoId}"/>
-  <input type="hidden" name="flight" value="${flight}"/>
   <input type="hidden" name="flightDate" value='<%=request.getAttribute("flightDate")!=null?request.getAttribute("flightDate").toString():""%>'/>  
   <input type="hidden" name="flyTime" value="${flyTime}"/> 
   <input type="hidden" name="flightNo" value="${flightNo}"/> 
+   <input type="hidden" name="flightInfoIds" value="${flightInfoIds}"/> 
   <%
   	String flightDate = request.getAttribute("flightDate")==null?"": request.getAttribute("flightDate").toString().trim();
   	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -139,7 +138,6 @@ function Hide(divid) {
  
   <div align="left" style="width: 1024">
   
-<FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';"> 目的地：</FONT><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color:#B22222">  ${flight} &nbsp; </FONT>
 <FONT style="FONT-SIZE: 20px;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt"> 航班号：<font color="#b22222">${flightNo} &nbsp; &nbsp; &nbsp;</font></FONT>
 <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">乘机时间: </FONT><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color:#B22222">&nbsp;<%=request.getAttribute("flightDate")!=null?request.getAttribute("flightDate").toString():""%> ${flyTime} &nbsp; 星期 <%=weeks%></FONT>
  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
@@ -158,13 +156,14 @@ function Hide(divid) {
   
   <tr bgcolor="#F0F0F0">
      <th width="5%">序号</th>
-    <th width="10%">姓名</th>
-    <th width="10%">证件类型</th>
+     <th width="5%">航程</th>
+    <th width="9%">姓名</th>
+    <th width="9%">证件类型</th>
     <th width="15%">证件号码</th> 
     <th width="6%">座位</th>    
-    <th width="5%">VIP</th>
+    <th width="4%">VIP</th>
     <th  width="10%">联系电话</th>
-    <th  width="12%">状态</th>  
+    <th  width="10%">状态</th>  
     <th width="10%">团队名称</th>  
     <th width="8%">备注</th>
     <th width="11%">操作</th>
@@ -174,14 +173,15 @@ function Hide(divid) {
   <c:forEach var="item" items="${infoList}">
   <tr bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'">
      <td align="center" width="5%"><%=++i %></td>
-    <td align="center" width="10%">${item.name}</td>
-    <td align="center" width="10%">${item.certType}</td>
+      <td align="center" width="5%">${item.flight}</td>
+    <td align="center" width="9%">${item.name}</td>
+    <td align="center" width="9%">${item.certType}</td>
    
     <td align="center" width="15%">${item.certNo}</td>
     <td align="center" width="6%">${item.seatNum}</td>
-    <td align="center" width="5%"><c:if test="${item.vipFlag==1}">是</c:if></td>
+    <td align="center" width="4%"><c:if test="${item.vipFlag==1}">是</c:if></td>
     <td align="center" width="10%">${item.linkphone}</td>
-    <td align="center" width="12%">
+    <td align="center" width="10%">
     <c:if test="${item.status==2}">已售 票</c:if>
     <c:if test="${item.status==3}">已换登机牌</c:if>   
      <c:if test="${item.status==4}">已安检</c:if>    

@@ -39,11 +39,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			src="<%=request.getContextPath()%>/js/calendar/src/calendar-setup.js"></script>
 		<script type="text/javascript">
 			function sb(){
-				var flightId = document.getElementById("flightId");
 				var orderdate = document.getElementById("orderdate");
 				var minue = document.getElementById("minue");
 				var hour =document.getElementById("hour");
-				var url = "<%=request.getContextPath()%>/clientAction.do?method=toBeanchInfo&flightId="+flightId.value+"&orderdate="+orderdate.value+"&minue="+minue.value+"&hour="+hour.value;
+				var url = "<%=request.getContextPath()%>/clientAction.do?method=toBeanchInfo&orderdate="+orderdate.value+"&minue="+minue.value+"&hour="+hour.value;
 				document.getElementById("ifr").src=url;
 			}
 		</script>
@@ -54,14 +53,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <form action="<%=request.getContextPath()%>/clientAction.do?method=toBeanchInfo" method="post" target="ifr">
     <table border="0" width="1024" align="center">
     	<tr>
-    		<td>目的地：</td>
-    		<td nowrap="nowrap">
-    			<select id="flightId" name="flightId">
-    			<%for(BaFlight bf:list){ %>
-    				<option value="<%=bf.getId()%>" <%=request.getAttribute("flightId")!=null&&request.getAttribute("flightId").toString().trim().equals(String.valueOf(bf.getId()))?"selected=\'selected\'":""%>><%=bf.getFlight()%></option>
-    			<%}%>
-    			</select>
-    		</td>
     		<td align="right">日期：</td>
     		<td width="20%">
     		<table border="0">

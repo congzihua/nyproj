@@ -13,8 +13,6 @@
 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 String date = request.getAttribute("orderdate")==null||request.getAttribute("orderdate").toString().trim().equals("")?format.format(new Date()):request.getAttribute("orderdate").toString().trim();
 BaFlightKeyWord keyword = new BaFlightKeyWord();
-FlightService service = new FlightService();
-java.util.List<BaFlight> list = service.queryBaFlight(keyword);	
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
@@ -130,18 +128,6 @@ function Hide(divid) {
    <input id="fid" type="hidden" name="fid" value="<%=request.getAttribute("flightId")==null?"":Integer.valueOf(request.getAttribute("flightId").toString()) %>"/>
     <table border="0" width="1024" align="center">
     	<tr>
-    		<th>目的地：</th>
-    		<td nowrap="nowrap">
-    		<select id="flightId" name="flightId">
-    			<%for(BaFlight bf:list){ %>
-    				<option value="<%=bf.getId()%>" <%=request.getAttribute("flightId")!=null&&request.getAttribute("flightId").toString().trim().equals(String.valueOf(bf.getId()))?"selected=\'selected\'":""%>><%=bf.getFlight()%></option>
-    			<%}%>
-    			</select>
-    			
-    			
-										
-										
-    		</td>
     		<th align="right">日期：</th>
     		<td>
     		<table border="0">
@@ -198,6 +184,7 @@ function Hide(divid) {
 
   <tr bgcolor="#F0F0F0">
      <th>序号</th>
+     <th>航程</th>
     <th>姓名</th>
     <th>证件类型</th>
     <th>证件号码</th> 
@@ -213,6 +200,7 @@ function Hide(divid) {
   <c:forEach var="item" items="${list}">
   <tr onclick="xxInfo(${item.id})" bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'">
      <td align="center"><%=++i %></td>
+     <td align="center">${item.flight}</td>
     <td align="center">${item.name}</td>
     <td align="center">${item.certType}</td>
    

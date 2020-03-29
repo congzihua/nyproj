@@ -205,6 +205,9 @@
     	 <isNotEmpty prepend="and" property="seleFlightInfo">
                         (b.id = #seleFlightInfo#)
       </isNotEmpty> 
+      <isNotEmpty prepend="and" property="seleFlightInfos">
+                        (b.id in  ($seleFlightInfos$))
+      </isNotEmpty> 
        <isNotEmpty prepend="and" property="id">
                         (a.id = #id#)
       </isNotEmpty>
@@ -227,7 +230,9 @@
 	    SELECT a.bag_num,a.TEAM_NAME,a.TEAMFLAG,a.PRICE_ID,a.GATE_TIME,a.SEAT_NUM,a.FLIGHTINFO_ID, a.STATUS, a.NAME,a.CERT_TYPE,a.CERT_NO,a.LINKPHONE,	a.VIP_FLAG,a.TICKETPOINT_ID,b.FLIGHT_NO,a.PAYMENT,a.TICKETPRICE,a.REMARK,a.GATE,a.HALFPRICECARD,
 			a.ZEROPRICECARD,a.CREATEDATE,a.DELETE_FLAG,a.ID,a.LUGG_SUM,a.WEIGHT_SUM,b.FLIGHT_ID,c.FLIGHT,b.FLIGHT_DATE,b.FLY_TIME,d.name ticketpointname   FROM op_ordertickets a,ba_flightinfo b,ba_flight c,ba_ticketpoint d 
 	   		 where a.status  in('2','3','4') and a.flightinfo_id=b.id and b.flight_id=c.id and b.delete_flag!=1 and c.delete_flag!=1  and a.TICKETPOINT_ID=d.id 
-   			 <isNotEmpty prepend="and" property="seleFlightInfo">(b.id = #seleFlightInfo#) </isNotEmpty> order by a.STATUS, CONVERT(a.name USING gbk ) 
+   			 <isNotEmpty prepend="and" property="seleFlightInfo">(b.id = #seleFlightInfo#) </isNotEmpty>
+   			 <isNotEmpty prepend="and" property="seleFlightInfos">(b.id in  ($seleFlightInfos$)) </isNotEmpty>
+   			  order by a.STATUS, CONVERT(a.name USING gbk ) 
       </select>
       
       <select id="baFlightInfoList" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooBaFligInfo">

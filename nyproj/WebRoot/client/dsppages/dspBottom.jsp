@@ -218,6 +218,20 @@ div{
 body,html{
 margin:0px;
 }
+.btn{
+    width: 40px;
+    padding: 0;
+    border: none;
+    color: blue;
+    background: none;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.btn:hover{
+    cursor: pointer;
+    border-bottom: 1px solid blue;
+}  
 
 
 </STYLE>
@@ -293,7 +307,7 @@ function Hide(divid) {
 </table>
 </div>
  <div align="center" style="width:100%;border:0" >
-<FONT  style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt">
+<FONT  style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt;height: 30px;">
 &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
  &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;
   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 舱  单&nbsp;
@@ -302,7 +316,7 @@ function Hide(divid) {
       <input      type="button" value="查找" onclick="findInPage();"> 
 		</FONT>
  <table width="98%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
-  <tr bgcolor="#F0F0F0">
+  <tr bgcolor="#F0F0F0" style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">
   <th width="8%">航程</th>
      <th width="9%">售票点</th>
     <th width="8%">姓名</th>
@@ -311,10 +325,10 @@ function Hide(divid) {
     <th width="5%">VIP</th>
     <th width="10%">联系电话</th>
     <th width="6%">状态</th> 
-    <th width="12%">订票日期</th>   
+    <th width="7%">订票日期</th>   
     <th width="6%">团体</th>
     <th width="8%">备注</th>
-    <th  width="15%">操作</th>
+    <th  width="20%">操作</th>
   </tr>
   </table>
   </div>
@@ -329,7 +343,7 @@ function Hide(divid) {
 	<input type="hidden" name="ordertime" value="${ordertime}"/>
   <%int i = 0; %>
   <c:forEach var="item" items="${oporderList}">
-  <tr bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'">
+  <tr bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'" style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">
   	<td align="center" width="8%">${item.flight}</td>
      <td align="center" width="9%">${item.ticketpointname}</td>
     <td  class="highlightRow" align="center" width="8%">${item.name}</td>
@@ -350,7 +364,7 @@ function Hide(divid) {
    
      
         </td>
-    <td  class="highlightRow" align="center" width="12%"><fmt:formatDate  value="${item.createdate}" pattern="MM.dd"/></td>
+    <td  class="highlightRow" align="center" width="7%"><fmt:formatDate  value="${item.createdate}" pattern="MM.dd"/></td>
     <td  class="highlightRow" align="center" width="6%" onMouseOver="Show(www_zzjs<%=i%>);" onMouseOut="Hide(www_zzjs<%=i%>);">
 		<c:choose>
           <c:when test="${fn:length(item.teamName) > 4}">
@@ -374,45 +388,45 @@ function Hide(divid) {
    
      <div id="www_zzjs_net<%=i%>" class="article">${item.remark}</div>
     </td>
-    <td   align="left" width="16%" > 
+    <td   align="left" width="20%" > 
       
     <c:if test="${item.status==0}">	
     	<c:if test="${item.teamflag==null||item.teamflag==0}">
-		    <input type="button" style="width: 50px" value="售 票" onclick="sp(${item.id},${item.status});"/>
-		    <input type="button" style="width: 50px" value="确认" onclick="qren(${item.id},${item.status});"/>    
-		    <input type="button" style="width: 50px" value="修改" onclick="xiugai(${item.id},${item.status});"/> 	
-			<input type="button" style="width: 50px" value="改签" onclick="dgq(${item.id},${item.status});"/>	
+		    <input type="button" class="btn" value="售票" onclick="sp(${item.id},${item.status});"/>
+		    <input type="button" class="btn" value="确认" onclick="qren(${item.id},${item.status});"/>    
+		    <input type="button" class="btn" value="修改" onclick="xiugai(${item.id},${item.status});"/> 	
+			<input type="button" class="btn" value="改签" onclick="dgq(${item.id},${item.status});"/>	
 		</c:if>
 		<c:if test="${item.teamflag==1}">
-			 <input type="button" style="width: 50px" value="售 票" onclick="saltTeamTickets(${flightinfoId},'${item.teamName}',${item.status});"/>
-		    <input type="button" style="width: 50px" value="确认" onclick="qren(${item.id},${item.status});"/>    
-		    <input type="button" style="width: 50px" value="修改" onclick="xiugai(${item.id},${item.status});"/> 	
-			<input type="button" style="width: 50px" value="改签" onclick="dgq(${item.id},${item.status});"/>	
+			 <input type="button" class="btn" value="售票" onclick="saltTeamTickets(${flightinfoId},'${item.teamName}',${item.status});"/>
+		    <input type="button" class="btn" value="确认" onclick="qren(${item.id},${item.status});"/>    
+		    <input type="button" class="btn" value="修改" onclick="xiugai(${item.id},${item.status});"/> 	
+			<input type="button" class="btn" value="改签" onclick="dgq(${item.id},${item.status});"/>	
 		</c:if>
 	</c:if>
 	 <c:if test="${item.status==1}">
 		 <c:if test="${item.teamflag==null||item.teamflag==0}">	
-	   		 <input type="button" style="width: 50px" value="售 票" onclick="sp(${item.id},${item.status});"/>       
+	   		 <input type="button" class="btn" value="售票" onclick="sp(${item.id},${item.status});"/>       
 	    </c:if>
 	    <c:if test="${item.teamflag==1}">
-			 <input type="button" style="width: 50px" value="售 票" onclick="saltTeamTickets(${flightinfoId},'${item.teamName}',${item.status});"/>
+			 <input type="button" class="btn" value="售票" onclick="saltTeamTickets(${flightinfoId},'${item.teamName}',${item.status});"/>
 		</c:if>
       <input type="button" style="width:50px" value="修改" onclick="xiugai(${item.id},${item.status});"/> 	
 	
-		<input type="button" style="width: 50px" value="改签" onclick="dgq(${item.id},${item.status});"/>	
+		<input type="button" class="btn" value="改签" onclick="dgq(${item.id},${item.status});"/>	
 	 
 	</c:if>
 	
 	<c:if test="${item.status>=2}">	
-		<input type="button" style="width: 50px" value="打印" onclick="prin(${item.id},${item.status});"/>
+		<input type="button" class="btn" value="打印" onclick="prin(${item.id},${item.status});"/>
 		<c:if test="${item.status == 7}">
 			<c:if test="${authorization.sysqx==3 || authorization.sysqx==4}">
 				<!--不能进行推票改签-->
 	 		</c:if>
 	 	</c:if>
 		<c:if test="${item.status == 4 || item.status ==2 ||item.status ==3}">
-			<input type="button" style="width: 50px" value="退票" onclick="tp(${item.id},${item.status});"/>		
-				<input type="button" style="width: 50px" value="改签" onclick="dgpage(${item.id},${item.status});"/>
+			<input type="button" class="btn" value="退票" onclick="tp(${item.id},${item.status});"/>		
+				<input type="button" class="btn" value="改签" onclick="dgpage(${item.id},${item.status});"/>
 		</c:if>
 	</c:if>
 	</td>

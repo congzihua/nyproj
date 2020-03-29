@@ -59,17 +59,16 @@
 	<script type="text/javascript" src="<%=request.getContextPath()%>/js/common.js?version=1"></script>
 	
 
-		<STYLE type="text/css">
-<!--
-.tearea{overflow-y:auto;padding:0;width:99%;border:1px solid gray;}
+		<style type="text/css">
+.tearea{overflow-y:auto;padding:0;width:99%;border:1px solid gray;height: 21px;}
+.input{border:none;}
+.select{border: none;}
 .article {
 BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; FILTER: revealTrans(transition=23,duration=0.5) blendTrans(duration=0.5); POSITION: absolute; VISIBILITY: hidden
 ; background-color: #FFCC00; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px}
--->
-.tr-type tr {border-color: rgb(51, 51, 51); height: 30px; text-align: center; overflow: auto; vertical-align: middle; -ms-word-break: break-all;}
-</STYLE>
+.tr-type tr {border-color: rgb(51, 51, 51); height: 33px; text-align: center; overflow: auto; vertical-align: middle; -ms-word-break: break-all;}
+</style>
 <script type="text/javascript">
-<!--
 function saltTickets(){
 	var flightId  = document.getElementById("flightId").value;
 	var orderdate = document.getElementById("orderdate").value;
@@ -77,11 +76,11 @@ function saltTickets(){
 	var flightinfoId = document.getElementById('flightinfoId').value;
 	var ordertime = document.getElementById('ordertime').value;
 	var url = "<%=request.getContextPath()%>/clientAction.do?method=toSp&flightId="+flightId+"&orderdate="+orderdate+"&flyTime="+flyTime+"&ordertime="+ordertime+"&flightinfoId="+flightinfoId;
+	console.log(url);
 	window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
 	parent.dspBottom.document.forms[0].submit();
 }
-function check()
-		{	      
+function check() {	      
 			
 			var name = document.getElementById("name");
 			
@@ -234,7 +233,6 @@ function changeFlight(){
 	}
 
 }
-//-->
 </script>
 	</head>
 	<body oncontextmenu="if (!event.ctrlKey){return true;}">
@@ -269,9 +267,9 @@ function changeFlight(){
  
   <tr bgcolor="#FFFFFF">
     <td align="right" width="15%">姓名：</td>
-    <td width="18%"><input type="text" value="" id="name" name="name" style="width: 90%"/><font color="red">*</font></td>
+    <td width="18%"><input type="text" value="" id="name" name="name" class="input" style="width: 90%"/><font color="red">*</font></td>
     <td align="right" width="15%">证件类型：</td>
-    <td width="18%"><select id="certType" name="certType" style="width: 98%">
+    <td width="18%"><select id="certType" name="certType"  class="select" style="width: 98%">
 		<option value="身份证">身份证</option>
 		<option value="军人证">军人证</option>
 		<option value="户口簿">户口簿</option>
@@ -279,19 +277,19 @@ function changeFlight(){
 		<option value="其他">其他</option>
 	</select></td>
     <td align="right" width="15%">证件号码：</td>
-    <td width="18%"><input type="text" id="certNo" name="certNo" value="" style="width: 90%"/><font color="red">*</font></td>
+    <td width="18%"><input type="text" id="certNo" class="input" name="certNo" value="" style="width: 90%"/><font color="red">*</font></td>
   </tr>
   <tr bgcolor="#FFFFFF" >
     
      <td align="right" width="15%">VIP：</td>
-    <td width="18%"><select id="vipFlag" name="vipFlag" style="width: 100%">
+    <td width="18%"><select id="vipFlag" name="vipFlag" class="select" style="width: 98%">
 			<option value="0">否</option>
 			<option value="1">是</option>
 		</select>	</td>
 	<td align="right" width="15%">联系电话：</td>
-    <td width="18%"><input type="text" id="linkphone" name="linkphone" value="" style="width:90%"/><font color="red">*</font></td>
+    <td width="18%"><input type="text" id="linkphone" class="input" name="linkphone" value="" style="width:90%"/><font color="red">*</font></td>
     <td align="right" width="15%">订票点：</td>
-    <td width="18%"><select id="ticketpointId" name="ticketpointId" style="width: 90%">
+    <td width="18%"><select id="ticketpointId" name="ticketpointId" class="select" style="width: 90%">
 			<c:forEach var="it" items="${tpList}">
 				<option value="${it.id}">${it.name}</option>
 			</c:forEach>			
@@ -299,12 +297,12 @@ function changeFlight(){
   </tr>  
   <tr bgcolor="#FFFFFF">
     <td align="right" width="15%">团体：</td>
-    <td width="18%"><select id='teamflag' name="teamflag" style="width: 100%" onchange="isTeam();">
+    <td width="18%"><select id='teamflag' name="teamflag" class="select" style="width: 98%" onchange="isTeam();">
 			<option value="0">否</option>
 			<option value="1">是</option>
 		</select>	</td>
 	<td align="right" width="15%">团体名称：</td>
-    <td width="18%"><input type="text" id="teamName" name="teamName" value="" style="width:90%;display: none"/></td>
+    <td width="18%"><input type="text" id="teamName" name="teamName" class="input" value="" style="width:90%;"/></td>
     
     <td  align="right" width="15%">备注：</td>
     <td colspan="1"><textarea id="remark" name="remark" class="tearea"></textarea></td>

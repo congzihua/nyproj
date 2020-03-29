@@ -8,6 +8,11 @@
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%
 	List<OpOrdertickets> ol2 = (List<OpOrdertickets>)request.getAttribute("flightinfos");
+	String fightInfoids = "";
+	for (OpOrdertickets op:ol2) {
+		fightInfoids += ","+ op.getId();
+	}
+	fightInfoids = fightInfoids.substring(1);
 	java.util.List<BaTicketpoint> tpList = (java.util.List<BaTicketpoint>)request.getAttribute("tpList");
  	List<BaTicketprice> tprice = (List<BaTicketprice>)request.getAttribute("tprice");
 	String ot = (String)request.getAttribute("orderdate");
@@ -65,7 +70,7 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 -->
 </STYLE>
 <script type="text/javascript">
-<!--
+
 window.name="mypage";
 <%if(request.getAttribute("message")!=null && request.getAttribute("message").toString().trim().equals("1")){%>
 		alert("订票信息保存成功！");
@@ -171,8 +176,8 @@ function check()
 			var orderdate = document.getElementById("orderdate").value;
 			var flyTime = document.getElementById("flyTime").value;
 			var certType = document.getElementById("certType").value;
-			
-			SysmanagerDWR.validate(flightId,flightinfoId,orderdate,ticketpointId.value,flyTime,certType,certNo.value,newValidate);
+			var flightInfoIds = '<%=fightInfoids%>';
+			SysmanagerDWR.validate(flightId,flightInfoIds,orderdate,ticketpointId.value,flyTime,certType,certNo.value,newValidate);
 			document.getElementById("bc").disabled="disabled";
 			document.getElementById("gb").disabled="disabled";		
 			
@@ -235,9 +240,21 @@ function changeFlight(){
 		   document.getElementById("flightinfoId").value=  objArr[i].id;
 	   }
 	}
-
+	var prices = '${pricesJson}';
+	var priceArr = eval("(" + prices + ")");
+	var ops = "";
+	for (var key in priceArr) {
+		
+		if (selcFlight == key) {
+			var ps = priceArr[key];
+			console.log("ps="+ps);
+			for (var i in ps) {
+				ops += '<option value="'+ps[i].id+'">'+ps[i].discountType+'</option>';
+			}
+		}
+	}
+	document.getElementById("priceId").innerHTML=ops;
 }
-//-->
 </script>
 	</head>
 	<body oncontextmenu="if (!event.ctrlKey){return true;}">

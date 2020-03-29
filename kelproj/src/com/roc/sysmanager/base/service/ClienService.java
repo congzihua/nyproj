@@ -67,7 +67,6 @@ public class ClienService {
 		return dao.tpOrtdOpOrderticket(ordertickets, userOper);
 	}
 	public List<OpOrdertickets> zhidengjiticketsList(OpOrderticketsKeyword keyword) {
-		
 		return dao.zhidengjiticketsList(keyword);
 	}
 	public boolean updateForDjp(OpOrdertickets ordertickets, OpUseroper userOper) {

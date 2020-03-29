@@ -504,12 +504,17 @@ public class SysmanagerDWR {
 	}
 	//--------------------------
 	//批量跟新航班号
-	public boolean bentchUpdateFlightNo(Integer flightinfoId,String flightNo) throws ParseException{
+	public boolean bentchUpdateFlightNo(String flightinfoIds,String flightNo) throws ParseException{
+		String[] fIds = flightinfoIds.split(",");
 		ClienService service = new ClienService();
 		OpOrdertickets op = new OpOrdertickets();
-	    op.setFlightinfoId(flightinfoId);
-	    op.setFlightNo(flightNo);
-	    return service.bentchUpFlightNo(op);
+		boolean isSucess = false;
+		for (String flightinfoId:fIds) {
+		    op.setFlightinfoId(Integer.valueOf(flightinfoId));
+		    op.setFlightNo(flightNo);
+		    isSucess = service.bentchUpFlightNo(op);
+		}
+	    return isSucess;
 	}
 	public int printTickets(Integer id,String opername){
 		ClienService service = new ClienService();
