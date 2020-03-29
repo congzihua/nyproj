@@ -66,6 +66,7 @@
 BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; FILTER: revealTrans(transition=23,duration=0.5) blendTrans(duration=0.5); POSITION: absolute; VISIBILITY: hidden
 ; background-color: #FFCC00; padding-top: 3px; padding-right: 3px; padding-bottom: 3px; padding-left: 3px}
 -->
+.tr-type tr {border-color: rgb(51, 51, 51); height: 30px; text-align: center; overflow: auto; vertical-align: middle; -ms-word-break: break-all;}
 </STYLE>
 <script type="text/javascript">
 <!--
@@ -255,7 +256,7 @@ function changeFlight(){
 		</FONT>
 		</div>
 	</div>
-	<div style="width: 98%" align="center">	
+	<div style="width: 100%" align="center">	
 	<form action="<%=request.getContextPath()%>/clientAction.do?method=addOrderInfo" method="post" target="dspBottom">
 	<input type="hidden" id="flightinfoIds" name="flightinfoIds" value="<%=fightInfoids%>"/>
 	<input type="hidden" id="flightIds" name="flightIds" value="<%=flightIds%>"/>
@@ -264,7 +265,7 @@ function changeFlight(){
 	<input type="hidden" id="flyTime" name="flyTime" value="${flightinfo.flyTime}"/>
 	<input type="hidden" id="flightinfoId" name="flightinfoId" value="${flightinfo.id}"/>
 	<input type="hidden" id="ordertime" name="ordertime" value="${flightinfo.flyTime}"/>
-	<table width="98%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">	
+	<table  class="tr-type" width="98%" border="1" align="center" style="border-color: rgb(51, 51, 51); font-size: 14px; border-collapse: collapse;">	
  
   <tr bgcolor="#FFFFFF">
     <td align="right" width="15%">姓名：</td>

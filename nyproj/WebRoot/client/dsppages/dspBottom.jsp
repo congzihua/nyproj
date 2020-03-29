@@ -374,7 +374,7 @@ function Hide(divid) {
    
      <div id="www_zzjs_net<%=i%>" class="article">${item.remark}</div>
     </td>
-    <td   align="left" width="15%" > 
+    <td   align="left" width="16%" > 
       
     <c:if test="${item.status==0}">	
     	<c:if test="${item.teamflag==null||item.teamflag==0}">

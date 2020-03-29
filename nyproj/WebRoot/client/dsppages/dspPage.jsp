@@ -23,8 +23,8 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/layer/layer.js"></script>
 </head>
-<frameset rows="160,*" frameborder="0" border="0" id="appMainFrame">
-	<frame id="dspTop" name="dspTop" scrolling="auto" noresize="noresize"  src="<%=request.getContextPath()%>/clientAction.do?method=toTopInfoPage&flightinfoIds=<%=flightInfoIds%>" marginheight="0">
+<frameset rows="180,*" frameborder="0" border="0" id="appMainFrame">
+	<frame id="dspTop" name="dspTop" noresize="noresize"  src="<%=request.getContextPath()%>/clientAction.do?method=toTopInfoPage&flightinfoIds=<%=flightInfoIds%>" marginheight="0">
 	
      <frame id="dspBottom" name="dspBottom" src="<%=request.getContextPath()%>/clientAction.do?method=toBottomList&flightinfoIds=<%=flightInfoIds%>&orderdate=<%=orderdate%>&ordertime=<%=flyTime%>&flightIds=<%=flightIds %>" >
 	<noframes>
