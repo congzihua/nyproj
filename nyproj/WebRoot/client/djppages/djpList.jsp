@@ -91,7 +91,20 @@ div{margin:0;border:0;padding:0;}
 body,html{
 margin:0px;
 }
+.btn{
+    width: 70px;
+    padding: 0;
+    border: none;
+    color: blue;
+    background: none;
+    font-size: 14px;
+    margin-left: 5px;
+}
 
+.btn:hover{
+    cursor: pointer;
+    border-bottom: 1px solid blue;
+}  
 -->
 </STYLE>
 <SCRIPT type="text/javascript">
@@ -146,7 +159,7 @@ function Hide(divid) {
 </div>
  
  <div align="center" style=" height:600px;overflow-y:auto;width:  100%;top: 0px;margin: 0px；z-index:2; position::absolute;">
- <table id="txtBox" style='top: 0px;' width="1024" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
+ <table id="txtBox" width="98%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
 
   <p align="center">
       <font size="3"><input id="string" name="string" type="text" size="15" onChange="n = 0;"></font> 
@@ -154,7 +167,7 @@ function Hide(divid) {
       <input      type="button" value="查找" onclick="findInPage();"> 
 	</p>   
   
-  <tr bgcolor="#F0F0F0">
+  <tr bgcolor="#F0F0F0" style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">
      <th width="5%">序号</th>
      <th width="5%">航程</th>
     <th width="9%">姓名</th>
@@ -171,7 +184,7 @@ function Hide(divid) {
  
   <%int i = 0; %>
   <c:forEach var="item" items="${infoList}">
-  <tr bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'">
+  <tr bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'" style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">
      <td align="center" width="5%"><%=++i %></td>
       <td align="center" width="5%">${item.flight}</td>
     <td align="center" width="9%">${item.name}</td>
@@ -203,10 +216,10 @@ function Hide(divid) {
     </td>
     <td align="center" width="11%"> 
      <c:if test="${item.teamflag==1}">   
-	<input type="button" style="width: 70px" value="换登机牌" onclick="dgpage1(${item.id},${item.status});"/>
+	<input type="button" class="btn" value="换登机牌" onclick="dgpage1(${item.id},${item.status});"/>
 	</c:if> 
 	<c:if test="${item.teamflag==0||item.teamflag==null||item.teamflag==''}">   
-	<input type="button" style="width: 70px" value="换登机牌" onclick="dgpage(${item.id},${item.status});"/>
+	<input type="button" class="btn" value="换登机牌" onclick="dgpage(${item.id},${item.status});"/>
 	</c:if> 
 	</td>
   </tr>
