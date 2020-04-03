@@ -11,7 +11,6 @@
 	OpOrdertickets flightinfo = (OpOrdertickets)request.getAttribute("flightinfo");
 	java.util.List<BaTicketpoint> tpList = (java.util.List<BaTicketpoint>)request.getAttribute("tpList");
 	java.util.List<OpOrdertickets> ooList = (java.util.List<OpOrdertickets>)request.getAttribute("ooList");
- 	List<BaTicketprice> tprice = (List<BaTicketprice>)request.getAttribute("tprice");
  	String[] hourandmin = flightinfo.getGateTime()==null||flightinfo.getGateTime().equals("")?null:flightinfo.getGateTime().split(":");
  	String fyt = flightinfo.getFlyTime();
  	String o = fyt.split(":")[0];
@@ -83,31 +82,43 @@ var printNames = "";
 var printCertType = "";
 var printCertNo = "";
 var printVipFlag ="";
-function check(type,flightinfoId)
-		{
+var printFlightinfoId ="";
+var printFlight = "";
+var fligntInfoIds = '${flightInfoIds}';
+function clearData (){
+	printIds = "";
+	 printNames = ""; 
+	 printCertType = "";
+	 printCertNo = "";
+	 printVipFlag ="";
+	 printFlightinfoId ="";
+	 printFlight = "";
+}
+function check(type){
 			var member = document.getElementsByName("member");
 			var name = document.getElementsByName("name");
 			var certType = document.getElementsByName("certType");
 			var certNo = document.getElementsByName("certNo");
 			var vipFlag = document.getElementsByName("vipFlag");
 			var seatSele = document.getElementsByName("seatSele");
+			var fId =  document.getElementsByName("flightinfoId");
+			var flightName = document.getElementsByName("flight");
 			var ids = '';
-			
-			
+			clearData();
 			for (var i = 0; i < member.length; i++){
 				if (member[i].checked==true){  
 					ids += member[i].value+","
 					printNames +=name[i].value+","; 
 					printCertType +=certType[i].value+",";
 					printCertNo += certNo[i].value+",";
-					
 					printVipFlag +=vipFlag[i].value+",";
-					
+					printFlightinfoId += fId[i].value+","
+					printFlight += flightName[i].value+",";
 				}
 			}
 			if(ids==null||ids==""){
 				alert("请选择要打印登机牌的乘客");
-					return false;
+				return false;
 			}
 			
 			ids = ids.substring(0,ids.length-1);			
@@ -115,6 +126,8 @@ function check(type,flightinfoId)
 			printCertType = printCertType.substring(0,printCertType.length-1);
 			printCertNo = printCertNo.substring(0,printCertNo.length-1);
 			printVipFlag = printVipFlag.substring(0,printVipFlag.length-1);
+			printFlightinfoId = printFlightinfoId.substring(0,printFlightinfoId.length-1);
+			printFlight = printFlight.substring(0,printFlight.length-1);
 						
 			var luggSum = document.getElementById("luggSum");	
 			var djpCount = document.getElementById("djpCount");
@@ -152,7 +165,7 @@ function check(type,flightinfoId)
 			var flyminute = document.getElementById("flyminute");
 			var status = document.getElementById("status").value;	
 			printIds = ids;
-			SysmanagerDWR.djpOrXlqSaveTeam(ids,'<%=auth.getUserid()%>',type,document.getElementById("seatNum").value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,jsTrim(luggSum.value),jsTrim(weightSum.value),flightinfoId,status,onHandleM1);		
+			SysmanagerDWR.djpOrXlqSaveTeam(ids,'<%=auth.getUserid()%>',type,document.getElementById("seatNum").value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,jsTrim(luggSum.value),jsTrim(weightSum.value),fligntInfoIds,status,onHandleM1);		
 		}
 		function changebox(parm){
 			var member = document.getElementsByName("member");
@@ -249,11 +262,11 @@ function check(type,flightinfoId)
 			var flyminute = document.getElementById("flyminute");
 			var flightno= document.getElementById("flightNo").value;
 			var flydate=document.getElementById("orderdate").value;
-			SysmanagerDWR.xlqSaveTeam(ids,'<%=auth.getUserid()%>',type,document.getElementById("seatNum").value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,lugs,wsums,flightinfoId,type,jsTrim(luggSum.value),onHandleM2);		
+			SysmanagerDWR.xlqSaveTeam(ids,'<%=auth.getUserid()%>',type,document.getElementById("seatNum").value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,lugs,wsums,fligntInfoIds,type,jsTrim(luggSum.value),onHandleM2);		
 			
 		}
-		function seleSeat(data,seleSeatCount){
-			var url = "<%=request.getContextPath()%>/client/djppages/seleSeatTEAM.jsp?id="+data+"&count="+seleSeatCount;
+		function seleSeat(seleSeatCount){
+			var url = "<%=request.getContextPath()%>/client/djppages/seleSeatTEAM.jsp?count="+seleSeatCount+"&fligntInfoIds="+fligntInfoIds;
 			var size = document.getElementsByName("member");
 			var rv = window.showModalDialog(url, window, "dialogWidth: 432px; dialogHeight: 700px; help: no; scroll: yes; status: no");
 			if(rv!=null)
@@ -274,19 +287,17 @@ function check(type,flightinfoId)
 				alert("信息保存失败，你选择的信息状态已经改变，请核查后重新选择！");
 				
 			}else {
-				
-		
-		   if(window.confirm("信息保存成功，是否进行打印操作！")){
-	         	PrintLab1(data);
-			}
-			document.getElementById("luggSum1").value=jsTrim(document.getElementById("luggSum").value);
-			document.getElementById("weightSum1").value=jsTrim(document.getElementById("weightSum").value);
-			document.getElementById("seatNum").value="";
-			document.getElementById("panduan").value='1';
-			document.getElementById("tuipiao").disabled="";
+			   if(window.confirm("信息保存成功，是否进行打印操作！")){
+		         	PrintLab1(data);
+				}
+				document.getElementById("luggSum1").value=jsTrim(document.getElementById("luggSum").value);
+				document.getElementById("weightSum1").value=jsTrim(document.getElementById("weightSum").value);
+				document.getElementById("seatNum").value="";
+				document.getElementById("panduan").value='1';
+				document.getElementById("tuipiao").disabled="";
 				document.getElementById("bc").disabled="";
 				document.getElementById("cl").disabled="";
-		}
+			}
 	}
 		function onHandleM2(data){
 			if(data=="0"||data=="-1"){
@@ -335,11 +346,10 @@ var varDemo1 = 'MB1.PRN^LPT1^';
 var varDemo2 = 'MB2.PRN^LPT2^';
 var socketUrl = 'ws://localhost:7302/PrintServer';
 var socket = null;
-
+//打印登机牌
 function PrintLab1(data){
     var flightNo = document.getElementById("flightNo").value;
     var flydate = document.getElementById("orderdate").value;
-    var flightTo = document.getElementById("flight").value;
     var gate = document.getElementById("gate").value;
     var flyhour = document.getElementById("flyhour").value;
     var flyminute = document.getElementById("flyminute").value;
@@ -347,7 +357,7 @@ function PrintLab1(data){
 	
      varItem1 ='';
      var idAr =printIds.split(',');
-    
+    var printFlights = printFlight.split(",");
 	var vipFlag=" ";
     for(var i = 0;i<idAr.length;i++){
         vipFlag=" ";
@@ -361,6 +371,7 @@ function PrintLab1(data){
 	    var seatNumPostion = data.split(",")[i] == null || data.split(",")[i] == ""?" ":data.split(",")[i];
 	    if (varItem1 != '')
 	    	varItem1 += "|";
+	    var flightTo = printFlights[i];
 	    varItem1 += flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNumPostion+'^'+flightTo+'^北京南郊^'+gate+'^'+flytime+'^'+printNames.split(",")[i]+'^'+certNo+'^'+idAr[i];   
     }
      var pData  = varDemo1+varItem1;
@@ -424,6 +435,7 @@ function PrintLab1(data){
             }
               
      };
+     //打印行李签
 	function PrintLab2(data){
 	
     var luggSum = document.getElementById("luggSum").value;
@@ -458,24 +470,20 @@ function myHandle(data){
 	<div align="center" >
  
   <div align="left" style="width: 100%">
-  
-<FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';"> 目的地：</FONT><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color:#B22222"> ${flightinfo.flight} &nbsp; </FONT>
 <FONT style="FONT-SIZE: 20px;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt"> 航班号：<font color="#b22222">${flightinfo.flightNo} &nbsp; &nbsp; &nbsp;</font></FONT>
 <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">乘机时间: </FONT><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color:#B22222">&nbsp;<%=new SimpleDateFormat("yyyy-MM-dd").format(flightinfo.getFlightDate()) %>&nbsp;<%=flightinfo.getFlyTime() %> &nbsp; 星期 <%=weeks%></FONT>
-
 </div>
 </div>
 	<form action="<%=request.getContextPath()%>/clientAction.do?method=editOrderInfo" method="post" target="dspBottom">
-	<input type="hidden" id="flightId" name="flightId" value="${flightinfo.flightId}"/>
 	<input type="hidden" id="orderdate" name="orderdate" value="<fmt:formatDate value="${flightinfo.flightDate}" pattern="yyyy-MM-dd"/>"/>
 	<input type="hidden" id="flyTime" name="flyTime" value="${flightinfo.flyTime}"/>
-	<input type="hidden" id="flightinfoId" name="flightinfoId" value="${flightinfo.id}"/>
+	<input type="hidden" id="flightinfoIds" name="flightinfoIds" value="${flightInfoIds}"/>
 	<input type="hidden" id="id" name="id" value="${id}"/>
+	<input type="hidden" id="flight" value="${flightinfo.flight}"/>
 	<input type="hidden" id="flightNo" name="flightNo" value="${flightinfo.flightNo }" />
 	<input type="hidden" id="status" name="status" value="${flightinfo.status}" />
 	<input type="hidden" id="djpCount" value="<%=ooList.size()%>" />
 	 <input type="hidden" value="<fmt:formatDate value="${flightinfo.flightDate}" pattern="MM月dd日"/>" name="monandday" id="monandday"  readonly="readonly"/> 
-	 <input type="hidden" id="flight" value="${flightinfo.flight}"/>
 	 <input id="panduan" type="hidden" value="<%=flightinfo.getGate()==null||flightinfo.getGate().trim().equals("")?"0":"1" %>"/>
 	<table width="100%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">	
   
@@ -483,13 +491,13 @@ function myHandle(data){
     
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">座位：</FONT></td>
     <td width="18%" nowrap="nowrap"><input type="text" style="width: 55%" id="seatNum" name="seatNum" value="" readonly="readonly"/> 
-    <input type="button" name="xz" onclick="seleSeat(${flightinfo.flightinfoId},<%=ooList.size()%>);" value="选 择" /></td>
+    <input type="button" name="xz" onclick="seleSeat(<%=ooList.size()%>);" value="选 择" /></td>
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">登机口：</FONT></td>
     <td width="18%"><input type="text" id="gate" name="gate" value="${flightinfo.gate==null ||flightinfo.gate=='' ?'1':flightinfo.gate}"/></td>
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">登机时间：</FONT></td>
     
 	
-    <td width="18%" colspan="2">
+    <td width="18%" colspan="3">
     <select id="flyhour" name="flyhour">
 		   
 		<option value="06" <%if("06".equals(hour)){ %>selected="selected"<%} %>>06</option>     
@@ -531,21 +539,22 @@ function myHandle(data){
     <td width="18%"><input type="text" id="luggSum" name="luggSum" value="${flightinfo.luggSum}" style="width:60px;"/> &nbsp;<input style="width:60px;border-top: 0px;border-left: 0px;border-right:0px;border-bottom:1px" type="text" name="luggSum1" id="luggSum1" value="${flightinfo.luggSum}" align="right" readonly="readonly"/> 件</td>
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">行李重量：</FONT></td>
     <td width="18%"><input type="text" id="weightSum" name="weightSum" value="${flightinfo.weightSum}" style="width:60px;"/> &nbsp;<input style="width:60px;border-top: 0px;border-left: 0px;border-right:0px;border-bottom:1px" type="text" name="weightSum1" id="weightSum1" value="${flightinfo.weightSum}" align="right" readonly="readonly"/> (KG)</td>
-    <td align="center" colspan="3" width="15%">
+    <td align="center" colspan="4" width="15%">
     <input type="button" id="tuipiao" name="tuipiao" value="打印行李签" onclick="prxlq(3,${flightinfo.flightinfoId});"/>&nbsp;&nbsp;
   		<input type="button" id="cl" name="cl" value="关 闭" onclick="window.close();"/>
     </td>
     
    </tr> 
   <tr bgcolor="#FFFFFF" align="left" >
-  	<td colspan="7">
-  		<input type="button" style="margin-left: 10px; " id="bc" name="bc" value="打印登机牌" onclick="check(3,${flightinfo.flightinfoId})"/>&nbsp;&nbsp;
+  	<td colspan="8">
+  		<input type="button" style="margin-left: 10px; " id="bc" name="bc" value="打印登机牌" onclick="check(3)"/>&nbsp;&nbsp;
   	</td>
   </tr>
   <tr bgcolor="#F0F0F0">
-    <td align="center" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt"><input type="checkbox" value="全选" id="allmember" onclick="if(this.checked==true){changebox('yes');}else{changebox('no');}  ;" name="members" /> 姓名[<%=ooList.size()%>]人</FONT></td>
+    <td align="center" width="10%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt"><input type="checkbox" value="全选" id="allmember" onclick="if(this.checked==true){changebox('yes');}else{changebox('no');}  ;" name="members" /> 姓名[<%=ooList.size()%>]人</FONT></td>
+  	 <td align="center" width="10%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">航程</FONT></td>
    <td align="center" width="10%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">座位号</FONT></td>
-    <td align="center" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">证件类型</FONT></td>
+    <td align="center" width="10%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">证件类型</FONT></td>
     <td align="center" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">证件号码</FONT></td>
     <td align="center" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">联系电话</FONT></td>
     <td align="center" width="10%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">订票点</FONT></td>
@@ -557,6 +566,11 @@ function myHandle(data){
   <input type="checkbox" value="<%=oo.getId()%>" id=<%=oo.getId() %> name="member" />
   <input type="hidden" name="name" value="<%=oo.getName() %>"/>
   <%=oo.getName() %>
+  </td>
+  <td align="center">
+  	<input type="hidden" name="flightinfoId" value="<%=oo.getFlightinfoId()%>"/>
+	  <input type="hidden" name="flight" value="<%=oo.getFlight()==null?"":oo.getFlight()%>"/>
+	  <%=oo.getFlight()==null?"":oo.getFlight() %>
   </td>
   <td align="center">
 	  <input type="hidden" name="seatSele" value="<%=oo.getSeatNum()==null?"":oo.getSeatNum()%>"/>

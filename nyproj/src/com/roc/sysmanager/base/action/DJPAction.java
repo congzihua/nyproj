@@ -107,8 +107,9 @@ public class DJPAction extends DispatchAction {
 	public ActionForward toDJPPage(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
-		String teamName = (String) request.getAttribute("teamName");
 		request.setAttribute("id", id);
+		String flightInfoIds = request.getParameter("flightInfoIds");
+		request.setAttribute("flightInfoIds", flightInfoIds);
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setId(Integer.valueOf(id));
@@ -125,17 +126,10 @@ public class DJPAction extends DispatchAction {
 		List<BaTicketprice> tprice = service2.queryBaTicketpriceList(keyword);
 		request.setAttribute("tprice", tprice);
 		
-		ClienService service3 = new ClienService();
-		OpOrderticketsKeyword keyword1 = new OpOrderticketsKeyword();
-		keyword1.setSeleFlightInfo(Integer.valueOf(id));
-		
-		
-			return mapping.findForward("shchDJP");
-		
-
+		return mapping.findForward("shchDJP");
 	}
 	/**
-	 * 到换登机牌页面
+	 * 到换登机牌页面-团体页面
 	 * 
 	 * @param mapping
 	 * @param form
@@ -147,13 +141,14 @@ public class DJPAction extends DispatchAction {
 			HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		request.setAttribute("id", id);
+		String flightInfoIds = request.getParameter("flightInfoIds");
+		request.setAttribute("flightInfoIds", flightInfoIds);
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setId(Integer.valueOf(id));
 		OpOrdertickets ol1 = service.getOrderticketsList(kw).get(0);
 		String teamName = ol1.getTeamName();
-		Integer flightInfoId = ol1.getFlightinfoId();
-		kw.setSeleFlightInfo(flightInfoId);
+		kw.setSeleFlightInfos(flightInfoIds);
 		kw.setTeamName(teamName);
 		kw.setStatus(ol1.getStatus());
 		
@@ -162,7 +157,6 @@ public class DJPAction extends DispatchAction {
 		}
 		List<OpOrdertickets> ooList=service.teamDjpList(kw);
 		request.setAttribute("ooList", ooList);
-		
 		request.setAttribute("flightinfo", ol1);
 
 		BaTicketpointKeyword kw1 = new BaTicketpointKeyword();
@@ -175,11 +169,6 @@ public class DJPAction extends DispatchAction {
 		List<BaTicketprice> tprice = service2.queryBaTicketpriceList(keyword);
 		request.setAttribute("tprice", tprice);
 		
-		ClienService service3 = new ClienService();
-		OpOrderticketsKeyword keyword1 = new OpOrderticketsKeyword();
-		keyword1.setSeleFlightInfo(Integer.valueOf(id));
-		
-		teamName = ol1.getTeamName();
 		return mapping.findForward("shchDJPTEAM");
 		
 

@@ -45,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	function dgpageHandle(data){
 		if(data){
-			var url = "<%=request.getContextPath()%>/dJPAction.do?method=toDJPPage&id="+idValue;
+			var url = "<%=request.getContextPath()%>/dJPAction.do?method=toDJPPage&id="+idValue+"&flightInfoIds="+fIds;
 			window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 550px; help: no; scroll: no; status: no");
 			
 			document.forms[0].submit();
@@ -54,9 +54,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			document.forms[0].submit();	
 		}	
 	}
+	var fIds = '${flightInfoIds}';
 	function dgpageHandle1(data){
 		if(data){
-			var url = "<%=request.getContextPath()%>/dJPAction.do?method=toDJPPage1&id="+idValue;
+			var url = "<%=request.getContextPath()%>/dJPAction.do?method=toDJPPage1&id="+idValue+"&flightInfoIds="+fIds;
 			//window.open(url);
 			window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 550px; help: no; scroll: auto; status: no");
 			

@@ -43,8 +43,6 @@
 			interface="com.roc.sysmanager.base.dao.BlacklistDao"/>
 		<dao implementation="com.roc.sysmanager.base.impl.DutyTimeDaoImpl" 
 			interface="com.roc.sysmanager.base.dao.DutyTimeDao"/>
-		<dao implementation="com.roc.sysmanager.base.impl.BaFlightNoDaoImpl" 
-			interface="com.roc.sysmanager.base.dao.BaFlightNoDao"/>
 	</context>
 
 </daoConfig>

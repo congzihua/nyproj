@@ -218,8 +218,8 @@ public class OpOrderticketsImpl extends SqlMapDaoTemplate implements OpOrdertice
 		// TODO Auto-generated method stub
 		return (Integer)queryForObject("isHasSeat", keyword);
 	}
-public List<OpOrdertickets> queryByFlightInfoId(int id) {
-		return queryForList("queryByFlightInfoId",id);
+public List<OpOrdertickets> queryByFlightInfoId(String flightInfoIds) {
+		return queryForList("queryByFlightInfoId",flightInfoIds);
 	}
 
 	public Integer updateStatusAtDJP(int id) {
@@ -233,10 +233,10 @@ public List<OpOrdertickets> queryByFlightInfoId(int id) {
 	public Integer updateStatusOver(int id) {
 		return (Integer)update("updateStatusOver", id);
 	}
-	public Integer selectStatusByCustomerId(int id,int flightInfoId) {
+	public Integer selectStatusByCustomerId(int id,String flightInfoIds) {
 		OpOrderticketsKeyword keyword = new OpOrderticketsKeyword();
 		keyword.setId(id);
-		keyword.setSeleFlightInfo(flightInfoId);
+		keyword.setSeleFlightInfos(flightInfoIds);
 		return (Integer)queryForObject("selectStatusByCustomerId", keyword);
 	}
 	/**
@@ -244,10 +244,10 @@ public List<OpOrdertickets> queryByFlightInfoId(int id) {
 	 * @param id
 	 * @return
 	 */
-	public Integer selectStatusForOver(int id,Integer flightInfoId) {
+	public Integer selectStatusForOver(int id,String flightInfoIds) {
 		OpOrderticketsKeyword keyword = new OpOrderticketsKeyword();
 		keyword.setId(id);
-		keyword.setSeleFlightInfo(flightInfoId);
+		keyword.setSeleFlightInfos(flightInfoIds);
 		return (Integer)queryForObject("selectStatusForOver", keyword);
 	}
 	public Integer mainPageForDJP(OpOrderticketsKeyword keyword) {

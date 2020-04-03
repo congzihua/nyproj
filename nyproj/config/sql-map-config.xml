@@ -44,5 +44,4 @@
      <sqlMap resource="com/roc/enp/sqlmapdao/sql/sql-map-unitsandup.xml"/>
     <sqlMap resource="com/roc/enp/sqlmapdao/sql/sqlmap-blacklist-user.xml"/>
     <sqlMap resource="com/roc/enp/sqlmapdao/sql/sqlmap-duty.xml"/>
-    <sqlMap resource="com/roc/enp/sqlmapdao/sql/sqlmap-ba-flight-no.xml"/>
 </sqlMapConfig>
