@@ -145,9 +145,9 @@ define the method of class bench
 */
 function displayBenchTitle()
 {
-	document.write("<div style=\"position: absolute; left: " + this.left + "px; top: " + this.top + "px;\" ");
+	document.write("<div style=\"position: absolute;width:100%; left: " + this.left + "px; top: " + this.top + "px;\" ");
 	document.write("id=\"" + this.id + "_TitleBar\" > ");
-	document.write("<table border=1 width=100% nowrap borderColorLight='" + this.bgColor + "' borderColorDark='" + this.bgColor +"' ");
+	document.write("<table border=0 width=100% nowrap borderColorLight='" + this.bgColor + "' borderColorDark='" + this.bgColor +"' ");
 	document.write("cellpadding=0 cellspacing=0> ");
 	document.write("<tr>");
 	document.write("<td align=\"center\" height=" + this.titleHeight + "px bgcolor='#d4d0cd' borderColorLight=black borderColorDark=white ");
@@ -165,7 +165,7 @@ function displayBenchTitle()
 function displayBenchItems(visibility)
 {
 	var topValue = this.top + this.titleHeight + 8;
-	document.write("<div style=\"position: absolute; left: " + this.left + "px; top: " + topValue + "px; ");
+	document.write("<div style=\"position: absolute;width:100%; left: " + this.left + "px; top: " + topValue + "px; ");
 	document.write("visibility: " + visibility + ";\" id=\"" + this.id + "_ItemList\" >");
 	for (var i = 0; i < this.itemCount; i++)
 	{
