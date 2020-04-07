@@ -90,7 +90,7 @@ java.util.Calendar c = java.util.Calendar.getInstance();
   <body background="<%=request.getContextPath()%>/image/bg.jpg">
     <div align="center">
    <%if(pplist!=null && pplist.size()>0){ %>
-   <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">目的地：</font> <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color: #b22222"> <%=fn %></font>&nbsp; &nbsp;<FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">起飞时间：</font><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color: #b22222"><%=fd %>&nbsp;<%=ft %> 星期 <%=weeks%></font>
+    <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">起飞时间：</font><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color: #b22222"><%=fd %>&nbsp;<%=ft %> 星期 <%=weeks%></font>
    <br/><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">已售票：</font><a href="javascript:void(0);" onclick="shouPiao()"> <FONT style="font-size:30px;text-shadow:Red;font-family:'黑体';color: #b22222"><%=shouPiao+huanPai+jinCang%> </FONT></a><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">张 </font>&nbsp; <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">已值机：</font><a href="javascript:void(0);" onclick="huanPai()"><FONT style="font-size:30px;text-shadow:Red;font-family:'黑体';color: #b22222"> <%=huanPai+jinCang%> </FONT></a><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">位 &nbsp;已出隔离厅：</font><a href="javascript:void(0);" onclick="jinCang()"> <FONT style="font-size:30px;text-shadow:Red;font-family:'黑体';color: #b22222"><%=jinCang %></FONT> </a> <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">位&nbsp; 行李件数：</font><FONT style="font-size:30px;text-shadow:Red;font-family:'黑体';color: #b22222"><%=jianShu %> </font><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">件&nbsp; 行李总重量：</font><FONT style="font-size:30px;text-shadow:Red;font-family:'黑体';color: #b22222"><%=zongZhong %> </font><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">公斤&nbsp;
   </FONT>
   <%} %>
@@ -98,6 +98,7 @@ java.util.Calendar c = java.util.Calendar.getInstance();
     <table bgcolor="#3366FF" border="0" cellpadding="0" cellspacing="1"  width="1024" align="center">
      <tr bgcolor="#F0F0F0">
     		<th>序号</th>
+    		<th>航程</th>
     		<th>姓名</th>
     		<th>VIP</th>
     		<th>联系方式</th>
@@ -110,6 +111,7 @@ java.util.Calendar c = java.util.Calendar.getInstance();
     	%>
     	 <tr bgcolor="#Ffffff">
     		<td align="center" bordercolor="black"><%=i+1 %></td>
+    		<td align="center" bordercolor="black"><%=eo.getFlight() %></td>
     		<td align="center" bordercolor="black"><%=eo.getName() %></td>
     		<td align="center" bordercolor="black"><%=vipflag==1?"VIP":"" %></td>
     		<td align="center" bordercolor="black"><%=eo.getLinkphone() %></td>

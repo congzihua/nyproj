@@ -267,14 +267,14 @@ public class SysmanagerDWR {
 	}
 	//--------------------------
 	//换登机牌
-	public String djpOrXlqSave(Integer id,Integer userId,Integer type,String seatNum,String gate,String gateTime,Integer luggSum,Double weightSum,Integer flightinfoId,String flightNo,String flightDate,String vipText,String flightTo,String name,String certNo,String origStatus) throws ParseException{
+	public String djpOrXlqSave(Integer id,Integer userId,Integer type,String seatNum,String gate,String gateTime,Integer luggSum,Double weightSum,String flightinfoIds,String flightNo,String flightDate,String vipText,String flightTo,String name,String certNo,String origStatus) throws ParseException{
 		ClienService service = new ClienService();
 		if(seatNum!=null && seatNum.trim().length()>0){
 			OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 			kw.setId(id);
 			kw.setSeatNum(seatNum.trim());
 			
-			kw.setSeleFlightInfo(flightinfoId);
+			kw.setSeleFlightInfos(flightinfoIds);
 			if(service.isHasSeat(kw)>=1){
 				return "0";
 			}
@@ -299,7 +299,7 @@ public class SysmanagerDWR {
 		
 	}
 	//换登机牌团队
-	public String djpOrXlqSaveTeam(String ids,Integer userId,Integer type,String seatNums,String gate,String gateTime,Integer luggSum,Double weightSum,Integer flightinfoId,String origStatus) throws ParseException{
+	public String djpOrXlqSaveTeam(String ids,Integer userId,Integer type,String seatNums,String gate,String gateTime,Integer luggSum,Double weightSum,String flightinfoIds,String origStatus) throws ParseException{
 		ClienService service = new ClienService();
 		String[] seatArray = seatNums.split(",");
 		String[]idArray = ids.split(",");
@@ -311,7 +311,7 @@ public class SysmanagerDWR {
 					kw.setId(0);//此处为团队去重复，
 					kw.setSeatNum(seatArray[i].trim());
 					kw.setIds(ids);
-					kw.setSeleFlightInfo(flightinfoId);
+					kw.setSeleFlightInfos(flightinfoIds);
 					if(service.isHasSeat(kw)>=1){
 						return "0";
 					}
@@ -375,14 +375,14 @@ public class SysmanagerDWR {
 	
 	//--------------------------
 	//出行李签的保存信息方法
-	public String xlqSave(Integer id,Integer userId,Integer type,String seatNum,String gate,String gateTime,Integer luggSum,Double weightSum,Integer flightinfoId,String flightTo,String workerNo,String flightno,String flydate,String name,Integer prinNum) throws ParseException{
+	public String xlqSave(Integer id,Integer userId,Integer type,String seatNum,String gate,String gateTime,Integer luggSum,Double weightSum,String flightinfoIds,String flightTo,String workerNo,String flightno,String flydate,String name,Integer prinNum) throws ParseException{
 		ClienService service = new ClienService();
 		if(seatNum!=null && seatNum.trim().length()>0){
 			OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 			kw.setId(id);
 			kw.setSeatNum(seatNum.trim());
 			
-			kw.setSeleFlightInfo(flightinfoId);
+			kw.setSeleFlightInfos(flightinfoIds);
 			if(service.isHasSeat(kw)>=1){
 				return "0";
 			}
@@ -414,7 +414,7 @@ public class SysmanagerDWR {
 	
 	}
 	//出行李签团队
-	public String xlqSaveTeam(String ids,Integer userId,Integer type,String seatNums,String gate,String gateTime,Integer luggSum,Double weightSum,Integer flightinfoId,String origStatus,Integer prinNum) throws ParseException{
+	public String xlqSaveTeam(String ids,Integer userId,Integer type,String seatNums,String gate,String gateTime,Integer luggSum,Double weightSum,String flightinfoIds,String origStatus,Integer prinNum) throws ParseException{
 		ClienService service =  SingleInstanceClientSer.getClientService().getService();
 		String[] seatArray = seatNums.split(",");
 		String[]idArray = ids.split(",");
@@ -426,7 +426,7 @@ public class SysmanagerDWR {
 					kw.setId(0);//此处为团队去重复，
 					kw.setSeatNum(seatArray[i].trim());
 					kw.setIds(ids);
-					kw.setSeleFlightInfo(flightinfoId);
+					kw.setSeleFlightInfos(flightinfoIds);
 					if(service.isHasSeat(kw)>=1){
 						return "0";
 					}

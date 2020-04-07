@@ -5,10 +5,11 @@
 <%
 		String path = request.getContextPath();
 		String count = request.getParameter("count");
+		String fligntInfoIds = request.getParameter("fligntInfoIds");
 		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword keyword = new OpOrderticketsKeyword();
-		keyword.setSeleFlightInfo(Integer.valueOf(request.getParameter("id")));
+		keyword.setSeleFlightInfos(fligntInfoIds);
 		List<OpOrdertickets>  list = service.flightInfoSeatNumList(keyword);
 		LinkedList<String> strList = new LinkedList<String>();
 		for(OpOrdertickets op:list){

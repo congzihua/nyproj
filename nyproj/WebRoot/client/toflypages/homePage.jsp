@@ -3,10 +3,6 @@
 <%@page import="com.roc.sysmanager.base.service.FlightService"%>
 <%@page import="com.roc.enp.entity.BaFlight"%>
 <%
-
-BaFlightKeyWord keyword = new BaFlightKeyWord();
-FlightService service = new FlightService();
-java.util.List<BaFlight> list = service.queryBaFlight(keyword);	
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
@@ -16,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>登机牌核对首页</title>
+    <title>安检系统-首页</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -43,12 +39,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <form action="<%=request.getContextPath()%>/clientAction.do?method=toMainPage" method="post">
     <table border="0" width="1024" align="center">
     	<tr>
-    		<td>目的地：</td>
-    		<td nowrap="nowrap">
-    			<% int i = 0;for(BaFlight bf:list){ %>
-											<input type="radio" name="flightId" value="<%=bf.getId()%>:<%=bf.getFlight()%>" checked="<%=i==0?"checked":""%>"><%=bf.getFlight()%>
-										<%i++;}%>
-    		</td>
     		<td align="right">日期：</td>
     		<td width="20%">
     		<table border="0">

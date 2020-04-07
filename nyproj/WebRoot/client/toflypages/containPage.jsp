@@ -59,7 +59,7 @@ String flightDate = request.getAttribute("orderdate")==null?"": request.getAttri
 	<div align="center"> 
  		 <div align="left" style="width: 1024"> 
  		 		<%if("up"==which||which.equals("up")){%>
-				<FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';"> 目的地：</FONT><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color: #b22222"> ${flight}</font> &nbsp;<FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';"> 航班号： </FONT><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color: #b22222">${flightNo}</font>&nbsp;&nbsp;<FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">起飞时间：</font><font style="font-size:20px;text-shadow:Red;font-family:'黑体';color:#b22222">${offLandTime} 星期 <%=weeks%></font>
+				<FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';"> 航班号： </FONT><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color: #b22222">${flightNo}</font>&nbsp;&nbsp;<FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">起飞时间：</font><font style="font-size:20px;text-shadow:Red;font-family:'黑体';color:#b22222">${offLandTime} 星期 <%=weeks%></font>
 				 <br><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';"> 已售票：</font>&nbsp;<font style="font-weight:5;font-family:'黑体';size: 18" color="#B22222">${shouPiao+dengJi+safeCheck+huanPai}</font>&nbsp;  &nbsp;
 				 <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';"> 已值机：</font>&nbsp;
 				 <font style="font-weight:5;font-family:'黑体';color: #b22222" >${huanPai+safeCheck+dengJi}</font>&nbsp;  &nbsp;
@@ -84,6 +84,7 @@ String flightDate = request.getAttribute("orderdate")==null?"": request.getAttri
     <table bgcolor="#3366FF" border="0" cellpadding="0" cellspacing="1"  width="1024" align="center">
     <tr bgcolor="#F0F0F0">
     		<th>序号</th>
+    		<th>航程</th>
     		<th>姓名</th>
     		<th>座位号</th>
     		<th>联系电话</th>
@@ -99,6 +100,7 @@ String flightDate = request.getAttribute("orderdate")==null?"": request.getAttri
     	
     	<tr bgcolor="#FFFFFF">
     		<td align="right" bordercolor="black">0</td>
+    		<td align="right" bordercolor="black"><%=tick.getFlight() %></td>
     		<td align="right" bordercolor="black"><%=tick.getName() %></td>
     		<td align="right" bordercolor="black"><%=tick.getSeatNum()==null?"":tick.getSeatNum() %></td>
     		<td align="right" bordercolor="black"><%=tick.getLinkphone() %></td>
@@ -113,6 +115,7 @@ String flightDate = request.getAttribute("orderdate")==null?"": request.getAttri
     	%>
     	<tr bgcolor="#FFFFFF">
     		<td align="right" bordercolor="black"><%=i+1 %></td>
+    		<td align="right" bordercolor="black"><%=eo.getFlight() %></td>
     		<td align="right" bordercolor="black"><%=eo.getName() %></td>
     		<td align="right" bordercolor="black"><%=eo.getSeatNum()==null?"":eo.getSeatNum() %></td>
     		<td align="right" bordercolor="black"><%=eo.getLinkphone() %></td>

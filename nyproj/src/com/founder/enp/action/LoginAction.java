@@ -53,7 +53,7 @@ public class LoginAction extends Action {
 		try{
 			 service = new UserService();
 		}catch(Exception e){
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 		
 		user = service.checkUser(user);

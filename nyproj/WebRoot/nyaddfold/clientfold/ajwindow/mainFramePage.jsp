@@ -1,7 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <% 
-String flightId=(String)request.getAttribute("flightId"); 
-String flight=java.net.URLEncoder.encode((String)request.getAttribute("flight"),"utf-8");
 String orderdate=(String)request.getAttribute("orderdate");
 String flyTime=(String)request.getAttribute("flyTime");
 %>
@@ -9,7 +7,7 @@ String flyTime=(String)request.getAttribute("flyTime");
 <html>
 <head>
 <title>
-登机牌核对主页面
+登机扫描系统-框架
 </title>
 <script type='text/javascript' src='<%=request.getContextPath() %>/dwr/util.js'></script> 
 <script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
@@ -31,8 +29,8 @@ String flyTime=(String)request.getAttribute("flyTime");
 					var message=document.getElementById("message");
 					message.src="<%=request.getContextPath()%>/client/toflypages/message.jsp?message=succ";
 					//message.innerHTML="<font color='red'>条形码验证成功！</font>";
-					document.getElementById("uncharge").src="<%=request.getContextPath()%>/clientAction.do?method=toFlyAlrSafeCheck&orderdate=<%=orderdate %>&flightId=<%=flightId%>&flyTime=<%=flyTime%>";
-					document.getElementById("charged").src="<%=request.getContextPath()%>/clientAction.do?method=areadyToFly&orderdate=<%=orderdate %>&flightId=<%=flightId%>&flyTime=<%=flyTime%>";
+					document.getElementById("uncharge").src="<%=request.getContextPath()%>/clientAction.do?method=toFlyAlrSafeCheck&orderdate=<%=orderdate %>&flyTime=<%=flyTime%>";
+					document.getElementById("charged").src="<%=request.getContextPath()%>/clientAction.do?method=areadyToFly&orderdate=<%=orderdate %>&flyTime=<%=flyTime%>";
 				}else{
 					var message=document.getElementById("message");
 					message.src="<%=request.getContextPath()%>/client/toflypages/message.jsp?message=fail";
@@ -45,9 +43,9 @@ String flyTime=(String)request.getAttribute("flyTime");
 </head>
 
 <frameset rows="310,30,*" cols="195" frameborder="1" border="1" id="appMainFrame">
-     <frame id="uncharge" scrolling="yes"  style="width:98%"  name="main" src="<%=request.getContextPath()%>/clientAction.do?method=toFlyAlrSafeCheck&orderdate=<%=orderdate %>&flightId=<%=flightId%>&flyTime=<%=flyTime%>&flight=<%=flight %>" >
-     <frame id="message" scrolling="no"  name="main"  style="width:98%" src="<%=request.getContextPath()%>/nyaddfold/clientfold/ajwindow/message.jsp?orderdate=<%=orderdate %>&flightId=<%=flightId%>&flyTime=<%=flyTime%>">
-     <frame id="charged" scrolling="yes"  style="width:98%" name="main" src="<%=request.getContextPath()%>/clientAction.do?method=areadyToFly&orderdate=<%=orderdate %>&flightId=<%=flightId%>&flyTime=<%=flyTime%>" >
+     <frame id="uncharge" scrolling="yes"  style="width:98%"  name="main" src="<%=request.getContextPath()%>/clientAction.do?method=toFlyAlrSafeCheck&orderdate=<%=orderdate %>&flyTime=<%=flyTime%>" >
+     <frame id="message" scrolling="no"  name="main"  style="width:98%" src="<%=request.getContextPath()%>/nyaddfold/clientfold/ajwindow/message.jsp?orderdate=<%=orderdate %>&flyTime=<%=flyTime%>">
+     <frame id="charged" scrolling="yes"  style="width:98%" name="main" src="<%=request.getContextPath()%>/clientAction.do?method=areadyToFly&orderdate=<%=orderdate %>&flyTime=<%=flyTime%>" >
 	
     <noframes>
         <body>

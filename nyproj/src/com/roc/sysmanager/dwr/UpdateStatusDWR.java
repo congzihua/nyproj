@@ -10,15 +10,15 @@ import com.roc.syspe.entity.OpOrderticketsKeyword;
 
 public class UpdateStatusDWR {
 
-	public int  updateStatusAtDJP(String id,Integer flightInfoId){
+	public int  updateStatusAtDJP(String id,String flightInfoIds){
 		ClienService cs=new ClienService();
 		Pattern p = Pattern.compile("\\D");
 		Matcher matc=p.matcher(id);
-		if(matc.matches() || flightInfoId == null || flightInfoId <= 0){
+		if(matc.matches() || flightInfoIds == null ){
 			return -1;
 		}
 		int wid=Integer.parseInt(id);
-		int count=cs.queryStatusByCustomerId(wid,flightInfoId);
+		int count=cs.queryStatusByCustomerId(wid,flightInfoIds);
 		if(count==0){
 			return -1;
 		}
@@ -29,15 +29,15 @@ public class UpdateStatusDWR {
 	 * @param id
 	 * @return
 	 */
-	public int  upFly(String id,Integer flightInfoId){
+	public int  upFly(String id,String flightInfoIds){
 		ClienService cs=new ClienService();
 		Pattern p = Pattern.compile("\\D");
 		Matcher matc=p.matcher(id);
-		if(matc.matches() || flightInfoId == null || flightInfoId < 0){
+		if(matc.matches() || flightInfoIds == null){
 			return -1;
 		}
 		int wid=Integer.parseInt(id);
-		int count=cs.selectStatusForOver(wid,flightInfoId);
+		int count=cs.selectStatusForOver(wid,flightInfoIds);
 		if(count==0){
 			return -1;
 		}
