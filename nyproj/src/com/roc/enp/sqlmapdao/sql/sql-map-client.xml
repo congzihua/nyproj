@@ -223,7 +223,7 @@
     	 <isNotEmpty prepend="and" property="status"> (a.status in (0,1)) </isNotEmpty> 
        <isNotEmpty prepend="and" property="teamName"> (a.teamflag=1 and a.team_name = #teamName#)</isNotEmpty>
         <isNotEmpty prepend="and" property="seleFlightInfo"> (b.id = #seleFlightInfo#) </isNotEmpty> 
-      
+      <isNotEmpty prepend="and" property="seleFlightInfos"> (b.id in ($seleFlightInfos$)) </isNotEmpty> 
       order by a.STATUS,a.TICKETPOINT_ID,CONVERT(a.name USING gbk )  
       </select>
       

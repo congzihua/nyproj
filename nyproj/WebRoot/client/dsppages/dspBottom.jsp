@@ -398,7 +398,7 @@ function Hide(divid) {
 			<input type="button" class="btn" value="改签" onclick="dgq(${item.id},${item.status});"/>	
 		</c:if>
 		<c:if test="${item.teamflag==1}">
-			 <input type="button" class="btn" value="售票" onclick="saltTeamTickets(${flightinfoId},'${item.teamName}',${item.status});"/>
+			 <input type="button" class="btn" value="售票" onclick="saltTeamTickets(${item.flightinfoId},'${item.teamName}',${item.status});"/>
 		    <input type="button" class="btn" value="确认" onclick="qren(${item.id},${item.status});"/>    
 		    <input type="button" class="btn" value="修改" onclick="xiugai(${item.id},${item.status});"/> 	
 			<input type="button" class="btn" value="改签" onclick="dgq(${item.id},${item.status});"/>	
@@ -409,7 +409,7 @@ function Hide(divid) {
 	   		 <input type="button" class="btn" value="售票" onclick="sp(${item.id},${item.status});"/>       
 	    </c:if>
 	    <c:if test="${item.teamflag==1}">
-			 <input type="button" class="btn" value="售票" onclick="saltTeamTickets(${flightinfoId},'${item.teamName}',${item.status});"/>
+			 <input type="button" class="btn" value="售票" onclick="saltTeamTickets(${item.flightinfoId},'${item.teamName}',${item.status});"/>
 		</c:if>
       <input type="button" style="width:50px" value="修改" onclick="xiugai(${item.id},${item.status});"/> 	
 	
