@@ -1,9 +1,11 @@
+<%@page import="com.flyticket.system.util.ArgsUnit"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@page import="com.roc.sysmanager.base.service.ClienService"%>
 <%@page import="com.roc.syspe.entity.OpOrderticketsKeyword"%>
 <%@page import="com.roc.syspe.entity.OpOrdertickets"%>
 <%
 String orderdate = request.getParameter("orderdate");
+int initStartIdVal = ArgsUnit.getOpTicketIdInitVal();
 String flyTime = request.getParameter("flyTime");
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -69,12 +71,13 @@ if("succ".equals(message)){
 </html>
 <script type="text/javascript">
 <!--
+  var idInitVal = <%=initStartIdVal%>;
   document.getElementById("txmv").focus();
 var info1 = '正在扫描中...';
   function dataUp(){
   	var message=document.getElementById("info");
 	//message.innerHTML=info1;
-  	if(document.getElementById("txmv").value!=null && document.getElementById("txmv").value!='' && parseFloat(document.getElementById("txmv").value)>100000){
+  	if(document.getElementById("txmv").value!=null && document.getElementById("txmv").value!='' && parseFloat(document.getElementById("txmv").value)>idInitVal){
   		window.setTimeout("mydata();",800);
     }else{
 		return;
@@ -85,7 +88,7 @@ var info1 = '正在扫描中...';
   function mydata(){
     var txm  = document.getElementById("txmv");  
     var re = /^[0-9]*$/; 
-  	if (txm.value!=null && txm.value !='' && re.test(txm.value)&&parseFloat(document.getElementById("txmv").value)>100000)    {
+  	if (txm.value!=null && txm.value !='' && re.test(txm.value)&&parseFloat(document.getElementById("txmv").value)>idInitVal)    {
   			var message=document.getElementById("info");
   			var fIds = '<%=flightInfoIds%>';
 			//message.innerHTML='正在提交数据...';
