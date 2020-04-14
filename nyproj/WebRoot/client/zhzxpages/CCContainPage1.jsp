@@ -104,7 +104,8 @@ java.util.Calendar c = java.util.Calendar.getInstance();
     		<th>联系方式</th>
     		<th>状态</th>
     	</tr>
-    <%for(int i=0;i<pplist.size();i++){
+    <%	if (pplist != null)
+    	for(int i=0;i<pplist.size();i++){
     	OpOrdertickets eo =pplist.get(i);
     	int vipflag=Integer.parseInt(eo.getVipFlag());
     	int status=Integer.parseInt(eo.getStatus());

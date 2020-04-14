@@ -132,19 +132,20 @@ String action="";
     		<th>联系方式</th>
     		<th>状态</th>
     	</tr>
-    <%for(int i=0;i<pplist.size();i++){
-    	OpOrdertickets eo =pplist.get(i);
-    	int vipflag=Integer.parseInt(eo.getVipFlag());
-    	int status=Integer.parseInt(eo.getStatus());
-    	%>
-    	<tr bgcolor="#FFFFFF">
-    		<td align="center" bordercolor="black"><%=i+1 %></td>
-    		<td align="center" bordercolor="black"><%=eo.getFlight() %></td>
-    		<td align="center" bordercolor="black"><%=eo.getName() %></td>
-    		<td align="center" bordercolor="black"><%=vipflag==1?"VIP":"" %></td>
-    		<td align="center" bordercolor="black"><%=eo.getLinkphone() %></td>
-    		<td align="center" bordercolor="black"><%=(status==2?"已售票":(status==3?"已换登机牌" :(status==4?"已安检":(status==7?"已登机":"已退票"))))%></td>
-    	</tr>
+    <%	if (pplist != null)
+    	for(int i=0;i<pplist.size();i++){
+	    	OpOrdertickets eo =pplist.get(i);
+	    	int vipflag=Integer.parseInt(eo.getVipFlag());
+	    	int status=Integer.parseInt(eo.getStatus());
+	%>
+	    	<tr bgcolor="#FFFFFF">
+	    		<td align="center" bordercolor="black"><%=i+1 %></td>
+	    		<td align="center" bordercolor="black"><%=eo.getFlight() %></td>
+	    		<td align="center" bordercolor="black"><%=eo.getName() %></td>
+	    		<td align="center" bordercolor="black"><%=vipflag==1?"VIP":"" %></td>
+	    		<td align="center" bordercolor="black"><%=eo.getLinkphone() %></td>
+	    		<td align="center" bordercolor="black"><%=(status==2?"已售票":(status==3?"已换登机牌" :(status==4?"已安检":(status==7?"已登机":"已退票"))))%></td>
+	    	</tr>
     	<%
   	  } 
     %>
