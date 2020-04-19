@@ -131,46 +131,69 @@ public class ClientAction extends DispatchAction {
 		kw.setSeleFlightInfos(flightInfoIds);
 		
 		List<OpOrdertickets> ol = service.getOrderticketsList(kw);
-		List<OpOrdertickets> ol2 =service.groupTiecketCount(kw);
-		//已用票的订票数
-		kw.setSeleStatus("1");
-		List<OpOrdertickets> ol3 =service.groupTiecketCount(kw);
 		
+		List<List<BaTicketsalloc>> result = new ArrayList<>();
 		BaTicketsallocKeyword keyword = new BaTicketsallocKeyword();
 		keyword.setFlightId(Integer.valueOf(flightId));
 		keyword.setOrderdate(orderdate);
 		keyword.setOrdertime(ordertime);
 		BaTicketsallocService ser = new BaTicketsallocService();
+		//查询航程和时间对应的票额分配情况列表
 		List<BaTicketsalloc> bl = ser.getForSeleCountList(keyword);
-		List<BaTicketsalloc> bl2 = new ArrayList<BaTicketsalloc>();
-		for(BaTicketsalloc b:bl){
-			int i = 0,k=0;
-			for(OpOrdertickets op:ol2){
-				
-				if(b.getTicketpointId().equals(op.getTicketpointId())){
-					i = op.getCounts();
-					ol2.remove(op);
-					break;
-				}
-			}
+		for (String flightInfoId:fids) {
+			OpOrderticketsKeyword qkeyword = new OpOrderticketsKeyword();
+			qkeyword.setSeleFlightInfo(Integer.valueOf(flightInfoId));
+			//查询航班航程信息
+			OpOrdertickets ot = service.getbaFlightInfoForIn(qkeyword);
 			
-			for(OpOrdertickets op:ol3){
+			List<BaTicketsalloc> bl2 = new ArrayList<BaTicketsalloc>();
+			for(BaTicketsalloc b:bl){
 				
-				if(b.getTicketpointId().equals(op.getTicketpointId())){
-					k = op.getCounts();
-					ol3.remove(op);
-					break;
+				BaTicketsalloc newBean = new BaTicketsalloc();
+				newBean.setFlight(ot.getFlight());
+				newBean.setId(Integer.valueOf(flightInfoId));
+				newBean.setTicketpointId(b.getTicketpointId());
+				int i = 0,k=0;
+				kw = new OpOrderticketsKeyword();
+				kw.setSeleFlightInfo(Integer.valueOf(flightInfoId));
+				kw.setTicketPointId(b.getTicketpointId());
+				//查询该航班下的订票点订售票票该航程的数量
+				List<OpOrdertickets> ol2 =service.queryGroupOrderTicketInfos(kw);
+				//已用票的订票数
+				kw.setSeleStatus("1");
+				List<OpOrdertickets> ol3 =service.queryGroupOrderTicketInfos(kw);
+				if (ol2 != null && ol2.size() > 0) {
+					Integer dsCount = ol2.get(0).getCounts();
+					i = dsCount == null ? 0:dsCount;
+				}
+				
+				if (ol3 != null && ol3.size() > 0) {
+					Integer dCount = ol3.get(0).getCounts();
+					k = dCount == null ? 0:dCount;
+				}
+				newBean.setUsedCount(i);
+				newBean.setOrderCount(k);
+				newBean.setBalance(b.getBalance()==null?0:b.getBalance());
+//				b.setLookBalance(b.getAmount()-i);
+				bl2.add(newBean);
+			}
+			result.add(bl2);
+		}
+		for (BaTicketsalloc b:bl) {
+			int usedCount = 0;
+			for (List<BaTicketsalloc> baList:result) {
+				for (BaTicketsalloc ba:baList) {
+					if (b.getTicketpointId().equals(ba.getTicketpointId())) {
+						usedCount += ba.getUsedCount()== null?0:ba.getUsedCount();
+					}
 				}
 			}
-			b.setUsedCount(i);
-			b.setOrderCount(k);
-			b.setBalance(b.getAmount()-(b.getLockednum()==null?0:b.getLockednum())- i);			
-			b.setBalance(b.getBalance()==null?0:b.getBalance());
-			b.setLookBalance(b.getAmount()-i);
-			bl2.add(b);
+			b.setLookBalance(b.getAmount()-usedCount);
+			b.setBalance(b.getLookBalance()-(b.getLockednum()==null?0:b.getLockednum()));
 		}
 		
-		request.setAttribute("ticketsPointC", bl2);
+		request.setAttribute("ticketsPointC", bl);
+		request.setAttribute("ticketsPointAndStatCountList", result);
 		request.setAttribute("oporderList", ol);
 		
 		return mapping.findForward("dspBottom");

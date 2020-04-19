@@ -81,9 +81,7 @@ function saltTickets(){
 	parent.dspBottom.document.forms[0].submit();
 }
 function check() {	      
-			
 			var name = document.getElementById("name");
-			
 			var certNo = document.getElementById("certNo");
 			var linkphone = document.getElementById("linkphone");
 			var ticketpointId = document.getElementById("ticketpointId");

@@ -530,5 +530,16 @@
 	   			  <isNotEmpty prepend="and" property="endDate"><![CDATA[ b.FLIGHT_DATE <=#endDate# ]]> </isNotEmpty>
 	   			 order by a.STATUS, CONVERT(a.name USING gbk ) 
       </select>
+      <select id="queryGroupOrderTicketInfos" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooOrderCounts">
+      	SELECT	count(s.id) counts,	s.TICKETPOINT_ID,  s.FLIGHTINFO_ID FROM
+		op_ordertickets s INNER JOIN ba_flightinfo a on s.FLIGHTINFO_ID=a.ID
+		WHERE
+			s.STATUS != 9
+			AND s.STATUS != 8
+     	 	and s.FLIGHTINFO_ID  = #seleFlightInfo#
+     	 	and s.TICKETPOINT_ID = #ticketPointId#
+      	<isNotEmpty prepend="and" property="seleStatus">(s.status in (0,1))</isNotEmpty>
+      	 GROUP BY s.TICKETPOINT_ID,s.FLIGHTINFO_ID
+  	</select>
 </sqlMap>
 

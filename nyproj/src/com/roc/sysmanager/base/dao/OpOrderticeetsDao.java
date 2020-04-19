@@ -113,5 +113,6 @@ public interface OpOrderticeetsDao {
 	 * @return
 	 */
 	public Integer updateStatusOver(int id);
+	public List<OpOrdertickets> queryGroupOrderTicketInfos(OpOrderticketsKeyword keyword);
 
 }

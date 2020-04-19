@@ -435,4 +435,9 @@ public List<OpOrdertickets> teamDjpList(OpOrderticketsKeyword kw) {
 		// TODO Auto-generated method stub
 		return queryForList("zhidengjiticketsListForException", kw);
 	}
+
+	@Override
+	public List<OpOrdertickets> queryGroupOrderTicketInfos(OpOrderticketsKeyword keyword) {
+		return queryForList("queryGroupOrderTicketInfos", keyword);
+	}
 }

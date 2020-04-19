@@ -266,4 +266,7 @@ public class ClienService {
 	public Integer updateStatusOver(int id){
 		return dao.updateStatusOver(id);
 	}
+	public List<OpOrdertickets> queryGroupOrderTicketInfos(OpOrderticketsKeyword keyword) {
+		return dao.queryGroupOrderTicketInfos(keyword);
+	}
 }
