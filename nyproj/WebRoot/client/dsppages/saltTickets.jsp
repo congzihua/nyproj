@@ -47,7 +47,8 @@
 
 	<script type="text/javascript" src="js/calendar/src/utils.js"></script>
 		<script type="text/javascript" src="js/calendar/src/calendar.js"></script>
-		<script type="text/javascript" src="<%=request.getContextPath()%>/js/verify.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/verify.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 		<!-- import the language module -->
 		<script type="text/javascript"
 			src="js/calendar/lang/calendar-zh.js"></script>
@@ -255,6 +256,27 @@ function changeFlight(){
 	}
 	document.getElementById("priceId").innerHTML=ops;
 }
+function getIdcard(){  
+  var img1Base64;
+  var httpServerPort=8989;                             
+  $.ajax({
+      dataType: "JSONP",                    
+      type: "get",
+      url: "http://localhost:"+httpServerPort+"/api/ReadMsg",//接口服务器地址  参数: Fp=1读证内指纹，PhotoQuality 身份证头像质量，cardImg=1获取身份证正反面图片
+      //contentType: "application/x-www-form-urlencoded; charset=utf-8",
+      success: function (data) {
+          $("#name").val(data.name);
+          $('#certType').val('身份证');
+          $('#certNo').val(data.cardno);
+          //成功执行
+          console.log(data);
+      },
+      error: function (e) {
+          //失败执行
+          alert(e.status + ',' + e.statusText);
+      }
+  });
+}
 </script>
 	</head>
 	<body oncontextmenu="if (!event.ctrlKey){return true;}">
@@ -365,6 +387,7 @@ function changeFlight(){
 			<td align="center" colspan="6">  
 				<input id="bc" type="button" value="保 存" onclick="check()"/>
 				<input id="gb" type="button" value="关闭" onclick="window.close();"/> 
+        <input id="xinxi" type="button" value="身份证识别" onclick="getIdcard()"/>
 				</td>
 		</tr>
 		

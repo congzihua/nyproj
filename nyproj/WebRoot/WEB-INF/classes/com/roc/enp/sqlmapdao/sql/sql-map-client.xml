@@ -195,7 +195,7 @@
        <isNotEmpty prepend="and" property="id">
                         (a.id = #id#)
       </isNotEmpty>
-      order by a.STATUS,a.TICKETPOINT_ID,CONVERT(a.name USING gbk )  
+      order by a.STATUS, a.flightinfo_id,CONVERT(a.name USING gbk )  
       </select>
       <select id="allInfoList" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooOpOrdertickets">
     SELECT a.TEAM_NAME,a.bag_num,a.TEAMFLAG,a.PRICE_ID,a.GATE_TIME,a.SEAT_NUM,a.FLIGHTINFO_ID, a.STATUS, a.NAME,a.CERT_TYPE,a.CERT_NO,a.LINKPHONE,

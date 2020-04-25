@@ -261,11 +261,11 @@ function printCertificate(){
      <th width="50px">序号</th>
     <th width="80px">姓名</th>
     <th width="70px">证件类型</th>
-    <th width="130px">证件号码</th>      
+    <th width="140px">证件号码</th>      
     <th width="40px">VIP</th>
     <th width="90px">联系电话</th>
     <th width="80px">票价</th>    
-    <th width="90px">备注</th>
+    <th width="80px">备注</th>
     
   </tr>
   <%int ii = 0,pageNum = 0; %>
@@ -275,7 +275,7 @@ function printCertificate(){
     <td align="center"  width="80px">${item.name}</td>
     <td align="center"  width="70px">${item.certType}</td>
    
-    <td align="center"  width="130px">${item.certNo}</td>
+    <td align="center"  width="140px">${item.certNo}</td>
    
     <td align="center"  width="40px"><c:if test="${item.vipFlag==1}">是</c:if></td>
     <td align="center"  width="90px">${item.linkphone}</td>
@@ -283,7 +283,7 @@ function printCertificate(){
     ${item.realAmount}    
     </td>
     
-    <td align="center"  width="90px">
+    <td align="center"  width="80px">
        ${item.remark} 
     
     </td>
@@ -316,14 +316,14 @@ function printCertificate(){
     <td align="center" width="80px">${item.name}</td>
     <td align="center" width="70px">${item.certType}</td>
    
-    <td align="center" width="130px">${item.certNo}</td>
+    <td align="center" width="140px">${item.certNo}</td>
    
     <td align="center" width="40px"><c:if test="${item.vipFlag==1}">是</c:if></td>
     <td align="center" width="90px">${item.linkphone}</td>
     <td align="center" width="80px" >
     -${item.realAmount}    
     </td>
-    <td align="center" width="90px">
+    <td align="center" width="80px">
      ${item.remark}   
     </td>
   </tr>
