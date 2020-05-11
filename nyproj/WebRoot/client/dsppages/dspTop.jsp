@@ -233,29 +233,7 @@ function changeFlight(){
 
 }
 
-function getIdcard(){  
-  var img1Base64;
-  var httpServerPort=8989;                             
-  $.ajax({
-      dataType: "JSONP",                    
-      type: "get",
-      url: "http://localhost:"+httpServerPort+"/api/ReadMsg",//接口服务器地址  参数: Fp=1读证内指纹，PhotoQuality 身份证头像质量，cardImg=1获取身份证正反面图片
-      //contentType: "application/x-www-form-urlencoded; charset=utf-8",
-      success: function (data) {
-          $("#name").val(data.name);
-          $('#certType').val('身份证');
-          $('#certNo').val(data.cardno);
-          //成功执行
-          console.log(data);
-      },
-      error: function (e) {
-          //失败执行
-          alert(e.status + ',' + e.statusText);
-      }
-  });
-  
-    
-}
+
 </script>
 	</head>
 	<body oncontextmenu="if (!event.ctrlKey){return true;}">
@@ -343,11 +321,74 @@ function getIdcard(){
 
 </form>
 </div>
-
   </body>
   <script type="text/javascript">
 	  window.onload=function(){
 		  document.getElementById("flight").value=${flightinfo.flightId};
 	  };
+	  var scanCertNo = '';
+	  var scanName = "";
+	  function getIdcard(){
+		  var img1Base64;
+		  var httpServerPort=8989;                             
+		  $.ajax({
+		      dataType: "JSONP",                    
+		      type: "get",
+		      url: "http://localhost:"+httpServerPort+"/api/ReadMsg",//接口服务器地址  参数: Fp=1读证内指纹，PhotoQuality 身份证头像质量，cardImg=1获取身份证正反面图片
+		      //contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		      success: function (data) {
+		          scanCertNo = data.cardno;
+		          scanName = data.name;
+		          if (scanCertNo == null || scanCertNo == undefined) {
+		        	  alert("未能正确安装省份证识别设别");
+		        	  return ;
+		          }
+		          //成功执行undefined
+		          toGetOrderInfo(scanCertNo);
+		      },
+		      error: function (e) {
+		          //失败执行
+		          alert(e.status + ',' + e.statusText);
+		      }
+		  });
+		}
+	  function toGetOrderInfo(certNo) {
+			var flightInfoIds = '<%=fightInfoids%>';
+			SysmanagerDWR.getOrderIdAndType(flightInfoIds,certNo,1,getOrderIdAndTypeHandle);
+	  }
+		function getOrderIdAndTypeHandle(data) {
+			if (data == null || data == '') {
+				$("#name").val(scanName);
+		        $('#certType').val('身份证');
+		        $('#certNo').val(scanCertNo);
+				return;
+			}
+			var orderId = data.split(";")[0];
+			var teamFlag = data.split(";")[1];
+			var status = data.split(";")[2];
+			status = Number(status);
+			if(status >= 2) {
+				alert("该乘客已售票，可直接打印票据！");
+				return;
+			}
+			if (teamFlag == 1 || teamFlag == '1'){
+				var fId = data.split(";")[3];
+				var tName = data.split(";")[4];
+				saltTeamTickets(fId,tName,status);
+			}else {
+				toIsSaltTicekets(orderId);
+			}
+		}
+	  function saltTeamTickets(fId,name,status){
+	  		var url = "<%=request.getContextPath()%>/clientAction.do?method=toSaltTeamTickets&flightinfoId="+fId+"&name="+encodeURI(encodeURI(name))+"&status="+status;
+	  		//window.open(url);
+	  		window.showModalDialog(url, window, "dialogWidth: 1400px; dialogHeight: 650px; help: no; scroll: yes; status: no");
+	  		parent.dspBottom.document.forms[0].submit();
+	  }
+	  function toIsSaltTicekets(idValue){
+		  var url = "<%=request.getContextPath()%>/clientAction.do?method=editSp&id="+idValue;
+		  window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 650px; help: no; scroll: no; status: no");
+		  parent.dspBottom.document.forms[0].submit();	
+	  }
   </script>
 </html>

@@ -1,5 +1,6 @@
 package com.roc.sysmanager.base.action;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,12 +23,6 @@ import com.roc.syspe.entity.OpOrderticketsKeyword;
 public class DJPAction extends DispatchAction {
 	/**
 	 * 查看是否有航班信息！
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
 	 */
 	public ActionForward toBlankInfo(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -70,12 +65,6 @@ public class DJPAction extends DispatchAction {
 
 	/**
 	 * 查看list
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
 	 */
 	public ActionForward toList(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -97,12 +86,6 @@ public class DJPAction extends DispatchAction {
 
 	/**
 	 * 到换登机牌页面
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
 	 */
 	public ActionForward toDJPPage(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -130,12 +113,6 @@ public class DJPAction extends DispatchAction {
 	}
 	/**
 	 * 到换登机牌页面-团体页面
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
 	 */
 	public ActionForward toDJPPage1(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
@@ -170,7 +147,5 @@ public class DJPAction extends DispatchAction {
 		request.setAttribute("tprice", tprice);
 		
 		return mapping.findForward("shchDJPTEAM");
-		
-
 	}
 }

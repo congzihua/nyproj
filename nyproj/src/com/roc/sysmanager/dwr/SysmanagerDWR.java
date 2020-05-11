@@ -717,4 +717,19 @@ public class SysmanagerDWR {
 		user.setPassword(newPassoword);		
 		return service.changeUserPwd(user);
 	}
+	/**验证用户身份是否可以进行换登/售票机牌**/
+	public String getOrderIdAndType(String flightInfoIds,String certNo,int status) {
+		ClienService service = new ClienService();
+		OpOrdertickets ticket = service.getOrderInfoByParams(flightInfoIds,certNo,status);
+		String orderIdAndTeamFlag = null;
+		
+		if (ticket != null && ticket.getId() != null) {
+			String teamName = ticket.getTeamName();
+			int flightInfoId = ticket.getFlightinfoId();
+			orderIdAndTeamFlag = ticket.getId()+";"+(ticket.getTeamflag() == null?"0":ticket.getTeamflag())
+					+";"+ticket.getStatus()+";"+flightInfoId+";"+teamName;
+		}
+		
+		return orderIdAndTeamFlag;
+	}
 }

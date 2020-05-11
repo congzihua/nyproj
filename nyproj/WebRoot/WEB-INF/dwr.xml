@@ -29,6 +29,7 @@
 	    	<include method="djpOrXlqSaveTeam"/>
 	    	<include method="xlqSaveTeam"/>
 	    	<include method="printUpdateTeam"/>
+	    	<include method="getOrderIdAndType"/>
         </create> 
         <create  creator="new" javascript="FlightInfoDWR">
        		 <param name="class" value="com.roc.sysmanager.dwr.FlightInfoDWR" /> 

@@ -440,4 +440,14 @@ public List<OpOrdertickets> teamDjpList(OpOrderticketsKeyword kw) {
 	public List<OpOrdertickets> queryGroupOrderTicketInfos(OpOrderticketsKeyword keyword) {
 		return queryForList("queryGroupOrderTicketInfos", keyword);
 	}
+
+	@Override
+	public OpOrdertickets getOrderInfoByParams(String flightInfoIds, String certNo,int status) {
+		OpOrderticketsKeyword keyword = new OpOrderticketsKeyword();
+		keyword.setCertNo(certNo);
+		keyword.setCertType("身份证");
+		keyword.setSeleFlightInfos(flightInfoIds);
+		keyword.setSeleStatus(status+"");
+		return (OpOrdertickets)queryForObject("getOrderInfoByParams", keyword);
+	}
 }

@@ -294,7 +294,7 @@ function check(data)
 		
 	</select></td>
     
-    <td width="13%"><input style="width: 100%" type="text" name="certNo" value="<%=opt.getCertNo()%>"/></td>
+    <td width="13%"><input style="width: 130px" type="text" name="certNo" value="<%=opt.getCertNo()%>"/></td>
  
    
     <td width="9%"><input style="width: 100px" type="text" name="linkphone" value="<%=opt.getLinkphone()%>"/></td>

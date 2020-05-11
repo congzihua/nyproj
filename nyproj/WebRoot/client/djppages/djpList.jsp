@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 	<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/util.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'> </script>
@@ -74,6 +75,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	function sx(){
 		document.forms[0].submit();
+	}
+	function getIdcard(){  
+		  var img1Base64;
+		  var httpServerPort=8989;                             
+		  $.ajax({
+		      dataType: "JSONP",                    
+		      type: "get",
+		      url: "http://localhost:"+httpServerPort+"/api/ReadMsg",//接口服务器地址  参数: Fp=1读证内指纹，PhotoQuality 身份证头像质量，cardImg=1获取身份证正反面图片
+		      //contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		      success: function (data) {
+		    	 toGetOrderInfo(data.cardno);
+		      },
+		      error: function (e) {
+		          //失败执行
+		          alert(e.status + ',' + e.statusText);
+		      }
+		  });
+	}
+	function toGetOrderInfo(certNo) {
+		var flightInfoIds = '${flightInfoIds}';
+		SysmanagerDWR.getOrderIdAndType(flightInfoIds,certNo,2,getOrderIdAndTypeHandle);
+	}
+	function getOrderIdAndTypeHandle(data) {
+		if (data == null || data == '') {
+			alert("未发现该乘客信息，或非待换登机牌状态！");
+			return;
+		}
+		var orderId = data.split(";")[0];
+		var teamFlag = data.split(";")[1];
+		if (teamFlag == 1 || teamFlag == '1'){
+			dgpage1(orderId,data.split(";")[2]);
+		}else {
+			dgpage(orderId,data.split(";")[2]);
+		}
 	}
 	</script>
 	<STYLE type="text/css">
@@ -165,7 +200,8 @@ function Hide(divid) {
   <p align="center">
       <font size="3"><input id="string" name="string" type="text" size="15" onChange="n = 0;"></font> 
     
-      <input      type="button" value="查找" onclick="findInPage();"> 
+      <input   type="button" value="查找" onclick="findInPage();"> 
+      <input id="xinxi" type="button" value="身份证识别" onclick="getIdcard()"/>
 	</p>   
   
   <tr bgcolor="#F0F0F0" style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">

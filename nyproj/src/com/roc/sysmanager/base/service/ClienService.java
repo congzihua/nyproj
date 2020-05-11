@@ -269,4 +269,7 @@ public class ClienService {
 	public List<OpOrdertickets> queryGroupOrderTicketInfos(OpOrderticketsKeyword keyword) {
 		return dao.queryGroupOrderTicketInfos(keyword);
 	}
+	public OpOrdertickets getOrderInfoByParams(String flightInfoIds, String certNo,int status) {
+		return dao.getOrderInfoByParams(flightInfoIds,certNo,status);
+	}
 }

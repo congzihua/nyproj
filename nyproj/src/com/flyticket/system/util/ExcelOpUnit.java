@@ -226,6 +226,7 @@ public class ExcelOpUnit {
 		}  
 		return true;
 	}
+	
 	private static HSSFCellStyle getTableTitleStyle(HSSFWorkbook workbook){
 		HSSFCellStyle style = workbook.createCellStyle();
 		  style.setFillBackgroundColor(HSSFCellStyle.LEAST_DOTS);

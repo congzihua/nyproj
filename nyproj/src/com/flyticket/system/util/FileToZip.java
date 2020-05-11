@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class FileToZip {
+	
 	//文件打包下载
     public static HttpServletResponse downLoadFiles(List<File> files,String title,
             HttpServletRequest request, HttpServletResponse response)
