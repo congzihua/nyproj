@@ -10,6 +10,7 @@ public class ArgsUnit {
 	private static String startAddress = null;
 	private static String dataOutDir = null;
 	private static int opTicketIdInitVal =  0 ;
+	private static String gate;
 	public static String getStartAddress(String uri) {
 	    if(startAddress == null){
 			Properties properties = new Properties();
@@ -80,5 +81,25 @@ public class ArgsUnit {
 			}
 	    }
 		return opTicketIdInitVal;
+	}
+	public static String gateDeafult() {
+		String uri = "";
+		ArgsUnit unit = new ArgsUnit();
+		uri =unit.getClass().getClassLoader().getResource("").getPath();
+	    if(gate == null){
+			Properties properties = new Properties();
+		    try {
+				properties.load(new FileInputStream(uri+"configmap.properties"));
+				gate = properties.getProperty("gate");
+				
+		    } catch (Exception e) {
+		    	gate = "1";
+				e.printStackTrace();
+			}
+	    }
+		return gate;
+	}
+	public static void setGateDeafult(String gt) {
+		gate = gt;
 	}
 }

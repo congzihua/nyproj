@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8" isELIgnored="false"%>
+﻿<%@ page language="java" import="java.util.*" pageEncoding="utf-8" isELIgnored="false"%>
 <%@page import="com.roc.enp.entity.BaTicketpoint"%>
 <%@page import="com.roc.enp.entity.BaTicketprice"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -257,16 +257,16 @@ function check(data)
      <th width="80px" nowrap="nowrap"><input id="checkId" type="checkbox" onclick="selectAll1(<%=size%>);" />全选</th>
 	 <th width="6%">姓名<font color="#FF0000">*</font></th>
      <th width="5%">证件类型</th>
-    <th width="13%">证件号码<font color="#FF0000">*</font></th>
+    <th width="16%">证件号码<font color="#FF0000">*</font></th>
     
     <th width="9%">联系电话<font color="#FF0000">*</font></th>
     <th width="4%">VIP</th>    
     <th width="8%">订票点</th>
-    <th width="10%">五折卡</th>
+    <th width="5%">五折卡</th>
     <th width="5%">全免卡</th> 
       
     <th width="6%">付款方式</th>
-    <th width="6%">票价类型<font color="#FF0000">*</font></th>
+    <th width="8%">票价类型<font color="#FF0000">*</font></th>
     <th width="6%">是否团队</th>
 	<th width="8%">团队名称</th>
 	<th width="8%">备注</th> 
@@ -294,7 +294,7 @@ function check(data)
 		
 	</select></td>
     
-    <td width="13%"><input style="width: 130px" type="text" name="certNo" value="<%=opt.getCertNo()%>"/></td>
+    <td width="16%"><input style="width: 160px" type="text" name="certNo" value="<%=opt.getCertNo()%>"/></td>
  
    
     <td width="9%"><input style="width: 100px" type="text" name="linkphone" value="<%=opt.getLinkphone()%>"/></td>
@@ -311,9 +311,9 @@ function check(data)
 		</select></td>
   
    
-    <td width="10%"><input type="text" name="halfpricecard" style="width: 100px" value="<%=opt.getHalfpricecard()==null?"":opt.getHalfpricecard()%>"/></td>
+    <td width="5%"><input type="text" name="halfpricecard" style="width: 80px" value="<%=opt.getHalfpricecard()==null?"":opt.getHalfpricecard()%>"/></td>
    
-    <td width="5%"><input type="text" name="zeropricecard" style="width: 100px" value="<%=opt.getZeropricecard()==null?"":opt.getZeropricecard()%>"/></td>
+    <td width="5%"><input type="text" name="zeropricecard" style="width: 80px" value="<%=opt.getZeropricecard()==null?"":opt.getZeropricecard()%>"/></td>
    
     <td width="6%">
     <select  name="payment" style="width: 90px">
@@ -324,8 +324,8 @@ function check(data)
    </td>
  
     
-    <td  width="6%">
-    <select  name="priceId" onchange="sumPrices(<%=size %>);" style="width: 90px">
+    <td  width="8%">
+    <select  name="priceId" onchange="sumPrices(<%=size %>);" style="width: 96px">
 
     	<%for(BaTicketprice tpr:tprice){%>    	
     	<option value="<%=tpr.getId()+";"+tpr.getRealAmount()%>" <%=tpr.getRealAmount() ==1350||tpr.getRealAmount()==1000?"selected='selected'":"" %>><%=tpr.getDiscountType()+"("+tpr.getRealAmount()+")"%></option>

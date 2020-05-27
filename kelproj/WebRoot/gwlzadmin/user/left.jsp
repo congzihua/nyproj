@@ -36,7 +36,7 @@
 	     webFXTreeConfig.rootPath="../../";
 		 webFXTreeConfig.defaultAction = "javascript:void(0);"; 
 		 webFXTreeConfig.cbRefAttribute	= "identify";
-	     tree = new WebFXLoadTree("马兰", "../GetDepartMentTree.do",'','','../../images/foldericon.png','../../images/foldericon.png');
+	     tree = new WebFXLoadTree("北京南郊", "../GetDepartMentTree.do",'','','../../images/foldericon.png','../../images/foldericon.png');
 	     tree.click = "rootclick(this)";
 		 document.write(tree);
 

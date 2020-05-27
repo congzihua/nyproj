@@ -1,3 +1,4 @@
+<%@page import="com.flyticket.system.util.ArgsUnit"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" isELIgnored="false"%>
 <%@page import="com.roc.enp.entity.BaTicketpoint"%>
 <%@page import="com.roc.enp.entity.BaTicketprice"%>
@@ -8,6 +9,8 @@
 
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%
+	
+	String gt = ArgsUnit.gateDeafult();
 	OpOrdertickets flightinfo = (OpOrdertickets)request.getAttribute("flightinfo");
 	String fyt = flightinfo.getFlyTime();
 	String o = fyt.split(":")[0];
@@ -391,6 +394,7 @@ function myHandle(data){
 </SCRIPT>
 	</head>
 	<body oncontextmenu="if (!event.ctrlKey){return false;}">	
+	<c:set var="gateNo" value="<%=gt %>" scope="page"/>
 	<div style="width: 1024" align="center">
 		<FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt">
 			换 登 机 牌
@@ -412,7 +416,7 @@ function myHandle(data){
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">座位：</FONT></td>
     <td width="18%" nowrap="nowrap"><input type="text" style="width: 55%" id="seatNum" name="seatNum" value="${flightinfo.seatNum}" readonly="readonly"/> <input type="button" name="xz" onclick="seleSeat();" value="选 择" /></td>
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">登机口：</FONT></td>
-    <td width="18%"><input type="text" id="gate" name="gate" value="${flightinfo.gate==null ||flightinfo.gate=='' ?'1':flightinfo.gate}"/></td>
+    <td width="18%"><input type="text" id="gate" name="gate" value="${flightinfo.gate==null ||flightinfo.gate=='' ?gateNo:flightinfo.gate}"/></td>
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">登机时间：</FONT></td>
     <td width="18%">
     <select id="flyhour" name="flyhour">

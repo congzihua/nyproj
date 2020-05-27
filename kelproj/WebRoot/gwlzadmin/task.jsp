@@ -41,13 +41,13 @@ function addDownBar()
 	</head>
 	<body onmousemove="return workArea.mousemove();"
 		onresize="workArea.reload();" topmargin="0" leftmargin="0"
-		style="font-size:12px; "
+		style="font-size:16px; "
 		oncontextmenu="if (!event.ctrlKey){return false;}" bgcolor="#808080">
 		<script language="javascript">
 
-workArea = new WorkArea("workArea", "#808080");
+workArea = new WorkArea("workArea", "#000");
 
-bench = new Bench("user", "用户管理", 25, 0, 0, 20, 100);
+bench = new Bench("user", "用户管理", 40, 0, 0, 20, 300);
 
 benchItem = new Item("部门管理", 20, "../images/DepartmentLibManager.gif", 30, 30,"department/list.jsp", "main");
 bench.addItem(benchItem);
@@ -65,7 +65,7 @@ bench.addItem(benchItem);
 workArea.addBench(bench);
 
 
-bench = new Bench("sysmanage", "基础数据管理", 25, 0, 0, 20, 100);
+bench = new Bench("sysmanage", "基础数据管理", 40, 0, 0, 20, 100);
 benchItem = new Item("航程管理", 20, "../images/hangcheng.jpg", 30, 30,"<%=request.getContextPath()%>/flightAction.do?method=list", "main");
 bench.addItem(benchItem);
 benchItem = new Item("票价管理", 20, "../images/Coding.png", 30, 30,"<%=request.getContextPath()%>/ticketpriceAction.do?method=ticketpriceList", "main");
@@ -79,7 +79,7 @@ bench.addItem(benchItem);
 
 workArea.addBench(bench);
 <%if(auth.getSysqx().equals("4")){%>
-bench = new Bench("sum", "统计分析", 25, 0, 0, 20, 100);
+bench = new Bench("sum", "统计分析", 40, 0, 0, 20, 100);
 
 benchItem = new Item("统计分析", 20, "../images/unitsssys.png", 30, 30,"<%=request.getContextPath()%>/client/dsppages/units/allUserUnits.jsp", "main");
 bench.addItem(benchItem);
@@ -96,13 +96,13 @@ benchItem = new Item("售票异常明细", 20, "../images/menu_node.gif", 30, 30
 bench.addItem(benchItem);
 workArea.addBench(bench);
 <%}%>
-bench = new Bench("blacklistzj", "黑名单及值机", 25, 0, 0, 20, 100);
+bench = new Bench("blacklistzj", "黑名单及值机", 40, 0, 0, 20, 100);
 benchItem = new Item("用户黑名单", 20, "../images/doodler.png", 30, 30,"<%=request.getContextPath()%>/blacklistUserAction.do?method=toBlacklistUserList", "main");
 bench.addItem(benchItem);
 benchItem = new Item("设置值班机时间", 20, "../images/wenjiageshi_18.png", 30, 30,"<%=request.getContextPath()%>/dutyTimeAction.do?method=toDutytimePage", "main");
 bench.addItem(benchItem);
 workArea.addBench(bench);
-bench = new Bench("log", "系统操作日志", 25, 0, 0, 20, 100);
+bench = new Bench("log", "系统操作日志", 40, 0, 0, 20, 100);
 
 benchItem = new Item("系统日志", 20, "../images/doodler.png", 30, 30,"log/logAction.do?oper=list", "main");
 bench.addItem(benchItem);

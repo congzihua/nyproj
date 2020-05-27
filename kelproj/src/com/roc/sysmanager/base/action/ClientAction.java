@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,6 +17,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
+import com.alibaba.fastjson.JSON;
 import com.founder.enp.entity.Authorization;
 import com.founder.enp.util.Global;
 import com.roc.enp.entity.BaFlight;
@@ -26,11 +28,9 @@ import com.roc.enp.entity.BaTicketprice;
 import com.roc.enp.entity.BaTicketpriceKeyword;
 import com.roc.enp.entity.BlackUserKeyword;
 import com.roc.enp.entity.BlacklistUser;
-import com.roc.enp.entity.FlightInfo;
 import com.roc.sysmanager.base.service.BaTicketsallocService;
 import com.roc.sysmanager.base.service.BlacklistUserService;
 import com.roc.sysmanager.base.service.ClienService;
-import com.roc.sysmanager.base.service.FlightInfoService;
 import com.roc.sysmanager.base.service.FlightService;
 import com.roc.sysmanager.dwr.SingleInstanceClientSer;
 import com.roc.syspe.entity.BaTicketsalloc;
@@ -50,14 +50,11 @@ public class ClientAction extends DispatchAction {
 	 */
 	public ActionForward toBlankInfo(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
-		String flightId = request.getParameter("flightId");	
-		request.setAttribute("flightId",flightId);
 		String orderdate = request.getParameter("orderdate");
 		String flyTime= request.getParameter("hour")+":"+request.getParameter("minue");
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setSeleDate(orderdate);
-		kw.setSeleFlightId(Integer.valueOf(flightId));
 		kw.setFlyTime(flyTime);
 		//查看是否存在航班信息
 		List<OpOrdertickets> ol1 = service.getBaFlightInfoList(kw);
@@ -68,8 +65,7 @@ public class ClientAction extends DispatchAction {
 			request.setAttribute("orderdate",orderdate);
 			return mapping.findForward("homePage");
 		}		
-		request.setAttribute("flightinfoId", ol1.get(0).getId());	
-		request.setAttribute("flightId", flightId);
+		request.setAttribute("flightInfoList",ol1);	
 		request.setAttribute("orderdate", orderdate);
 		request.setAttribute("flyTime",flyTime);
 		return mapping.findForward("dspPage");
@@ -85,17 +81,25 @@ public class ClientAction extends DispatchAction {
 	 */
 	public ActionForward toTopInfoPage(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
-		String flightinfoId = request.getParameter("flightinfoId");
+		String flightinfoIds = request.getParameter("flightinfoIds");
 		
 		ClienService service = new ClienService();
-		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
-		
-		kw.setSeleFlightInfo(Integer.valueOf(flightinfoId));
+		String[] finfoIds = flightinfoIds.split(",");
+		List<OpOrdertickets> otList = new ArrayList<OpOrdertickets>();
+		for (String flightInfoId:finfoIds) {
+			OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
+			kw.setSeleFlightInfo(Integer.valueOf(flightInfoId));
+			OpOrdertickets ot = service.getbaFlightInfoForIn(kw);
+			otList.add(ot);
+		}
 		FlightService service1 = new FlightService();
 		BaTicketpointKeyword kw1 = new BaTicketpointKeyword();
 		java.util.List<BaTicketpoint> tpList = service1.queryBaTicketpoint(kw1);
-		OpOrdertickets ol1 = service.getbaFlightInfoForIn(kw);			
-		request.setAttribute("flightinfo", ol1);
+				
+		request.setAttribute("flightinfos", otList);
+		String fInfoJson = JSON.toJSON(otList).toString();
+		request.setAttribute("flightInfoJson",fInfoJson);
+		request.setAttribute("flightinfo", otList.get(0));
 		request.setAttribute("tpList", tpList);
 		return mapping.findForward("dspTop");
 		
@@ -110,58 +114,86 @@ public class ClientAction extends DispatchAction {
 	 */
 	public ActionForward toBottomList(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
-		String flightInfoId = request.getParameter("flightinfoId");
-		request.setAttribute("flightinfoId", Integer.valueOf(flightInfoId));
-		String flightId = request.getParameter("flightId");
+		String flightInfoIds = request.getParameter("flightinfoIds");
+		String[] fids = flightInfoIds.split(",");
+		request.setAttribute("flightinfoId", Integer.valueOf(fids[0]));
+		request.setAttribute("flightinfoIds", flightInfoIds);
+		String[] flightIds = request.getParameter("flightIds").split(",");
+	    String flightId = flightIds[0];
 		request.setAttribute("flightId", Integer.valueOf(flightId));
+		request.setAttribute("flightIds", request.getParameter("flightIds"));
 		String orderdate = request.getParameter("orderdate");
 		request.setAttribute("orderdate", orderdate);
 		String ordertime = request.getParameter("ordertime");
 		request.setAttribute("ordertime", ordertime);
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
-		kw.setSeleFlightInfo(Integer.valueOf(flightInfoId));
+		kw.setSeleFlightInfos(flightInfoIds);
 		
 		List<OpOrdertickets> ol = service.getOrderticketsList(kw);
-		List<OpOrdertickets> ol2 =service.groupTiecketCount(kw);
-		//已用票的订票数
-		kw.setSeleStatus("1");
-		List<OpOrdertickets> ol3 =service.groupTiecketCount(kw);
+		
+		List<List<BaTicketsalloc>> result = new ArrayList<>();
 		BaTicketsallocKeyword keyword = new BaTicketsallocKeyword();
 		keyword.setFlightId(Integer.valueOf(flightId));
 		keyword.setOrderdate(orderdate);
 		keyword.setOrdertime(ordertime);
 		BaTicketsallocService ser = new BaTicketsallocService();
+		//查询航程和时间对应的票额分配情况列表
 		List<BaTicketsalloc> bl = ser.getForSeleCountList(keyword);
-		List<BaTicketsalloc> bl2 = new ArrayList<BaTicketsalloc>();
-		for(BaTicketsalloc b:bl){
-			int i = 0,k=0;
-			for(OpOrdertickets op:ol2){
-				
-				if(b.getTicketpointId().equals(op.getTicketpointId())){
-					i = op.getCounts();
-					ol2.remove(op);
-					break;
-				}
-			}
+		for (String flightInfoId:fids) {
+			OpOrderticketsKeyword qkeyword = new OpOrderticketsKeyword();
+			qkeyword.setSeleFlightInfo(Integer.valueOf(flightInfoId));
+			//查询航班航程信息
+			OpOrdertickets ot = service.getbaFlightInfoForIn(qkeyword);
 			
-			for(OpOrdertickets op:ol3){
+			List<BaTicketsalloc> bl2 = new ArrayList<BaTicketsalloc>();
+			for(BaTicketsalloc b:bl){
 				
-				if(b.getTicketpointId().equals(op.getTicketpointId())){
-					k = op.getCounts();
-					ol3.remove(op);
-					break;
+				BaTicketsalloc newBean = new BaTicketsalloc();
+				newBean.setFlight(ot.getFlight());
+				newBean.setId(Integer.valueOf(flightInfoId));
+				newBean.setTicketpointId(b.getTicketpointId());
+				int i = 0,k=0;
+				kw = new OpOrderticketsKeyword();
+				kw.setSeleFlightInfo(Integer.valueOf(flightInfoId));
+				kw.setTicketPointId(b.getTicketpointId());
+				//查询该航班下的订票点订售票票该航程的数量
+				List<OpOrdertickets> ol2 =service.queryGroupOrderTicketInfos(kw);
+				//已用票的订票数
+				kw.setSeleStatus("1");
+				List<OpOrdertickets> ol3 =service.queryGroupOrderTicketInfos(kw);
+				if (ol2 != null && ol2.size() > 0) {
+					Integer dsCount = ol2.get(0).getCounts();
+					i = dsCount == null ? 0:dsCount;
+				}
+				
+				if (ol3 != null && ol3.size() > 0) {
+					Integer dCount = ol3.get(0).getCounts();
+					k = dCount == null ? 0:dCount;
+				}
+				newBean.setUsedCount(i);
+				newBean.setOrderCount(k);
+				newBean.setBalance(b.getBalance()==null?0:b.getBalance());
+//				b.setLookBalance(b.getAmount()-i);
+				bl2.add(newBean);
+			}
+			result.add(bl2);
+		}
+		for (BaTicketsalloc b:bl) {
+			int usedCount = 0;
+			for (List<BaTicketsalloc> baList:result) {
+				for (BaTicketsalloc ba:baList) {
+					if (b.getTicketpointId().equals(ba.getTicketpointId())) {
+						usedCount += ba.getUsedCount()== null?0:ba.getUsedCount();
+					}
 				}
 			}
-			b.setUsedCount(i);
-			b.setOrderCount(k);
-			b.setBalance(b.getAmount()-(b.getLockednum()==null?0:b.getLockednum())- i);			
-			b.setBalance(b.getBalance()==null?0:b.getBalance());
-			b.setLookBalance(b.getAmount()-i);
-			bl2.add(b);
+			b.setLookBalance(b.getAmount()-usedCount);
+			b.setBalance(b.getLookBalance()-(b.getLockednum()==null?0:b.getLockednum()));
 		}
 		
-		request.setAttribute("ticketsPointC", bl2);
+		request.setAttribute("ticketsPointC", bl);
+		request.setAttribute("ticketsPointAndStatCountList", result);
 		request.setAttribute("oporderList", ol);
 		
 		return mapping.findForward("dspBottom");
@@ -339,14 +371,11 @@ public class ClientAction extends DispatchAction {
 	 */
 	public ActionForward toBeanchInfo(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
-		String flightId = request.getParameter("flightId");	
-		request.setAttribute("flightId",flightId);
 		String orderdate = request.getParameter("orderdate");
 		String flyTime= request.getParameter("hour")+":"+request.getParameter("minue");
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setSeleDate(orderdate);
-		kw.setSeleFlightId(Integer.valueOf(flightId));
 		kw.setFlyTime(flyTime);
 		//查看是否存在航班信息
 		List<OpOrdertickets> ol1 = service.getBaFlightInfoList(kw);
@@ -358,8 +387,15 @@ public class ClientAction extends DispatchAction {
 			return mapping.findForward("bentchUpdate");
 		}	
 		request.setAttribute("message", 1);
-		request.setAttribute("flightinfoId", ol1.get(0).getId());	
-		request.setAttribute("flightId", flightId);
+		String flightinfoIds = "";
+		String flightNo = "";
+		for (OpOrdertickets ot:ol1) {
+			flightinfoIds += ","+ot.getId();
+			if (ot.getFlightNo() != null)
+				flightNo = ot.getFlightNo();
+		}
+		request.setAttribute("flightinfoIds", flightinfoIds.substring(1));	
+		request.setAttribute("flightNo", flightNo);
 		request.setAttribute("orderdate", orderdate);
 		request.setAttribute("flyTime", flyTime);
 		return mapping.findForward("bentchUpdate");
@@ -536,18 +572,14 @@ public class ClientAction extends DispatchAction {
 		return mapping.findForward("allUserUnits");
 		
 	}
+//通过起飞时间-到安检页面
 public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
-		String idName = request.getParameter("flightId");
-		String[] strArr=idName.split(":");
-		String flightId= strArr[0];
-		String flight=strArr[1];
-		request.setAttribute("flight", flight);
+		
 		String orderdate = request.getParameter("orderdate");
 		String flyTime= request.getParameter("hour")+":"+request.getParameter("minue");
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setSeleDate(orderdate);
-		kw.setSeleFlightId(Integer.valueOf(flightId));
 		kw.setFlyTime(flyTime);
 		ClienService service = new ClienService();
 		boolean b=service.mainPageForDJP(kw);
@@ -556,7 +588,6 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 			return mapping.findForward("homePageDJP");
 		}
 		request.setAttribute("orderdate", orderdate);
-		request.setAttribute("flightId", flightId);
 		request.setAttribute("flyTime", flyTime);
 		return mapping.findForward("mainPage");
 		
@@ -565,25 +596,20 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 	//登机坪操作核心页面未操作action
 	public ActionForward toPageAtDJP1(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
-		String flightId = request.getParameter("flightId");
 		String orderdate = request.getParameter("orderdate");
 		String flyTime= request.getParameter("flyTime");
-		OpOrderticketsKeyword kw1 = new OpOrderticketsKeyword();
-		kw1.setSeleDate(orderdate);
-		kw1.setSeleFlightId(Integer.valueOf(flightId));
-		kw1.setFlyTime(flyTime);
 		//查看是否存在航班信息
-		
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setSeleDate(orderdate);
-		kw.setSeleFlightId(Integer.valueOf(flightId));
 		kw.setFlyTime(flyTime);
 		//查看是否存在航班信息
 		List<OpOrdertickets> ol1 = service.listForChargeDJP(kw);
 		List<OpOrdertickets> ol2 = service.listForReserveDJP(kw);
 		List<OpOrdertickets> ol3 = service.listForChargedDJP(kw);
-		
+		OpOrderticketsKeyword kw1 = new OpOrderticketsKeyword();
+		kw1.setSeleDate(orderdate);
+		kw1.setFlyTime(flyTime);
 		List<OpOrdertickets> ol4 = service.getBaFlightInfoList(kw1);
 		List<OpOrdertickets> statusOverList = service.listForInFly(kw1);
 		StringBuffer offLandTimeSb=new StringBuffer();
@@ -596,7 +622,6 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 		
 		request.setAttribute("dengJi", statusOverList.size());
 		request.setAttribute("safeCheck", ol3.size());
-		request.setAttribute("flight", (ol4!=null)?ol4.get(0).getFlight():"");
 		request.setAttribute("offLandTime", offLandTimeSb.toString());
 		request.setAttribute("list", ol1);
 		request.setAttribute("orderdate",orderdate);
@@ -609,7 +634,6 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 	public ActionForward toPageAtDJP2(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
 		String id = (request.getParameter("id")!=null && !"".equals(request.getParameter("id").trim()))?request.getParameter("id"):"";
-		String flightId = request.getParameter("flightId");
 		
 		String orderdate = request.getParameter("orderdate");
 		String flyTime= request.getParameter("flyTime");
@@ -622,18 +646,11 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 		}
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setSeleDate(orderdate);
-		kw.setSeleFlightId(Integer.valueOf(flightId));
 		kw.setFlyTime(flyTime);
 		//查看是否存在航班信息
 		List<OpOrdertickets> ol1 = service.listForChargedDJP(kw);
-//		if(ol1!=null && ol1.size()>0){
-//			
-//		}else{
-//			request.setAttribute("message", 1);
-//			return mapping.findForward("homePageDJP");
-//		}		
+		
 		request.setAttribute("list", ol1);
-//		request.setAttribute("orderdate", orderdate);
 		return mapping.findForward("containPage");
 		
 	}
@@ -854,7 +871,6 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 		request.setAttribute("orderdate", request.getParameter("orderdate"));
 		request.setAttribute("flyTime", request.getParameter("flyTime"));
 		request.setAttribute("flightinfoId", request.getParameter("flightinfoId"));
-		
 		request.setAttribute("ordertime", request.getParameter("ordertime"));
 		
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
@@ -863,7 +879,6 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 		
 		OpOrdertickets ol1 = new ClienService().getbaFlightInfoForIn(kw);			
 		request.setAttribute("flightinfo", ol1);
-		
 		 
 		BaTicketpointKeyword kw1 = new BaTicketpointKeyword();
 		FlightService service1 = new FlightService();
@@ -873,9 +888,26 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 		BaTicketpriceKeyword keyword = new BaTicketpriceKeyword();
 		keyword.setFlightId(Integer.valueOf(request.getParameter("flightId")));
 		List<BaTicketprice> tprice = service2.queryBaTicketpriceList(keyword);
-		request.setAttribute("tprice", tprice);
-		return mapping.findForward("saltTickets");
+		ClienService service = new ClienService();
+		String orderdate = request.getParameter("orderdate");
+		String flyTime = request.getParameter("flyTime");
 		
+		request.setAttribute("tprice", tprice);
+		OpOrderticketsKeyword kw2 = new OpOrderticketsKeyword();
+		kw2.setSeleDate(orderdate);
+		kw2.setFlyTime(flyTime);
+		//查看是否存在航班信息
+		List<OpOrdertickets> ol2 = service.getBaFlightInfoList(kw2);
+		request.setAttribute("flightinfos", ol2);
+		String fInfoJson = JSON.toJSON(ol2).toString();
+		request.setAttribute("flightInfoJson",fInfoJson);
+		Map<Integer,List<BaTicketprice>> prices = new HashMap<>();
+		for (OpOrdertickets t:ol2) {
+			keyword.setFlightId(t.getFlightId());
+			prices.put(t.getFlightId(),service2.queryBaTicketpriceList(keyword));
+		}
+		request.setAttribute("pricesJson",JSON.toJSON(prices).toString());
+		return mapping.findForward("saltTickets");
 	}
 	public ActionForward addSaltTicketsInfo(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
@@ -1139,29 +1171,29 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 	 */
 	public ActionForward toLuggInfo(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
-		String flightId = request.getParameter("flightId");	
-		request.setAttribute("flightId",flightId);
 		String orderdate = request.getParameter("orderdate");
 		String flyTime= request.getParameter("hour")+":"+request.getParameter("minue");
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setSeleDate(orderdate);
-		kw.setSeleFlightId(Integer.valueOf(flightId));
 		kw.setFlyTime(flyTime);
 		//查看是否存在航班信息
 		List<OpOrdertickets> ol1 = service.getBaFlightInfoList(kw);
-		Integer id = null;
+		String flightInfoIds = "";
 		if(ol1!=null && ol1.size()>0){
-			id =  ol1.get(0).getId();
+			for (OpOrdertickets ot:ol1) {
+				flightInfoIds += "," +ot.getId();
+			}
+			flightInfoIds = flightInfoIds.substring(1);
 			OpOrderticketsKeyword kw1 = new OpOrderticketsKeyword();
-			kw1.setSeleFlightInfo(Integer.valueOf(id));
+			kw1.setSeleFlightInfos(flightInfoIds);
 			List<OpOrdertickets> ol = service.allInfoList(kw1);
 			request.setAttribute("list", ol);
 		}	
 		
-		request.setAttribute("flightId", flightId);
 		request.setAttribute("orderdate", orderdate);
 		request.setAttribute("flyTime",flyTime);
+		request.setAttribute("flightInfoIds",flightInfoIds);
 		return mapping.findForward("luggageInfo");
 		
 	}
@@ -1212,16 +1244,11 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 	 */
 	public ActionForward toFlyMainPage(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
-		String idName = request.getParameter("flightId");
-		String[] strArr=idName.split("c");
-		String flightId= strArr[0];
-		String flight=strArr[1];
-		request.setAttribute("flight", flight);
+		
 		String orderdate = request.getParameter("orderdate");
 		String flyTime= request.getParameter("hour")+":"+request.getParameter("minue");
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setSeleDate(orderdate);
-		kw.setSeleFlightId(Integer.valueOf(flightId));
 		kw.setFlyTime(flyTime);
 		ClienService service = new ClienService();
 		boolean b=service.mainPageForDJP(kw);
@@ -1230,7 +1257,6 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 			return mapping.findForward("fly_homePage");
 		}
 		request.setAttribute("orderdate", orderdate);
-		request.setAttribute("flightId", flightId);
 		request.setAttribute("flyTime", flyTime);
 		return mapping.findForward("fly_mainFramePage");
 		
@@ -1246,18 +1272,15 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 	 */
 		public ActionForward toFlyAlrSafeCheck(ActionMapping mapping, ActionForm form,
 				HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
-			String flightId = request.getParameter("flightId");
 			String orderdate = request.getParameter("orderdate");
 			String flyTime= request.getParameter("flyTime");
 			OpOrderticketsKeyword kw1 = new OpOrderticketsKeyword();
 			kw1.setSeleDate(orderdate);
-			kw1.setSeleFlightId(Integer.valueOf(flightId));
 			kw1.setFlyTime(flyTime);
 			//查看是否存在航班信息			
 			ClienService service = new ClienService();
 			OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 			kw.setSeleDate(orderdate);
-			kw.setSeleFlightId(Integer.valueOf(flightId));
 			kw.setFlyTime(flyTime);
 			//查看是否存在航班信息
 			List<OpOrdertickets> ol1 = service.listForChargeDJP(kw);
@@ -1274,7 +1297,6 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 			request.setAttribute("huanPai", ol1.size());
 			request.setAttribute("safeCheck", ol3.size());
 			request.setAttribute("dengJi",statusOverList.size());
-			request.setAttribute("flight", (ol4!=null)?ol4.get(0).getFlight():"");
 			request.setAttribute("offLandTime", offLandTimeSb.toString());
 			request.setAttribute("list", ol3);
 			request.setAttribute("orderdate",orderdate);
@@ -1295,7 +1317,6 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 		public ActionForward areadyToFly(ActionMapping mapping, ActionForm form,
 				HttpServletRequest request, HttpServletResponse response){
 			String id = (request.getParameter("id")!=null && !"".equals(request.getParameter("id").trim()))?request.getParameter("id"):"";
-			String flightId = request.getParameter("flightId");			
 			String orderdate = request.getParameter("orderdate");
 			String flyTime= request.getParameter("flyTime");
 			ClienService service = new ClienService();
@@ -1307,7 +1328,6 @@ public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 			}
 			OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 			kw.setSeleDate(orderdate);
-			kw.setSeleFlightId(Integer.valueOf(flightId));
 			kw.setFlyTime(flyTime);
 			//查看是否存在航班信息
 			List<OpOrdertickets> ol1 = service.listForInFly(kw);		

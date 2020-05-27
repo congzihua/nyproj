@@ -9,6 +9,7 @@
 String path = request.getContextPath();
 Authorization auth = (Authorization)request.getSession(true).getAttribute("authorization");
 List<BaTicketsalloc> tilist = request.getAttribute("ticketsPointC")==null?null:(List<BaTicketsalloc> )request.getAttribute("ticketsPointC");
+List<List<BaTicketsalloc>> ticketsPointAndStatCountList = request.getAttribute("ticketsPointAndStatCountList")==null ?new ArrayList<List<BaTicketsalloc>>() :(List<List<BaTicketsalloc>>)request.getAttribute("ticketsPointAndStatCountList");
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
@@ -61,7 +62,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	}
   	function saltTeamTickets(data,name,status){
   		var url = "<%=request.getContextPath()%>/clientAction.do?method=toSaltTeamTickets&flightinfoId="+data+"&name="+encodeURI(encodeURI(name))+"&status="+status;
-  		window.showModalDialog(url, window, "dialogWidth: 1300px; dialogHeight: 650px; help: no; scroll: yes; status: no");
+  		//window.open(url);
+  		window.showModalDialog(url, window, "dialogWidth: 1400px; dialogHeight: 650px; help: no; scroll: yes; status: no");
 		document.forms[0].submit();	
   	} 
   	
@@ -218,6 +220,20 @@ div{
 body,html{
 margin:0px;
 }
+.btn{
+    width: 40px;
+    padding: 0;
+    border: none;
+    color: blue;
+    background: none;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.btn:hover{
+    cursor: pointer;
+    border-bottom: 1px solid blue;
+}  
 
 
 </STYLE>
@@ -252,11 +268,12 @@ function Hide(divid) {
    <table width=" 100%" border="1" align="left" style="border-collapse:collapse; border-color:#333333;
 	font-size:14px;">
   <tr>
-  <th style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">
+  <th width="12%" style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">
   	单位
   </th>
   <c:forEach var="tp" items="${ticketsPointC}">
-    <th style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;" align="center"><input type="hidden" id="${tp.ticketpointId}" name="${tp.ticketpointId}" value="${tp.balance}"/>${tp.name}</th>
+    <th style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;" align="center">
+    <input type="hidden" id="${tp.ticketpointId}" name="${tp.ticketpointId}" value="${tp.balance}"/>${tp.name}</th>
     </c:forEach>
    <th style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">
   	合计
@@ -264,7 +281,7 @@ function Hide(divid) {
   </tr>
   <tr>
   
-  <th style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">票额</th>
+  <th width="12%" style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">票额</th>
   <% int total = 0;for(BaTicketsalloc b: tilist){total+=b.getAmount();%>
     <td style="height:30px;color:blue; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;" align="center"><%=b.getAmount() %></td>
   <%} %>
@@ -272,19 +289,41 @@ function Hide(divid) {
    	<%=total %>
     </td>
   </tr>
-  <tr>
-  <th style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">已用(订/售)</th>
-  <% int total1 = 0,totalOrder=0;for(BaTicketsalloc b: tilist){total1+=b.getUsedCount();totalOrder+=b.getOrderCount();%>
-    <td style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;" align="center"><%=b.getUsedCount()+"("+b.getOrderCount()+"/"+(b.getUsedCount()-b.getOrderCount())+")"%></td>
+ 
+  <% 
+   for (List<BaTicketsalloc> list:ticketsPointAndStatCountList) {
+  %>
+   <tr>
+   <% int total1 = 0,totalOrder=0;
+   	  String fInfo = null;
+	  for(BaTicketsalloc b: list){
+		  total1+=b.getUsedCount();
+	  	  totalOrder+=b.getOrderCount();
+	  	  
+	  	  if (fInfo == null) {
+	  		  fInfo = "1";
+ 	%>
+	  <th width="12%" style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">
+	  	<%=b.getFlight()%>-已用(订/售)
+	  </th>
+	   <%
+	   	 }
+	   %>
+    <td style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;" align="center">
+    <%=b.getUsedCount()+"("+b.getOrderCount()+"/"+(b.getUsedCount()-b.getOrderCount())+")"%>
+    </td>
     <%} %>
     <td style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;" align="center">
    	<%=total1+"("+totalOrder+"/"+(total1-totalOrder)+")" %>
     </td>
   </tr>
+  <%} %>
   <tr>
   <th style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">剩余</th>
    <% int total2 = 0;for(BaTicketsalloc b: tilist){total2+=b.getLookBalance();%>
-    <td style="height:30px;color:green; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;" align="center"><b><%=b.getLookBalance()<1?"<font color='red'>无</font>":b.getLookBalance()%></b></td>
+    <td style="height:30px;color:green; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;" align="center">
+    <b><%=b.getLookBalance()<1?"<font color='red'>无</font>":b.getLookBalance()%></b>
+    </td>
      <%} %>
     <td style="height:30px;color:green; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;" align="center">
    	<%=total2 %>
@@ -293,7 +332,7 @@ function Hide(divid) {
 </table>
 </div>
  <div align="center" style="width:100%;border:0" >
-<FONT  style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt">
+<FONT  style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt;height: 30px;">
 &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp;
  &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;
   &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 舱  单&nbsp;
@@ -301,43 +340,48 @@ function Hide(divid) {
 <input id="string" name="string" type="text" size="15" onChange="nextIndex = 0;"></font> 
       <input      type="button" value="查找" onclick="findInPage();"> 
 		</FONT>
- <table width="98%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
-  <tr bgcolor="#F0F0F0">
-     <th width="9%">售票点</th>
-    <th width="8%">姓名</th>
+ <table width="99%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
+  <tr bgcolor="#F0F0F0" style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">
+  	 <th width="4%">NO.</th>
+  	<th width="7%">航程</th>
+     <th width="8%">售票点</th>
+    <th width="7%">姓名</th>
     <th width="6%">证件类型</th>
-    <th width="12%">证件号码</th>    
+    <th width="11%">证件号码</th>    
     <th width="5%">VIP</th>
-    <th width="11%">联系电话</th>
-    <th width="6%">状态</th> 
-    <th width="12%">订票日期</th>   
+    <th width="9%">联系电话</th>
+    <th width="5%">状态</th> 
+    <th width="7%">订票日期</th>   
     <th width="6%">团体</th>
     <th width="8%">备注</th>
-    <th  width="18%">操作</th>
+    <th  width="17%">操作</th>
   </tr>
   </table>
   </div>
 
 <div  align="center"  style=" height:351px;overflow-y:auto;width:100%;top: 0px;margin: 0px">
  <!--  hr color="#0033FF" />-->
- <table width="98%" border="0"  align="center"   cellpadding="0" cellspacing="1" bgcolor="#3366FF">
+ <table width="99%" border="0"  align="center"   cellpadding="0" cellspacing="1" bgcolor="#3366FF">
   
-  <input type="hidden" name="flightinfoId" value="${flightinfoId}"/>
+  <input type="hidden" name="flightinfoIds" value="${flightinfoIds}"/>
 	<input type="hidden" name="orderdate" value="<%=request.getAttribute("orderdate").toString()%>"/>
-	<input type="hidden" name="flightId" value="${flightId}"/>
+	<input type="hidden" name="flightIds" value="${flightIds}"/>
 	<input type="hidden" name="ordertime" value="${ordertime}"/>
   <%int i = 0; %>
   <c:forEach var="item" items="${oporderList}">
-  <tr bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'">
-      <td align="center" width="9%">${item.ticketpointname}</td>
-    <td  class="highlightRow" align="center" width="8%">${item.name}</td>
+   <%++i; %>
+  <tr bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'" style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">
+  	<td align="center" width="4%"><%=i %></td>
+  	<td align="center" width="7%">${item.flight}</td>
+     <td align="center" width="8%">${item.ticketpointname}</td>
+    <td  class="highlightRow" align="center" width="7%">${item.name}</td>
     <td  class="highlightRow" align="center" width="6%">${item.certType}</td>
    
-    <td  class="highlightRow" align="center" width="12%">${item.certNo}</td>
+    <td  class="highlightRow" align="center" width="11%">${item.certNo}</td>
     
     <td  class="highlightRow" align="center" width="5%"><c:if test="${item.vipFlag==1}">是</c:if></td>
-    <td  class="highlightRow" align="center" width="11%">${item.linkphone}</td>
-    <td  class="highlightRow" align="center" width="6%"><c:if test="${item.status==0}">订 &nbsp; 票</c:if>
+    <td  class="highlightRow" align="center" width="9%">${item.linkphone}</td>
+    <td  class="highlightRow" align="center" width="5%"><c:if test="${item.status==0}">订 &nbsp; 票</c:if>
     <c:if test="${item.status==1}">确认订票</c:if>
     <c:if test="${item.status==2}">已售票</c:if>
     <c:if test="${item.status==3}">换登机牌</c:if>
@@ -345,10 +389,8 @@ function Hide(divid) {
     <c:if test="${item.status==7}">已登机</c:if>
    	<c:if test="${item.status==8}">已退订</c:if>
     <c:if test="${item.status==9}">已退票</c:if>
-   
-     
         </td>
-    <td  class="highlightRow" align="center" width="12%"><fmt:formatDate  value="${item.createdate}" pattern="MM.dd"/></td>
+    <td  class="highlightRow" align="center" width="7%"><fmt:formatDate  value="${item.createdate}" pattern="MM.dd"/></td>
     <td  class="highlightRow" align="center" width="6%" onMouseOver="Show(www_zzjs<%=i%>);" onMouseOut="Hide(www_zzjs<%=i%>);">
 		<c:choose>
           <c:when test="${fn:length(item.teamName) > 4}">
@@ -360,7 +402,7 @@ function Hide(divid) {
       </c:choose>   
      <div id="www_zzjs<%=i%>" class="article">${item.teamName}</div>
 	</td>
-    <td  class="highlightRow" width="9%" align="center" onMouseOver="Show(www_zzjs_net<%=i%>);" onMouseOut="Hide(www_zzjs_net<%=i%>);">
+    <td  class="highlightRow" width="8%" align="center" onMouseOver="Show(www_zzjs_net<%=i%>);" onMouseOut="Hide(www_zzjs_net<%=i%>);">
       <c:choose>
           <c:when test="${fn:length(item.remark) > 5}">
               <c:out value="${fn:substring(item.remark, 0, 5)}..." />
@@ -372,45 +414,45 @@ function Hide(divid) {
    
      <div id="www_zzjs_net<%=i%>" class="article">${item.remark}</div>
     </td>
-    <td   align="left" width="18%" > 
+    <td   align="left" width="17%" > 
       
     <c:if test="${item.status==0}">	
     	<c:if test="${item.teamflag==null||item.teamflag==0}">
-		    <input type="button" style="width: 50px" value="售 票" onclick="sp(${item.id},${item.status});"/>
-		    <input type="button" style="width: 50px" value="确认" onclick="qren(${item.id},${item.status});"/>    
-		    <input type="button" style="width: 50px" value="修改" onclick="xiugai(${item.id},${item.status});"/> 	
-			<input type="button" style="width: 50px" value="改签" onclick="dgq(${item.id},${item.status});"/>	
+		    <input type="button" class="btn" value="售票" onclick="sp(${item.id},${item.status});"/>
+		    <input type="button" class="btn" value="确认" onclick="qren(${item.id},${item.status});"/>    
+		    <input type="button" class="btn" value="修改" onclick="xiugai(${item.id},${item.status});"/> 	
+			<input type="button" class="btn" value="改签" onclick="dgq(${item.id},${item.status});"/>	
 		</c:if>
 		<c:if test="${item.teamflag==1}">
-			 <input type="button" style="width: 50px" value="售 票" onclick="saltTeamTickets(${flightinfoId},'${item.teamName}',${item.status});"/>
-		    <input type="button" style="width: 50px" value="确认" onclick="qren(${item.id},${item.status});"/>    
-		    <input type="button" style="width: 50px" value="修改" onclick="xiugai(${item.id},${item.status});"/> 	
-			<input type="button" style="width: 50px" value="改签" onclick="dgq(${item.id},${item.status});"/>	
+			 <input type="button" class="btn" value="售票" onclick="saltTeamTickets(${item.flightinfoId},'${item.teamName}',${item.status});"/>
+		    <input type="button" class="btn" value="确认" onclick="qren(${item.id},${item.status});"/>    
+		    <input type="button" class="btn" value="修改" onclick="xiugai(${item.id},${item.status});"/> 	
+			<input type="button" class="btn" value="改签" onclick="dgq(${item.id},${item.status});"/>	
 		</c:if>
 	</c:if>
 	 <c:if test="${item.status==1}">
 		 <c:if test="${item.teamflag==null||item.teamflag==0}">	
-	   		 <input type="button" style="width: 50px" value="售 票" onclick="sp(${item.id},${item.status});"/>       
+	   		 <input type="button" class="btn" value="售票" onclick="sp(${item.id},${item.status});"/>       
 	    </c:if>
 	    <c:if test="${item.teamflag==1}">
-			 <input type="button" style="width: 50px" value="售 票" onclick="saltTeamTickets(${flightinfoId},'${item.teamName}',${item.status});"/>
+			 <input type="button" class="btn" value="售票" onclick="saltTeamTickets(${item.flightinfoId},'${item.teamName}',${item.status});"/>
 		</c:if>
       <input type="button" style="width:50px" value="修改" onclick="xiugai(${item.id},${item.status});"/> 	
 	
-		<input type="button" style="width: 50px" value="改签" onclick="dgq(${item.id},${item.status});"/>	
+		<input type="button" class="btn" value="改签" onclick="dgq(${item.id},${item.status});"/>	
 	 
 	</c:if>
 	
 	<c:if test="${item.status>=2}">	
-		<input type="button" style="width: 50px" value="打印" onclick="prin(${item.id},${item.status});"/>
+		<input type="button" class="btn" value="打印" onclick="prin(${item.id},${item.status});"/>
 		<c:if test="${item.status == 7}">
 			<c:if test="${authorization.sysqx==3 || authorization.sysqx==4}">
 				<!--不能进行推票改签-->
 	 		</c:if>
 	 	</c:if>
 		<c:if test="${item.status == 4 || item.status ==2 ||item.status ==3}">
-			<input type="button" style="width: 50px" value="退票" onclick="tp(${item.id},${item.status});"/>		
-				<input type="button" style="width: 50px" value="改签" onclick="dgpage(${item.id},${item.status});"/>
+			<input type="button" class="btn" value="退票" onclick="tp(${item.id},${item.status});"/>		
+				<input type="button" class="btn" value="改签" onclick="dgpage(${item.id},${item.status});"/>
 		</c:if>
 	</c:if>
 	</td>

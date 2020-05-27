@@ -67,6 +67,7 @@ public class ClienService {
 		return dao.tpOrtdOpOrderticket(ordertickets, userOper);
 	}
 	public List<OpOrdertickets> zhidengjiticketsList(OpOrderticketsKeyword keyword) {
+		
 		return dao.zhidengjiticketsList(keyword);
 	}
 	public boolean updateForDjp(OpOrdertickets ordertickets, OpUseroper userOper) {
@@ -116,16 +117,16 @@ public class ClienService {
 	public Integer isHasSeat(OpOrderticketsKeyword keyword) {	
 		return dao.isHasSeat(keyword);
 	}
-	public List<OpOrdertickets> queryByFlightInfoId(int id){
-		return dao.queryByFlightInfoId(id);
+	public List<OpOrdertickets> queryByFlightInfoId(String flightInfoIds){
+		return dao.queryByFlightInfoId(flightInfoIds);
 	}
 	
 	public Integer updateStatusAtDJP(int id){
 		return dao.updateStatusAtDJP(id);
 	}
 	
-	public Integer queryStatusByCustomerId(int id,int flightInfoId){
-		return dao.selectStatusByCustomerId(id,flightInfoId);
+	public Integer queryStatusByCustomerId(int id,String flightInfoIds){
+		return dao.selectStatusByCustomerId(id,flightInfoIds);
 	}
 	
 	public boolean mainPageForDJP(OpOrderticketsKeyword keyword){
@@ -254,8 +255,8 @@ public class ClienService {
 	 * @param id
 	 * @return
 	 */
-	public Integer selectStatusForOver(int id,Integer flightInfoId){
-		return dao.selectStatusForOver(id,flightInfoId);
+	public Integer selectStatusForOver(int id,String flightInfoIds){
+		return dao.selectStatusForOver(id,flightInfoIds);
 	}
 	/**
 	 * 更改状态为结束7
@@ -264,5 +265,11 @@ public class ClienService {
 	 */
 	public Integer updateStatusOver(int id){
 		return dao.updateStatusOver(id);
+	}
+	public List<OpOrdertickets> queryGroupOrderTicketInfos(OpOrderticketsKeyword keyword) {
+		return dao.queryGroupOrderTicketInfos(keyword);
+	}
+	public OpOrdertickets getOrderInfoByParams(String flightInfoIds, String certNo,int status) {
+		return dao.getOrderInfoByParams(flightInfoIds,certNo,status);
 	}
 }

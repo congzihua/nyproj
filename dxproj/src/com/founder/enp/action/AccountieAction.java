@@ -107,6 +107,7 @@ public class AccountieAction extends Action {
 			com.founder.enp.service.LogService.recordLog(logEntity, request);
 			return mapping.findForward("info");
 		}
+		
 		return null;
 	}
 }

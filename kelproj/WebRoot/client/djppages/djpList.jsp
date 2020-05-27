@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 	<script type='text/javascript' src='<%=request.getContextPath()%>/dwr/util.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'> </script>
@@ -45,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	function dgpageHandle(data){
 		if(data){
-			var url = "<%=request.getContextPath()%>/dJPAction.do?method=toDJPPage&id="+idValue;
+			var url = "<%=request.getContextPath()%>/dJPAction.do?method=toDJPPage&id="+idValue+"&flightInfoIds="+fIds;
 			window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 550px; help: no; scroll: no; status: no");
 			
 			document.forms[0].submit();
@@ -54,9 +55,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			document.forms[0].submit();	
 		}	
 	}
+	var fIds = '${flightInfoIds}';
 	function dgpageHandle1(data){
 		if(data){
-			var url = "<%=request.getContextPath()%>/dJPAction.do?method=toDJPPage1&id="+idValue;
+			var url = "<%=request.getContextPath()%>/dJPAction.do?method=toDJPPage1&id="+idValue+"&flightInfoIds="+fIds;
 			//window.open(url);
 			window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 550px; help: no; scroll: auto; status: no");
 			
@@ -73,6 +75,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	function sx(){
 		document.forms[0].submit();
+	}
+	function getIdcard(){  
+		  var img1Base64;
+		  var httpServerPort=8989;                             
+		  $.ajax({
+		      dataType: "JSONP",                    
+		      type: "get",
+		      url: "http://localhost:"+httpServerPort+"/api/ReadMsg",//接口服务器地址  参数: Fp=1读证内指纹，PhotoQuality 身份证头像质量，cardImg=1获取身份证正反面图片
+		      //contentType: "application/x-www-form-urlencoded; charset=utf-8",
+		      success: function (data) {
+		    	 toGetOrderInfo(data.cardno);
+		      },
+		      error: function (e) {
+		          //失败执行
+		          alert(e.status + ',' + e.statusText);
+		      }
+		  });
+	}
+	function toGetOrderInfo(certNo) {
+		var flightInfoIds = '${flightInfoIds}';
+		SysmanagerDWR.getOrderIdAndType(flightInfoIds,certNo,2,getOrderIdAndTypeHandle);
+	}
+	function getOrderIdAndTypeHandle(data) {
+		if (data == null || data == '') {
+			alert("未发现该乘客信息，或非待换登机牌状态！");
+			return;
+		}
+		var orderId = data.split(";")[0];
+		var teamFlag = data.split(";")[1];
+		if (teamFlag == 1 || teamFlag == '1'){
+			dgpage1(orderId,data.split(";")[2]);
+		}else {
+			dgpage(orderId,data.split(";")[2]);
+		}
 	}
 	</script>
 	<STYLE type="text/css">
@@ -91,7 +127,20 @@ div{margin:0;border:0;padding:0;}
 body,html{
 margin:0px;
 }
+.btn{
+    width: 70px;
+    padding: 0;
+    border: none;
+    color: blue;
+    background: none;
+    font-size: 14px;
+    margin-left: 5px;
+}
 
+.btn:hover{
+    cursor: pointer;
+    border-bottom: 1px solid blue;
+}  
 -->
 </STYLE>
 <SCRIPT type="text/javascript">
@@ -105,11 +154,10 @@ function Hide(divid) {
   <body oncontextmenu="if (!event.ctrlKey){return false;}" background="<%=request.getContextPath()%>/image/bg.jpg">
  
   <form action="<%=request.getContextPath()%>/dJPAction.do?method=toList" method="post">&nbsp; 
-  <input type="hidden" name="flightinfoId" value="${flightinfoId}"/>
-  <input type="hidden" name="flight" value="${flight}"/>
   <input type="hidden" name="flightDate" value='<%=request.getAttribute("flightDate")!=null?request.getAttribute("flightDate").toString():""%>'/>  
   <input type="hidden" name="flyTime" value="${flyTime}"/> 
   <input type="hidden" name="flightNo" value="${flightNo}"/> 
+   <input type="hidden" name="flightInfoIds" value="${flightInfoIds}"/> 
   <%
   	String flightDate = request.getAttribute("flightDate")==null?"": request.getAttribute("flightDate").toString().trim();
   	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -139,7 +187,6 @@ function Hide(divid) {
  
   <div align="left" style="width: 1024">
   
-<FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';"> 目的地：</FONT><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color:#B22222">  ${flight} &nbsp; </FONT>
 <FONT style="FONT-SIZE: 20px;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt"> 航班号：<font color="#b22222">${flightNo} &nbsp; &nbsp; &nbsp;</font></FONT>
 <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">乘机时间: </FONT><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color:#B22222">&nbsp;<%=request.getAttribute("flightDate")!=null?request.getAttribute("flightDate").toString():""%> ${flyTime} &nbsp; 星期 <%=weeks%></FONT>
  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
@@ -148,23 +195,25 @@ function Hide(divid) {
 </div>
  
  <div align="center" style=" height:600px;overflow-y:auto;width:  100%;top: 0px;margin: 0px；z-index:2; position::absolute;">
- <table id="txtBox" style='top: 0px;' width="1024" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
+ <table id="txtBox" width="98%" border="0" align="center"  cellpadding="0" cellspacing="1" bgcolor="#3366FF">
 
   <p align="center">
       <font size="3"><input id="string" name="string" type="text" size="15" onChange="n = 0;"></font> 
     
-      <input      type="button" value="查找" onclick="findInPage();"> 
+      <input   type="button" value="查找" onclick="findInPage();"> 
+      <input id="xinxi" type="button" value="身份证识别" onclick="getIdcard()"/>
 	</p>   
   
-  <tr bgcolor="#F0F0F0">
+  <tr bgcolor="#F0F0F0" style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">
      <th width="5%">序号</th>
-    <th width="10%">姓名</th>
-    <th width="10%">证件类型</th>
+     <th width="5%">航程</th>
+    <th width="9%">姓名</th>
+    <th width="9%">证件类型</th>
     <th width="15%">证件号码</th> 
     <th width="6%">座位</th>    
-    <th width="5%">VIP</th>
+    <th width="4%">VIP</th>
     <th  width="10%">联系电话</th>
-    <th  width="12%">状态</th>  
+    <th  width="10%">状态</th>  
     <th width="10%">团队名称</th>  
     <th width="8%">备注</th>
     <th width="11%">操作</th>
@@ -172,16 +221,17 @@ function Hide(divid) {
  
   <%int i = 0; %>
   <c:forEach var="item" items="${infoList}">
-  <tr bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'">
+  <tr bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'" style="height:30px; border-color:#333333; text-align:center; vertical-align:middle;	word-break:break-all;overflow:auto;">
      <td align="center" width="5%"><%=++i %></td>
-    <td align="center" width="10%">${item.name}</td>
-    <td align="center" width="10%">${item.certType}</td>
+      <td align="center" width="5%">${item.flight}</td>
+    <td align="center" width="9%">${item.name}</td>
+    <td align="center" width="9%">${item.certType}</td>
    
     <td align="center" width="15%">${item.certNo}</td>
     <td align="center" width="6%">${item.seatNum}</td>
-    <td align="center" width="5%"><c:if test="${item.vipFlag==1}">是</c:if></td>
+    <td align="center" width="4%"><c:if test="${item.vipFlag==1}">是</c:if></td>
     <td align="center" width="10%">${item.linkphone}</td>
-    <td align="center" width="12%">
+    <td align="center" width="10%">
     <c:if test="${item.status==2}">已售 票</c:if>
     <c:if test="${item.status==3}">已换登机牌</c:if>   
      <c:if test="${item.status==4}">已安检</c:if>    
@@ -203,10 +253,10 @@ function Hide(divid) {
     </td>
     <td align="center" width="11%"> 
      <c:if test="${item.teamflag==1}">   
-	<input type="button" style="width: 70px" value="换登机牌" onclick="dgpage1(${item.id},${item.status});"/>
+	<input type="button" class="btn" value="换登机牌" onclick="dgpage1(${item.id},${item.status});"/>
 	</c:if> 
 	<c:if test="${item.teamflag==0||item.teamflag==null||item.teamflag==''}">   
-	<input type="button" style="width: 70px" value="换登机牌" onclick="dgpage(${item.id},${item.status});"/>
+	<input type="button" class="btn" value="换登机牌" onclick="dgpage(${item.id},${item.status});"/>
 	</c:if> 
 	</td>
   </tr>

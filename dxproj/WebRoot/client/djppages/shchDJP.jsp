@@ -1,3 +1,4 @@
+<%@page import="com.flyticket.system.util.ArgsUnit"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" isELIgnored="false"%>
 <%@page import="com.roc.enp.entity.BaTicketpoint"%>
 <%@page import="com.roc.enp.entity.BaTicketprice"%>
@@ -8,6 +9,8 @@
 
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%
+	
+	String gt = ArgsUnit.gateDeafult();
 	OpOrdertickets flightinfo = (OpOrdertickets)request.getAttribute("flightinfo");
 	String fyt = flightinfo.getFlyTime();
 	String o = fyt.split(":")[0];
@@ -74,7 +77,8 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'> </script>
 <SCRIPT language="JavaScript">
-    function check(data,type,flightinfoId)
+	var fIds = '${flightInfoIds}';
+    function check(data,type)
 		{	      
 			var seatNum = document.getElementById("seatNum");			
 			var luggSum = document.getElementById("luggSum");	
@@ -121,10 +125,10 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 			var name=document.getElementById("name").value;
 			var certNo=document.getElementById("certNo").value;
 			var status = document.getElementById("status").value;
-			SysmanagerDWR.djpOrXlqSave(data,'<%=auth.getUserid()%>',type,seatNum.value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,luggSum.value,weightSum.value,flightinfoId,flightno,flydate,vipText,flightTo,name,certNo,status,onHandleM1);		
+			SysmanagerDWR.djpOrXlqSave(data,'<%=auth.getUserid()%>',type,seatNum.value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,luggSum.value,weightSum.value,fIds,flightno,flydate,vipText,flightTo,name,certNo,status,onHandleM1);		
 			
 		}
-		function prxlq(data,type,flightinfoId)
+		function prxlq(data,type)
 		{	
 			var vv = document.getElementById("panduan").value;
 			if(vv==0){
@@ -194,11 +198,11 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 			var flightTo=document.getElementById("flightTo").value;
 			var name=document.getElementById("name").value;
 			
-			SysmanagerDWR.xlqSave(data,'<%=auth.getUserid()%>',type,seatNum.value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,lugs,wsums,flightinfoId,flightTo,<%=auth.getWorkerNo()%>,flightno,flydate,name,jsTrim(luggSum.value),onHandleM2);		
+			SysmanagerDWR.xlqSave(data,'<%=auth.getUserid()%>',type,seatNum.value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,lugs,wsums,fIds,flightTo,<%=auth.getWorkerNo()%>,flightno,flydate,name,jsTrim(luggSum.value),onHandleM2);		
 			
 		}
-		function seleSeat(data){
-			var url = "<%=request.getContextPath()%>/client/djppages/seleSeat.jsp?id="+data;
+		function seleSeat(){
+			var url = "<%=request.getContextPath()%>/client/djppages/seleSeat.jsp?flightInfoIds="+fIds;
 			
 			var rv = window.showModalDialog(url, window, "dialogWidth: 432px; dialogHeight: 700px; help: no; scroll: yes; status: no");
 			if(rv!=null)
@@ -307,7 +311,7 @@ function PrintLab1(data){
     	return;
     }
     
-	varItem1 = flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNum+'^'+flightTo+'^鼎新^'+gate+'^'+flytime+'^'+name+'^'+certNo+'^'+id;
+	varItem1 = flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNum+'^'+flightTo+'^北京南郊^'+gate+'^'+flytime+'^'+name+'^'+certNo+'^'+id;
 	 var pData  = varDemo1+varItem1;
      buildSocket();
      socket.onopen = function (event) {
@@ -354,7 +358,7 @@ function PrintLab2(data){
 		if (varItem2.length > 0) {
 			varItem2 += "|";
 		}
-		varItem2 += '鼎新^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+name+'^'+data.split(';')[i]+'^51296829^'+flightTo+'^'+id;
+		varItem2 += '北京南郊^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+name+'^'+data.split(';')[i]+'^51296829^'+flightTo+'^'+id;
 		
     }
 	
@@ -390,6 +394,7 @@ function myHandle(data){
 </SCRIPT>
 	</head>
 	<body oncontextmenu="if (!event.ctrlKey){return false;}">	
+	<c:set var="gateNo" value="<%=gt %>" scope="page"/>
 	<div style="width: 1024" align="center">
 		<FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt">
 			换 登 机 牌
@@ -399,7 +404,6 @@ function myHandle(data){
 	<input type="hidden" id="flightId" name="flightId" value="${flightinfo.flightId}"/>
 	<input type="hidden" id="orderdate" name="orderdate" value="<fmt:formatDate value="${flightinfo.flightDate}" pattern="yyyy-MM-dd"/>"/>
 	<input type="hidden" id= "flyTime" name="flyTime" value="${flightinfo.flyTime}"/>
-	<input type="hidden" id="flightinfoId" name="flightinfoId" value="${flightinfo.id}"/>
 	<input type="hidden" id="id" name="id" value="${id}"/>
 	<input type="hidden" id="flightNo" name="flightNo" value="${flightinfo.flightNo}" />
 	<input type="hidden" id="status" name="status" value="${flightinfo.status}" />
@@ -410,9 +414,9 @@ function myHandle(data){
   <tr bgcolor="#FFFFFF">
     
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">座位：</FONT></td>
-    <td width="18%" nowrap="nowrap"><input type="text" style="width: 55%" id="seatNum" name="seatNum" value="${flightinfo.seatNum}" readonly="readonly"/> <input type="button" name="xz" onclick="seleSeat(${flightinfo.flightinfoId});" value="选 择" /></td>
+    <td width="18%" nowrap="nowrap"><input type="text" style="width: 55%" id="seatNum" name="seatNum" value="${flightinfo.seatNum}" readonly="readonly"/> <input type="button" name="xz" onclick="seleSeat();" value="选 择" /></td>
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">登机口：</FONT></td>
-    <td width="18%"><input type="text" id="gate" name="gate" value="${flightinfo.gate==null ||flightinfo.gate=='' ?'1':flightinfo.gate}"/></td>
+    <td width="18%"><input type="text" id="gate" name="gate" value="${flightinfo.gate==null ||flightinfo.gate=='' ?gateNo:flightinfo.gate}"/></td>
     <td align="right" width="15%"><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">登机时间：</FONT></td>
     <td width="18%">
     <select id="flyhour" name="flyhour">
@@ -450,14 +454,14 @@ function myHandle(data){
 		
 
 										</select></td>
-										<td align="center"><input type="button" id="bc" name="bc" value="打印登机牌" onclick="check(${flightinfo.id},3,${flightinfo.flightinfoId})"/></td>
+										<td align="center"><input type="button" id="bc" name="bc" value="打印登机牌" onclick="check(${flightinfo.id},3)"/></td>
   </tr>
     <tr bgcolor="#FFFFFF">
    <td align="right" ><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">行李数：</FONT></td>
     <td width="18%"><input type="text" id="luggSum" name="luggSum" value="${flightinfo.luggSum}" style="width: 60px"/> &nbsp;<input style="width:60px;border-top: 0px;border-left: 0px;border-right:0px;border-bottom:1px" type="text" name="luggSum1" id="luggSum1" value="${flightinfo.luggSum}" align="right" readonly="readonly"/> 件</td>
     <td align="right" ><FONT style="FONT-SIZE: 14pt;font-weight:7;font-family:'黑体'; COLOR: blue; HEIGHT: 9pt">行李重量：</FONT></td>
     <td  colspan="2"><input type="text" id="weightSum" name="weightSum" value="${flightinfo.weightSum}" style="width: 60px"/> &nbsp;<input style="width:60px;border-top: 0px;border-left: 0px;border-right:0px;border-bottom:1px" type="text" name="weightSum1" id="weightSum1" value="${flightinfo.weightSum}" align="right" readonly="readonly"/>（KG）</td>
-    <td align="left" colspan="2"> &nbsp;  &nbsp;  &nbsp;<input type="button" id="tuipiao" name="tuipiao" value="打印行李签" onclick="prxlq(${flightinfo.id},3,${flightinfo.flightinfoId});" /></td>
+    <td align="left" colspan="2"> &nbsp;  &nbsp;  &nbsp;<input type="button" id="tuipiao" name="tuipiao" value="打印行李签" onclick="prxlq(${flightinfo.id},3);" /></td>
    </tr> 
   <tr bgcolor="#FFFFFF"><td colspan="7"><hr style="color: blue"/></td></tr>
   <tr bgcolor="#FFFFFF">

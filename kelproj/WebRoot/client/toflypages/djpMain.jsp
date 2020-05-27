@@ -11,9 +11,6 @@
 	<frame name="top" scrolling="no" noresize="noresize"  src="<%=request.getContextPath()%>/client/toflypages/top.jsp" marginheight="0">
 	<frame name="nav" scrolling="no" noresize="noresize" target="enpMainFrame" src="<%=request.getContextPath()%>/client/toflypages/nav.jsp" marginheight="0">
      <frame id="main" name="main" src="<%=request.getContextPath()%>/client/toflypages/homePage.jsp" >
-	
-
-
     <noframes>
         <body>
             <p>no frames</p>

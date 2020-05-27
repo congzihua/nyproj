@@ -162,7 +162,7 @@ public class ExcelOpUnit {
 	 		row.createCell(++jj).setCellValue("");	 		
 	 		row.getCell(jj).setCellStyle(styTitle2);
 	 		sheet.addMergedRegion(new CellRangeAddress(i, i, 0, 6));
-	 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM");
+	 		SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
 	 		long tLong = System.currentTimeMillis();
 	 		String path =ArgsUnit.getDataOutDir()+format.format(new Date());
 	 		String oldFilePath = path+"/"+tLong+".xls";
@@ -226,6 +226,7 @@ public class ExcelOpUnit {
 		}  
 		return true;
 	}
+	
 	private static HSSFCellStyle getTableTitleStyle(HSSFWorkbook workbook){
 		HSSFCellStyle style = workbook.createCellStyle();
 		  style.setFillBackgroundColor(HSSFCellStyle.LEAST_DOTS);
@@ -407,8 +408,7 @@ public class ExcelOpUnit {
 		 	}
 			SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
 	 		long tLong = System.currentTimeMillis();
-	 		String dataDir = ArgsUnit.getDataOutDir();
-	 		String path =dataDir+format.format(new Date());
+	 		String path ="d:/out_excels/"+format.format(new Date());
 	 		String oldFilePath = path+"/"+tLong+".xls";
 	 		String newFilePath = path+"/"+(tLong)+".encrypt";
 	 	    File fileDirs = new File(path);

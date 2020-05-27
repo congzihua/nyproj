@@ -2,8 +2,10 @@ package com.roc.sysmanager.base.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +31,11 @@ public class CommandCenter extends DispatchAction{
 			request.setAttribute("message", "1");
 			return mapping.findForward("noFlightData");
 		}
-		request.setAttribute("howMany", fiList.size());
+		Set<String> flyTimes = new HashSet<String>();
+		for (FlightInfo fInfo : fiList) {//按照时间进行分组
+			flyTimes.add(fInfo.getFly_time());
+		}
+		request.setAttribute("howMany", flyTimes.size());
 		return mapping.findForward("mainPage");
 		
 	}
@@ -42,14 +48,20 @@ public class CommandCenter extends DispatchAction{
 		int jinCang=0;
 		int jianShu=0;
 		int zongZhong=0;
-//		List<HashMap<String, Object>> frameList=new ArrayList<HashMap<String,Object>>();
 		HashMap<String, Object> frameMap=new HashMap<String, Object>();
 		String flightDate =request.getParameter("orderdate");
 		request.setAttribute("odate", flightDate);
 		List<FlightInfo> fiList=new FlightInfoService().queryByFlightDate(flightDate);
 		FlightInfo fi = fiList.get(0);
-		int id=fi.getId();
-		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(id);
+		String ft = fi.getFly_time();
+		String flightInfoIds = "";
+		for (FlightInfo fInfo : fiList) {
+			if (fInfo.getFly_time().equalsIgnoreCase(ft)) {
+				flightInfoIds += ","+fInfo.getId();
+			}
+		}
+		flightInfoIds = flightInfoIds.substring(1);
+		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(flightInfoIds);
 		Iterator<OpOrdertickets> iter1=pplist.iterator();
 		while (iter1.hasNext()) {
 			OpOrdertickets opo = (OpOrdertickets) iter1.next();
@@ -88,9 +100,8 @@ public class CommandCenter extends DispatchAction{
 		String flightDate =request.getParameter("orderdate");
 		request.setAttribute("odate", flightDate);
 		List<FlightInfo> fiList=new FlightInfoService().queryByFlightDate(flightDate);
-		FlightInfo fi = fiList.get(0);
-		int id=fi.getId();
-		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(id);
+		String flightInfoIds = getFlightIds(fiList, 1);
+		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(flightInfoIds);
 		Iterator<OpOrdertickets> iter1=pplist.iterator();
 		while (iter1.hasNext()) {
 			OpOrdertickets opo = (OpOrdertickets) iter1.next();
@@ -134,9 +145,8 @@ public class CommandCenter extends DispatchAction{
 		String flightDate =request.getParameter("orderdate");
 		request.setAttribute("odate", flightDate);
 		List<FlightInfo> fiList=new FlightInfoService().queryByFlightDate(flightDate);
-		FlightInfo fi = fiList.get(0);
-		int id=fi.getId();
-		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(id);
+		String flightInfoIds = getFlightIds(fiList, 1);
+		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(flightInfoIds);
 		Iterator<OpOrdertickets> iter1=pplist.iterator();
 		while (iter1.hasNext()) {
 			OpOrdertickets opo = (OpOrdertickets) iter1.next();
@@ -180,9 +190,8 @@ public class CommandCenter extends DispatchAction{
 		String flightDate =request.getParameter("orderdate");
 		request.setAttribute("odate", flightDate);
 		List<FlightInfo> fiList=new FlightInfoService().queryByFlightDate(flightDate);
-		FlightInfo fi = fiList.get(0);
-		int id=fi.getId();
-		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(id);
+		String flightInfoIds = getFlightIds(fiList, 1);
+		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(flightInfoIds);
 		Iterator<OpOrdertickets> iter1=pplist.iterator();
 		while (iter1.hasNext()) {
 			OpOrdertickets opo = (OpOrdertickets) iter1.next();
@@ -228,9 +237,9 @@ public class CommandCenter extends DispatchAction{
 		String flightDate =request.getParameter("orderdate");
 		request.setAttribute("odate", flightDate);
 		List<FlightInfo> fiList=new FlightInfoService().queryByFlightDate(flightDate);
-		FlightInfo fi = fiList.get(1);
-		int id=fi.getId();
-		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(id);
+		
+		String flightInfoIds = getFlightIds(fiList, 2);
+		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(flightInfoIds);
 		Iterator<OpOrdertickets> iter1=pplist.iterator();
 		while (iter1.hasNext()) {
 			OpOrdertickets opo = (OpOrdertickets) iter1.next();
@@ -269,9 +278,8 @@ public class CommandCenter extends DispatchAction{
 		String flightDate =request.getParameter("orderdate");
 		request.setAttribute("odate", flightDate);
 		List<FlightInfo> fiList=new FlightInfoService().queryByFlightDate(flightDate);
-		FlightInfo fi = fiList.get(1);
-		int id=fi.getId();
-		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(id);
+		String flightInfoIds = getFlightIds(fiList, 2);
+		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(flightInfoIds);
 		Iterator<OpOrdertickets> iter1=pplist.iterator();
 		while (iter1.hasNext()) {
 			OpOrdertickets opo = (OpOrdertickets) iter1.next();
@@ -316,9 +324,8 @@ public class CommandCenter extends DispatchAction{
 		String flightDate =request.getParameter("orderdate");
 		request.setAttribute("odate", flightDate);
 		List<FlightInfo> fiList=new FlightInfoService().queryByFlightDate(flightDate);
-		FlightInfo fi = fiList.get(1);
-		int id=fi.getId();
-		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(id);
+		String flightInfoIds = getFlightIds(fiList, 2);
+		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(flightInfoIds);
 		Iterator<OpOrdertickets> iter1=pplist.iterator();
 		while (iter1.hasNext()) {
 			OpOrdertickets opo = (OpOrdertickets) iter1.next();
@@ -363,9 +370,8 @@ public class CommandCenter extends DispatchAction{
 		String flightDate =request.getParameter("orderdate");
 		request.setAttribute("odate", flightDate);
 		List<FlightInfo> fiList=new FlightInfoService().queryByFlightDate(flightDate);
-		FlightInfo fi = fiList.get(1);
-		int id=fi.getId();
-		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(id);
+		String flightInfoIds = getFlightIds(fiList, 2);
+		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(flightInfoIds);
 		Iterator<OpOrdertickets> iter1=pplist.iterator();
 		while (iter1.hasNext()) {
 			OpOrdertickets opo = (OpOrdertickets) iter1.next();
@@ -412,9 +418,8 @@ public class CommandCenter extends DispatchAction{
 		String flightDate =request.getParameter("orderdate");
 		request.setAttribute("odate", flightDate);
 		List<FlightInfo> fiList=new FlightInfoService().queryByFlightDate(flightDate);
-		FlightInfo fi = fiList.get(2);
-		int id=fi.getId();
-		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(id);
+		String flightInfoIds = getFlightIds(fiList, 3);
+		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(flightInfoIds);
 		Iterator<OpOrdertickets> iter1=pplist.iterator();
 		while (iter1.hasNext()) {
 			OpOrdertickets opo = (OpOrdertickets) iter1.next();
@@ -442,7 +447,19 @@ public class CommandCenter extends DispatchAction{
 		return mapping.findForward("mainPageContain");
 //		}
 	}
-	
+	private String getFlightIds(List<FlightInfo> fiList,int postion) {
+		String flightInfoIds = "";
+		Set<String> flTime = new HashSet<>();
+		for (FlightInfo fInfo : fiList) {
+			flTime.add(fInfo.getFly_time());
+			if (flTime.size() == postion) {
+				flightInfoIds += ","+fInfo.getId();
+			}
+		}
+		flightInfoIds = flightInfoIds.substring(1);
+		
+		return flightInfoIds;
+	}
 	public ActionForward toMainPageContain20(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
 		int shouPiao=0;
@@ -454,9 +471,8 @@ public class CommandCenter extends DispatchAction{
 		String flightDate =request.getParameter("orderdate");
 		request.setAttribute("odate", flightDate);
 		List<FlightInfo> fiList=new FlightInfoService().queryByFlightDate(flightDate);
-		FlightInfo fi = fiList.get(2);
-		int id=fi.getId();
-		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(id);
+		String flightInfoIds = getFlightIds(fiList, 3);
+		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(flightInfoIds);
 		Iterator<OpOrdertickets> iter1=pplist.iterator();
 		while (iter1.hasNext()) {
 			OpOrdertickets opo = (OpOrdertickets) iter1.next();
@@ -501,9 +517,8 @@ public class CommandCenter extends DispatchAction{
 		String flightDate =request.getParameter("orderdate");
 		request.setAttribute("odate", flightDate);
 		List<FlightInfo> fiList=new FlightInfoService().queryByFlightDate(flightDate);
-		FlightInfo fi = fiList.get(2);
-		int id=fi.getId();
-		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(id);
+		String flightInfoIds = getFlightIds(fiList, 3);
+		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(flightInfoIds);
 		Iterator<OpOrdertickets> iter1=pplist.iterator();
 		while (iter1.hasNext()) {
 			OpOrdertickets opo = (OpOrdertickets) iter1.next();
@@ -548,9 +563,8 @@ public class CommandCenter extends DispatchAction{
 		String flightDate =request.getParameter("orderdate");
 		request.setAttribute("odate", flightDate);
 		List<FlightInfo> fiList=new FlightInfoService().queryByFlightDate(flightDate);
-		FlightInfo fi = fiList.get(2);
-		int id=fi.getId();
-		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(id);
+		String flightInfoIds = getFlightIds(fiList, 3);
+		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(flightInfoIds);
 		Iterator<OpOrdertickets> iter1=pplist.iterator();
 		while (iter1.hasNext()) {
 			OpOrdertickets opo = (OpOrdertickets) iter1.next();

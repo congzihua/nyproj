@@ -7,11 +7,16 @@
 
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%
-
+	List<OpOrdertickets> ol2 = (List<OpOrdertickets>)request.getAttribute("flightinfos");
+	String fightInfoids = "";
+	for (OpOrdertickets op:ol2) {
+		fightInfoids += ","+ op.getId();
+	}
+	fightInfoids = fightInfoids.substring(1);
 	java.util.List<BaTicketpoint> tpList = (java.util.List<BaTicketpoint>)request.getAttribute("tpList");
  	List<BaTicketprice> tprice = (List<BaTicketprice>)request.getAttribute("tprice");
 	String ot = (String)request.getAttribute("orderdate");
-	
+	Integer flightId = Integer.valueOf((String)request.getAttribute("flightId"));
   	SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
   	java.util.Date date = format.parse(ot);
   	java.util.Calendar c = java.util.Calendar.getInstance();
@@ -42,7 +47,8 @@
 
 	<script type="text/javascript" src="js/calendar/src/utils.js"></script>
 		<script type="text/javascript" src="js/calendar/src/calendar.js"></script>
-		<script type="text/javascript" src="<%=request.getContextPath()%>/js/verify.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/verify.js"></script>
+    <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 		<!-- import the language module -->
 		<script type="text/javascript"
 			src="js/calendar/lang/calendar-zh.js"></script>
@@ -65,7 +71,7 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 -->
 </STYLE>
 <script type="text/javascript">
-<!--
+
 window.name="mypage";
 <%if(request.getAttribute("message")!=null && request.getAttribute("message").toString().trim().equals("1")){%>
 		alert("订票信息保存成功！");
@@ -171,8 +177,8 @@ function check()
 			var orderdate = document.getElementById("orderdate").value;
 			var flyTime = document.getElementById("flyTime").value;
 			var certType = document.getElementById("certType").value;
-			
-			SysmanagerDWR.validate(flightId,flightinfoId,orderdate,ticketpointId.value,flyTime,certType,certNo.value,newValidate);
+			var flightInfoIds = '<%=fightInfoids%>';
+			SysmanagerDWR.validate(flightId,flightInfoIds,orderdate,ticketpointId.value,flyTime,certType,certNo.value,newValidate);
 			document.getElementById("bc").disabled="disabled";
 			document.getElementById("gb").disabled="disabled";		
 			
@@ -207,7 +213,7 @@ function check()
 		}
 function dgpage(){
 	var url = "dinggaipage.html";
-window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
+	window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 400px; help: no; scroll: no; status: no");
 }
 
 
@@ -217,18 +223,73 @@ divid.style.visibility = "visible";
 divid.filters.revealTrans.play();
 } 
 function Hide(divid) {
-divid.filters.revealTrans.apply();
-divid.style.visibility = "hidden";
-divid.filters.revealTrans.play();
+	divid.filters.revealTrans.apply();
+	divid.style.visibility = "hidden";
+	divid.filters.revealTrans.play();
 }
-//-->
+function changeFlight(){
+	var selcFlight = document.getElementById("flight").value;
+	var flightId = document.getElementById("flightId").value;
+	if (selcFlight == flightId) {
+		return;
+	}
+	var str = '${flightInfoJson}';
+	var objArr = eval("(" + str + ")");
+	for(var i in objArr) {
+	   if (objArr[i].flightId == selcFlight) {
+		   document.getElementById("flightId").value = objArr[i].flightId;
+		   document.getElementById("flightinfoId").value=  objArr[i].id;
+	   }
+	}
+	var prices = '${pricesJson}';
+	var priceArr = eval("(" + prices + ")");
+	var ops = "";
+	for (var key in priceArr) {
+		
+		if (selcFlight == key) {
+			var ps = priceArr[key];
+			console.log("ps="+ps);
+			for (var i in ps) {
+				ops += '<option value="'+ps[i].id+'">'+ps[i].discountType+'</option>';
+			}
+		}
+	}
+	document.getElementById("priceId").innerHTML=ops;
+}
+function getIdcard(){  
+  var img1Base64;
+  var httpServerPort=8989;                             
+  $.ajax({
+      dataType: "JSONP",                    
+      type: "get",
+      url: "http://localhost:"+httpServerPort+"/api/ReadMsg",//接口服务器地址  参数: Fp=1读证内指纹，PhotoQuality 身份证头像质量，cardImg=1获取身份证正反面图片
+      //contentType: "application/x-www-form-urlencoded; charset=utf-8",
+      success: function (data) {
+          $("#name").val(data.name);
+          $('#certType').val('身份证');
+          $('#certNo').val(data.cardno);
+          //成功执行
+          console.log(data);
+      },
+      error: function (e) {
+          //失败执行
+          alert(e.status + ',' + e.statusText);
+      }
+  });
+}
 </script>
 	</head>
 	<body oncontextmenu="if (!event.ctrlKey){return true;}">
 	<div align="left">
 		<div style="width: 96%" align="center">
 		<FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt">
-			目的地：</FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #b22222; HEIGHT: 9pt">&nbsp; ${flightinfo.flight} &nbsp; </FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt"> 航班号：<font color="#b22222">${flightinfo.flightNo} &nbsp; &nbsp; &nbsp;</font></FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt">乘机日期：</FONT>&nbsp; <FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt"><fmt:formatDate value="${flightinfo.flightDate}" pattern="yyyy-MM-dd"/> &nbsp;${flightinfo.flyTime} &nbsp; 星期 <%=weeks%>
+			目的地：</FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #b22222; HEIGHT: 9pt">&nbsp; 
+			<select id="flight" name="flight" onchange="changeFlight();">
+					<%for (OpOrdertickets oot:ol2) { %>
+						<option value="<%=oot.getFlightId()%>" <%= oot.getFlightId().equals(flightId)?"selected='selected'":""%> ><%=oot.getFlight()%></option>
+					<% }%>
+			</select>
+			&nbsp; </FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt"> 航班号：<font color="#b22222">${flightinfo.flightNo} &nbsp; &nbsp; &nbsp;</font></FONT><FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #000000; HEIGHT: 9pt">乘机日期：</FONT>&nbsp; <FONT style="FONT-SIZE: 12pt;font-weight:5;font-family:'黑体'; COLOR: #B22222; HEIGHT: 9pt"><fmt:formatDate value="${flightinfo.flightDate}" pattern="yyyy-MM-dd"/> &nbsp;${flightinfo.flyTime} &nbsp; 星期 <%=weeks%>
 		</FONT>
 		</div>
 		<div style="width: 96%" align="center">
@@ -326,6 +387,7 @@ divid.filters.revealTrans.play();
 			<td align="center" colspan="6">  
 				<input id="bc" type="button" value="保 存" onclick="check()"/>
 				<input id="gb" type="button" value="关闭" onclick="window.close();"/> 
+        <input id="xinxi" type="button" value="身份证识别" onclick="getIdcard()"/>
 				</td>
 		</tr>
 		

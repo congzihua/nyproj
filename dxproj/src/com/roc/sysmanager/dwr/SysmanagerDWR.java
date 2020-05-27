@@ -160,30 +160,42 @@ public class SysmanagerDWR {
 		ClienService cService = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setSeleDate(upDate);
-		kw.setSeleFlightId(Integer.valueOf(flightId));
+		//kw.setSeleFlightId(Integer.valueOf(flightId));
 		kw.setFlyTime(flyTime);
 		//查看是否存在航班信息
-		OpOrdertickets order = new OpOrdertickets();
+		//当日航班信息列表
 		List<OpOrdertickets> ol1 = cService.getBaFlightInfoList(kw);
-		if(ol1!=null && ol1.size()>0){
-			order = ol1.get(0);
-		}else{
+		if(ol1== null ||  ol1.size() == 0){
 			return 1;//当日无航班信息
 		}
+		boolean isHasFlight = false;
+		int newFlightInfoId = 0;
+		String flightInfoIds = "";
+		for (OpOrdertickets flightInfo:ol1) {
+			Integer curFlightId = flightInfo.getFlightId();
+			flightInfoIds += ","+flightInfo.getId();
+			if (flightId.equals(curFlightId)) {
+				isHasFlight = true;
+				newFlightInfoId = flightInfo.getId();
+			}
+		}
+		if (!isHasFlight)
+			return 1;//当日无航班信息
+		flightInfoIds = flightInfoIds.substring(1);
 		OpOrderticketsKeyword opOrderticketKw = new OpOrderticketsKeyword();
-		
 		opOrderticketKw.setId(Integer.valueOf(id));
+		//查询原始订单信息
 		OpOrdertickets orderInfo = cService.getOrderticketsList(opOrderticketKw).get(0);
-		int newFlightInfoId = order.getId();
+		
 		String certNo = orderInfo.getCertNo();
 		String certType = orderInfo.getCertType();
-		int orderNum = isAlreadyOrderTickets(newFlightInfoId, certType, certNo);
+		int orderNum = isAlreadyOrderTickets(flightInfoIds, certType, certNo);
 		if(orderNum > 0){
 			return 10;//该日已经有订票信息，确认改签日期
 		}
 		com.roc.syspe.entity.OpOrderticketsKeyword okw = new com.roc.syspe.entity.OpOrderticketsKeyword();
 		okw.setTicketPointId(orderTicketPointId);
-		okw.setSeleFlightInfo(order.getId());//航班信息的id
+		okw.setSeleFlightInfos(flightInfoIds);//航班信息的id
 		okw.setId(id);
 		List<OpOrdertickets>  orderList= cService.groupTiecketCount(okw);
 		OpOrdertickets countOrder = null;
@@ -213,7 +225,7 @@ public class SysmanagerDWR {
 		userOper.setType(5);//改签
 		OpOrdertickets ordertickets = new OpOrdertickets();
 		ordertickets.setId(id);
-		ordertickets.setFlightinfoId(order.getId());
+		ordertickets.setFlightinfoId(newFlightInfoId);
 		ordertickets.setTicketpointId(orderTicketPointId);
 		ordertickets.setStatus(status);
 		ordertickets.setSeatNum("");
@@ -255,14 +267,14 @@ public class SysmanagerDWR {
 	}
 	//--------------------------
 	//换登机牌
-	public String djpOrXlqSave(Integer id,Integer userId,Integer type,String seatNum,String gate,String gateTime,Integer luggSum,Double weightSum,Integer flightinfoId,String flightNo,String flightDate,String vipText,String flightTo,String name,String certNo,String origStatus) throws ParseException{
+	public String djpOrXlqSave(Integer id,Integer userId,Integer type,String seatNum,String gate,String gateTime,Integer luggSum,Double weightSum,String flightinfoIds,String flightNo,String flightDate,String vipText,String flightTo,String name,String certNo,String origStatus) throws ParseException{
 		ClienService service = new ClienService();
 		if(seatNum!=null && seatNum.trim().length()>0){
 			OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 			kw.setId(id);
 			kw.setSeatNum(seatNum.trim());
 			
-			kw.setSeleFlightInfo(flightinfoId);
+			kw.setSeleFlightInfos(flightinfoIds);
 			if(service.isHasSeat(kw)>=1){
 				return "0";
 			}
@@ -283,11 +295,12 @@ public class SysmanagerDWR {
 			return "5";//登机牌状态与元状态不匹配
 		}
 		String startAddress = ArgsUnit.getStartAddress();
+		ArgsUnit.setGateDeafult(gate);
 		return service.updateForDjp(order,useroper)?flightNo+"^"+flightDate+"^"+vipText+"^"+seatNum+"^"+flightTo+"^"+(startAddress.contains("北京")?"北京南郊":startAddress)+"^"+gate+"^"+gateTime+"^"+name+"^"+certNo:"1";
 		
 	}
 	//换登机牌团队
-	public String djpOrXlqSaveTeam(String ids,Integer userId,Integer type,String seatNums,String gate,String gateTime,Integer luggSum,Double weightSum,Integer flightinfoId,String origStatus) throws ParseException{
+	public String djpOrXlqSaveTeam(String ids,Integer userId,Integer type,String seatNums,String gate,String gateTime,Integer luggSum,Double weightSum,String flightinfoIds,String origStatus) throws ParseException{
 		ClienService service = new ClienService();
 		String[] seatArray = seatNums.split(",");
 		String[]idArray = ids.split(",");
@@ -299,7 +312,7 @@ public class SysmanagerDWR {
 					kw.setId(0);//此处为团队去重复，
 					kw.setSeatNum(seatArray[i].trim());
 					kw.setIds(ids);
-					kw.setSeleFlightInfo(flightinfoId);
+					kw.setSeleFlightInfos(flightinfoIds);
 					if(service.isHasSeat(kw)>=1){
 						return "0";
 					}
@@ -357,20 +370,21 @@ public class SysmanagerDWR {
 		useroper.setUserId(userId);
 		useroper.setType(type);
 		boolean b= service.updateForDjpTeam(orderList, null, useroper);
+		ArgsUnit.setGateDeafult(gate);
 		return b?returnSeatArray:"1";
 		
 	}
 	
 	//--------------------------
 	//出行李签的保存信息方法
-	public String xlqSave(Integer id,Integer userId,Integer type,String seatNum,String gate,String gateTime,Integer luggSum,Double weightSum,Integer flightinfoId,String flightTo,String workerNo,String flightno,String flydate,String name,Integer prinNum) throws ParseException{
+	public String xlqSave(Integer id,Integer userId,Integer type,String seatNum,String gate,String gateTime,Integer luggSum,Double weightSum,String flightinfoIds,String flightTo,String workerNo,String flightno,String flydate,String name,Integer prinNum) throws ParseException{
 		ClienService service = new ClienService();
 		if(seatNum!=null && seatNum.trim().length()>0){
 			OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 			kw.setId(id);
 			kw.setSeatNum(seatNum.trim());
 			
-			kw.setSeleFlightInfo(flightinfoId);
+			kw.setSeleFlightInfos(flightinfoIds);
 			if(service.isHasSeat(kw)>=1){
 				return "0";
 			}
@@ -402,7 +416,7 @@ public class SysmanagerDWR {
 	
 	}
 	//出行李签团队
-	public String xlqSaveTeam(String ids,Integer userId,Integer type,String seatNums,String gate,String gateTime,Integer luggSum,Double weightSum,Integer flightinfoId,String origStatus,Integer prinNum) throws ParseException{
+	public String xlqSaveTeam(String ids,Integer userId,Integer type,String seatNums,String gate,String gateTime,Integer luggSum,Double weightSum,String flightinfoIds,String origStatus,Integer prinNum) throws ParseException{
 		ClienService service =  SingleInstanceClientSer.getClientService().getService();
 		String[] seatArray = seatNums.split(",");
 		String[]idArray = ids.split(",");
@@ -414,7 +428,7 @@ public class SysmanagerDWR {
 					kw.setId(0);//此处为团队去重复，
 					kw.setSeatNum(seatArray[i].trim());
 					kw.setIds(ids);
-					kw.setSeleFlightInfo(flightinfoId);
+					kw.setSeleFlightInfos(flightinfoIds);
 					if(service.isHasSeat(kw)>=1){
 						return "0";
 					}
@@ -492,12 +506,17 @@ public class SysmanagerDWR {
 	}
 	//--------------------------
 	//批量跟新航班号
-	public boolean bentchUpdateFlightNo(Integer flightinfoId,String flightNo) throws ParseException{
+	public boolean bentchUpdateFlightNo(String flightinfoIds,String flightNo) throws ParseException{
+		String[] fIds = flightinfoIds.split(",");
 		ClienService service = new ClienService();
 		OpOrdertickets op = new OpOrdertickets();
-	    op.setFlightinfoId(flightinfoId);
-	    op.setFlightNo(flightNo);
-	    return service.bentchUpFlightNo(op);
+		boolean isSucess = false;
+		for (String flightinfoId:fIds) {
+		    op.setFlightinfoId(Integer.valueOf(flightinfoId));
+		    op.setFlightNo(flightNo);
+		    isSucess = service.bentchUpFlightNo(op);
+		}
+	    return isSucess;
 	}
 	public int printTickets(Integer id,String opername){
 		ClienService service = new ClienService();
@@ -528,7 +547,7 @@ public class SysmanagerDWR {
 			return 0;
 		}
 	}
-	public  int validate(Integer flightId,Integer flightinfoId,
+	public  int validate(Integer flightId,String flightinfoIds,
 			String orderdate,Integer ticketpointId,String flyTime,
 			String certType,String certNo){
 		BlacklistUserService servcie = new BlacklistUserService();
@@ -539,22 +558,22 @@ public class SysmanagerDWR {
 		if (bLUser != null && bLUser.getIdcard()!= null) {
 			return 4;
 		}
-		int isOrder = isAlreadyOrderTickets(flightinfoId, certType, certNo);
+		int isOrder = isAlreadyOrderTickets(flightinfoIds, certType, certNo);
 		if(isOrder > 0){
 			return 3;//该用户已经订过票
 		}
-		int ticketCount = isHasTickets(flightId, flightinfoId, orderdate, ticketpointId, flyTime);
+		int ticketCount = isHasTickets(flightId, flightinfoIds, orderdate, ticketpointId, flyTime);
 		if(!(ticketCount>0)){
 			return 2;//票点票额已经不足，请核查			
 		}
 		return 1;//正常可以保存订票信息
 	}
 	//查看售票点是否有票额 或  当日是否有此人已经订售票或出登机牌
-	private static int isHasTickets(Integer flightId,Integer flightinfoId,String orderdate,Integer ticketpointId,String flyTime){
+	private static int isHasTickets(Integer flightId,String flightinfoIds,String orderdate,Integer ticketpointId,String flyTime){
 		ClienService cService = new ClienService();
 		com.roc.syspe.entity.OpOrderticketsKeyword okw = new com.roc.syspe.entity.OpOrderticketsKeyword();
 		okw.setTicketPointId(ticketpointId);
-		okw.setSeleFlightInfo(flightinfoId);//航班信息的id
+		okw.setSeleFlightInfos(flightinfoIds);//航班信息的id
 		
 		List<OpOrdertickets>  orderList= cService.groupTiecketCount(okw);
 		OpOrdertickets countOrder = null;
@@ -581,12 +600,12 @@ public class SysmanagerDWR {
 		return 1;
 		
 	}
-	private static Integer isAlreadyOrderTickets(Integer flightinfoId,String certType,String certNo){
+	private static Integer isAlreadyOrderTickets(String flightinfoIds,String certType,String certNo){
 		ClienService cService = new ClienService();
 		com.roc.syspe.entity.OpOrderticketsKeyword okw = new com.roc.syspe.entity.OpOrderticketsKeyword();
 		okw.setCertNo(certNo);
 		okw.setCertType(certType);
-		okw.setSeleFlightInfo(flightinfoId);
+		okw.setSeleFlightInfos(flightinfoIds);
 		Integer count = cService.authInfoIsHas(okw);
 		return count;
 		
@@ -699,5 +718,20 @@ public class SysmanagerDWR {
 		user.setUserid(userId);
 		user.setPassword(newPassoword);		
 		return service.changeUserPwd(user);
+	}
+	/**验证用户身份是否可以进行换登/售票机牌**/
+	public String getOrderIdAndType(String flightInfoIds,String certNo,int status) {
+		ClienService service = new ClienService();
+		OpOrdertickets ticket = service.getOrderInfoByParams(flightInfoIds,certNo,status);
+		String orderIdAndTeamFlag = null;
+		
+		if (ticket != null && ticket.getId() != null) {
+			String teamName = ticket.getTeamName();
+			int flightInfoId = ticket.getFlightinfoId();
+			orderIdAndTeamFlag = ticket.getId()+";"+(ticket.getTeamflag() == null?"0":ticket.getTeamflag())
+					+";"+ticket.getStatus()+";"+flightInfoId+";"+teamName;
+		}
+		
+		return orderIdAndTeamFlag;
 	}
 }

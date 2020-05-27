@@ -9,7 +9,8 @@ public class ArgsUnit {
 	
 	private static String startAddress = null;
 	private static String dataOutDir = null;
-	
+	private static int opTicketIdInitVal =  0 ;
+	private static String gate;
 	public static String getStartAddress(String uri) {
 	    if(startAddress == null){
 			Properties properties = new Properties();
@@ -17,8 +18,10 @@ public class ArgsUnit {
 				properties.load(new FileInputStream(uri+"WEB-INF/classes/configmap.properties"));
 				startAddress = properties.getProperty("startaddress");
 		    } catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 	    }
@@ -60,5 +63,43 @@ public class ArgsUnit {
 			}
 	    }
 		return dataOutDir;
+	}
+
+	public static int getOpTicketIdInitVal() {
+		String uri = "";
+		ArgsUnit unit = new ArgsUnit();
+		uri =unit.getClass().getClassLoader().getResource("").getPath();
+	    if(opTicketIdInitVal == 0){
+			Properties properties = new Properties();
+		    try {
+				properties.load(new FileInputStream(uri+"configmap.properties"));
+				String idStart = properties.getProperty("TICKET_ID_START");
+				opTicketIdInitVal = Integer.valueOf(idStart);
+		    } catch (Exception e) {
+		    	opTicketIdInitVal = 10000;
+				e.printStackTrace();
+			}
+	    }
+		return opTicketIdInitVal;
+	}
+	public static String gateDeafult() {
+		String uri = "";
+		ArgsUnit unit = new ArgsUnit();
+		uri =unit.getClass().getClassLoader().getResource("").getPath();
+	    if(gate == null){
+			Properties properties = new Properties();
+		    try {
+				properties.load(new FileInputStream(uri+"configmap.properties"));
+				gate = properties.getProperty("gate");
+				
+		    } catch (Exception e) {
+		    	gate = "1";
+				e.printStackTrace();
+			}
+	    }
+		return gate;
+	}
+	public static void setGateDeafult(String gt) {
+		gate = gt;
 	}
 }

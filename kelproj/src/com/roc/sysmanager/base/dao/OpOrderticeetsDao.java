@@ -44,11 +44,11 @@ public interface OpOrderticeetsDao {
 	
 	public  List<OpOrdertickets> getAllCountInfoForUnits(OpOrderticketsKeyword keyword);
 	public Integer isHasSeat(OpOrderticketsKeyword keyword);
-	public List<OpOrdertickets> queryByFlightInfoId(int id);
+	public List<OpOrdertickets> queryByFlightInfoId(String flightInfoIds);
 	
 	public Integer updateStatusAtDJP(int id);
 	
-	public Integer selectStatusByCustomerId(int id,int flightInfoId);
+	public Integer selectStatusByCustomerId(int id,String flightInfoIds);
 	
 	public Integer mainPageForDJP(OpOrderticketsKeyword keyword);
 	
@@ -106,12 +106,14 @@ public interface OpOrderticeetsDao {
 	 * @param id
 	 * @return
 	 */
-	public Integer selectStatusForOver(int id,Integer flightInfoId) ;
+	public Integer selectStatusForOver(int id,String flightInfoIds) ;
 	/**
 	 * 更改状态为结束7
 	 * @param id
 	 * @return
 	 */
 	public Integer updateStatusOver(int id);
+	public List<OpOrdertickets> queryGroupOrderTicketInfos(OpOrderticketsKeyword keyword);
+	public OpOrdertickets getOrderInfoByParams(String flightInfoIds, String certNo,int status);
 
 }

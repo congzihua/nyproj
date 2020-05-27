@@ -1,5 +1,6 @@
 package com.roc.sysmanager.base.action;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,24 +23,15 @@ import com.roc.syspe.entity.OpOrderticketsKeyword;
 public class DJPAction extends DispatchAction {
 	/**
 	 * 查看是否有航班信息！
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
 	 */
 	public ActionForward toBlankInfo(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		String flightId = request.getParameter("flightId");
-		request.setAttribute("flightId", flightId);
 		String orderdate = request.getParameter("orderdate");
 		String flyTime = request.getParameter("hour") + ":"
 				+ request.getParameter("minue");
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setSeleDate(orderdate);
-		kw.setSeleFlightId(Integer.valueOf(flightId));
 		kw.setFlyTime(flyTime);
 		// 查看是否存在航班信息
 		List<OpOrdertickets> ol1 = service.getBaFlightInfoList(kw);
@@ -57,8 +49,14 @@ public class DJPAction extends DispatchAction {
 		request.setAttribute("flightDate", orderdate);
 		request.setAttribute("flyTime", orderinfo.getFlyTime());
 		request.setAttribute("flightNo", orderinfo.getFlightNo());
+		String flightInfoIds = "";
+		for (OpOrdertickets ot :ol1) {
+			flightInfoIds +=","+ot.getId();
+		}
+		flightInfoIds = flightInfoIds.substring(1);
+		request.setAttribute("flightInfoIds", flightInfoIds);
 		OpOrderticketsKeyword keyword = new OpOrderticketsKeyword();
-		keyword.setSeleFlightInfo(orderinfo.getId());
+		keyword.setSeleFlightInfos(flightInfoIds);
 		List<OpOrdertickets> infoList = service.zhidengjiticketsList(keyword);
 		request.setAttribute("infoList", infoList);
 		return mapping.findForward("djpList");
@@ -67,17 +65,11 @@ public class DJPAction extends DispatchAction {
 
 	/**
 	 * 查看list
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
 	 */
 	public ActionForward toList(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
-		String flightinfoId = request.getParameter("flightinfoId");
-		request.setAttribute("flightinfoId", flightinfoId);
+		String flightinfoIds = request.getParameter("flightInfoIds");
+		request.setAttribute("flightInfoIds", flightinfoIds);
 		request.setAttribute("flyTime", request.getParameter("flyTime"));
 		request.setAttribute("flight", request.getParameter("flight"));
 		request.setAttribute("flightDate", request.getParameter("flightDate"));
@@ -85,7 +77,7 @@ public class DJPAction extends DispatchAction {
 
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword keyword = new OpOrderticketsKeyword();
-		keyword.setSeleFlightInfo(Integer.valueOf(flightinfoId));
+		keyword.setSeleFlightInfos(flightinfoIds);
 		List<OpOrdertickets> infoList = service.zhidengjiticketsList(keyword);
 		request.setAttribute("infoList", infoList);
 		return mapping.findForward("djpList");
@@ -94,18 +86,13 @@ public class DJPAction extends DispatchAction {
 
 	/**
 	 * 到换登机牌页面
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
 	 */
 	public ActionForward toDJPPage(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
-		String teamName = (String) request.getAttribute("teamName");
 		request.setAttribute("id", id);
+		String flightInfoIds = request.getParameter("flightInfoIds");
+		request.setAttribute("flightInfoIds", flightInfoIds);
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setId(Integer.valueOf(id));
@@ -122,35 +109,23 @@ public class DJPAction extends DispatchAction {
 		List<BaTicketprice> tprice = service2.queryBaTicketpriceList(keyword);
 		request.setAttribute("tprice", tprice);
 		
-		ClienService service3 = new ClienService();
-		OpOrderticketsKeyword keyword1 = new OpOrderticketsKeyword();
-		keyword1.setSeleFlightInfo(Integer.valueOf(id));
-		
-		
-			return mapping.findForward("shchDJP");
-		
-
+		return mapping.findForward("shchDJP");
 	}
 	/**
-	 * 到换登机牌页面
-	 * 
-	 * @param mapping
-	 * @param form
-	 * @param request
-	 * @param response
-	 * @return
+	 * 到换登机牌页面-团体页面
 	 */
 	public ActionForward toDJPPage1(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) {
 		String id = request.getParameter("id");
 		request.setAttribute("id", id);
+		String flightInfoIds = request.getParameter("flightInfoIds");
+		request.setAttribute("flightInfoIds", flightInfoIds);
 		ClienService service = new ClienService();
 		OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 		kw.setId(Integer.valueOf(id));
 		OpOrdertickets ol1 = service.getOrderticketsList(kw).get(0);
 		String teamName = ol1.getTeamName();
-		Integer flightInfoId = ol1.getFlightinfoId();
-		kw.setSeleFlightInfo(flightInfoId);
+		kw.setSeleFlightInfos(flightInfoIds);
 		kw.setTeamName(teamName);
 		kw.setStatus(ol1.getStatus());
 		
@@ -159,7 +134,6 @@ public class DJPAction extends DispatchAction {
 		}
 		List<OpOrdertickets> ooList=service.teamDjpList(kw);
 		request.setAttribute("ooList", ooList);
-		
 		request.setAttribute("flightinfo", ol1);
 
 		BaTicketpointKeyword kw1 = new BaTicketpointKeyword();
@@ -172,13 +146,6 @@ public class DJPAction extends DispatchAction {
 		List<BaTicketprice> tprice = service2.queryBaTicketpriceList(keyword);
 		request.setAttribute("tprice", tprice);
 		
-		ClienService service3 = new ClienService();
-		OpOrderticketsKeyword keyword1 = new OpOrderticketsKeyword();
-		keyword1.setSeleFlightInfo(Integer.valueOf(id));
-		
-		teamName = ol1.getTeamName();
 		return mapping.findForward("shchDJPTEAM");
-		
-
 	}
 }

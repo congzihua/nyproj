@@ -113,7 +113,7 @@ String action="";
   <body background="<%=request.getContextPath()%>/image/bg.jpg">
     <%if(fdate!=null){ %>
     <div align="center">
-   <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">目的地：</font> <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color: #b22222"> <%=fn %></font>&nbsp; &nbsp;<FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">航班号：</font><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color: #b22222"><%=hbh %></FONT>&nbsp; &nbsp;<FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">起飞时间：</font><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color: #b22222"><%=fd %>&nbsp;<%=ft %> 星期 <%=weeks%></font>
+  <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">航班号：</font><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color: #b22222"><%=hbh %></FONT>&nbsp; &nbsp;<FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">起飞时间：</font><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';color: #b22222"><%=fd %>&nbsp;<%=ft %> 星期 <%=weeks%></font>
    <br/>
    <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">已售票：</font><a href="javascript:void(0);" onclick="shouPiao()"> <FONT style="font-size:30px;text-shadow:Red;font-family:'黑体';color: #b22222"><%=shouPiao+huanPai+jinCang+safeCheckSum %> </FONT></a><FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">张 </font>&nbsp; 
    <FONT style="font-size:20px;text-shadow:Red;font-family:'黑体';">已值机：</font><a href="javascript:void(0);" onclick="huanPai()"><FONT style="font-size:30px;text-shadow:Red;font-family:'黑体';color: #b22222"> <%=huanPai+jinCang+safeCheckSum %> </FONT></a>
@@ -126,23 +126,26 @@ String action="";
     <table bgcolor="#3366FF" border="0" cellpadding="0" cellspacing="1"  width="1024" align="center">
      <tr bgcolor="#F0F0F0">
     		<th>序号</th>
+    		<th>航程</th>
     		<th>姓名</th>
     		<th>VIP</th>
     		<th>联系方式</th>
     		<th>状态</th>
     	</tr>
-    <%for(int i=0;i<pplist.size();i++){
-    	OpOrdertickets eo =pplist.get(i);
-    	int vipflag=Integer.parseInt(eo.getVipFlag());
-    	int status=Integer.parseInt(eo.getStatus());
-    	%>
-    	<tr bgcolor="#FFFFFF">
-    		<td align="center" bordercolor="black"><%=i+1 %></td>
-    		<td align="center" bordercolor="black"><%=eo.getName() %></td>
-    		<td align="center" bordercolor="black"><%=vipflag==1?"VIP":"" %></td>
-    		<td align="center" bordercolor="black"><%=eo.getLinkphone() %></td>
-    		<td align="center" bordercolor="black"><%=(status==2?"已售票":(status==3?"已换登机牌" :(status==4?"已安检":(status==7?"已登机":"已退票"))))%></td>
-    	</tr>
+    <%	if (pplist != null)
+    	for(int i=0;i<pplist.size();i++){
+	    	OpOrdertickets eo =pplist.get(i);
+	    	int vipflag=Integer.parseInt(eo.getVipFlag());
+	    	int status=Integer.parseInt(eo.getStatus());
+	%>
+	    	<tr bgcolor="#FFFFFF">
+	    		<td align="center" bordercolor="black"><%=i+1 %></td>
+	    		<td align="center" bordercolor="black"><%=eo.getFlight() %></td>
+	    		<td align="center" bordercolor="black"><%=eo.getName() %></td>
+	    		<td align="center" bordercolor="black"><%=vipflag==1?"VIP":"" %></td>
+	    		<td align="center" bordercolor="black"><%=eo.getLinkphone() %></td>
+	    		<td align="center" bordercolor="black"><%=(status==2?"已售票":(status==3?"已换登机牌" :(status==4?"已安检":(status==7?"已登机":"已退票"))))%></td>
+	    	</tr>
     	<%
   	  } 
     %>

@@ -1,8 +1,17 @@
+<%@page import="com.roc.syspe.entity.OpOrdertickets"%>
+<%@page import="java.util.List"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%
 	
-	Integer flightinfoId = (Integer)request.getAttribute("flightinfoId");
-		String flightId = (String)request.getAttribute("flightId");
+	List<OpOrdertickets> ol1 = (List<OpOrdertickets>)request.getAttribute("flightInfoList");
+	String flightInfoIds = "";
+	String flightIds = "";
+	for (OpOrdertickets ot:ol1) {
+		flightInfoIds +=","+ ot.getId();
+		flightIds += ","+ot.getFlightId();
+	}
+	flightInfoIds = flightInfoIds.substring(1);
+	flightIds = flightIds.substring(1);
 	String orderdate = (String)request.getAttribute("orderdate");
 	String flyTime = (String)request.getAttribute("flyTime");
 %>
@@ -14,10 +23,10 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/layer/layer.js"></script>
 </head>
-<frameset rows="160,*" frameborder="0" border="0" id="appMainFrame">
-	<frame id="dspTop" name="dspTop" scrolling="auto" noresize="noresize"  src="<%=request.getContextPath()%>/clientAction.do?method=toTopInfoPage&flightinfoId=<%=flightinfoId%>" marginheight="0">
+<frameset rows="180,*" frameborder="0" border="0" id="appMainFrame">
+	<frame id="dspTop" name="dspTop" noresize="noresize"  src="<%=request.getContextPath()%>/clientAction.do?method=toTopInfoPage&flightinfoIds=<%=flightInfoIds%>" marginheight="0">
 	
-     <frame id="dspBottom" name="dspBottom" src="<%=request.getContextPath()%>/clientAction.do?method=toBottomList&flightinfoId=<%=flightinfoId%>&flightId=<%=flightId%>&orderdate=<%=orderdate%>&ordertime=<%=flyTime%>" >
+     <frame id="dspBottom" name="dspBottom" src="<%=request.getContextPath()%>/clientAction.do?method=toBottomList&flightinfoIds=<%=flightInfoIds%>&orderdate=<%=orderdate%>&ordertime=<%=flyTime%>&flightIds=<%=flightIds %>" >
 	<noframes>
         <body>
             <p>no frames</p>

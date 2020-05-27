@@ -71,6 +71,8 @@
     	select a.flight_id,a.flight_date,a.fly_time from ba_flightinfo a where a.DELETE_FLAG  !=1
     </select>
     <select id="queryByFlightDate" parameterClass="java.lang.String" resultMap="ooFlightInfoResult">
-    	select a.id,a.flight_id,a.flight_date,a.fly_time,a.createdate,b.flight flight_name,a.delete_flag from ba_flightinfo a,ba_flight b where a.flight_id=b.id and a.DELETE_FLAG  !=1 and b.delete_flag !=1 and a.flight_date=#value#
+    	select a.id,a.flight_id,a.flight_date,a.fly_time,a.createdate,b.flight flight_name,a.delete_flag from ba_flightinfo a,ba_flight b 
+    	where a.flight_id=b.id and a.DELETE_FLAG  !=1 and b.delete_flag !=1 and a.flight_date=#value#
+    	order by a.fly_time
     </select>  
 </sqlMap>

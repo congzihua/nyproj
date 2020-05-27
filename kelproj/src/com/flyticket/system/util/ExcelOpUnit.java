@@ -226,6 +226,7 @@ public class ExcelOpUnit {
 		}  
 		return true;
 	}
+	
 	private static HSSFCellStyle getTableTitleStyle(HSSFWorkbook workbook){
 		HSSFCellStyle style = workbook.createCellStyle();
 		  style.setFillBackgroundColor(HSSFCellStyle.LEAST_DOTS);
@@ -314,10 +315,12 @@ public class ExcelOpUnit {
 						 row.setHeightInPoints(24F);
 						 String mc = null;
 						 if(startAddress.contains("南苑") || startAddress.contains("北京")){
-							 startAddress = "北京南郊";
+							 mc = "北京南郊";
+						 }else if(startAddress.contains("鼎新")){
+							 mc = "鼎新保障办";
+						 }else if(startAddress.contains("库")){
+							 mc = "库尔勒保障办";
 						 }
-						 
-						 mc = startAddress + "保障办";
 						 row.createCell(0).setCellValue("编报单位："+mc);
 //						 HSSFCellStyle sty1 = sty;
 						 sty1.setAlignment(CellStyle.ALIGN_LEFT);

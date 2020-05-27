@@ -295,6 +295,7 @@ public class SysmanagerDWR {
 			return "5";//登机牌状态与元状态不匹配
 		}
 		String startAddress = ArgsUnit.getStartAddress();
+		ArgsUnit.setGateDeafult(gate);
 		return service.updateForDjp(order,useroper)?flightNo+"^"+flightDate+"^"+vipText+"^"+seatNum+"^"+flightTo+"^"+(startAddress.contains("北京")?"北京南郊":startAddress)+"^"+gate+"^"+gateTime+"^"+name+"^"+certNo:"1";
 		
 	}
@@ -369,6 +370,7 @@ public class SysmanagerDWR {
 		useroper.setUserId(userId);
 		useroper.setType(type);
 		boolean b= service.updateForDjpTeam(orderList, null, useroper);
+		ArgsUnit.setGateDeafult(gate);
 		return b?returnSeatArray:"1";
 		
 	}

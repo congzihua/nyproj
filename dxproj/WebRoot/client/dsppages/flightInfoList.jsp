@@ -39,11 +39,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			src="<%=request.getContextPath()%>/js/calendar/src/calendar-setup.js"></script>
 		<script type="text/javascript">
 			function sb(){
-				var flightId = document.getElementById("flightId");
 				var orderdate = document.getElementById("orderdate");
 				var minue = document.getElementById("minue");
 				var hour =document.getElementById("hour");
-				var url = "<%=request.getContextPath()%>/clientAction.do?method=toBeanchInfo&flightId="+flightId.value+"&orderdate="+orderdate.value+"&minue="+minue.value+"&hour="+hour.value;
+				var url = "<%=request.getContextPath()%>/clientAction.do?method=toBeanchInfo&orderdate="+orderdate.value+"&minue="+minue.value+"&hour="+hour.value;
 				document.getElementById("ifr").src=url;
 			}
 		</script>
@@ -54,14 +53,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <form action="<%=request.getContextPath()%>/clientAction.do?method=toBeanchInfo" method="post" target="ifr">
     <table border="0" width="1024" align="center">
     	<tr>
-    		<td>目的地：</td>
-    		<td nowrap="nowrap">
-    			<select id="flightId" name="flightId">
-    			<%for(BaFlight bf:list){ %>
-    				<option value="<%=bf.getId()%>" <%=request.getAttribute("flightId")!=null&&request.getAttribute("flightId").toString().trim().equals(String.valueOf(bf.getId()))?"selected=\'selected\'":""%>><%=bf.getFlight()%></option>
-    			<%}%>
-    			</select>
-    		</td>
     		<td align="right">日期：</td>
     		<td width="20%">
     		<table border="0">
@@ -80,10 +71,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     				
     				<option value="07">07</option>
     				<option value="08">08</option>
-    				<option value="09">09</option>
+    				<option value="09" selected="selected">09</option>
     				<option value="10">10</option>
     				<option value="11">11</option>
-    				<option value="12"  selected="selected">12</option>
+    				<option value="12">12</option>
     				<option value="13">13</option>
     				<option value="14">14</option>
     				<option value="15">15</option>
@@ -101,7 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     				<option value="10">10</option>
     				
     				<option value="20">20</option>
-    				<option value="30"  selected="selected">30</option>
+    				<option value="30">30</option>
     				<option value="40">40</option>
     				<option value="50">50</option>
     				

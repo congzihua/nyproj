@@ -61,7 +61,7 @@
 												cellspacing="0" cellpadding="2" align="center">
 												<tr>
 													<td align="left" valign="middle">
-													<font  style="font-family:'华文行楷';font-size:50px;font-weight:1000; color:#FFFF00" >空军值班机后台管理系 统</font>&nbsp;
+													<font  style="font-family:'华文行楷';font-size:50px;font-weight:1000; color:#FFFF00" >空军值班机后台管理系统</font>&nbsp;
 													</td>
 												</tr>
 												<tr>

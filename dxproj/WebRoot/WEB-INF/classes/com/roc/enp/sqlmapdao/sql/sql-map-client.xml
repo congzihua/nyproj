@@ -72,6 +72,7 @@
 	   <result property="seatNum" column="SEAT_NUM"/>
 	   <result property="id" column="ID"/>
 	   <result property="flightNo" column="flight_no"/>
+	   <result property="flight" column="FLIGHT"/>	
     </resultMap>  
     <resultMap class="com.roc.syspe.entity.OpOrdertickets" id="ooForUnitsInfos">
     	<result property="flightId" column="FLIGHT_ID"/>
@@ -187,14 +188,14 @@
 	    where a.status not in('8','9') and a.TICKETPOINT_ID=d.id and a.flightinfo_id=b.id and b.flight_id=c.id and b.delete_flag!=1 and c.delete_flag!=1   
     	 <isNotEmpty prepend="and" property="seleFlightInfo">
                         (b.id = #seleFlightInfo#)
-     	 </isNotEmpty> 
-     	 <isNotEmpty  prepend="and" property="seleFlightInfos">
-     	 	b.id = in (${seleFlightInfos})
-     	 </isNotEmpty>
+      </isNotEmpty> 
+      <isNotEmpty  prepend="and" property="seleFlightInfos">
+     	 	b.id  in ($seleFlightInfos$)
+      </isNotEmpty>
        <isNotEmpty prepend="and" property="id">
                         (a.id = #id#)
       </isNotEmpty>
-      order by a.STATUS,a.TICKETPOINT_ID,CONVERT(a.name USING gbk )  
+      order by a.STATUS, a.flightinfo_id,CONVERT(a.name USING gbk )  
       </select>
       <select id="allInfoList" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooOpOrdertickets">
     SELECT a.TEAM_NAME,a.bag_num,a.TEAMFLAG,a.PRICE_ID,a.GATE_TIME,a.SEAT_NUM,a.FLIGHTINFO_ID, a.STATUS, a.NAME,a.CERT_TYPE,a.CERT_NO,a.LINKPHONE,
@@ -204,6 +205,9 @@
 	    where  a.TICKETPOINT_ID=d.id and a.flightinfo_id=b.id and b.flight_id=c.id   
     	 <isNotEmpty prepend="and" property="seleFlightInfo">
                         (b.id = #seleFlightInfo#)
+      </isNotEmpty> 
+      <isNotEmpty prepend="and" property="seleFlightInfos">
+                        (b.id in  ($seleFlightInfos$))
       </isNotEmpty> 
        <isNotEmpty prepend="and" property="id">
                         (a.id = #id#)
@@ -219,7 +223,7 @@
     	 <isNotEmpty prepend="and" property="status"> (a.status in (0,1)) </isNotEmpty> 
        <isNotEmpty prepend="and" property="teamName"> (a.teamflag=1 and a.team_name = #teamName#)</isNotEmpty>
         <isNotEmpty prepend="and" property="seleFlightInfo"> (b.id = #seleFlightInfo#) </isNotEmpty> 
-      
+      <isNotEmpty prepend="and" property="seleFlightInfos"> (b.id in ($seleFlightInfos$)) </isNotEmpty> 
       order by a.STATUS,a.TICKETPOINT_ID,CONVERT(a.name USING gbk )  
       </select>
       
@@ -227,21 +231,33 @@
 	    SELECT a.bag_num,a.TEAM_NAME,a.TEAMFLAG,a.PRICE_ID,a.GATE_TIME,a.SEAT_NUM,a.FLIGHTINFO_ID, a.STATUS, a.NAME,a.CERT_TYPE,a.CERT_NO,a.LINKPHONE,	a.VIP_FLAG,a.TICKETPOINT_ID,b.FLIGHT_NO,a.PAYMENT,a.TICKETPRICE,a.REMARK,a.GATE,a.HALFPRICECARD,
 			a.ZEROPRICECARD,a.CREATEDATE,a.DELETE_FLAG,a.ID,a.LUGG_SUM,a.WEIGHT_SUM,b.FLIGHT_ID,c.FLIGHT,b.FLIGHT_DATE,b.FLY_TIME,d.name ticketpointname   FROM op_ordertickets a,ba_flightinfo b,ba_flight c,ba_ticketpoint d 
 	   		 where a.status  in('2','3','4') and a.flightinfo_id=b.id and b.flight_id=c.id and b.delete_flag!=1 and c.delete_flag!=1  and a.TICKETPOINT_ID=d.id 
-   			 <isNotEmpty prepend="and" property="seleFlightInfo">(b.id = #seleFlightInfo#) </isNotEmpty> order by a.STATUS, CONVERT(a.name USING gbk ) 
+   			 <isNotEmpty prepend="and" property="seleFlightInfo">(b.id = #seleFlightInfo#) </isNotEmpty>
+   			 <isNotEmpty prepend="and" property="seleFlightInfos">(b.id in  ($seleFlightInfos$)) </isNotEmpty>
+   			  order by a.STATUS, CONVERT(a.name USING gbk ) 
       </select>
       
       <select id="baFlightInfoList" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooBaFligInfo">
-      	select a.id,a.FLIGHT_ID,a.FLIGHT_DATE,a.FLY_TIME,b.FLIGHT,a.FLIGHT_NO from ba_flightinfo a,ba_flight b where a.flight_id=b.id  and b.delete_flag!=1  and FLIGHT_ID=#seleFlightId# and FLIGHT_DATE=#seleDate# and FLY_TIME=#flyTime# and a.delete_flag!=1
+      	select a.id,a.FLIGHT_ID,a.FLIGHT_DATE,a.FLY_TIME,b.FLIGHT,a.FLIGHT_NO from ba_flightinfo a,ba_flight b
+      	 where a.flight_id=b.id  and b.delete_flag!=1 
+      	 <isNotEmpty prepend="and" property="seleFlightId">(FLIGHT_ID=#seleFlightId#)</isNotEmpty>
+      	  and FLIGHT_DATE=#seleDate# and FLY_TIME=#flyTime# and a.delete_flag!=1
       </select>
       <select id="groupTiecketCount" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooOrderCounts">
-      	select count(*) counts,TICKETPOINT_ID from op_ordertickets  where status!=9 and status!=8 and FLIGHTINFO_ID =#seleFlightInfo# 
+      	select count(*) counts,TICKETPOINT_ID from op_ordertickets  where status!=9 and status!=8 
+      	<isNotEmpty prepend="and" property="seleFlightInfo">
+              FLIGHTINFO_ID =#seleFlightInfo# 
+      </isNotEmpty> 
+      <isNotEmpty  prepend="and" property="seleFlightInfos">
+     	 	FLIGHTINFO_ID  in ($seleFlightInfos$)
+      </isNotEmpty>
       	<isNotEmpty prepend="and" property="id">(ID != #id#)</isNotEmpty>
       	<isNotEmpty prepend="and" property="seleStatus">(status in (0,1))</isNotEmpty>
       	 <isNotEmpty prepend="and" property="ticketPointId">(TICKETPOINT_ID = #ticketPointId#)</isNotEmpty>  group by TICKETPOINT_ID
       </select>
       
       <select id="getbaFlightInfoForIn" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooBaFligInfo">
-      	select a.id,a.FLIGHT_ID,a.FLIGHT_DATE,a.FLY_TIME,b.FLIGHT,a.FLIGHT_NO from ba_flightinfo a,ba_flight b where a.flight_id=b.id  and b.delete_flag!=1  and a.id=#seleFlightInfo# and a.delete_flag!=1
+      	select a.id,a.FLIGHT_ID,a.FLIGHT_DATE,a.FLY_TIME,b.FLIGHT,a.FLIGHT_NO from ba_flightinfo a,ba_flight b 
+      	where a.flight_id=b.id  and b.delete_flag!=1  and a.id=#seleFlightInfo# and a.delete_flag!=1
       </select>
      <insert id="insertOpOrderticket" parameterClass="com.roc.syspe.entity.OpOrdertickets">
        INSERT INTO op_ordertickets (FLIGHTINFO_ID, STATUS, NAME, CERT_TYPE, CERT_NO, LINKPHONE, VIP_FLAG, 
@@ -364,7 +380,9 @@
      </select>
      <select id="flightInfoSeatNumList" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooSeatnumlist">
      	SELECT a.SEAT_NUM	FROM  op_ordertickets a where a.STATUS not in ('8','9') and a.SEAT_NUM is not  null and a.SEAT_NUM !='' 
-     	and a.FLIGHTINFO_ID = #seleFlightInfo#
+     	<isNotEmpty prepend="and" property="seleFlightInfos">
+				 a.FLIGHTINFO_ID in ($seleFlightInfos$)
+		</isNotEmpty>
      </select>
       <select id="getAllCountInfoForUnits" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword"  resultMap="ooUserUnitsCount">
       	SELECT c.FLIGHT,d.DISCOUNT_TYPE,d.REAL_AMOUNT,count(d.ID) counts
@@ -378,14 +396,15 @@
       	SELECT count(a.ID) counts
 		    FROM op_ordertickets a,ba_flightinfo b
 		    where  a.flightinfo_id=b.id  and a.STATUS not in('8','9')
-            and a.ID != #id# and a.SEAT_NUM = #seatNum# and b.id=#seleFlightInfo#
+            and a.ID != #id# and a.SEAT_NUM = #seatNum# 
+            <isNotEmpty property="seleFlightInfos" prepend="and"> b.id in($seleFlightInfos$) </isNotEmpty> 
             <isNotEmpty property="ids" prepend="and"> <![CDATA[ a.id not in(#ids#) ]]> </isNotEmpty> 
       </select>
-      <select id="queryByFlightInfoId" parameterClass="java.lang.Integer" resultMap="ooRMKZZX">
+      <select id="queryByFlightInfoId" parameterClass="java.lang.String" resultMap="ooRMKZZX">
       	select a.FLIGHTINFO_ID,a.STATUS,a.NAME,a.CERT_TYPE,a.CERT_NO,a.LINKPHONE,a.VIP_FLAG,a.TICKETPOINT_ID,
       		b.FLIGHT_NO,a.PAYMENT,a.TICKETPRICE,a.REMARK,a.GATE,a.HALFPRICECARD,a.ZEROPRICECARD,a.CREATEDATE,
       			a.DELETE_FLAG,a.ID,a.LUGG_SUM,a.WEIGHT_SUM,c.FLIGHT,b.FLIGHT_DATE,b.FLY_TIME
-      	from op_ordertickets a,ba_flightinfo b,ba_flight c where a.delete_flag!=1 and b.delete_flag!=1 and c.delete_flag!=1 and a.flightinfo_id=b.id and b.flight_id=c.id  and a.FLIGHTINFO_ID=#value# and(a.STATUS="2" or a.STATUS="3" or a.STATUS="4"  or a.STATUS="7")
+      	from op_ordertickets a,ba_flightinfo b,ba_flight c where a.delete_flag!=1 and b.delete_flag!=1 and c.delete_flag!=1 and a.flightinfo_id=b.id and b.flight_id=c.id  and a.FLIGHTINFO_ID in ($value$) and(a.STATUS="2" or a.STATUS="3" or a.STATUS="4"  or a.STATUS="7")
       				  order by a.STATUS      
       </select>
     
@@ -396,33 +415,49 @@
       		update op_ordertickets set status=7 where id=#value#
       </update>
       <select id="selectStatusByCustomerId" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultClass="java.lang.Integer">
-      		select count(*) from op_ordertickets a where a.ID=#id# and a.FLIGHTINFO_ID=#seleFlightInfo# and a.STATUS=3
+      		select count(*) from op_ordertickets a where a.ID=#id# and a.FLIGHTINFO_ID in ($seleFlightInfos$) and a.STATUS=3
       </select>
       <select id="selectStatusForOver" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultClass="java.lang.Integer">
-      		select count(*) from op_ordertickets a where a.ID=#id# and a.FLIGHTINFO_ID=#seleFlightInfo# and a.STATUS=4
+      		select count(*) from op_ordertickets a 
+      		where a.ID=#id# and a.FLIGHTINFO_ID in ($seleFlightInfos$) and a.STATUS=4
       </select>
       
       <select id="mainPageForDJP" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultClass="java.lang.Integer">
-      	select count(*) from op_ordertickets a,ba_flightinfo b where a.flightinfo_id=b.id  and b.delete_flag!=1  and b.FLIGHT_ID=#seleFlightId# and b.FLIGHT_DATE=#seleDate# and b.FLY_TIME=#flyTime# and a.delete_flag!=1
+      	select count(*) from op_ordertickets a,ba_flightinfo b where a.flightinfo_id=b.id  and b.delete_flag!=1   and b.FLIGHT_DATE=#seleDate# and b.FLY_TIME=#flyTime# and a.delete_flag!=1
       </select>
       
       <select id="listForReserveDJP" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooAtDJP">
-      	select a.ID,a.NAME,a.STATUS,a.SEAT_NUM,a.LINKPHONE,a.CERT_TYPE,a.CERT_NO,b.flight_no from op_ordertickets a,ba_flightinfo b where a.flightinfo_id=b.id  and b.delete_flag!=1  and b.FLIGHT_ID=#seleFlightId# and b.FLIGHT_DATE=#seleDate# and b.FLY_TIME=#flyTime# and a.delete_flag!=1 and a.STATUS='2'
+      	select a.ID,a.NAME,a.STATUS,a.SEAT_NUM,a.LINKPHONE,a.CERT_TYPE,a.CERT_NO,b.flight_no,c.FLIGHT 
+      	from op_ordertickets a,ba_flightinfo b ,ba_flight c
+      	where c.id=b.flight_id and a.flightinfo_id=b.id  and b.delete_flag!=1   and b.FLIGHT_DATE=#seleDate# and b.FLY_TIME=#flyTime# and a.delete_flag!=1 and a.STATUS='2'
       </select>
       
       <select id="listForChargeDJP" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooAtDJP">
-      	select a.ID,a.NAME,a.STATUS,a.SEAT_NUM,a.LINKPHONE,a.CERT_TYPE,a.CERT_NO,b.flight_no from op_ordertickets a,ba_flightinfo b where a.flightinfo_id=b.id  and b.delete_flag!=1  and b.FLIGHT_ID=#seleFlightId# and b.FLIGHT_DATE=#seleDate# and b.FLY_TIME=#flyTime# and a.delete_flag!=1 and a.STATUS='3'
+      	select a.ID,a.NAME,a.STATUS,a.SEAT_NUM,a.LINKPHONE,a.CERT_TYPE,a.CERT_NO,b.flight_no,c.FLIGHT 
+      	from op_ordertickets a,ba_flightinfo b ,ba_flight c
+      	where c.id=b.flight_id and a.flightinfo_id=b.id  and b.delete_flag!=1   and b.FLIGHT_DATE=#seleDate# and b.FLY_TIME=#flyTime# and a.delete_flag!=1 and a.STATUS='3'
       </select>
       
       <select id="listForChargedDJP" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooAtDJP">
-      	select a.ID,a.NAME,a.STATUS,a.SEAT_NUM,a.LINKPHONE,a.CERT_TYPE,a.CERT_NO,b.flight_no from op_ordertickets a,ba_flightinfo b where a.flightinfo_id=b.id  and b.delete_flag!=1  and b.FLIGHT_ID=#seleFlightId# and b.FLIGHT_DATE=#seleDate# and b.FLY_TIME=#flyTime# and a.delete_flag!=1 and a.STATUS='4'
+      	select a.ID,a.NAME,a.STATUS,a.SEAT_NUM,a.LINKPHONE,a.CERT_TYPE,a.CERT_NO,b.flight_no ,c.FLIGHT
+      	from op_ordertickets a,ba_flightinfo b ,ba_flight c
+      	where c.id=b.flight_id and  a.flightinfo_id=b.id  and b.delete_flag!=1   and b.FLIGHT_DATE=#seleDate# and b.FLY_TIME=#flyTime# and a.delete_flag!=1 and a.STATUS='4'
       </select>
       
        <select id="listForInFly" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooAtDJP">
-      	select a.ID,a.NAME,a.STATUS,a.SEAT_NUM,a.LINKPHONE,a.CERT_TYPE,a.CERT_NO,b.flight_no from op_ordertickets a,ba_flightinfo b where a.flightinfo_id=b.id  and b.delete_flag!=1  and b.FLIGHT_ID=#seleFlightId# and b.FLIGHT_DATE=#seleDate# and b.FLY_TIME=#flyTime# and a.delete_flag!=1 and a.STATUS='7'
+      	select a.ID,a.NAME,a.STATUS,a.SEAT_NUM,a.LINKPHONE,a.CERT_TYPE,a.CERT_NO,b.flight_no ,c.FLIGHT
+      	from op_ordertickets a,ba_flightinfo b ,ba_flight c
+      	where c.id=b.flight_id and a.flightinfo_id=b.id  and b.delete_flag!=1   and b.FLIGHT_DATE=#seleDate# and b.FLY_TIME=#flyTime# and a.delete_flag!=1 and a.STATUS='7'
       </select>
       <select id="authInfoIsHas" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultClass="java.lang.Integer">
-      	select count(*) from op_ordertickets a where a.CERT_TYPE=#certType# and a.CERT_NO=#certNo# and a.FLIGHTINFO_ID=#seleFlightInfo# and a.status not in('8','9')
+      	select count(*) from op_ordertickets a where a.CERT_TYPE=#certType# and a.CERT_NO=#certNo# 
+      	and a.status not in('8','9')
+      	<isNotEmpty  prepend="and" property="seleFlightInfo">
+     	 	a.FLIGHTINFO_ID=#seleFlightInfo# 
+      	</isNotEmpty>
+      	<isNotEmpty  prepend="and" property="seleFlightInfos">
+     	 	a.FLIGHTINFO_ID  in ($seleFlightInfos$)
+      	</isNotEmpty>
       </select>
       <select id="getOrderStatus" parameterClass="java.lang.Integer" resultClass="java.lang.String">
       	select status from op_ordertickets where id=#value#
@@ -436,7 +471,7 @@
     	 <isNotEmpty prepend="and" property="status"> (a.status=#status#) </isNotEmpty> 
        <isNotEmpty prepend="and" property="teamName"> (a.teamflag=1 and a.team_name = #teamName#)</isNotEmpty>
         <isNotEmpty prepend="and" property="seleFlightInfo"> (b.id = #seleFlightInfo#) </isNotEmpty> 
-      
+      <isNotEmpty prepend="and" property="seleFlightInfos"> (b.id in ($seleFlightInfos$)) </isNotEmpty>
       order by a.STATUS,a.TICKETPOINT_ID,CONVERT(a.name USING gbk )  
       </select>
       
@@ -494,6 +529,33 @@
 	   			  </isNotEmpty>
 	   			  <isNotEmpty prepend="and" property="endDate"><![CDATA[ b.FLIGHT_DATE <=#endDate# ]]> </isNotEmpty>
 	   			 order by a.STATUS, CONVERT(a.name USING gbk ) 
+      </select>
+      <select id="queryGroupOrderTicketInfos" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooOrderCounts">
+      	SELECT	count(s.id) counts,	s.TICKETPOINT_ID,  s.FLIGHTINFO_ID FROM
+		op_ordertickets s INNER JOIN ba_flightinfo a on s.FLIGHTINFO_ID=a.ID
+		WHERE
+			s.STATUS != 9
+			AND s.STATUS != 8
+     	 	and s.FLIGHTINFO_ID  = #seleFlightInfo#
+     	 	and s.TICKETPOINT_ID = #ticketPointId#
+      	<isNotEmpty prepend="and" property="seleStatus">(s.status in (0,1))</isNotEmpty>
+      	 GROUP BY s.TICKETPOINT_ID,s.FLIGHTINFO_ID
+  	</select>
+  	<select id="getOrderInfoByParams" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooOpOrdertickets">
+	    SELECT a.bag_num,a.TEAM_NAME,a.TEAMFLAG,a.PRICE_ID,a.GATE_TIME,a.SEAT_NUM,a.FLIGHTINFO_ID, a.STATUS, a.NAME,a.CERT_TYPE,a.CERT_NO,a.LINKPHONE,	a.VIP_FLAG,a.TICKETPOINT_ID,b.FLIGHT_NO,a.PAYMENT,a.TICKETPRICE,a.REMARK,a.GATE,a.HALFPRICECARD,
+				a.ZEROPRICECARD,a.CREATEDATE,a.DELETE_FLAG,a.ID,a.LUGG_SUM,a.WEIGHT_SUM,b.FLIGHT_ID,c.FLIGHT,b.FLIGHT_DATE,b.FLY_TIME,d.name ticketpointname   
+				FROM op_ordertickets a,ba_flightinfo b,ba_flight c,ba_ticketpoint d 
+		   		 where 
+		   		 <isEqual property="seleStatus" compareValue="1">
+			        a.status not in('8','9')
+			     </isEqual>
+			     <isNotEqual property="seleStatus" compareValue="1">
+			         a.status  in('2') 
+			      </isNotEqual>
+		   		 and a.flightinfo_id=b.id and b.flight_id=c.id and b.delete_flag!=1 and c.delete_flag!=1  and a.TICKETPOINT_ID=d.id 
+   			 	and a.CERT_TYPE= #certType# and a.CERT_NO=#certNo#
+   			 	and (b.id in  ($seleFlightInfos$)) 
+   			  limit 1 
       </select>
 </sqlMap>
 
