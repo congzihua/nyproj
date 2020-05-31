@@ -43,6 +43,8 @@
 			interface="com.roc.sysmanager.base.dao.BlacklistDao"/>
 		<dao implementation="com.roc.sysmanager.base.impl.DutyTimeDaoImpl" 
 			interface="com.roc.sysmanager.base.dao.DutyTimeDao"/>
+		<dao implementation="com.tempflight.dao.impl.TempOrderticketsImpl" 
+			interface="com.tempflight.dao.TempOrderticeetsDao"/>
 	</context>
 
 </daoConfig>

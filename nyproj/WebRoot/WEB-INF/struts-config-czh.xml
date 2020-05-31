@@ -15,6 +15,54 @@
       	<forward name="mainPage" path="/client/zhzxpages/CCMainPage.jsp" />   
       	<forward name="exceptionDatas" path="/nyaddfold/dataop/exceptionDatas.jsp" />   	
       </action>
+      
+      <action 
+      	path="/tfLoginAction"
+      	type="com.tempflight.action.TfLoginAction"
+      		validate="false" scope="request" >
+	      	<forward name="success" path="/tempflight/saleticket/dspMain.jsp" redirect="true" />
+	      	<forward name="djpMain" path="/tempflight/djppages/djpMain.jsp" redirect="true" />
+		    <forward name="tip" path="/tflogin.jsp"/>
+		    <forward name="admin" path="/tempflight/index.jsp"/>
+		     <forward name="zhzxMain" path="/tempflight/zhzxpages/zhzxMain.jsp"></forward>
+	        <forward name="toSafeMain" path="/tempflight/toflypages/djpMain.jsp"></forward>
+	        <forward name="toFlyMain" path="/tempflight/clientfold/ajwindow/toFlyMain.jsp"></forward>
+      </action>
+      <action 
+      path="/tfClientAction" parameter="method"
+      type="com.tempflight.action.TfClientAction"
+      validate="false" scope="request" >
+      	<forward name="tempDspPage" path="/tempflight/saleticket/dspPage.jsp" />   
+      	<forward name="tfHomePage" path="/tempflight/saleticket/homePage.jsp" /> 
+      	<forward name="tfDspTop" path="/tempflight/saleticket/dspTop.jsp" />  
+      	<forward name="tfDspBottom" path="/tempflight/saleticket/dspBottom.jsp" />  
+      	<forward name="tempDpEdit" path="/tempflight/saleticket/dpEdit.jsp"/> 
+      	<forward name="tip" path="/tempflight/saleticket/tip.jsp"/>
+      	   
+      	<forward name="myUnits" path="/client/dsppages/units/printDiv.jsp"/>
+      	<forward name="userOperLog" path="/client/dsppages/logs/userOperLog.jsp"></forward>
+      	<forward name="customerOperLog" path="/client/dsppages/logs/customerOperLog.jsp"></forward>
+      	<forward name="allUserUnits" path="/client/dsppages/units/allUserUnits.jsp"></forward>
+      	<forward name="userSaleTicketsInfo" path="/client/dsppages/units/userSaleTicketsInfo.jsp"></forward>
+      <forward name="homePageDJP" path="/client/toflypages/homePage.jsp" />  
+      	<forward name="containPage" path="/client/toflypages/containPage.jsp" /> 
+      	<forward name="mainPage" path="/client/toflypages/mainFramePage.jsp" /> 
+      	<forward name="dpEdit" path="/client/dsppages/dpEdit.jsp" /> 
+      	<forward name="dgqEdit" path="/client/dsppages/dgqEdit.jsp" /> 
+      	<forward name="saltTickets" path="/client/dsppages/saltTickets.jsp" /> 
+      	<forward name="userFlyInfoList" path="/client/dsppages/userFlyInfoList.jsp" /> 
+      	<forward name="teamSaltTickets" path="/client/dsppages/teamSaltTickets.jsp" /> 
+      	<forward name="tipteam" path="/client/dsppages/tipteam.jsp" />
+      	<forward name="teamUpDate" path="/client/dsppages/teamUpDate.jsp" />
+      	<forward name="luggageInfo" path="/client/djppages/luggageInfo.jsp" />
+      	<forward name="xxinfo" path="/client/djppages/xxinfo.jsp" />
+      	<forward name="saltPointUnits" path="/client/dsppages/units/saltPointUnits.jsp"></forward>
+      	<!-- 13.1.12 增加跳转页面 -->
+      	<forward name="fly_toFlyMain" path="/nyaddfold/clientfold/ajwindow/toFlyMain.jsp"></forward>
+      	<forward name="fly_homePage" path="/nyaddfold/clientfold/ajwindow/homePage.jsp"></forward>
+      	<forward name="fly_mainFramePage" path="/nyaddfold/clientfold/ajwindow/mainFramePage.jsp"></forward>
+      	<forward name="fly_containPage" path="/nyaddfold/clientfold/ajwindow/containPage.jsp"></forward>
+      </action>
  </action-mappings>
 
 </struts-config>

@@ -45,5 +45,12 @@
        		 <include method="updateStatusAtDJPForSeatNum"/>
        		 <include method="upFly"/>
         </create>
+        <create creator="new" javascript="TfSysmanagerDWR">  
+            <param name="class" value="com.tempflight.dwr.TfSysmanagerDWR" /> 
+	    	<include method="validate"/>
+	    	<include method="getOrderStatus"/>
+	    	<include method="ticketsInforeturn"/>
+	    	
+        </create> 
     </allow>
 </dwr>    

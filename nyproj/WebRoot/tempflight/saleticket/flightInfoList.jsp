@@ -1,0 +1,128 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@page import="com.roc.enp.entity.BaFlightKeyWord"%>
+<%@page import="com.roc.sysmanager.base.service.FlightService"%>
+<%@page import="com.roc.enp.entity.BaFlight"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%
+SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+String date = request.getAttribute("orderdate")==null||request.getAttribute("orderdate").toString().trim().equals("")?format.format(new Date()):request.getAttribute("orderdate").toString().trim();
+BaFlightKeyWord keyword = new BaFlightKeyWord();
+FlightService service = new FlightService();
+java.util.List<BaFlight> list = service.queryBaFlight(keyword);	
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>订售票系统首页</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<link rel="stylesheet" type="text/css" media="all"
+			href="<%=request.getContextPath()%>/js/calendar/themes/system.css"
+			title="Calendar Theme - system.css">
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/calendar/src/utils.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/calendar/src/calendar.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/verify.js"></script>
+		<!-- import the language module -->
+		<script type="text/javascript"
+			src="<%=request.getContextPath()%>/js/calendar/lang/calendar-zh.js"></script>
+		<script type="text/javascript" src="<%=request.getContextPath()%>/js/worktable.js"></script>
+		<script type="text/javascript"
+			src="<%=request.getContextPath()%>/js/calendar/src/calendar-setup.js"></script>
+		<script type="text/javascript">
+			function sb(){
+				var orderdate = document.getElementById("orderdate");
+				var minue = document.getElementById("minue");
+				var hour =document.getElementById("hour");
+				var url = "<%=request.getContextPath()%>/clientAction.do?method=toBeanchInfo&orderdate="+orderdate.value+"&minue="+minue.value+"&hour="+hour.value;
+				document.getElementById("ifr").src=url;
+			}
+		</script>
+  </head>
+  
+  <body oncontextmenu="if (!event.ctrlKey){return false;}">
+  <div align="center">
+  <form action="<%=request.getContextPath()%>/clientAction.do?method=toBeanchInfo" method="post" target="ifr">
+    <table border="0" width="1024" align="center">
+    	<tr>
+    		<td align="right">日期：</td>
+    		<td width="20%">
+    		<table border="0">
+						        <td width="70%" >
+						        <input value="<%=date %>" id="orderdate" name="orderdate" width="100%" readonly="readonly">        </td>
+						        <td align="left">
+						        	 <span style="cursor: hand"><img	src="<%=request.getContextPath()%>/images/caldendar.gif" id="caldendar1" /> </span>	 
+						        	
+						        	   </td> 
+							
+								</table>
+    		</td>
+    		<td>起飞时间：</td>
+    		<td>
+    			<select id="hour" name="hour">
+    				
+    				<option value="07">07</option>
+    				<option value="08">08</option>
+    				<option value="09" selected="selected">09</option>
+    				<option value="10">10</option>
+    				<option value="11">11</option>
+    				<option value="12">12</option>
+    				<option value="13">13</option>
+    				<option value="14">14</option>
+    				<option value="15">15</option>
+    				<option value="16">16</option>
+    				<option value="17">17</option>
+    				<option value="18">18</option>
+    				<option value="19">19</option>
+    				<option value="20">20</option>
+    				
+    			</select>
+    			:
+    			<select id="minue" name="minue">
+    				<option value="00">00</option>
+    				
+    				<option value="10">10</option>
+    				
+    				<option value="20">20</option>
+    				<option value="30">30</option>
+    				<option value="40">40</option>
+    				<option value="50">50</option>
+    				
+    				
+    			</select>
+    		</td>
+    		<td><input type='button' name="" value="查询" onclick="sb();"/></td>
+    		
+    	</tr>
+    
+    </table>
+   
+    </form>
+    </div>
+    <iframe id="ifr" name="ifr" scrolling="auto" src="" width="100%"></iframe>
+  </body>
+</html>
+<SCRIPT type="text/javascript" LANGUAGE="JavaScript">
+<!--
+  Zapatec.Calendar.setup({
+    firstDay          : 1,
+    step              : 1,
+    electric          : false,
+    inputField        : "orderdate",
+    button            : "caldendar1",
+    ifFormat          : "%Y-%m-%d",
+    daFormat          : "%Y-%m-%d",
+    showsTime         :  false
+  });
+   
+  
+  //-->
+</SCRIPT>

@@ -1,0 +1,214 @@
+/*css 鍒濆鍖� */
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img {
+    margin: 0;
+    padding: 0;
+}
+
+/*灏嗘爣绛惧師鏈夌殑榛樿鍐呭杈硅窛鍘绘帀*/
+
+fieldset, img, input, button {
+    border: none; /*鍘绘帀杈规*/
+    padding: 0;
+    margin: 0;
+    outline-style: none; /*鍘绘帀鐜粫杈规*/
+}
+
+ul, ol {
+    list-style: none; /*鍘绘帀鍘熸牱寮忎腑鐨勫皬榛戠偣*/
+    /*ctrl+alt+l*/
+}
+
+input {
+    padding-top: 0;
+    padding-bottom: 0;
+
+}
+
+select, input {
+    vertical-align: middle; /*杈撳叆瀛楀眳涓樉绀�*/
+}
+
+select, input, textarea {
+    font-size: 14px;
+    margin: 0;
+}
+
+/**/
+textarea {
+    resize: none; /*闃叉鎷栧姩*/
+}
+
+img {
+    border: 0;
+    vertical-align: middle; /*  鍘绘帀鍥剧墖搴曢儴榛樿鐨�3鍍忕礌绌虹櫧缂濋殭*/
+}
+
+table {
+    border-collapse: collapse; /*鍚堝苟澶栬竟绾�*/
+}
+
+body {
+    font-family:  Microsoft YaHei, Arial, "\5b8b\4f53";
+    background:#0064C8;
+}
+
+.clearfix:before, .clearfix:after {
+    content: "";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1; /*IE/7/6*/
+    /*鍏煎IE6涓嬬殑鍐欐硶*/
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-decoration: none; /**/
+    font-weight: normal; /*涓嶅姞绮�*/
+    font-size: 100%;
+}
+
+/*login 寮�濮�*/
+.login{
+    width: 1000px;
+    height: 500px;
+    /*background-color: yellowgreen;*/
+    position: absolute;
+    left:50%;
+    top:50%;
+    margin-left: -500px;
+    margin-top: -250px;
+	
+	background:#0064C8;
+}
+.login>.login_title{
+    height: 80px;
+    text-align: center;
+}
+.login>.login_title>p{
+    color:#fff;
+    font-size: 40px;
+    font-weight: 600;
+    margin-top: -8px;
+    letter-spacing:5px
+}
+.login>.login_main{
+    width: 1000px;
+    height: 320px;
+	margin-top:20px;
+}
+.login>.login_main>.main_left{
+    height: 320px;
+    width: 650px;
+    float: left;
+    -moz-border-top-left-radius: 10px;
+    -webkit-border-top-left-radius: 10px;
+    border-top-left-radius: 10px;
+
+    -moz-border-bottom-left-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+
+    background: url("../images/login_left.jpg") no-repeat;
+}
+.login>.login_main>.main_right{
+    height: 320px;
+    width: 350px;
+    float: right;
+    background-color: #e9eef2;
+    -moz-border-top-right-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    border-top-right-radius: 10px;
+
+    -moz-border-bottom-right-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.login>.login_main>.main_right>.right_title{
+    color:#251E5F;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 60px;
+    background: url("../images/border_img.png") repeat;
+    margin-bottom: 25px;
+}
+.login>.login_main>.main_right>form>div{
+    position: relative;
+}
+.login>.login_main>.main_right>form>div>img{
+    position: absolute;
+    left: 62px;
+    top:7px;
+}
+.login>.login_main>.main_right>form input{
+    height: 35px;
+    width: 250px;
+    border: 1px solid #d3d8dc;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    margin-left: 50px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    color:#333;
+    padding-left: 40px;
+}
+.login>.login_main>.main_right>form select{
+    height: 35px;
+    width: 250px;
+    border: 1px solid #d3d8dc;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    margin-left: 50px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    color:#333;
+    padding-left: 40px;
+}
+.login>.login_main>.main_right>form>.code>input{
+    width: 150px;
+}
+.login>.login_main>.main_right>form>.code>.code_img{
+    width: 90px;
+    height: 35px;
+    float: right;
+    margin-right: 50px;
+    cursor: pointer;
+}
+.login>.login_main>.main_right>form input:focus{
+    border: 1px solid #999;
+}
+.login>.login_main>.main_right>form>.yes_login>a{
+    display: block;
+    width: 250px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    background-color: #0064c8;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    color:#fff;
+    text-decoration: none;
+    margin-left: 50px;
+}
+.login>.login_main>.main_right>form>.yes_login>a:hover{
+    background-color: #0058af;
+}
+.login>.login_footer{
+    text-align: center;
+    padding-top: 20px;
+}
+.login>.login_footer>p{
+    font-size: 14px;
+    color:#eee;
+    line-height: 30px;
+}
+
+/*login 缁撴潫*/
