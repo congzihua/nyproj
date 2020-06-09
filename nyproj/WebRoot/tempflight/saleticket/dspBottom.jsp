@@ -54,16 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<%}%>
   	var idValue = "";
   	var nowStatus = "";
-	function toIsSaltTicekets(data){
-		if(data){
-	  		var url = "<%=request.getContextPath()%>/clientAction.do?method=editSp&id="+idValue;
-			window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 650px; help: no; scroll: no; status: no");
-			document.forms[0].submit();	
-		}else{
-			alert("信息状态已经改变，请重新选择！");
-			document.forms[0].submit();	
-		}
-	}
+	
 	function shux(){
 		document.forms[0].submit();
 	}

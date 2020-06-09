@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import com.founder.enp.persistence.DaoConfig;
 import com.founder.enp.service.DepartMentService;
 import com.ibatis.dao.client.DaoManager;
+import com.roc.syspe.entity.OpOrdertickets;
 import com.tempflight.dao.TempOrderticeetsDao;
 import com.tempflight.entity.TempFlightinfo;
 import com.tempflight.entity.TempOrdertickets;
@@ -61,4 +62,55 @@ public class TempClienService {
 	public boolean tpTemptdOpOrderticket(TempOrdertickets tempOrdertickets) {
 		return dao.tpTemptdOpOrderticket(tempOrdertickets);
 	}
+	/**登机安检列表页面**/
+	public List<TempOrdertickets> queryTempOrderticketsForDjp(Integer flightinfoId) {
+		return dao.queryTempOrderticketsForDjp(flightinfoId);
+	}
+	public List<TempOrdertickets> tempFlightInfoSeatNumList(Integer flightinfoId) {
+		return dao.tempFlightInfoSeatNumList(flightinfoId);
+	}
+	public int isHasSeatInTempFlight(TempOrderticketsKeyword kw) {
+		return dao.isHasSeatInTempFlight(kw);
+	}
+	public boolean updateForTempDjp(TempOrdertickets order) {
+		return dao.updateForTempDjp(order);
+	}
+	public void updateTempOrdersBagnum(TempOrdertickets order) {
+		dao.updateTempOrdersBagnum(order);
+	}
+	/**查询该航班是否有该乘客**/
+	public TempOrdertickets tfAuthInfoTicketInfo(TempOrderticketsKeyword kw) {
+		return dao.tfAuthInfoTicketInfo(kw);
+	}
+	/**通过团体名称查询该航班的团单列表**/
+	public List<TempOrdertickets> tempTeamDjpList(TempOrderticketsKeyword kw) {
+		return dao.tempTeamDjpList(kw);
+	}
+	public boolean updateForDjpTeam(List<TempOrdertickets> orderList) {
+		for (TempOrdertickets order:orderList)
+			updateForTempDjp(order);
+		return true;
+	}
+	public List<TempFlightinfo> tempFlightInfoListByDate(String flightDate) {
+		return dao.tempFlightInfoListByDate(flightDate);
+	}
+	public List<TempOrdertickets> listTempForChargedDJP(int flightinfoId) {
+		return dao.listTempForChargedDJP(flightinfoId);
+	}
+	public List<TempOrdertickets> listTempForChargedSafeCheck(int flightinfoId) {
+		return dao.listTempForChargedSafeCheck(flightinfoId);
+	}
+	public List<TempFlightinfo> tempFlightInfoListByLimit( ){
+		return dao.tempFlightInfoListByLimit();
+	}
+	public int insertTempFlightinfo(TempFlightinfo tempFlightinfo) {
+		return dao.insertTempFlightinfo(tempFlightinfo);
+	}
+	public int editTempFlightinfo(TempFlightinfo tempFlightinfo) {
+		return dao.editTempFlightinfo(tempFlightinfo);
+	}
+	public int deleteTempFlightinfoById(int id) {
+		return dao.deleteTempFlightinfoById(id);
+	}
+	
 }

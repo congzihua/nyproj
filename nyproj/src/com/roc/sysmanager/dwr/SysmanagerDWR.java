@@ -502,7 +502,6 @@ public class SysmanagerDWR {
 		}else{
 			return "0";
 		}
-		
 	}
 	//--------------------------
 	//批量跟新航班号

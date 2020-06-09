@@ -50,4 +50,35 @@ public class BagnumUtil {
 		
 		return bagnum.getMaxnum().toString();
 	}
+	
+	public static synchronized String getTFBagnum(){
+		Bagnum bagnum = new Bagnum();
+		SimpleDateFormat format = new SimpleDateFormat("yyMMdd");
+		String yMd = format.format(new Date());
+		BaTicketsallocService service = new BaTicketsallocService();
+		List<Bagnum> banumList = service.getBagnumList(null);
+		try{
+			if(banumList == null || banumList.size() < 1){
+				bagnum.setMonday(yMd);
+				yMd+="001";		
+				bagnum.setMaxnum(Long.valueOf(yMd));
+				service.insertBagnum(bagnum);
+			}else{
+				bagnum = banumList.get(0);
+				if(bagnum.getMonday()!=null && bagnum.getMonday().trim().equals(yMd)){
+					bagnum.setMaxnum(bagnum.getMaxnum()+1);
+				}else{
+					bagnum.setMonday(yMd.trim());
+					yMd+="001";	
+					bagnum.setMaxnum(Long.valueOf(yMd));
+				}
+				service.editBagnum(bagnum);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return "-1";
+		}
+		
+		return bagnum.getMaxnum().toString();
+	}
 }

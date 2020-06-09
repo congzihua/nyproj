@@ -1,12 +1,12 @@
 package com.roc.sysmanager.dwr;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.roc.sysmanager.base.service.ClienService;
 import com.roc.syspe.entity.OpOrderticketsKeyword;
+import com.tempflight.entity.TempOrdertickets;
+import com.tempflight.service.TempClienService;
 
 public class UpdateStatusDWR {
 
@@ -43,6 +43,7 @@ public class UpdateStatusDWR {
 		}
 		return cs.updateStatusOver(wid)>0?wid:-1;
 	}
+	
 	public boolean updateStatusAtDJPForSeatNum(String id,Integer flightInfoId){
 		ClienService cs=new ClienService();
 			OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
@@ -54,5 +55,45 @@ public class UpdateStatusDWR {
 			}else
 				return false;
 		
+	}
+	public int updateTempStatusAtDJP(String id,int flightInfoId){
+		TempClienService cs=new TempClienService();
+		Pattern p = Pattern.compile("\\D");
+		Matcher matc=p.matcher(id);
+		if(matc.matches() ){
+			return -1;
+		}
+		int wid=Integer.parseInt(id);
+		TempOrdertickets order =cs.queryTempOrderticketsById(wid);
+		if(order == null ){
+			return -1;
+		}
+		int tId = order.getTempFlightinfoId();
+		if (tId != flightInfoId || !order.getStatus().equals("3")) {
+			return -1;
+		}
+		order.setStatus("4");
+		boolean b = cs.tpTemptdOpOrderticket(order);
+		return b?wid:-1;
+	}
+	public int  upTempFly(String id,int flightInfoId){
+		TempClienService cs=new TempClienService();
+		Pattern p = Pattern.compile("\\D");
+		Matcher matc=p.matcher(id);
+		if(matc.matches() ){
+			return -1;
+		}
+		int wid=Integer.parseInt(id);
+		TempOrdertickets order =cs.queryTempOrderticketsById(wid);
+		if(order == null){
+			return -1;
+		}
+		int tId = order.getTempFlightinfoId();
+		if (tId != flightInfoId || !order.getStatus().equals("4")) {
+			return -1;
+		}
+		order.setStatus("7");
+		boolean b = cs.tpTemptdOpOrderticket(order);
+		return b?wid:-1;
 	}
 }

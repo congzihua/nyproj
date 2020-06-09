@@ -44,13 +44,23 @@
        		 <include method="updateStatusAtDJP"/> 
        		 <include method="updateStatusAtDJPForSeatNum"/>
        		 <include method="upFly"/>
+       		 <include method="upTempFly"/>
+       		 <include method="updateTempStatusAtDJP"/>
+       		 
         </create>
         <create creator="new" javascript="TfSysmanagerDWR">  
             <param name="class" value="com.tempflight.dwr.TfSysmanagerDWR" /> 
 	    	<include method="validate"/>
 	    	<include method="getOrderStatus"/>
 	    	<include method="ticketsInforeturn"/>
-	    	
+	    	<include method="djpOrXlqSave"/>
+	    	<include method="xlqSave"/>
+	    	<include method="printUpdate"/>
+	    	<include method="xlqSaveTeam"/>
+	    	<include method="getOrderIdAndType"/>
+	    	<include method="djpOrXlqSaveTeam"/>
+	    	<include method="printUpdateTeam"/>
+	    	<include method="updateOrAddTempFlightinfo"/>
         </create> 
     </allow>
 </dwr>    

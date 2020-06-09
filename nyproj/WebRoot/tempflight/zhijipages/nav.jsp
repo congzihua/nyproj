@@ -35,9 +35,8 @@
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" >
     <tr valign="middle">
       <th  scope="col"  nowrap="nowrap"><div align="left"> &nbsp;
-       <a href="<%=request.getContextPath()%>/tempflight/saleticket/homePage.jsp" target="main"> <font style="font-size:12";style="font-family:'宋体'"color="#FFFFFF">首页</font></a>|
-      <span><a href="<%=request.getContextPath()%>/tempflight/saleticket/flightInfoList.jsp" target="main"><font style="font-size:12";style="font-family:'宋体'" color="#FFFFFF">航班管理</font></a></span>|
-      <span><a href="<%=request.getContextPath()%>" target="main"> <font style="font-size:12";style="font-family:'宋体'"color="#FFFFFF">统计分析</font></a></span>|
+       <a href="<%=request.getContextPath()%>/tempflight/zhijipages/homePage.jsp" target="main"> <font style="font-size:12";style="font-family:'宋体'"color="#FFFFFF">首页</font></a>|
+      <span><a href="<%=request.getContextPath()%>/tempflight/zhijipages/luggageInfo.jsp" target="main"><font style="font-size:12";style="font-family:'宋体'" color="#FFFFFF">乘客信息</font></a></span>|
       </div></th>
       <th scope="col" align="right"><div align="right"><a href="#" onclick="uppassword();"><font style="font-size:12";style="font-family:'宋体'" color="#FFFFFF">修改密码</font></a>|<a href="#" onclick="tc();"><font style="font-size:12";style="font-family:'宋体'" color="#FF0000"> 退出</font></a></div></th>
     </tr>
