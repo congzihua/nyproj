@@ -11,6 +11,7 @@
 <%
 	
 	String gt = ArgsUnit.gateDeafult();
+	String startAddress = ArgsUnit.getStartAddress();
 	OpOrdertickets flightinfo = (OpOrdertickets)request.getAttribute("flightinfo");
 	String fyt = flightinfo.getFlyTime();
 	String o = fyt.split(":")[0];
@@ -180,7 +181,6 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 			}
 			
 			if(jsTrim(weightSum1)!=""&&jsTrim(weightSum1)!=null){
-				
 				wsums += parseFloat(weightSum1,10);
 			}
 			document.getElementById("tuipiao").disabled="disabled";
@@ -203,13 +203,11 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 		}
 		function seleSeat(){
 			var url = "<%=request.getContextPath()%>/client/djppages/seleSeat.jsp?flightInfoIds="+fIds;
-			
 			var rv = window.showModalDialog(url, window, "dialogWidth: 432px; dialogHeight: 700px; help: no; scroll: yes; status: no");
 			if(rv!=null)
 				document.getElementById("seatNum").value=rv;
 		}
 		function onHandleM1(data){
-		 
 			if(data=="0"){
 				alert("您选择的座位已经被选，请重新选择!");
 				document.getElementById("tuipiao").disabled="";
@@ -222,11 +220,10 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 				document.getElementById("cl").disabled="";
 			}else if(data=="5"){
 				alert("信息保存失败，你选择的信息状态已经改变，请核查后重新选择！");
-				
 			}else {
-		    if(window.confirm("信息保存成功，是否进行打印操作！")){
-	         	PrintLab1(data);
-			}
+			    if(window.confirm("信息保存成功，是否进行打印操作！")){
+		         	PrintLab1(data);
+				}
 			var luggSum = document.getElementById("luggSum");
 			var weightSum = document.getElementById("weightSum");
 			
@@ -278,8 +275,8 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 	}
 </script>
 <SCRIPT LANGUAGE="JavaScript">
-var varItem1 = 'MB1.PRN^LPT1^4008^2012-01-22^是^1-A^库尔勒^北京^4-6^08:30^科比布莱恩提^220111198804153641^12';
-var varItem2 = 'MB2.PRN^LPT2^北京^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
+var varItem1 = 'MB1.PRN^LPT1^4008^2012-01-22^是^1-A^库尔勒^<%=startAddress%>^4-6^08:30^科比布莱恩提^220111198804153641^12';
+var varItem2 = 'MB2.PRN^LPT2^<%=startAddress%>^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
 var varDemo1 = 'MB1.PRN^LPT1^';
 var varDemo2 = 'MB2.PRN^LPT2^';
 var socketUrl = 'ws://localhost:7302/PrintServer';
@@ -311,7 +308,7 @@ function PrintLab1(data){
     	return;
     }
     
-	varItem1 = flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNum+'^'+flightTo+'^北京南郊^'+gate+'^'+flytime+'^'+name+'^'+certNo+'^'+id;
+	varItem1 = flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNum+'^'+flightTo+'^<%=startAddress%>^'+gate+'^'+flytime+'^'+name+'^'+certNo+'^'+id;
 	 var pData  = varDemo1+varItem1;
      buildSocket();
      socket.onopen = function (event) {
@@ -358,7 +355,7 @@ function PrintLab2(data){
 		if (varItem2.length > 0) {
 			varItem2 += "|";
 		}
-		varItem2 += '北京南郊^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+name+'^'+data.split(';')[i]+'^51296829^'+flightTo+'^'+id;
+		varItem2 += '<%=startAddress%>^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+name+'^'+data.split(';')[i]+'^51296829^'+flightTo+'^'+id;
 		
     }
 	

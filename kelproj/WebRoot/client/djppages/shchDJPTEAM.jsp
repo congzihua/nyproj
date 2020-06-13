@@ -9,6 +9,7 @@
 
  <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
 <%
+	String startAddress = ArgsUnit.getStartAddress();
 	String gt = ArgsUnit.gateDeafult();
 	OpOrdertickets flightinfo = (OpOrdertickets)request.getAttribute("flightinfo");
 	java.util.List<BaTicketpoint> tpList = (java.util.List<BaTicketpoint>)request.getAttribute("tpList");
@@ -343,7 +344,7 @@ function check(type){
 <SCRIPT LANGUAGE="JavaScript">
 var varItem1 = 'HB1^RQ1^VIP1^ZW1^MDD1^SFD1^DJK1^DJSJ1^XM1^ZJHM1^1234567890123';
 
-var varItem2 = '北京南郊^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
+var varItem2 = '马兰^100190^1^25.336^288963^4008^2月15日^中国*织造^2012021510023^51296829^NewYork^2201111988';
 var varDemo1 = 'MB1.PRN^LPT1^';
 var varDemo2 = 'MB2.PRN^LPT2^';
 var socketUrl = 'ws://localhost:7302/PrintServer';
@@ -374,7 +375,7 @@ function PrintLab1(data){
 	    if (varItem1 != '')
 	    	varItem1 += "|";
 	    var flightTo = printFlights[i];
-	    varItem1 += flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNumPostion+'^'+flightTo+'^北京南郊^'+gate+'^'+flytime+'^'+printNames.split(",")[i]+'^'+certNo+'^'+idAr[i];   
+	    varItem1 += flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNumPostion+'^'+flightTo+'^<%=startAddress%>^'+gate+'^'+flytime+'^'+printNames.split(",")[i]+'^'+certNo+'^'+idAr[i];   
     }
      var pData  = varDemo1+varItem1;
 	 socketStatus = true;
@@ -450,7 +451,7 @@ function PrintLab1(data){
 		if (varItem2.length > 0) {
 			varItem2 += "|";
 		}
-        varItem2 += '北京南郊^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+printNames.split(",")[0]+'^'+data.split(";")[i]+'^51296829^'+flightTo+'^'+printIds.split(',')[1];  
+        varItem2 += '<%=startAddress%>^100190^'+luggSum+'^'+weightSum+'^288963^'+flightNo+'^'+monandday+'^'+printNames.split(",")[0]+'^'+data.split(";")[i]+'^51296829^'+flightTo+'^'+printIds.split(',')[1];  
 	 }
 	 if (varItem2.length > 0){
 		 var pData  = varDemo2+varItem2;

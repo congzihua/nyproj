@@ -104,4 +104,12 @@ public class TempOrderticketsImpl extends SqlMapDaoTemplate implements TempOrder
 	public int deleteTempFlightinfoById(int id) {
 		return update("deleteTempFlightinfoById", id);
 	}
+	@Override
+	public List<TempFlightinfo> queryTempFlghtInfosByDates(TempOrderticketsKeyword kw) {
+		return queryForList("queryTempFlghtInfosByDates",kw);
+	}
+	@Override
+	public Integer queryTempOrderCount(Integer tempFlightinfoId) {
+		return (Integer)queryForObject("queryTempOrderCount", tempFlightinfoId);
+	}
 }

@@ -16,7 +16,10 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
 import com.founder.enp.service.TemplateService;
+import com.roc.enp.entity.BaFlight;
+import com.roc.enp.entity.BaFlightKeyWord;
 import com.roc.sysmanager.base.service.ClienService;
+import com.roc.sysmanager.base.service.FlightService;
 import com.roc.syspe.entity.OpOrdertickets;
 import com.roc.syspe.entity.OpOrderticketsKeyword;
 import com.tempflight.entity.TempFlightinfo;
@@ -392,5 +395,26 @@ public class TfClientAction extends DispatchAction {
 	public ActionForward toTempFlightInfoList(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
 		return mapping.findForward("tempFlightinfoList");
+	}
+	//临时航班的统计
+	public ActionForward ticketInfoUnits(ActionMapping mapping, ActionForm form,
+			HttpServletRequest request, HttpServletResponse response){
+		String orderdate = request.getParameter("orderdate");
+		request.setAttribute("orderdate", orderdate);
+		String orderdate1 = request.getParameter("orderdate1");
+		request.setAttribute("orderdate1", orderdate1);
+		
+		TempClienService service = new TempClienService();
+		TempOrderticketsKeyword kw = new TempOrderticketsKeyword();
+		kw.setStartDate(orderdate +" 00:00:00");
+		kw.setEndDate(orderdate1 + " 23:59:59");
+		List<TempFlightinfo> flghtInfos = service.queryTempFlghtInfosByDates(kw);
+		for(TempFlightinfo bf:flghtInfos){
+			Integer orderNum = service.queryTempOrderCount(bf.getId());
+			bf.setOrderNum(orderNum);
+		}		
+		request.setAttribute("list", flghtInfos);
+		return mapping.findForward("allUserUnits");
+		
 	}
 }

@@ -1,4 +1,8 @@
+<%@page import="com.flyticket.system.util.ArgsUnit"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
+<%
+	String startAddress = ArgsUnit.getStartAddress();
+%>
 <html>
 	<head>
 		<script type="text/javascript" src="../../xtree/xtree.js"></script>
@@ -35,7 +39,7 @@
 	     webFXTreeConfig.rootPath="../../";
 		 webFXTreeConfig.defaultAction = "javascript:void(0);"; 
 		 webFXTreeConfig.cbRefAttribute	= "identify";
-	     tree = new WebFXLoadTree("北京南郊", "../GetDepartMentTree.do",'','','../../images/foldericon.png','../../images/foldericon.png');
+	     tree = new WebFXLoadTree("<%=startAddress%>", "../GetDepartMentTree.do",'','','../../images/foldericon.png','../../images/foldericon.png');
 	     tree.click = "rootclick(this)";
 		 document.write(tree);
 

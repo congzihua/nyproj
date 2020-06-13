@@ -112,5 +112,11 @@ public class TempClienService {
 	public int deleteTempFlightinfoById(int id) {
 		return dao.deleteTempFlightinfoById(id);
 	}
+	public List<TempFlightinfo> queryTempFlghtInfosByDates(TempOrderticketsKeyword kw) {
+		return dao.queryTempFlghtInfosByDates(kw);
+	}
+	public Integer queryTempOrderCount(Integer tempFlightinfoId) {
+		return dao.queryTempOrderCount(tempFlightinfoId);
+	}
 	
 }

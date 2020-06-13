@@ -183,5 +183,23 @@
         set delete_flag=1
  			where id=#id#
     </update>
+   <select id="queryTempFlghtInfosByDates" parameterClass="com.tempflight.entity.TempOrderticketsKeyword" resultMap="ooTempFlightinfo">
+      	select  id,flight_info,flight_no,origin,gate_no,flight_date,fly_time,create_time,delete_flag
+      	from temp_flightinfo
+      	 where  delete_flag=0
+      	  <isNotEmpty property="startDate" prepend="and">  
+      	  <![CDATA[ flight_date>=#startDate# ]]> 
+      	  </isNotEmpty> 
+      	  <isNotEmpty prepend="and" property="endDate"> 
+      	  <![CDATA[ flight_date <=#endDate# ]]> 
+      	  </isNotEmpty>
+      	 order by flight_date,fly_time
+    </select>
+    <select id="queryTempOrderCount" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+      	SELECT count(a.ID) counts
+		    FROM temp_ordertickets a
+		    where   a.STATUS =7
+            and a.TEMP_FLIGHTINFO_ID =#tempFlightinfoId#
+      </select>
 </sqlMap> 
 

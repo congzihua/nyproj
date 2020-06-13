@@ -38,4 +38,6 @@ public interface TempOrderticeetsDao {
 	public int insertTempFlightinfo(TempFlightinfo tempFlightinfo);
 	public int editTempFlightinfo(TempFlightinfo tempFlightinfo);
 	public int deleteTempFlightinfoById(int id);
+	public List<TempFlightinfo> queryTempFlghtInfosByDates(TempOrderticketsKeyword kw);
+	public Integer queryTempOrderCount(Integer tempFlightinfoId);
 }

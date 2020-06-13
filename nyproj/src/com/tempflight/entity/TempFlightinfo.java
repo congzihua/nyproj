@@ -12,6 +12,15 @@ public class TempFlightinfo {
 	private String  flyTime;
 	private Date createTime;
 	private Integer deleteFlag;
+	private Integer orderNum;
+	
+	
+	public Integer getOrderNum() {
+		return orderNum;
+	}
+	public void setOrderNum(Integer orderNum) {
+		this.orderNum = orderNum;
+	}
 	public Integer getId() {
 		return id;
 	}

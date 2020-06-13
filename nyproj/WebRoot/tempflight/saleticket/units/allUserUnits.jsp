@@ -1,6 +1,7 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.tempflight.entity.TempFlightinfo"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@page import="com.roc.syspe.entity.BaTicketsalloc"%>
-<%@page import="com.roc.syspe.entity.OpOrdertickets"%>
+
 <%@page import="com.roc.enp.entity.BaFlight"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
@@ -8,8 +9,11 @@
 
 <%
 String path = request.getContextPath();
-java.util.List<BaFlight> list = request.getAttribute("list")==null?null:(java.util.List<BaFlight>)request.getAttribute("list");
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+String orderdate = request.getAttribute("orderdate")==null||request.getAttribute("orderdate").toString().trim().equals("")?"":request.getAttribute("orderdate").toString();
+String orderdate1 = request.getAttribute("orderdate1")==null||request.getAttribute("orderdate1").toString().trim().equals("")?"":request.getAttribute("orderdate1").toString();
+String dur = orderdate+"-"+orderdate1;
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -82,13 +86,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	function printCertificate(){
 		if (confirm('确定打印吗？')) {
-	　　		//window.print();
 			document.getElementById("np").style.display='none';
 			document.getElementById("myid").focus();  
-			//PageSetup_Null();	
 			window.status ="";
 			window.defaultstatus='';	
-			//PageSetup_Default()  				 
 	  		window.print();
 	  		document.getElementById("np").style.display="";
 	　　}
@@ -147,7 +148,7 @@ divid.filters.revealTrans.play();
   
   <body oncontextmenu="if (!event.ctrlKey){return false;}" style="text-align:center;">
  
-  <form action="<%=request.getContextPath()%>/clientAction.do?method=ticketInfoUnits" method="post">
+  <form action="<%=request.getContextPath()%>/tfClientAction.do?method=ticketInfoUnits" method="post">
   
   
   
@@ -156,18 +157,16 @@ divid.filters.revealTrans.play();
 <table width="1024" border="0" align="center"  cellpadding="0" cellspacing="1">
 	<tr><td>日期：</td><td><table border="0">
 						        <td width="70%" >
-						        <input id="orderdate" name="orderdate" width="100%" value="<%=request.getAttribute("orderdate")==null||request.getAttribute("orderdate").toString().trim().equals("")?"":request.getAttribute("orderdate").toString() %>" readonly="readonly">        </td>
+						        <input id="orderdate" name="orderdate" width="100%" value="<%=orderdate %>" readonly="readonly">        </td>
 						        <td align="left">
 						        	 <span style="cursor: hand"><img	src="<%=request.getContextPath()%>/images/caldendar.gif" id="caldendar1" /> </span>	 
-						        	
 						        	   </td> 
-							
 								</table>
 	</td>
 	<td align="center">至</td>
 	<td nowrap="nowrap"> <table border="0">
 						        <td width="70%" >
-						        <input id="orderdate1" name="orderdate1" width="100%" value="<%=request.getAttribute("orderdate1")==null||request.getAttribute("orderdate1").toString().trim().equals("")?"":request.getAttribute("orderdate1").toString() %>" readonly="readonly">        </td>
+						        <input id="orderdate1" name="orderdate1" width="100%" value="<%=orderdate1 %>" readonly="readonly">        </td>
 						        <td align="left">
 						        	 <span style="cursor: hand"><img	src="<%=request.getContextPath()%>/images/caldendar.gif" id="caldendar2" /> </span>	 
 						        	
@@ -186,68 +185,46 @@ divid.filters.revealTrans.play();
    
     <td> 
     <table width="100%" border="1" cellspacing="0" cellpadding="0" frame="void">
-<%int i = 0,k=0,nums=0,totalNums=0;Double pjxj = 0.0D,total = 0.0D,toP = 0.0D;
-if(list!=null){
-	for(BaFlight bf:list){
- %>
+
  <tr bgcolor="#F0F0F0">
-	 	<td align="center" colspan="6">
-	 	<span style="font-size:15px;text-shadow:Red;font-family:'黑体';"><%=(request.getAttribute("orderdate")==null||request.getAttribute("orderdate").toString().trim().equals("")?"":request.getAttribute("orderdate").toString()) + (request.getAttribute("orderdate1")==null||request.getAttribute("orderdate1").toString().trim().equals("")?"":"至"+request.getAttribute("orderdate1").toString())  %><%=bf.getFlight() %> 信 息 统 计</span>
-	 	</td>
+	 	<th  colspan="6">
+	 	<span style="font-size:15px;text-shadow:Red;font-family:'黑体';"><%=dur %>信息统计</span>
+	 	</th>
 	 
 	 </tr>
   <tr bgcolor="#F0F0F0">
      <th>序号</th>
+     <th>日期</th>
     <th>航程</th>
-    <th>票价类型</th>
-    <th>单价</th>      
     <th>张数</th>
-    <th>小计</th>
-    
-    
   </tr>
   <%
-  
-  List<OpOrdertickets> opList  = request.getAttribute("unitsIfno"+k)==null?null:(List<OpOrdertickets>)request.getAttribute("unitsIfno"+k); %>
- <%if(list!=null) for(OpOrdertickets ot:opList){ %>
- <%
-	nums+= ot.getCounts();
-	pjxj = Double.valueOf(ot.getCounts()*ot.getRealAmount());
-	total+= pjxj;
- %>
+  int totalNums = 0,i = 0;
+  List<TempFlightinfo> opList  = request.getAttribute("list")==null?null:(List)request.getAttribute("list"); %>
+ <%if(opList!=null) for(TempFlightinfo ot:opList){ %>
 	  <tr bgcolor="#F0F0F0">
-	  	<td align="center"><%=++i %></td>
-	  	<td align="center"><%=ot.getFlight()%></td>
-	  	<td align="center"><%=ot.getDiscountType()%></td>
-	  	<td align="center"><%=ot.getRealAmount()%></td>
-	  	<td align="center"><%=ot.getCounts()%></td>
-	  	<td align="center"><fmt:formatNumber value="<%=pjxj%>" pattern="####0.0"/></td>
+	  	<th><%=++i %></th>
+	  	<th><%=format.format(ot.getFlightDate()) %></th>
+	  	<th><%=ot.getFlightInfo()%></th>
+	  	<th><%=ot.getOrderNum()%></th>
 	  </tr>
-  <% } %>
+  <% 
+  	totalNums += ot.getOrderNum();
+ 	}
+ %>
   <tr  bgcolor="#F0F0F0">
   	
-	  	<td  align="center">合计：</td>
-	  	<td  align="center">--</td>
-	  	<td  align="center">--</td>
-	  	<td  align="center">--</td>
-	  	<td  align="center"><%=nums%></td>
-	  	<td  align="center"><fmt:formatNumber value="<%=total%>" pattern="####0.0"/></td>
-	 
+	  	<th>合计：</th>
+	  	<th>--</th>
+	  	<th>--</th>
+	  	<th><%=totalNums %></th>
   </tr>
-  <%k++;totalNums+=nums;toP+=total; nums=0;total=0.0D;}} %>
+ 
   </table>
   </td>
   </tr>
   </table>
-<div align="center">
-	<div style="width: 630">
-		
-  	
-	  	总计张数：<%=totalNums%>张 &nbsp; &nbsp; 总金额：<fmt:formatNumber value="<%=toP%>" pattern="####0.0"/>元
-	 
- 
-	</div>
-</div>
+
 </div>
 </form>  
 </body>

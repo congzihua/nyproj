@@ -48,6 +48,7 @@
       	<forward name="fly_mainFramePage" path="/tempflight/djsmpages/mainFramePage.jsp"></forward>
       	<forward name="fly_containPage" path="/tempflight/djsmpages/containPage.jsp"></forward>
       	<forward name="tempFlightinfoList" path="/tempflight/saleticket/flightInfoList.jsp"></forward>
+      	<forward name="allUserUnits" path="/tempflight/saleticket/units/allUserUnits.jsp"></forward>
       </action>
       <action 
 	      path="/tfDJPAction" parameter="method"
