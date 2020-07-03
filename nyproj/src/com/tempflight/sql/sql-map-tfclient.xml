@@ -73,7 +73,7 @@
 		  LINKPHONE,VIP_FLAG,REMARK,GATE,CREATEDATE,DELETE_FLAG,LUGG_SUM,WEIGHT_SUM,
 		  SEAT_NUM,GATE_TIME,BAG_NUM,TEAM_NAME,TEAMFLAG
       	from temp_ordertickets
-      	 where  TEMP_FLIGHTINFO_ID=#flightinfoId# and STATUS = 5
+      	 where  TEMP_FLIGHTINFO_ID=#flightinfoId# and STATUS = 7
       	 order by flight_info,`NAME`
       </select>
        <select id="tfAuthInfoIsHasTicketInfo" parameterClass="com.tempflight.entity.TempOrderticketsKeyword" resultClass="java.lang.Integer">

@@ -50,41 +50,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/engine.js'></script> 
 	<script type='text/javascript' src='<%=request.getContextPath() %>/dwr/interface/SysmanagerDWR.js'> </script>
 	<script type="text/javascript">
-		
-  
-  	
-	function dgpage(data,status){
-		idValue = data;
-  		SysmanagerDWR.getOrderStatus(data,status,dgpageHandle);	
-		
-	}
-	function xxInfo(data){
-			var url = "<%=request.getContextPath()%>/clientAction.do?method=toXxinfoPage&id="+data+"&fid="+document.getElementById("fid").value;
-			window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 650px; help: no; scroll: no; status: no");
-			
-			
-		
-	}
-	function dgpageHandle1(data){
-		if(data){
-			var url = "<%=request.getContextPath()%>/dJPAction.do?method=toDJPPage1&id="+idValue;
-			//window.open(url);
-			window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 550px; help: no; scroll: no; status: no");
-			
-			document.forms[0].submit();
-		}else{
-			alert("信息状态已经改变，请重新选择！");
-			document.forms[0].submit();	
-		}	
-	}
-	function dgpage1(data,status){
-		idValue = data;
-  		SysmanagerDWR.getOrderStatus(data,status,dgpageHandle1);	
-		
-	}
-	function sx(){
-		document.forms[0].submit();
-	}
+		function xxInfo(data,flightId){
+				var url = "<%=request.getContextPath()%>/clientAction.do?method=toXxinfoPage&id="+data+"&fid="+flightId;
+				window.showModalDialog(url, window, "dialogWidth: 1024px; dialogHeight: 650px; help: no; scroll: no; status: no");
+		}
 	</script>
 	<STYLE type="text/css">
 <!--
@@ -125,7 +94,6 @@ function Hide(divid) {
  
   <div align="left" style="width: 1024">  
  <form action="<%=request.getContextPath()%>/clientAction.do?method=toLuggInfo" method="post">
-   <input id="fid" type="hidden" name="fid" value="<%=request.getAttribute("flightId")==null?"":Integer.valueOf(request.getAttribute("flightId").toString()) %>"/>
     <table border="0" width="1024" align="center">
     	<tr>
     		<th align="right">日期：</th>
@@ -198,7 +166,7 @@ function Hide(divid) {
   </tr>
   <%int i = 0; %>
   <c:forEach var="item" items="${list}">
-  <tr onclick="xxInfo(${item.id})" bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'">
+  <tr onclick="xxInfo(${item.id},${item.flightId})" bgcolor="#FFFFFF" onmouseout="this.bgColor='#FFFFFF'" onmouseover="this.bgColor='ffcccc'">
      <td align="center"><%=++i %></td>
      <td align="center">${item.flight}</td>
     <td align="center">${item.name}</td>

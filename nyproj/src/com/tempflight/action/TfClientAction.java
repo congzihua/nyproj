@@ -15,12 +15,6 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
 
-import com.founder.enp.service.TemplateService;
-import com.roc.enp.entity.BaFlight;
-import com.roc.enp.entity.BaFlightKeyWord;
-import com.roc.sysmanager.base.service.ClienService;
-import com.roc.sysmanager.base.service.FlightService;
-import com.roc.syspe.entity.OpOrdertickets;
 import com.roc.syspe.entity.OpOrderticketsKeyword;
 import com.tempflight.entity.TempFlightinfo;
 import com.tempflight.entity.TempOrdertickets;
@@ -377,7 +371,6 @@ public class TfClientAction extends DispatchAction {
 				TempOrdertickets kwOpOrder = service.queryTempOrderticketsById(Integer.valueOf(id));
 				request.setAttribute("smInfo", kwOpOrder);
 			}
-			
 			List<TempOrdertickets> ol1 = service.listTempForChargedSafeCheck(fId);
 			TempFlightinfo flightinfo = service.tempFlightInfoById(fId);
 			request.setAttribute("flightinfo", flightinfo);
