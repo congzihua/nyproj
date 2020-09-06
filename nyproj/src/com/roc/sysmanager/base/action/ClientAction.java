@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,10 +14,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.actions.DispatchAction;
+import org.directwebremoting.json.types.JsonObject;
 
 import com.alibaba.fastjson.JSON;
 import com.founder.enp.entity.Authorization;
@@ -572,8 +576,8 @@ public class ClientAction extends DispatchAction {
 		return mapping.findForward("allUserUnits");
 		
 	}
-//通过起飞时间-到安检页面
-public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
+	//通过起飞时间-到安检页面
+	public ActionForward toMainPage(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response){
 		
 		String orderdate = request.getParameter("orderdate");

@@ -11,7 +11,7 @@ public class OpOrderticketsKeyword extends PaginatedModel {
 		this.username = username;
 	}
 	private String seleStatus;
-	private Integer id;
+	
 	private String seleDate;
 	private Integer seleFlightId;
 	private String flyTime;
@@ -19,15 +19,19 @@ public class OpOrderticketsKeyword extends PaginatedModel {
 	private String seleFlightInfos;
 	private Integer ticketPointId;
 	private Integer userId;
-	private String startDate;
+	
 	private String endDate;
 	private Integer type;
 	private String name;
 	private String seatNum;
 	private String im;
+	//----------
+	private Integer id;
+	private String startDate;
 	private String certNo;
 	private String certType;
 	private String status;
+	//--------------
 	private String teamName;
 	private String teamflag;
 	private String ids;

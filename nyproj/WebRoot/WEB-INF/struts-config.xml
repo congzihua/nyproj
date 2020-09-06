@@ -96,7 +96,7 @@
       <forward name="info" path="/gwlzadmin/log/tip.jsp"></forward>
       </action>
     <action 
-      path="/gwlzclient/doc/docAction"
+      path="/docAction" parameter="method"
       type="com.founder.enp.action.DocAction"
       validate="false" scope="request" >
       </action>

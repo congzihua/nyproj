@@ -28,7 +28,6 @@ public class OpOrderticketsImpl extends SqlMapDaoTemplate implements OpOrdertice
 	@Override
 	public List<OpOrdertickets> getBaFlightInfoList(
 			OpOrderticketsKeyword keyword) {
-		// TODO Auto-generated method stub
 		return queryForList("baFlightInfoList", keyword);
 	}
 
@@ -449,5 +448,10 @@ public List<OpOrdertickets> teamDjpList(OpOrderticketsKeyword kw) {
 		keyword.setSeleFlightInfos(flightInfoIds);
 		keyword.setSeleStatus(status+"");
 		return (OpOrdertickets)queryForObject("getOrderInfoByParams", keyword);
+	}
+
+	@Override
+	public List<OpOrdertickets> teamDjpListByIdCard(OpOrderticketsKeyword keyWord) {
+		return queryForList("teamDjpListByIdCard", keyWord);
 	}
 }
