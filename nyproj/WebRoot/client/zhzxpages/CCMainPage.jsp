@@ -2,6 +2,12 @@
 <% 
 Integer num=(Integer)request.getAttribute("howMany"); 
 String flightdate=(String)request.getAttribute("odate");
+String rows = "100%";
+if (num!= null && num == 2) {
+	rows = "50%,*";
+}else if (num!= null && num >2 ) {
+	rows = "35%,*,25%";
+}
 %>
 
 <html>
@@ -10,8 +16,7 @@ String flightdate=(String)request.getAttribute("odate");
 指挥中心主页面
 </title>
 </head>
-<frameset  rows="500,*,100" cols="195" frameborder="1" border="1" id="appMainFrame">
-
+<frameset  rows="<%=rows %>"  frameborder="1" border="1" id="appMainFrame">
      <%
      for(int i=0;i<(num>3?3:num);i++){
     	%>
@@ -19,10 +24,6 @@ String flightdate=(String)request.getAttribute("odate");
     	<% 
    			  }
     	%>
-     	
-	
-
-
     <noframes>
         <body>
             <p>no frames</p>

@@ -357,7 +357,7 @@ function PrintLab1(data){
 	    if (varItem1 != '')
 	    	varItem1 += "|";
 	    var flightTo = printFlights[i];
-	    varItem1 += flightNo+'^'+flytime+'^'+vipFlag+'^'+seatNumPostion+'^'+flightTo+'^${flightinfo.origin}^'+gate+'^'+flytime+'^'+printNames.split(",")[i]+'^'+certNo+'^'+idAr[i];   
+	    varItem1 += flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNumPostion+'^'+flightTo+'^${flightinfo.origin}^'+gate+'^'+flytime+'^'+printNames.split(",")[i]+'^'+certNo+'^'+idAr[i];   
     }
      var pData  = varDemo1+varItem1;
 	 socketStatus = true;

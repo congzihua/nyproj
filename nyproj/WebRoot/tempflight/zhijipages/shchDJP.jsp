@@ -259,7 +259,7 @@ var startAddress = '${flightinfo.origin}';
 //登机牌打印
 function PrintLab1(data){
     var flightNo = document.getElementById("flightNo").value;
-    var flydate = '${flightinfo.flyTime}';
+    var flydate = document.getElementById("orderdate").value;
     var vipFlag = document.getElementById("vipFlag").value; 
     if(vipFlag==1){
     	vipFlag = "是";

@@ -115,5 +115,6 @@ public interface OpOrderticeetsDao {
 	public Integer updateStatusOver(int id);
 	public List<OpOrdertickets> queryGroupOrderTicketInfos(OpOrderticketsKeyword keyword);
 	public OpOrdertickets getOrderInfoByParams(String flightInfoIds, String certNo,int status);
+	public List<OpOrdertickets> teamDjpListByIdCard(OpOrderticketsKeyword keyWord);
 
 }

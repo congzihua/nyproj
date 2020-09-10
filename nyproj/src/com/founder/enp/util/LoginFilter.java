@@ -42,12 +42,12 @@ public class LoginFilter extends HttpServlet implements Filter {
 			Authorization auth = (Authorization) session
 					.getAttribute("authorization");
 		    String uri = ((HttpServletRequest)request).getRequestURI();
-		    String reg="(?i).+?\\.(jpg|gif|bmp|jpeg|jpeg2000|tif|ico|tiff|psd|png|swf|svg|pcx|dxf|img|dib|jfif|jpe|css|js)";//用正则表达式判断文件格式！这些都是图片格式
+		    String reg="(?i).+?\\.(jpg|gif|bmp|jpeg|jpeg2000|tif|ico|tiff|psd|png|swf|svg|pcx|dxf|img|dib|jfif|jpe|css|js|html)";//用正则表达式判断文件格式！这些都是图片格式
 		    if(uri!=null&&uri.trim().toLowerCase().matches(reg)){
 		    	
 		    }else{
 			    if (!uri.endsWith("login.jsp")&&!uri.endsWith("default.jsp") 
-			    		&& !uri.endsWith("loginAction.do")&& !uri.endsWith("gettask.jsp")&& !uri.endsWith("dljm.jsp"))
+			    		&& !uri.endsWith("loginAction.do")&& !uri.endsWith("gettask.jsp")&& !uri.endsWith("dljm.jsp") && !uri.endsWith("docAction.do"))
 			    {
 			 		if (auth == null || auth.getUserid() == 0) {
 						PrintWriter out = response.getWriter();

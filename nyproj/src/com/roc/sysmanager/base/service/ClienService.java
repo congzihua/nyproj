@@ -32,7 +32,6 @@ public class ClienService {
 	}
 	public List<OpOrdertickets> getOrderticketsList(
 			OpOrderticketsKeyword keyword) {
-		// TODO Auto-generated method stub
 		return dao.getOrderticketsList(keyword);
 	}	
 	public List<OpOrdertickets> getBaFlightInfoList(
@@ -271,5 +270,11 @@ public class ClienService {
 	}
 	public OpOrdertickets getOrderInfoByParams(String flightInfoIds, String certNo,int status) {
 		return dao.getOrderInfoByParams(flightInfoIds,certNo,status);
+	}
+	/**
+	 * 通过身份证查询当天要起飞的航班列表
+	 */
+	public List<OpOrdertickets> teamDjpListByIdCard(OpOrderticketsKeyword keyWord) {
+		return dao.teamDjpListByIdCard(keyWord);
 	}
 }

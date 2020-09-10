@@ -3,6 +3,12 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <% 
 List<TempFlightinfo> flightInfos =(List<TempFlightinfo>)request.getAttribute("flightInfos"); 
+String rows = "100%";
+if (flightInfos!= null && flightInfos.size() == 2) {
+	rows = "50%,*";
+}else if (flightInfos!= null && flightInfos.size() > 2) {
+	rows = "35%,*,25%";
+}
 %>
 
 <html>
@@ -11,7 +17,7 @@ List<TempFlightinfo> flightInfos =(List<TempFlightinfo>)request.getAttribute("fl
 指挥中心主页面
 </title>
 </head>
-<frameset  rows="400,*,100" cols="195" frameborder="1" border="1" id="appMainFrame">
+<frameset  rows="<%=rows %>"  frameborder="1" border="1" id="appMainFrame">
 
      <%
      int i = 0;
