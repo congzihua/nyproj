@@ -454,4 +454,9 @@ public List<OpOrdertickets> teamDjpList(OpOrderticketsKeyword kw) {
 	public List<OpOrdertickets> teamDjpListByIdCard(OpOrderticketsKeyword keyWord) {
 		return queryForList("teamDjpListByIdCard", keyWord);
 	}
+
+	@Override
+	public List<String> getFlightSeats(OpOrderticketsKeyword kw) {
+		return queryForList("getFlightSeats", kw);
+	}
 }

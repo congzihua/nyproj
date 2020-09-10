@@ -558,7 +558,7 @@
    			  limit 1 
       </select>
       
-   <select id="teamDjpListByIdCard" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooOpOrdertickets">
+   	<select id="teamDjpListByIdCard" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultMap="ooOpOrdertickets">
       SELECT a.bag_num,a.TEAM_NAME,a.TEAMFLAG,a.PRICE_ID,a.GATE_TIME,a.SEAT_NUM,a.FLIGHTINFO_ID, a.STATUS, a.NAME,a.CERT_TYPE,a.CERT_NO,a.LINKPHONE,
 		a.VIP_FLAG,a.TICKETPOINT_ID,b.FLIGHT_NO,a.PAYMENT,a.TICKETPRICE,a.REMARK,a.GATE,a.HALFPRICECARD,
 		a.ZEROPRICECARD,a.CREATEDATE,a.DELETE_FLAG,a.ID,a.LUGG_SUM,a.WEIGHT_SUM,b.FLIGHT_ID,c.FLIGHT,b.FLIGHT_DATE,b.FLY_TIME,d.name ticketpointname
@@ -577,6 +577,12 @@
     	 	a.id in ($ids$)
     	 </isNotEmpty>
       	order by a.STATUS,a.TICKETPOINT_ID 
+      </select>
+      <select id="getFlightSeats" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultClass="java.lang.String">
+      	SELECT  a.SEAT_NUM
+		FROM op_ordertickets a,ba_flightinfo b
+		where  a.flightinfo_id=b.id  and a.STATUS not in('8','9')
+            <isNotEmpty property="seleFlightInfos" prepend="and"> b.id in($seleFlightInfos$) </isNotEmpty> 
       </select>
 </sqlMap>
 

@@ -277,4 +277,7 @@ public class ClienService {
 	public List<OpOrdertickets> teamDjpListByIdCard(OpOrderticketsKeyword keyWord) {
 		return dao.teamDjpListByIdCard(keyWord);
 	}
+	public List<String> getFlightSeats(OpOrderticketsKeyword kw) {
+		return dao.getFlightSeats(kw);
+	}
 }

@@ -62,9 +62,7 @@ public class ClientAction extends DispatchAction {
 		kw.setFlyTime(flyTime);
 		//查看是否存在航班信息
 		List<OpOrdertickets> ol1 = service.getBaFlightInfoList(kw);
-		if(ol1!=null && ol1.size()>0){
-			
-		}else{
+		if(ol1 == null || ol1.size() == 0){
 			request.setAttribute("message", 1);
 			request.setAttribute("orderdate",orderdate);
 			return mapping.findForward("homePage");
