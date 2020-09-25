@@ -22,6 +22,10 @@
             <button class="btn up">打印登机牌</button>
         </div>
     </div>
+    <div class="time-box">
+        <div class="an-time"></div>
+        <span id="timenum">30</span>
+    </div>
 </body>
 <script>
     Date.prototype.Format = function (fmt) {
@@ -47,6 +51,28 @@
                 );
         return fmt;
     };
+    var time = 30;
+    var timer = null;
+    var item = $('#timenum');
+    var value = "";
+    var inputTimer = null;
+    item.text(time);
+    timerStart();
+    function timerStart() {
+        if (time < 0) {
+            clearTimeout(timer);
+            window.location.href = "autoprintIndex.html"
+        } else {
+            timer = setTimeout(() => {
+                time -= 1;
+                item.text(time);
+                console.log(time)
+                timerStart();
+            }, 1000)
+        }
+
+    }
+
     var urlinfo = window.location.href;
     // var status = urlinfo.split("?")[1].split("=")[1];
     var CARD = urlinfo.split("?")[1].split("=")[1];
@@ -99,7 +125,7 @@
 
 
     $('.info-box').bind("click", function () {
-        
+
     });
 
 
