@@ -1,10 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>身份证识别页面</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>身份证识别页面</title>
 </head>
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/user.css">
+<script src="js/jquery-3.2.1.min.js"></script>
+
 <body>
-身份证识别页面
+    <div class="main">
+        <div class="header">
+            <button class="btn" id="back">退出</button>
+        </div>
+        <div class="content">
+            <div class="title">请在相应位置扫描：</div>
+            <div class="info">
+                <div class="tishi">二代身份证</div>
+                <div class="image-info"></div>
+            </div>
+        </div>
+        <div class="check">
+            <input type="number" id="inputInfo" class="input" placeholder="手工输入证件号码">
+        </div>
+    </div>
+    <div class="time-box">
+        <div class="an-time"></div>
+        <span id="timenum">30</span>
+    </div>
 </body>
+<script>
+    var time = 30;
+    var timer = null;
+    var item = $('#timenum');
+    var value = "";
+    var inputTimer = null;
+    item.text(time);
+    timerStart();
+    getCard();
+    function timerStart() {
+        if (time < 0) {
+            clearTimeout(timer);
+            window.location.href = "autoprintIndex.html"
+        } else {
+            timer = setTimeout(() => {
+                time -= 1;
+                item.text(time);
+                console.log(time)
+                timerStart();
+            }, 1000)
+        }
+
+    }
+    var CARD = "";
+
+    $('#back').bind('click', function () {
+        console.log(1)
+        window.location.href = "autoprintIndex.html"
+    });
+
+    $('#inputInfo').bind('change', function () {
+        if (inputTimer) {
+            clearTimeout(inputTimer);
+        }
+        inputTimer = setTimeout(() => {
+            window.location.href = "idcardDistinguishResult.html"
+        }, 500)
+    })
+    function getCard() {
+        $.ajax({
+            dataType: "JSONP",
+            type: "get",
+            url:
+                "http://localhost:8080/nyproj/docAction.do?method=getUserFlightInfos&idcard=" + 622102198611119636,
+            success: function (data) {
+                console.log(data)
+                let idList = data.map(function (item, index) {
+                    return item.id
+                })
+                let param = idList.join(",");
+                window.location.href = "idcardDistinguishResult.html?ids=" + param
+            },
+            error: function (e) {
+                //失败执行
+                console.log(e)
+            },
+        });
+    }
+</script>
+
 </html>
