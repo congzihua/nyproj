@@ -43,15 +43,18 @@ public class DocAction extends DispatchAction {
 	//通过身份证获得当日航班的信息列表
 	public ActionForward getUserFlightInfos(ActionMapping mapping, ActionForm form,
 					HttpServletRequest request, HttpServletResponse response) throws IOException{
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json; charset=utf-8");
 			String idCard =  request.getParameter("idcard");
 			PrintWriter out = response.getWriter();
+			List<OpOrdertickets> ol  = new ArrayList<>();
 			if (StringUtils.isEmpty(idCard)) {
-				out.print("");
+				out.print(JSON.toJSONString(ol));
 				return null;
 			}
 			ClienService service = new ClienService();
 			OpOrderticketsKeyword keyWord = new OpOrderticketsKeyword();
-			List<OpOrdertickets> ol  = null;
+			
 			keyWord.setCertNo(idCard);
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 			keyWord.setStartDate(format.format(new Date()));
@@ -65,17 +68,20 @@ public class DocAction extends DispatchAction {
 	//换登机牌-如果未选择座位则进行座位选择，并返回最新的数据
 	public ActionForward toQueryPrintInfoById(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response) throws IOException{
+		response.setCharacterEncoding("utf-8");
+		response.setContentType("application/json; charset=utf-8");
+		List<OpOrdertickets> ol  = new ArrayList<>();
 		ClienService service = new ClienService();
 		String idsParam = request.getParameter("ids");
 		PrintWriter out = response.getWriter();
 		if (StringUtils.isEmpty(idsParam)) {
 			log.error("id is null or none numeric");
-			out.print("");
+			out.print(JSON.toJSONString(ol));
 			return null;
 		}
 		
 		OpOrderticketsKeyword keyWord = new OpOrderticketsKeyword();
-		List<OpOrdertickets> ol  = null;
+		
 		keyWord.setIds(idsParam);
 		ol = service.teamDjpListByIdCard(keyWord);
 		ol = ol == null ?new ArrayList():ol;
