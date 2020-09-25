@@ -1,35 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html;" charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>身份识别结果页面</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/user.css">
     <script src="js/jquery-3.2.1.min.js"></script>
 </head>
+
 <body>
     <div class="main">
         <div class="header">
-            <button class="btn">退出</button>
+            <span class="name-box">姓名：<span id="name"></span></span>
+            <button class="btn" id="back">退出</button>
         </div>
-        <div class="info-content">
-            <div class="info-box">
-                <div class="plane-info">
-                    <span class="plane-number">HU8300</span>
-                    <span class="plane-date">2018-01-28</span>
-                    <span class="plane-type">经济舱</span>
-                </div>
-                <div class="plane-time">
-                    <span class="info-time">起飞时间<i class="info-time-i"></i></span>
-                    <span class="info-icon"><i></i></span>
-                    <span class="info-"></span>
-                </div>
-            </div>
+        <div class="info-content" id="content">
+        </div>
+        <div class="check-out">
+            <button class="btn up">打印登机牌</button>
         </div>
     </div>
 </body>
 <script>
-    
+    Date.prototype.Format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "h+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            S: this.getMilliseconds(), //毫秒
+        };
+        if (/(y+)/.test(fmt))
+            fmt = fmt.replace(
+                RegExp.$1,
+                (this.getFullYear() + "").substr(4 - RegExp.$1.length)
+            );
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt))
+                fmt = fmt.replace(
+                    RegExp.$1,
+                    RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length)
+                );
+        return fmt;
+    };
+    var urlinfo = window.location.href;
+    // var status = urlinfo.split("?")[1].split("=")[1];
+    var CARD = urlinfo.split("?")[1].split("=")[1];
+    console.log(CARD)
+
+    window.onload = function () {
+        getCard()
+        // getInfo()
+    }
+    $('#back').bind('click', function () {
+        console.log(1)
+        window.location.href = "autoprintIndex.html"
+    });
+    function getCard() {
+        $.ajax({
+            dataType: "JSONP",
+            type: "get",
+            url: "http://localhost:8080/nyproj/docAction.do?method=getUserFlightInfos&idcard=" + CARD,
+            success: function (data) {
+                console.log(data)
+                // let idList = data.map(function (item, index) {
+                //     return item.id
+                // })
+                // let param = idList.join(",");
+                // window.location.href = "idcardDistinguishResult.html?ids=" + param
+            },
+            error: function (e) {
+                //失败执行
+                console.log(e);
+                a = '[{"certNo": "610203197108152934","certType": "身份证",    "createdate": 1574842721000,        "deleteFlag": "0",            "flight": "南郊",                "flightDate": 1600963200000,                    "flightId": 5,                        "flightinfoId": 2235,                            "flyTime": "12:30",                                "id": 110930,                                    "linkphone": "18932481610",                                        "name": "杨鹏军",                                            "remark": "",                                                "status": "2",                                                    "teamName": "861厂",                                                        "teamflag": "1",                                                            "ticketpointId": 6,                                                                "ticketpointname": "鼎新",                                                                    "vipFlag": "0"}]'
+                let idList = JSON.parse(a).map(function (item, index) {
+                    return item.id
+                });
+                let list = JSON.parse(a).map(function (item, index) {
+                    return item
+                });
+                var html = "";
+                $('#name').text(list[0].name)
+                console.log(list)
+                $.each(list, function (k, v) {
+                    console.log(k, v)
+                    html += '<div class="info-box"><div class="plane-info"><span class="plane-number">' + v.id + '</span><span class="plane-date">' + new Date(v.flightDate).Format("yyyy-MM-dd") + '</span><span class="plane-type">' + v.flight + '</span></div ><div class="plane-time"><span class="info-time">' + v.flyTime + '<i class="info-time-i"></i></span><span class="info-icon">' + (v.status === '2' ? '待换登机牌' : v.status === '3' ? '待安检' : '') + '</span><span class="info-name">' + v.name + '</span></div></div >'
+                })
+                $("#content").append(html)
+
+            },
+        });
+
+    }
+
+
+    $('.info-box').bind("click", function () {
+        
+    });
+
+
+    function getInfo() {
+        $.ajax({
+            dataType: "JSONP",
+            type: "get",
+            url: "http://localhost:8080/nyproj/docAction.do?method=toQueryPrintInfoById&ids=" + status,
+            success: function (data) {
+                console.log(data)
+                // let idList = data.map(function (item, index) {
+                //     return item.id
+                // })
+                // let param = idList.join(",");
+                // window.location.href = "idcardDistinguishResult.html?ids=" + param
+            },
+            error: function (e) {
+                //失败执行
+                console.log(e)
+
+            },
+        })
+    }
+    function timerStart() {
+        if (time < 0) {
+            clearTimeout(timer);
+            window.location.href = "autoprintIndex.html"
+        } else {
+            timer = setTimeout(() => {
+                time -= 1;
+                item.text(time);
+                console.log(time)
+                timerStart();
+            }, 1000)
+        }
+
+    }
 </script>
+
 </html>

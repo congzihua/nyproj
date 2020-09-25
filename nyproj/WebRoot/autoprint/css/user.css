@@ -130,19 +130,99 @@
 }
 
 .check {
-    height: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2em;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
 }
 
 .input {
-    border: 1px solid #414040;
-    height: 2em;
-    line-height: 2em;
-    font-size: 2em;
-    border-radius: 5px;
-    width: 300px;
-    padding: 5px 12px;
+  border: 1px solid #414040;
+  height: 2em;
+  line-height: 2em;
+  font-size: 2em;
+  border-radius: 5px;
+  width: 300px;
+  padding: 5px 12px;
+}
+
+.info-box {
+  /* width: 90%; */
+  display: flex;
+  flex-flow: column;
+  padding: 15px 0;
+  height: 160px;
+  align-items: stretch;
+  border: 1px solid #535353;
+  border-radius: 3px;
+  box-shadow: 2px 2px 4px #535353;
+}
+
+.info-content {
+  margin: 0 10%;
+  height: 80%;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.plane-info {
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  font-size: 24px;
+  color: #f15d30;
+  text-align: center;
+}
+
+.plane-number,
+.plane-date,
+.plane-type {
+  flex: 1;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+.plane-time {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+.info-time,
+.info-icon,
+.info-name {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.check-out {
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.name-box {
+  position: absolute;
+  left: 5%;
+  top: 3%;
+}
+
+.up {
+  padding: 5px 10px;
+  width: 140px;
+  margin-right: 40px;
+}
+#card {
+  display: block;
+  width: 200px;
+}
+
+.card-box {
+  display: flex;
+  width: 20%;
+  justify-content: flex-start;
+  margin-right: 40px;
 }

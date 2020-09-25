@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>身份证识别页面</title>
 </head>
@@ -23,7 +23,11 @@
             </div>
         </div>
         <div class="check">
-            <input type="number" id="inputInfo" class="input" placeholder="手工输入证件号码">
+            <!-- <input type="number" id="inputInfo" class="input" placeholder="手工输入证件号码"> -->
+            <div class="card-box">证件号：<span id="card"></span></div>
+            <button class="search btn" onClick="moveInfo()">
+                下一步
+            </button>
         </div>
     </div>
     <div class="time-box">
@@ -39,55 +43,43 @@
     var inputTimer = null;
     item.text(time);
     // timerStart();
-    getCard();
     function timerStart() {
         if (time < 0) {
             clearTimeout(timer);
             window.location.href = "autoprintIndex.html"
         } else {
-            // timer = setTimeout(() => {
-            //     time -= 1;
-            //     item.text(time);
-            //     console.log(time)
-            //     timerStart();
-            // }, 1000)
+            timer = setTimeout(() => {
+                time -= 1;
+                item.text(time);
+                console.log(time)
+                timerStart();
+            }, 1000)
         }
 
     }
-    var CARD = "";
+    var CARD = "610203197108152934";
 
     $('#back').bind('click', function () {
         console.log(1)
         window.location.href = "autoprintIndex.html"
     });
 
-    $('#inputInfo').bind('change', function () {
-        if (inputTimer) {
-            clearTimeout(inputTimer);
+    $('.card').val(CARD.replace(/(\d{4})\d{10}(\d{4})/g, "$1****$2"));
+
+    console.log(CARD);
+    // var cardType = CARD.
+    // window.location.href = "idcardDistinguishResult.html?ids=" + CARD
+    // inputTimer = setTimeout(() => {
+    //     window.location.href = "idcardDistinguishResult.html"
+    // }, 1500)
+    function moveInfo() {
+        if (CARD) {
+            window.location.href = "idcardDistinguishResult.html?card=" + CARD;
+        } else {
+
         }
-        inputTimer = setTimeout(() => {
-            window.location.href = "idcardDistinguishResult.html"
-        }, 500)
-    })
-    function getCard() {
-        $.ajax({
-            dataType: "JSONP",
-            type: "get",
-            url: "http://localhost:8080/nyproj/docAction.do?method=getUserFlightInfos&idcard=610203197108152934",
-            success: function (data) {
-                console.log(data)
-                let idList = data.map(function (item, index) {
-                    return item.id
-                })
-                let param = idList.join(",");
-                window.location.href = "idcardDistinguishResult.html?ids=" + param
-            },
-            error: function (e) {
-                //失败执行
-                console.log(e)
-            },
-        });
     }
+
 </script>
 
 </html>
