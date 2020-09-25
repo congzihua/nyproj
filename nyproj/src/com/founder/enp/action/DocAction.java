@@ -108,12 +108,13 @@ public class DocAction extends DispatchAction {
 			kw = new OpOrderticketsKeyword();
 			kw.setSeleFlightInfos(seleFlightInfos);
 			List<String> seats = service.getFlightSeats(kw);
+			seats  = seats == null?new ArrayList<String>():seats;
 			order.setStatus("3");
 			order.setSeatNum(getSeatNum(seats));
 			order.setGate(ArgsUnit.gateDeafult());
 			Date flyDate = null;
 			try {
-				flyDate = format2.parse(flightDate+" "+flyTime);
+				flyDate = format2.parse(orderdate+" "+flyTime);
 			} catch (ParseException e) {
 				e.printStackTrace();
 			}
