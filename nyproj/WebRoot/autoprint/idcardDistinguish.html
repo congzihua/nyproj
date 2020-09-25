@@ -38,19 +38,19 @@
     var value = "";
     var inputTimer = null;
     item.text(time);
-    timerStart();
+    // timerStart();
     getCard();
     function timerStart() {
         if (time < 0) {
             clearTimeout(timer);
             window.location.href = "autoprintIndex.html"
         } else {
-            timer = setTimeout(() => {
-                time -= 1;
-                item.text(time);
-                console.log(time)
-                timerStart();
-            }, 1000)
+            // timer = setTimeout(() => {
+            //     time -= 1;
+            //     item.text(time);
+            //     console.log(time)
+            //     timerStart();
+            // }, 1000)
         }
 
     }
@@ -73,8 +73,7 @@
         $.ajax({
             dataType: "JSONP",
             type: "get",
-            url:
-                "http://localhost:8080/nyproj/docAction.do?method=getUserFlightInfos&idcard=" + 622102198611119636,
+            url: "http://localhost:8080/nyproj/docAction.do?method=getUserFlightInfos&idcard=610203197108152934",
             success: function (data) {
                 console.log(data)
                 let idList = data.map(function (item, index) {
