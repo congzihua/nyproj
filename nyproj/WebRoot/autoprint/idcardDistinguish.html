@@ -80,11 +80,12 @@
             url: "http://localhost:" + httpServerPort + "/api/ReadMsg",//接口服务器地址  参数: Fp=1读证内指纹，PhotoQuality 身份证头像质量，cardImg=1获取身份证正反面图片
             //contentType: "application/x-www-form-urlencoded; charset=utf-8",
             success: function (data) {
-                console.log(data)
                 scanCertNo = data.cardno;
                 scanName = data.name;
                 if (scanCertNo == null || scanCertNo == undefined) {
-                    alert("未能正确安装省份证识别设别");
+                    alert("未能正确安装身份证识别设别");
+                    clearTimeout(timer);
+                    window.location.href = "autoprintIndex.html"
                     return;
                 }
                 //成功执行undefined
@@ -93,6 +94,8 @@
             },
             error: function (e) {
                 //失败执行
+                clearTimeout(timer);
+                window.location.href = "autoprintIndex.html"
                 console.log(e.status + ',' + e.statusText);
             }
         });

@@ -299,15 +299,31 @@
   flex-direction: column;
 }
 
-.box-typeinfo {
+#box-typeinfo {
+  display: none;
   position: fixed;
+  text-align: center;
   left: 9%;
-  top: 10%;
+  top: 18%;
   z-index: 99999999;
   width: 82%;
-  height: 80%;
+  height: 65%;
   border: 0.02rem solid #f15832;
   box-shadow: 0.02rem 0.02rem 0.1rem #f15832;
   border-radius: 0.05rem;
   background-color: rgba(255, 255, 255, 1);
+}
+
+.active {
+  visibility: hidden;
+}
+
+#infoBox {
+  color: #f15832;
+  font-size: 0.7rem;
+}
+#box-typeinfo.dis {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
