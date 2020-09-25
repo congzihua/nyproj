@@ -1,10 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>自助打印登记牌主页</title>
+    <meta http-equiv="Content-Type" content="text/html;" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自助打印登记牌主页</title>
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/index.css">
 </head>
+
 <body>
-自助打印登记牌主页
+    <section class="main">
+        <div class="back"></div>
+        <div class="footer">
+            <div class="splite">
+                <div class="line"></div>
+                <div>触摸任意一处开始办理</div>
+                <div class="line"></div>
+            </div>
+        </div>
+    </section>
 </body>
+<script>
+    var box = document.querySelector('.main');
+    box.addEventListener('touchstart', function (e) {
+        window.location.href = "idcardDistinguish.html"
+    })
+</script>
+
 </html>

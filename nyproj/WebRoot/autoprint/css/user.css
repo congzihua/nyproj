@@ -1,0 +1,148 @@
+.time-box {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  bottom: 5px;
+  right: 10px;
+}
+
+.an-time {
+  height: 40px;
+  background: url("../images/loading.png") no-repeat center;
+  background-size: 80% 80%;
+  font-size: 14px;
+  -webkit-animation: clockwise 1000ms linear infinite;
+  animation: clockwise 1000ms linear infinite;
+}
+
+@-webkit-keyframes clockwise {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes clockwise {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes donut-rotate {
+  0% {
+    -webkit-transform: rotate(0);
+  }
+  50% {
+    -webkit-transform: rotate(-140deg);
+  }
+  100% {
+    -webkit-transform: rotate(0);
+  }
+}
+@keyframes donut-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(-140deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+#timenum {
+  position: absolute;
+  display: block;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  top: 0;
+  left: 0;
+}
+
+.main {
+  height: 100%;
+  width: 100%;
+}
+
+.header {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 3%;
+}
+.btn {
+  height: 30px;
+  width: 100px;
+  font-size: 1em;
+  border: 1px solid #2c2c2c;
+  color: #2c2c2c;
+  background-color: transparent;
+  box-shadow: 2px 2px 4px #2c2c2c;
+  border-radius: 5px;
+}
+
+.btn:focus {
+  border-color: #f15832;
+  color: #f15832;
+}
+
+.content {
+  height: 70%;
+  font-size: 2em;
+  padding: 15px;
+}
+
+.title {
+  font-size: 3em;
+  height: 35px;
+  line-height: 35px;
+}
+
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  height: calc(100% - 35px);
+}
+
+.tishi {
+  width: 100%;
+  font-size: 2em;
+  height: 25px;
+  line-height: 25px;
+  color: red;
+  text-align: center;
+}
+
+.image-info {
+  width: 100%;
+  background: url("../images/user.png") no-repeat center top;
+  background-size: auto 100%;
+  height: calc(100% - 25px);
+}
+
+.check {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+}
+
+.input {
+    border: 1px solid #414040;
+    height: 2em;
+    line-height: 2em;
+    font-size: 2em;
+    border-radius: 5px;
+    width: 300px;
+    padding: 5px 12px;
+}

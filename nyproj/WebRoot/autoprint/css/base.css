@@ -1,0 +1,78 @@
+body,
+div,
+ul,
+ol,
+li,
+p,
+dl,
+dt,
+dd,
+h1,
+h2,
+h3,
+h4,
+button {
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  outline: 0;
+  box-sizing: border-box;
+}
+
+body,
+input,
+select,
+textarea {
+  font-family: 'microsoft yahei';
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background: #fff;
+  margin: 0 auto;
+  color: #333;
+  font-size: .24rem;
+  /* overflow: hidden; */
+}
+
+input,
+select,
+textarea {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  outline: 0;
+  color: #333;
+  padding: 0;
+  margin: 0;
+}
+
+input::-webkit-input-placeholder {
+  color: #ccc;
+}
+
+ul,
+ol,
+li {
+  list-style: none;
+  list-style-type: none;
+}
+
+em,
+i {
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+}
+
+.box_sizing {
+  box-sizing: border-box;
+}
