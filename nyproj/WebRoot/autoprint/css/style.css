@@ -1,0 +1,236 @@
+.sky {
+  height: 100%;
+  background: #034fa7;
+  position: relative;
+  overflow: hidden;
+  background: -moz-linear-gradient(top, #034fa7 0%, #ffffff 100%);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, #034fa7),
+    color-stop(100%, #ffffff)
+  );
+  background: -webkit-linear-gradient(top, #034fa7 0%, #ffffff 100%);
+  background: -o-linear-gradient(top, #034fa7 0%, #ffffff 100%);
+  background: -ms-linear-gradient(top, #034fa7 0%, #ffffff 100%);
+  background: linear-gradient(to bottom, #034fa7 0%, #ffffff 100%);
+}
+
+.sky .clouds_one {
+  background: url("../images/cloud_one.png");
+  background-size: auto 100%;
+  position: absolute;
+  left: 0;
+  top: 35%;
+  height: 65%;
+  width: 300%;
+  -webkit-animation: cloud_one 50s linear infinite;
+  -moz-animation: cloud_one 50s linear infinite;
+  -o-animation: cloud_one 50s linear infinite;
+  animation: cloud_one 50s linear infinite;
+  -webkit-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.sky .clouds_two {
+  background: url("../images/cloud_two.png");
+  background-size: auto 100%;
+  position: absolute;
+  left: 0;
+  top: 35%;
+  height: 65%;
+  width: 300%;
+  -webkit-animation: cloud_two 75s linear infinite;
+  -moz-animation: cloud_two 75s linear infinite;
+  -o-animation: cloud_two 75s linear infinite;
+  animation: cloud_two 75s linear infinite;
+  -webkit-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.sky .clouds_three {
+  background: url("../images/cloud_three.png");
+  background-size: auto 100%;
+  position: absolute;
+  left: 0;
+  top: 35%;
+  height: 65%;
+  width: 300%;
+  -webkit-animation: cloud_three 100s linear infinite;
+  -moz-animation: cloud_three 100s linear infinite;
+  -o-animation: cloud_three 100s linear infinite;
+  animation: cloud_three 100s linear infinite;
+  -webkit-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.sky .clouds_forth {
+  background: url("../images/cloud_two.png");
+  background-size: auto 100%;
+  position: absolute;
+  left: 50%;
+  top: 35%;
+  height: 65%;
+  width: 300%;
+  -webkit-animation: clouds_forth 125s linear infinite;
+  -moz-animation: clouds_forth 125s linear infinite;
+  -o-animation: clouds_forth 125s linear infinite;
+  animation: clouds_forth 125s linear infinite;
+  -webkit-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.sky .top {
+  top: 50%;
+}
+
+@-webkit-keyframes sky_background {
+  0% {
+    background: #034fa7;
+    color: #034fa7;
+  }
+  50% {
+    background: #000;
+    color: #a3d9ff;
+  }
+  100% {
+    background: #034fa7;
+    color: #034fa7;
+  }
+}
+@-moz-keyframes sky_background {
+  0% {
+    background: #034fa7;
+    color: #034fa7;
+  }
+  50% {
+    background: #000;
+    color: #a3d9ff;
+  }
+  100% {
+    background: #034fa7;
+    color: #034fa7;
+  }
+}
+@keyframes sky_background {
+  0% {
+    background: #034fa7;
+    color: #034fa7;
+  }
+  50% {
+    background: #000;
+    color: #a3d9ff;
+  }
+  100% {
+    background: #034fa7;
+    color: #034fa7;
+  }
+}
+
+@-webkit-keyframes cloud_one {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -150%;
+  }
+}
+@-moz-keyframes cloud_one {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -150%;
+  }
+}
+@keyframes cloud_one {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -150%;
+  }
+}
+
+@-webkit-keyframes cloud_two {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -150%;
+  }
+}
+@-moz-keyframes cloud_two {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -150%;
+  }
+}
+@keyframes cloud_two {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -150%;
+  }
+}
+
+@-webkit-keyframes cloud_three {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -150%;
+  }
+}
+@-moz-keyframes cloud_three {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -150%;
+  }
+}
+@keyframes cloud_three {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: -150%;
+  }
+}
+@-webkit-keyframes clouds_forth {
+  0% {
+    left: 50%;
+  }
+  100% {
+    left: -200%;
+  }
+}
+@-moz-keyframes clouds_forth {
+  0% {
+    left: 50%;
+  }
+  100% {
+    left: -200%;
+  }
+}
+@keyframes clouds_forth {
+  0% {
+    left: 50%;
+  }
+  100% {
+    left: -200%;
+  }
+}
