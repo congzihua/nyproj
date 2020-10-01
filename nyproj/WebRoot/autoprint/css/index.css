@@ -5,15 +5,15 @@
   flex-wrap: wrap;
   background: #d36c43;
 }
-.back {
-  background: url("../images/plone.jpg") no-repeat center top;
-  height: 80%;
-  width: 100%;
-  background-size: 100%;
-}
 .footer {
-  height: 20%;
+  height: 100%;
   width: 100%;
+}
+.header {
+  height: 30%;
+  width: 100%;
+  position: absolute;
+  top: 0;
 }
 .splite {
   /* height: 5px; */
@@ -31,6 +31,3 @@
 .input {
   margin-right: 0 20px 0 0;
 }
-
-
-
