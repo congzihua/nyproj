@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="tfClient">  
+	<resultMap class="com.tempflight.entity.TempOrdertickets" id="ooTempOrdertickets">
+		<result property="id" column="id"/>
+	    <result property="tempFlightinfoId" column="TEMP_FLIGHTINFO_ID"/>
+	     <result property="flightInfo" column="flight_info"/>	
+	   <result property="name" column="NAME"/>
+	   <result property="certType" column="CERT_TYPE"/>
+	   <result property="certNo" column="CERT_NO"/>
+	   <result property="linkphone" column="LINKPHONE"/>
+	   <result property="vipFlag" column="VIP_FLAG"/>
+	   <result property="status" column="STATUS"/>
+	   <result property="remark" column="REMARK"/>
+	   <result property="gate" column="GATE"/>	
+	   <result property="createdate" column="CREATEDATE"/>
+	   <result property="deleteFlag" column="DELETE_FLAG"/>	
+	   <result property="luggSum" column="LUGG_SUM"/>	
+	   <result property="weightSum" column="WEIGHT_SUM"/>
+	     <result property="seatNum" column="SEAT_NUM"/>	
+	     <result property="teamflag" column="TEAMFLAG"/>
+	      <result property="teamName" column="TEAM_NAME"/>
+	      <result property="bagNum" column="bag_num"/>
+    </resultMap>
+    <resultMap class="com.tempflight.entity.TempOrdertickets" id="ooTempOrderticketsSeatNum">
+		 <result property="seatNum" column="SEAT_NUM"/>	
+	</resultMap>
+    <resultMap class="com.tempflight.entity.TempFlightinfo" id="ooTempFlightinfo">
+	  <result property="id" column="id"/>
+	     <result property="flightInfo" column="flight_info"/>
+	      <result property="flightNo" column="flight_no"/>
+	   <result property="origin" column="origin"/>
+	   <result property="gateNo" column="gate_no"/>	
+	   <result property="flightDate" column="flight_date"/>
+	   <result property="flyTime" column="fly_time"/>
+	   <result property="createTime" column="create_time"/>
+	   <result property="deleteFlag" column="delete_flag"/>	
+    </resultMap>
+     <select id="tempFlightInfoList" parameterClass="com.tempflight.entity.TempOrderticketsKeyword" resultMap="ooTempFlightinfo">
+      	select  id,flight_info,flight_no,origin,gate_no,flight_date,fly_time,create_time,delete_flag
+      	from temp_flightinfo
+      	 where  flight_date=#seleDate# and fly_time=#flyTime# and delete_flag!=1
+      </select>
+      <select id="tempFlightInfoListByDate" parameterClass="java.lang.String" resultMap="ooTempFlightinfo">
+      	select  id,flight_info,flight_no,origin,gate_no,flight_date,fly_time,create_time,delete_flag
+      	from temp_flightinfo
+      	 where  flight_date=#flightDate#  and delete_flag!=1 order by fly_time desc
+      </select>
+       <select id="tempFlightInfoById" parameterClass="java.lang.Integer" resultMap="ooTempFlightinfo">
+      	select  id,flight_info,flight_no,origin,gate_no,flight_date,fly_time,create_time,delete_flag
+      	from temp_flightinfo
+      	 where  id=#id# 
+      </select>
+       <select id="queryTempOrdertickets" parameterClass="java.lang.Integer" resultMap="ooTempOrdertickets">
+      	select   ID,TEMP_FLIGHTINFO_ID,STATUS,flight_info,NAME,CERT_TYPE,CERT_NO,
+		  LINKPHONE,VIP_FLAG,REMARK,GATE,CREATEDATE,DELETE_FLAG,LUGG_SUM,WEIGHT_SUM,
+		  SEAT_NUM,GATE_TIME,BAG_NUM,TEAM_NAME,TEAMFLAG
+      	from temp_ordertickets
+      	 where  TEMP_FLIGHTINFO_ID=#flightinfoId# and STATUS in (1,2,3,4,5,6,7)
+      	 order by `STATUS`,flight_info,`NAME` 
+      </select>
+      <select id="listTempForChargedDJP" parameterClass="java.lang.Integer" resultMap="ooTempOrdertickets">
+      	select   ID,TEMP_FLIGHTINFO_ID,STATUS,flight_info,NAME,CERT_TYPE,CERT_NO,
+		  LINKPHONE,VIP_FLAG,REMARK,GATE,CREATEDATE,DELETE_FLAG,LUGG_SUM,WEIGHT_SUM,
+		  SEAT_NUM,GATE_TIME,BAG_NUM,TEAM_NAME,TEAMFLAG
+      	from temp_ordertickets
+      	 where  TEMP_FLIGHTINFO_ID=#flightinfoId# and STATUS = 4
+      	 order by flight_info,`NAME`
+      </select>
+      <select id="listTempForChargedSafeCheck" parameterClass="java.lang.Integer" resultMap="ooTempOrdertickets">
+      	select   ID,TEMP_FLIGHTINFO_ID,STATUS,flight_info,NAME,CERT_TYPE,CERT_NO,
+		  LINKPHONE,VIP_FLAG,REMARK,GATE,CREATEDATE,DELETE_FLAG,LUGG_SUM,WEIGHT_SUM,
+		  SEAT_NUM,GATE_TIME,BAG_NUM,TEAM_NAME,TEAMFLAG
+      	from temp_ordertickets
+      	 where  TEMP_FLIGHTINFO_ID=#flightinfoId# and STATUS = 7
+      	 order by flight_info,`NAME`
+      </select>
+       <select id="tfAuthInfoIsHasTicketInfo" parameterClass="com.tempflight.entity.TempOrderticketsKeyword" resultClass="java.lang.Integer">
+      	select  count(id) from temp_ordertickets
+      	 where  CERT_TYPE=#certType# and CERT_NO=#certNo# 
+      	 and TEMP_FLIGHTINFO_ID = #seleFlightInfo# and STATUS in (1,2,3,4,5,6,7)
+      </select>
+     <select id="tfAuthInfoTicketInfo" parameterClass="com.tempflight.entity.TempOrderticketsKeyword" resultMap="ooTempOrdertickets">
+      	select * from temp_ordertickets
+      	 where  CERT_TYPE=#certType# and CERT_NO=#certNo# 
+      	 and TEMP_FLIGHTINFO_ID = #seleFlightInfo# and STATUS in (1,2,3,4,5,6,7) limit 1
+      </select>
+    <select id="queryTempOrderticketsById" parameterClass="java.lang.Integer" resultMap="ooTempOrdertickets">
+      	select   ID,TEMP_FLIGHTINFO_ID,STATUS,flight_info,NAME,CERT_TYPE,CERT_NO,
+		  LINKPHONE,VIP_FLAG,REMARK,GATE,CREATEDATE,DELETE_FLAG,LUGG_SUM,WEIGHT_SUM,
+		  SEAT_NUM,GATE_TIME,BAG_NUM,TEAM_NAME,TEAMFLAG
+      	from temp_ordertickets
+      	 where  id=#id#  
+      </select> 
+       <insert id="insertTempOrderticket" parameterClass="com.tempflight.entity.TempOrdertickets">
+       INSERT INTO temp_ordertickets (TEMP_FLIGHTINFO_ID,STATUS,flight_info,NAME,CERT_TYPE,CERT_NO,
+		  LINKPHONE,VIP_FLAG,REMARK,GATE,CREATEDATE,DELETE_FLAG,TEAM_NAME,TEAMFLAG) 
+    	VALUES(#tempFlightinfoId#,#status#,#flightInfo#, #name#, #certType#,#certNo#,
+    	 #linkphone#, #vipFlag#,  #remark#,#gate#,current_timestamp(), '0',#teamName#,#teamflag#)
+   		<selectKey resultClass="java.lang.Integer" keyProperty="id">     
+        	SELECT LAST_INSERT_ID()
+        </selectKey>  
+    </insert> 
+      <update id="editTempOrderticket" parameterClass="com.tempflight.entity.TempOrdertickets">
+        update temp_ordertickets 
+        set flight_info=#flightInfo#,
+        	 NAME=#name#, CERT_TYPE=#certType#, CERT_NO=#certNo#, 
+        	 LINKPHONE=#linkphone#, VIP_FLAG=#vipFlag#, 
+			TEAMFLAG=#teamflag#,TEAM_NAME=#teamName#, 
+			REMARK=#remark#,GATE=#gate#
+ 			where id=#id#
+    </update>
+    <update id="tgTempOrderticket" parameterClass="com.tempflight.entity.TempOrdertickets">
+        update temp_ordertickets set SEAT_NUM = #seatNum# , FLIGHTINFO_ID=#flightinfoId#,TICKETPOINT_ID=#ticketpointId# <isNotEmpty property="status" prepend=",">STATUS=#status#</isNotEmpty>
+ 			where id=#id#
+    </update>
+    <update id="tpTemptdOpOrderticket" parameterClass="com.tempflight.entity.TempOrdertickets">
+        update temp_ordertickets set STATUS=#status# where id=#id#
+    </update> 
+    
+    <select id="queryTempOrderticketsForDjp" parameterClass="java.lang.Integer" resultMap="ooTempOrdertickets">
+      	select   ID,TEMP_FLIGHTINFO_ID,STATUS,flight_info,NAME,CERT_TYPE,CERT_NO,
+		  LINKPHONE,VIP_FLAG,REMARK,GATE,CREATEDATE,DELETE_FLAG,LUGG_SUM,WEIGHT_SUM,
+		  SEAT_NUM,GATE_TIME,BAG_NUM,TEAM_NAME,TEAMFLAG
+      	from temp_ordertickets
+      	 where  TEMP_FLIGHTINFO_ID=#flightinfoId# and STATUS in (2,3,4)
+      	 order by `STATUS`,flight_info,`NAME` 
+      </select>
+      <select id="tempFlightInfoSeatNumList" parameterClass="java.lang.Integer" resultMap="ooTempOrderticketsSeatNum">
+     	SELECT a.SEAT_NUM	FROM  temp_ordertickets a where a.STATUS not in ('8','9') and a.SEAT_NUM is not  null and a.SEAT_NUM !='' 
+     	and TEMP_FLIGHTINFO_ID = #flightinfoId#
+     </select>
+     <select id="isHasSeatInTempFlight" parameterClass="com.tempflight.entity.TempOrderticketsKeyword" resultClass="java.lang.Integer">
+      	SELECT count(a.ID) counts
+		    FROM temp_ordertickets a
+		    where   a.STATUS not in('8','9')
+            and a.ID != #id# and a.SEAT_NUM = #seatNum# 
+            and a.TEMP_FLIGHTINFO_ID =#seleFlightInfo#
+             <isNotEmpty property="ids" prepend="and"> <![CDATA[ id not in(#ids#) ]]> </isNotEmpty> 
+      </select>
+      <update id="updateForTempDjp" parameterClass="com.tempflight.entity.TempOrdertickets" >
+        update temp_ordertickets set STATUS=#status#,SEAT_NUM=#seatNum#,LUGG_SUM=#luggSum#,WEIGHT_SUM=#weightSum# where id=#id#
+     </update>
+     <update id="updateTempOrdersBagnum" parameterClass="com.tempflight.entity.TempOrdertickets" >
+      		update temp_ordertickets set BAG_NUM=#bagNum# where id=#id#
+      </update>
+     <select id="tempTeamDjpList" parameterClass="com.tempflight.entity.TempOrderticketsKeyword" resultMap="ooTempOrdertickets">
+    	SELECT ID,TEMP_FLIGHTINFO_ID,STATUS,flight_info,NAME,CERT_TYPE,CERT_NO,
+		  LINKPHONE,VIP_FLAG,REMARK,GATE,CREATEDATE,DELETE_FLAG,LUGG_SUM,WEIGHT_SUM,
+		  SEAT_NUM,GATE_TIME,BAG_NUM,TEAM_NAME,TEAMFLAG
+	    FROM temp_ordertickets 
+	    where   delete_flag!=1  and status in (2,3) 
+       <isNotEmpty prepend="and" property="teamName"> (teamflag=1 and team_name = #teamName#)</isNotEmpty>
+        <isNotEmpty prepend="and" property="seleFlightInfo"> (TEMP_FLIGHTINFO_ID = #seleFlightInfo#) </isNotEmpty> 
+      order by STATUS,CONVERT(name USING gbk )  
+      </select>
+	<!--临时航班信息的操作sql-->
+	<select id="tempFlightInfoListByLimit" parameterClass="com.tempflight.entity.TempOrderticketsKeyword" resultMap="ooTempFlightinfo">
+      	select  id,flight_info,flight_no,origin,gate_no,flight_date,fly_time,create_time,delete_flag
+      	from temp_flightinfo
+      	 where   delete_flag=0
+      	 order by flight_date desc,create_time desc limit 20
+     </select>
+     <insert id="insertTempFlightinfo" parameterClass="com.tempflight.entity.TempFlightinfo">
+       INSERT INTO temp_flightinfo (flight_info,flight_no,origin,gate_no,flight_date,
+		  fly_time,create_time,delete_flag) 
+    	VALUES(#flightInfo#,#flightNo#,#origin#, #gateNo#, #flightDate#,
+    	 #flyTime#, current_timestamp(), '0')
+   		<selectKey resultClass="java.lang.Integer" keyProperty="id">     
+        	SELECT LAST_INSERT_ID()
+        </selectKey>  
+    </insert> 
+    <update id="editTempFlightinfo" parameterClass="com.tempflight.entity.TempFlightinfo">
+        update temp_flightinfo 
+        set flight_info=#flightInfo#,
+        	 flight_no=#flightNo#, origin=#origin#, gate_no=#gateNo#, 
+        	 flight_date=#flightDate#, fly_time=#flyTime#
+ 			where id=#id#
+    </update>
+    <update id="deleteTempFlightinfoById" parameterClass="java.lang.Integer">
+        update temp_flightinfo 
+        set delete_flag=1
+ 			where id=#id#
+    </update>
+   <select id="queryTempFlghtInfosByDates" parameterClass="com.tempflight.entity.TempOrderticketsKeyword" resultMap="ooTempFlightinfo">
+      	select  id,flight_info,flight_no,origin,gate_no,flight_date,fly_time,create_time,delete_flag
+      	from temp_flightinfo
+      	 where  delete_flag=0
+      	  <isNotEmpty property="startDate" prepend="and">  
+      	  <![CDATA[ flight_date>=#startDate# ]]> 
+      	  </isNotEmpty> 
+      	  <isNotEmpty prepend="and" property="endDate"> 
+      	  <![CDATA[ flight_date <=#endDate# ]]> 
+      	  </isNotEmpty>
+      	 order by flight_date,fly_time
+    </select>
+    <select id="queryTempOrderCount" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+      	SELECT count(a.ID) counts
+		    FROM temp_ordertickets a
+		    where   a.STATUS =7
+            and a.TEMP_FLIGHTINFO_ID =#tempFlightinfoId#
+      </select>
+</sqlMap> 
+

@@ -10,7 +10,7 @@
 <body>
 <div class="login">
     <div class="login_title">
-        <p>空军值班机保障系统</p>
+        <p>任务保障系统</p>
     </div>
     <div class="login_main">
         <div class="main_left"></div>
