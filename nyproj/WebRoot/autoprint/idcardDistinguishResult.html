@@ -7,7 +7,9 @@
     <title>身份识别结果页面</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/user.css">
+    <link rel="stylesheet" href="./css/style.css">
     <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="./js/rem.js"></script>
 </head>
 
 <body>
@@ -20,6 +22,16 @@
         </div>
         <div class="check-out">
             <button class="btn up">打印登机牌</button>
+        </div>
+        <div class="sky">
+            <div class="clouds_one"></div>
+            <div class="clouds_two"></div>
+            <div class="clouds_three"></div>
+            <div class="clouds_forth"></div>
+            <div class="clouds_one top"></div>
+            <div class="clouds_two top"></div>
+            <div class="clouds_three top"></div>
+            <div class="clouds_forth top"></div>
         </div>
     </div>
     <div class="time-box">
@@ -57,7 +69,7 @@
     var value = "";
     var inputTimer = null;
     item.text(time);
-    timerStart();
+    // timerStart();
     function timerStart() {
         if (time < 0) {
             clearTimeout(timer);

@@ -10,10 +10,81 @@
   width: 100%;
 }
 .header {
-  height: 30%;
+  height: 15%;
   width: 100%;
   position: absolute;
   top: 0;
+  z-index: 9999990;
+}
+.left-header {
+  height: 100%;
+  padding-left: 3%;
+}
+.left-header img {
+  height: 100%;
+}
+
+.banner {
+  height: 20%;
+  font-size: 0.6rem;
+  color: #fff;
+  padding-left: 5%;
+  padding-top: 5%;
+}
+.banner .english {
+  font-size: 0.5rem;
+}
+
+.left-bottom {
+  height: 30%;
+  position: absolute;
+  bottom: 0;
+  z-index: 9999999;
+  padding-left: 5%;
+  width: 90%;
+}
+
+.next-btn {
+  height: 0.8rem;
+  line-height: 0.8rem;
+  margin-left: 5%;
+  /* width: 3rem; */
+  position: relative;
+  border: none;
+  padding: 0 0.3rem;
+  font-size: 0.4rem;
+  color: #f73d37;
+  background-color: inherit;
+  border-top: 0.02rem solid #f73d37;
+  border-bottom: 0.02rem solid #f73d37;
+}
+.next-btn::before {
+  content: "<<";
+  font-size: 0.66rem;
+  position: absolute;
+  left: -0.8rem;
+  top: 0;
+  font-weight: 200;
+  color: #f73d37;
+}
+.next-btn::after {
+  content: ">>";
+  font-size: 0.66rem;
+  position: absolute;
+  right: -0.8rem;
+  top: 0;
+  font-weight: 200;
+  color: #f73d37;
+}
+
+.bottom-box {
+  display: flex;
+  position: absolute;
+  bottom: 10%;
+  font-size: 0.2rem;
+}
+.bottom-main {
+  padding-right: 1rem;
 }
 .splite {
   /* height: 5px; */
@@ -21,6 +92,16 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.right-bottom {
+  position: absolute;
+  z-index: 9999999;
+  right: 5%;
+  font-size: 0.4rem;
+  color: #f73d37;
+  font-weight: 700;
+  bottom: 30%;
 }
 
 .line {
