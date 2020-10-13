@@ -25,7 +25,7 @@
             <div class="mid">
                 <img src="./images/idcard.jpg" alt="">
             </div>
-            <button onClick="moveInfo()">下一步</button>
+            <!-- <button onClick="moveInfo()">下一步</button> -->
         </div>
         <div class="sky">
             <div class="clouds_one"></div>
@@ -49,6 +49,9 @@
     var item = $('#timenum');
     var value = "";
     var inputTimer = null;
+    var scanCertNo = '';
+    var scanName = "";
+    var CARD = "";
     item.text(time);
     timerStart();
     function timerStart() {
@@ -57,6 +60,7 @@
             window.location.href = "autoprintIndex.html"
         } else {
             timer = setTimeout(() => {
+                getCard()
                 time -= 1;
                 item.text(time);
                 console.log(time)
@@ -65,7 +69,34 @@
         }
 
     }
-    var CARD = "610203197108152934";
+
+
+    function getCard() {
+        var img1Base64;
+        var httpServerPort = 8989;
+        $.ajax({
+            dataType: "JSONP",
+            type: "get",
+            url: "http://localhost:" + httpServerPort + "/api/ReadMsg",//接口服务器地址  参数: Fp=1读证内指纹，PhotoQuality 身份证头像质量，cardImg=1获取身份证正反面图片
+            //contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            success: function (data) {
+                console.log(data)
+                scanCertNo = data.cardno;
+                scanName = data.name;
+                if (scanCertNo == null || scanCertNo == undefined) {
+                    alert("未能正确安装省份证识别设别");
+                    return;
+                }
+                //成功执行undefined
+                CARD = scanCertNo;
+                moveInfo()
+            },
+            error: function (e) {
+                //失败执行
+                console.log(e.status + ',' + e.statusText);
+            }
+        });
+    }
 
     $('#back').bind('click', function () {
         window.location.href = "autoprintIndex.html"

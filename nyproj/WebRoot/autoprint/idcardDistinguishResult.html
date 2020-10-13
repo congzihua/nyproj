@@ -15,7 +15,10 @@
 <body>
     <div class="main">
         <div class="header">
-            <span class="name-box">姓名：<span id="name"></span></span>
+            <div class="cardinfo-box">
+                <div class="name-box">姓名：&nbsp;&nbsp;&nbsp;<span id="name"></span></div>
+                <div class="id-box">身份证号：&nbsp;&nbsp;&nbsp;<span id="card"></span></div>
+            </div>
             <button class="btn" id="back">退出</button>
         </div>
         <div class="info-content" id="content">
@@ -38,6 +41,9 @@
         <div class="an-time"></div>
         <span id="timenum">30</span>
     </div>
+    <!-- <div class="box-typeinfo">
+        <span id="infoBox"></span>
+    </div> -->
 </body>
 <script>
     Date.prototype.Format = function (fmt) {
@@ -126,7 +132,24 @@
                 console.log(list)
                 $.each(list, function (k, v) {
                     console.log(k, v)
-                    html += '<div class="info-box"><div class="plane-info"><span class="plane-number">' + v.id + '</span><span class="plane-date">' + new Date(v.flightDate).Format("yyyy-MM-dd") + '</span><span class="plane-type">' + v.flight + '</span></div ><div class="plane-time"><span class="info-time">' + v.flyTime + '<i class="info-time-i"></i></span><span class="info-icon">' + (v.status === '2' ? '待换登机牌' : v.status === '3' ? '待安检' : '') + '</span><span class="info-name">' + v.name + '</span></div></div >'
+                    html += '<div class="info-box">' +
+                        '<div class="row">' +
+                        '<div class="row-title">序号</div>' +
+                        '<div class="row-title">航程</div>' +
+                        '<div class="row-title">乘机日期</div>' +
+                        '<div class="row-title">起飞时间</div>' +
+                        '<div class="row-title">状态</div>' +
+                        '<div class="row-title">操作</div>' +
+                        '</div>' +
+                        '<div class="row">' +
+                        '<div class="row-num">' + k + '</div>' +
+                        '<div class="row-num">' + v.flight + '</div>' +
+                        '<div class="row-num">' + new Date(v.flightDate).Format("yyyy-MM-dd") + '</div>' +
+                        '<div class="row-num">' + v.flyTime + '</div>' +
+                        '<div class="row-num">' + v.status + '</div>' +
+                        '<div class="row-num">' + '<a href="javascript:void(0)" onClick="upDate(' + v + ')">打印登机牌</a>' + '</div>' +
+                        '</div>'
+                    '</div >'
                 })
                 $("#content").append(html)
 
@@ -136,9 +159,9 @@
     }
 
 
-    $('.info-box').bind("click", function () {
-
-    });
+    function upDate(key) {
+        $('#infoBox').text('登机牌打印已成功！')
+    }
 
 
     function getInfo() {
