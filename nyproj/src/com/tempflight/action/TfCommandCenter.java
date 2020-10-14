@@ -63,10 +63,10 @@ public class TfCommandCenter extends DispatchAction{
 		TempFlightinfo fi = service.tempFlightInfoById(Integer.valueOf(flightinfoId));
 		List<TempOrdertickets> pplist=service.queryTempOrdertickets(fi.getId());
 		Iterator<TempOrdertickets> iter1= pplist.iterator();
+		Set<String> teamSet = new HashSet<String>();
 		while (iter1.hasNext()) {
 			TempOrdertickets opo = (TempOrdertickets) iter1.next();
-			jianShu+=opo.getLuggSum()==null?0:opo.getLuggSum();
-			zongZhong+=opo.getWeightSum()==null?0:opo.getWeightSum();
+			
 			if("2".equals(opo.getStatus())){
 				shouPiao +=1;
 			}else if("3".equals(opo.getStatus())){
@@ -76,6 +76,17 @@ public class TfCommandCenter extends DispatchAction{
 			}else if ("7".equals(opo.getStatus())) {
 				jinCang+=1;
 			}
+			boolean isTeam = opo.getTeamflag()!= null && opo.getTeamflag().equals("1");
+			int luggNum = opo.getLuggSum()==null?0:opo.getLuggSum();
+			String v = opo.getTeamName()+"-"+luggNum;
+			if (isTeam && teamSet.contains(v)) {
+		    	continue;
+		    }
+		    if (isTeam) {
+		    	teamSet.add(v);
+		    }
+		    jianShu+=opo.getLuggSum()==null?0:opo.getLuggSum();
+			zongZhong+=opo.getWeightSum()==null?0:opo.getWeightSum();
 		}
 		frameMap.put("shouPiao", shouPiao);
 		frameMap.put("huanPai", huanPai);

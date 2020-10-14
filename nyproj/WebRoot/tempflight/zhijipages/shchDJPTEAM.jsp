@@ -208,17 +208,12 @@ function check(type){
 				lugs +=parseInt(jsTrim(luggSum.value),10);
 			}
 			var luggSum1 = document.getElementById("luggSum1").value;
-			if(jsTrim(luggSum1)!=""&&jsTrim(luggSum1)!=null){
-				lugs += parseInt(luggSum1,10);
-			}
+			
 			var weightSum1 = document.getElementById("weightSum1").value;
 			if(jsTrim(weightSum.value)!=""&&jsTrim(weightSum.value)!=null){
 				wsums +=parseFloat(jsTrim(weightSum.value),10);
 			}
 			
-			if(jsTrim(weightSum1)!=""&&jsTrim(weightSum1)!=null){
-				wsums += parseFloat(weightSum1,10);
-			}
 			if(!window.confirm("您确认要打印行李签吗？")){
 				return;
 			}
@@ -302,17 +297,13 @@ function check(type){
 					lugs +=parseInt(jsTrim(luggSum.value),10);
 				}
 				var luggSum1 = document.getElementById("luggSum1").value;
-				if(jsTrim(luggSum1)!=""&&jsTrim(luggSum1)!=null){
-					lugs += parseInt(luggSum1,10);
-				}
+				
 				var weightSum1 = document.getElementById("weightSum1").value;
 				if(jsTrim(weightSum.value)!=""&&jsTrim(weightSum.value)!=null){
 					wsums +=parseFloat(jsTrim(weightSum.value),10);
 				}
 				
-				if(jsTrim(weightSum1)!=""&&jsTrim(weightSum1)!=null){
-					wsums += parseFloat(weightSum1,10);
-				}
+				
 				document.getElementById("luggSum1").value=lugs;
 				document.getElementById("weightSum1").value=wsums;
 				document.getElementById("seatNum").value="";

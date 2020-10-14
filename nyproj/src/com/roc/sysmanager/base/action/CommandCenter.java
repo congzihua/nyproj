@@ -63,10 +63,10 @@ public class CommandCenter extends DispatchAction{
 		flightInfoIds = flightInfoIds.substring(1);
 		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(flightInfoIds);
 		Iterator<OpOrdertickets> iter1=pplist.iterator();
+		Set<String> teamSet = new HashSet<String>();
 		while (iter1.hasNext()) {
 			OpOrdertickets opo = (OpOrdertickets) iter1.next();
-			jianShu+=opo.getLuggSum()==null?0:opo.getLuggSum();
-			zongZhong+=opo.getWeightSum()==null?0:opo.getWeightSum();
+			boolean isTeam = opo.getTeamflag()!= null && opo.getTeamflag().equals("1");
 			if("2".equals(opo.getStatus())){
 				shouPiao +=1;
 			}else if("3".equals(opo.getStatus())){
@@ -76,6 +76,17 @@ public class CommandCenter extends DispatchAction{
 			}else if ("7".equals(opo.getStatus())) {
 				jinCang+=1;
 			}
+		   
+		    int luggNum = opo.getLuggSum()==null?0:opo.getLuggSum();
+		    String v = opo.getTeamName()+"-"+luggNum;
+		    if (isTeam && teamSet.contains(v)) {
+		    	continue;
+		    }
+		    if (isTeam) {
+		    	teamSet.add(v);
+		    }
+			jianShu+= luggNum;
+			zongZhong+=opo.getWeightSum()==null?0:opo.getWeightSum();
 		}
 		frameMap.put("shouPiao", shouPiao);
 		frameMap.put("huanPai", huanPai);
@@ -148,6 +159,7 @@ public class CommandCenter extends DispatchAction{
 		String flightInfoIds = getFlightIds(fiList, 1);
 		List<OpOrdertickets> pplist=new ClienService().queryByFlightInfoId(flightInfoIds);
 		Iterator<OpOrdertickets> iter1=pplist.iterator();
+		Set<String> teamSet = new HashSet<String>();
 		while (iter1.hasNext()) {
 			OpOrdertickets opo = (OpOrdertickets) iter1.next();
 			jianShu+=opo.getLuggSum()==null?0:opo.getLuggSum();

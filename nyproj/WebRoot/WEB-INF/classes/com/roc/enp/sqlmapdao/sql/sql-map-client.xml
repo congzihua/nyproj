@@ -62,6 +62,8 @@
 	   <result property="flight" column="FLIGHT"/>
 	   <result property="flightDate" column="FLIGHT_DATE"/>
 	   <result property="flyTime" column="FLY_TIME"/>
+	   <result property="teamflag" column="TEAMFLAG"/>
+	   <result property="teamName" column="TEAM_NAME"/>
     </resultMap>  
     <resultMap class="com.roc.syspe.entity.OpOrdertickets" id="ooAtDJP">
 	   <result property="name" column="NAME"/>
@@ -401,7 +403,7 @@
             <isNotEmpty property="ids" prepend="and"> <![CDATA[ a.id not in(#ids#) ]]> </isNotEmpty> 
       </select>
       <select id="queryByFlightInfoId" parameterClass="java.lang.String" resultMap="ooRMKZZX">
-      	select a.FLIGHTINFO_ID,a.STATUS,a.NAME,a.CERT_TYPE,a.CERT_NO,a.LINKPHONE,a.VIP_FLAG,a.TICKETPOINT_ID,
+      	select a.FLIGHTINFO_ID,a.STATUS,a.NAME,a.CERT_TYPE,a.CERT_NO,a.LINKPHONE,a.TEAM_NAME,a.TEAMFLAG,a.VIP_FLAG,a.TICKETPOINT_ID,
       		b.FLIGHT_NO,a.PAYMENT,a.TICKETPRICE,a.REMARK,a.GATE,a.HALFPRICECARD,a.ZEROPRICECARD,a.CREATEDATE,
       			a.DELETE_FLAG,a.ID,a.LUGG_SUM,a.WEIGHT_SUM,c.FLIGHT,b.FLIGHT_DATE,b.FLY_TIME
       	from op_ordertickets a,ba_flightinfo b,ba_flight c where a.delete_flag!=1 and b.delete_flag!=1 and c.delete_flag!=1 and a.flightinfo_id=b.id and b.flight_id=c.id  and a.FLIGHTINFO_ID in ($value$) and(a.STATUS="2" or a.STATUS="3" or a.STATUS="4"  or a.STATUS="7")

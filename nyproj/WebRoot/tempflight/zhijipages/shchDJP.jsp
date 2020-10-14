@@ -158,18 +158,12 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 				lugs +=parseInt(jsTrim(luggSum.value),10);
 			}
 			var luggSum1 = document.getElementById("luggSum1").value;
-			if(jsTrim(luggSum1)!=""&&jsTrim(luggSum1)!=null){
-				lugs += parseInt(luggSum1,10);
-			}
+			
 			var weightSum1 = document.getElementById("weightSum1").value;
 			if(jsTrim(weightSum.value)!=""&&jsTrim(weightSum.value)!=null){
 				wsums +=parseFloat(jsTrim(weightSum.value),10);
 			}
 			
-			if(jsTrim(weightSum1)!=""&&jsTrim(weightSum1)!=null){
-				
-				wsums += parseFloat(weightSum1,10);
-			}
 			document.getElementById("tuipiao").disabled="disabled";
 			document.getElementById("bc").disabled="disabled";
 			document.getElementById("cl").disabled="disabled";

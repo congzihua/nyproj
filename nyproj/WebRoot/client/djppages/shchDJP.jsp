@@ -168,6 +168,7 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 				return;
 			}
 			var lugs = 0,wsums=0;
+			
 			if(jsTrim(luggSum.value)!=""&&jsTrim(luggSum.value)!=null){
 				lugs +=parseInt(jsTrim(luggSum.value),10);
 			}
@@ -176,6 +177,8 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 				lugs += parseInt(luggSum1,10);
 			}
 			var weightSum1 = document.getElementById("weightSum1").value;
+			var thisLugNum =parseInt(jsTrim(luggSum.value),10);
+			var thisWeithtNum =parseInt(jsTrim(weightSum.value),10);
 			if(jsTrim(weightSum.value)!=""&&jsTrim(weightSum.value)!=null){
 				wsums +=parseFloat(jsTrim(weightSum.value),10);
 			}
@@ -198,7 +201,7 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 			var flightTo=document.getElementById("flightTo").value;
 			var name=document.getElementById("name").value;
 			
-			SysmanagerDWR.xlqSave(data,'<%=auth.getUserid()%>',type,seatNum.value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,lugs,wsums,fIds,flightTo,<%=auth.getWorkerNo()%>,flightno,flydate,name,jsTrim(luggSum.value),onHandleM2);		
+			SysmanagerDWR.xlqSave(data,'<%=auth.getUserid()%>',type,seatNum.value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,thisLugNum,thisWeithtNum,fIds,flightTo,<%=auth.getWorkerNo()%>,flightno,flydate,name,jsTrim(luggSum.value),onHandleM2);		
 			
 		}
 		function seleSeat(){
@@ -254,17 +257,13 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 				lugs +=parseInt(jsTrim(luggSum.value),10);
 			}
 			var luggSum1 = document.getElementById("luggSum1").value;
-			if(jsTrim(luggSum1)!=""&&jsTrim(luggSum1)!=null){
-				lugs += parseInt(luggSum1,10);
-			}
+			
 			var weightSum1 = document.getElementById("weightSum1").value;
 			if(jsTrim(weightSum.value)!=""&&jsTrim(weightSum.value)!=null){
 				wsums +=parseFloat(jsTrim(weightSum.value),10);
 			}
 			
-			if(jsTrim(weightSum1)!=""&&jsTrim(weightSum1)!=null){
-				wsums += parseFloat(weightSum1,10);
-			}
+			
 			document.getElementById("luggSum1").value=lugs;
 			document.getElementById("weightSum1").value=wsums;
 			
