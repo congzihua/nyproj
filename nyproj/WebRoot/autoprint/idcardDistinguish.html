@@ -6,28 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>身份证识别页面</title>
 </head>
-<link rel="stylesheet" href="css/base.css">
-<link rel="stylesheet" href="css/user.css">
+<link rel="stylesheet" href="./css/base.css">
+<link rel="stylesheet" href="./css/user.css">
+<link rel="stylesheet" href="./css/style.css">
 <script src="js/jquery-3.2.1.min.js"></script>
+<script src="./js/rem.js"></script>
 
 <body>
     <div class="main">
         <div class="header">
-            <button class="btn" id="back">退出</button>
+            <div class="header-title">请将证件在相应位置扫描：身份证</div>
+
         </div>
         <div class="content">
-            <div class="title">请在相应位置扫描：</div>
-            <div class="info">
-                <div class="tishi">二代身份证</div>
-                <div class="image-info"></div>
-            </div>
+            <div class="image-info"></div>
         </div>
         <div class="check">
-            <!-- <input type="number" id="inputInfo" class="input" placeholder="手工输入证件号码"> -->
-            <div class="card-box">证件号：<span id="card"></span></div>
-            <button class="search btn" onClick="moveInfo()">
-                下一步
-            </button>
+            <div class="mid">
+                <img src="./images/idcard.jpg" alt="">
+            </div>
+            <!-- <button onClick="moveInfo()">下一步</button> -->
+        </div>
+        <div class="sky">
+            <div class="clouds_one"></div>
+            <div class="clouds_two"></div>
+            <div class="clouds_three"></div>
+            <div class="clouds_forth"></div>
+            <div class="clouds_one top"></div>
+            <div class="clouds_two top"></div>
+            <div class="clouds_three top"></div>
+            <div class="clouds_forth top"></div>
         </div>
     </div>
     <div class="time-box">
@@ -41,6 +49,9 @@
     var item = $('#timenum');
     var value = "";
     var inputTimer = null;
+    var scanCertNo = '';
+    var scanName = "";
+    var CARD = "";
     item.text(time);
     timerStart();
     function timerStart() {
@@ -49,6 +60,7 @@
             window.location.href = "autoprintIndex.html"
         } else {
             timer = setTimeout(() => {
+                getCard()
                 time -= 1;
                 item.text(time);
                 console.log(time)
@@ -57,21 +69,39 @@
         }
 
     }
-    var CARD = "610203197108152934";
+
+
+    function getCard() {
+        var img1Base64;
+        var httpServerPort = 8989;
+        $.ajax({
+            dataType: "JSONP",
+            type: "get",
+            url: "http://localhost:" + httpServerPort + "/api/ReadMsg",//接口服务器地址  参数: Fp=1读证内指纹，PhotoQuality 身份证头像质量，cardImg=1获取身份证正反面图片
+            //contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            success: function (data) {
+                console.log(data)
+                scanCertNo = data.cardno;
+                scanName = data.name;
+                if (scanCertNo == null || scanCertNo == undefined) {
+                    alert("未能正确安装省份证识别设别");
+                    return;
+                }
+                //成功执行undefined
+                CARD = scanCertNo;
+                moveInfo()
+            },
+            error: function (e) {
+                //失败执行
+                console.log(e.status + ',' + e.statusText);
+            }
+        });
+    }
 
     $('#back').bind('click', function () {
-        console.log(1)
         window.location.href = "autoprintIndex.html"
     });
 
-    $('.card').val(CARD.replace(/(\d{4})\d{10}(\d{4})/g, "$1****$2"));
-
-    console.log(CARD);
-    // var cardType = CARD.
-    // window.location.href = "idcardDistinguishResult.html?ids=" + CARD
-    // inputTimer = setTimeout(() => {
-    //     window.location.href = "idcardDistinguishResult.html"
-    // }, 1500)
     function moveInfo() {
         if (CARD) {
             window.location.href = "idcardDistinguishResult.html?card=" + CARD;

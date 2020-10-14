@@ -23,7 +23,11 @@ body,
 input,
 select,
 textarea {
-  font-family: 'microsoft yahei';
+  font-family: "microsoft yahei";
+}
+
+html {
+  font-size: 100px;
 }
 
 html,
@@ -36,7 +40,7 @@ body {
   background: #fff;
   margin: 0 auto;
   color: #333;
-  font-size: .24rem;
+  font-size: 0.24rem;
   /* overflow: hidden; */
 }
 
