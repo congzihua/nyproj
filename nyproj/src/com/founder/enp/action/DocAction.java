@@ -94,6 +94,7 @@ public class DocAction extends DispatchAction {
 		SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		SimpleDateFormat formatHourMinute = new SimpleDateFormat("HH:mm");
 		for (OpOrdertickets order:ol) {
+			order.setStartAddress(ArgsUnit.getStartAddress());
 			if (StringUtils.isNotEmpty(order.getSeatNum())) {
 				//already has seat,none need chose.
 				continue;
@@ -108,7 +109,7 @@ public class DocAction extends DispatchAction {
 			List<OpOrdertickets> ol1 = service.getBaFlightInfoList(kw);
 			List<String> flightIds = new ArrayList<String>();;
 			ol1.forEach(o -> {
-				flightIds.add(o.getFlightinfoId()+"");
+				flightIds.add(o.getId()+"");
 			});
 			String seleFlightInfos = StringUtils.join(flightIds, ",");
 			kw = new OpOrderticketsKeyword();

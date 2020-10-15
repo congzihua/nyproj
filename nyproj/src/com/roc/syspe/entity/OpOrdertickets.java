@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.LinkedList;
 
 public class OpOrdertickets {
+	private String startAddress;
 	private  Integer flightId;//FLIGHT_ID	i
 	private  java.util.Date flightDate;//FLIGHT_DATE
 	private  String flyTime;//FLY_TIME	v
@@ -47,6 +48,12 @@ public class OpOrdertickets {
 	private String bagNums;
 	
 	
+	public String getStartAddress() {
+		return startAddress;
+	}
+	public void setStartAddress(String startAddress) {
+		this.startAddress = startAddress;
+	}
 	public String getBagNums() {
 		return bagNums;
 	}

@@ -581,7 +581,7 @@
       	order by a.STATUS,a.TICKETPOINT_ID 
       </select>
       <select id="getFlightSeats" parameterClass="com.roc.syspe.entity.OpOrderticketsKeyword" resultClass="java.lang.String">
-      	SELECT  a.SEAT_NUM
+      	SELECT DISTINCT   a.SEAT_NUM
 		FROM op_ordertickets a,ba_flightinfo b
 		where  a.flightinfo_id=b.id  and a.STATUS not in('8','9')
             <isNotEmpty property="seleFlightInfos" prepend="and"> b.id in($seleFlightInfos$) </isNotEmpty> 
