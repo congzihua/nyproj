@@ -31,7 +31,7 @@ href="<%=request.getContextPath()%>/loginimages/User_Login.css" type=text/css re
 		</style>
 </HEAD>
 <BODY id=userlogin_body>
-<DIV style="padding-bottom:5px;padding-left:20px;"><a style="font-size:20px;color:#fff;" href="<%=request.getContextPath()%>/tflogin.jsp">保障系统</a></DIV>
+<DIV style="padding-bottom:6px;padding-left:20px;"><a style="text-decoration: none;border-bottom: 2px solid gray; font-size:25px;color: Gold;" href="<%=request.getContextPath()%>/tflogin.jsp">&nbsp;保障系统&nbsp;</a></DIV>
 <form action="<%=request.getContextPath()%>/loginAction.do" method="post" target="_top">
 <DIV id=user_login>
 <DL>
