@@ -55,7 +55,7 @@
     item.text(time);
     timerStart();
     function timerStart() {
-        if (time < 0) {
+        if (time <= 0) {
             clearTimeout(timer);
             window.location.href = "autoprintIndex.html"
         } else {
@@ -83,7 +83,10 @@
                 scanCertNo = data.cardno;
                 scanName = data.name;
                 if (scanCertNo == null || scanCertNo == undefined) {
+<<<<<<< HEAD
                     alert("未能正确安装身份证识别设别");
+=======
+>>>>>>> refs/remotes/origin/temp_flight
                     return;
                 }
                 //成功执行undefined
@@ -92,7 +95,12 @@
             },
             error: function (e) {
                 //失败执行
+<<<<<<< HEAD
                 window.location.href = "autoprintIndex.html"
+=======
+               // clearTimeout(timer);
+               // window.location.href = "autoprintIndex.html"
+>>>>>>> refs/remotes/origin/temp_flight
                 console.log(e.status + ',' + e.statusText);
             }
         });

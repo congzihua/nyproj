@@ -11,6 +11,7 @@ public class OpOrdertickets {
 	private  String status;//STATUS	var
 	private  String name;//NAME	varch
 	private  Integer flightinfoId;//FLIGHTINFO_ID;
+	private  String flightDateFormate;
 	private  String certType;//CERT_TYPE	v
 	private  String certNo; //CERT_NO	var
 	private  String linkphone;//LINKPHONE	v
@@ -48,6 +49,12 @@ public class OpOrdertickets {
 	private String bagNums;
 	
 	
+	public String getFlightDateFormate() {
+		return flightDateFormate;
+	}
+	public void setFlightDateFormate(String flightDateFormate) {
+		this.flightDateFormate = flightDateFormate;
+	}
 	public String getStartAddress() {
 		return startAddress;
 	}

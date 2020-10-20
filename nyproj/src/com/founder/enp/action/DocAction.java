@@ -49,7 +49,7 @@ public class DocAction extends DispatchAction {
 			PrintWriter out = response.getWriter();
 			List<OpOrdertickets> ol  = new ArrayList<>();
 			if (StringUtils.isEmpty(idCard)) {
-				out.print(JSON.toJSONString(ol));
+				out.write(JSON.toJSONString(ol));
 				return null;
 			}
 			ClienService service = new ClienService();
@@ -61,7 +61,7 @@ public class DocAction extends DispatchAction {
 			ol = service.teamDjpListByIdCard(keyWord);
 			ol = ol == null ?new ArrayList():ol;
 			String json = JSON.toJSONString(ol);
-			out.print(json);
+			out.write(json);
 			return null;
 	}
 	
@@ -76,7 +76,7 @@ public class DocAction extends DispatchAction {
 		PrintWriter out = response.getWriter();
 		if (StringUtils.isEmpty(idsParam)) {
 			log.error("id is null or none numeric");
-			out.print(JSON.toJSONString(ol));
+			out.write(JSON.toJSONString(ol));
 			return null;
 		}
 		
@@ -87,20 +87,25 @@ public class DocAction extends DispatchAction {
 		ol = ol == null ?new ArrayList():ol;
 		
 		if (ol.size()  == 0) {
-			out.print("");
+			out.write("");
 			return null;
 		}
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat format2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		SimpleDateFormat formatHourMinute = new SimpleDateFormat("HH:mm");
+		List<OpOrdertickets> resls = new ArrayList<OpOrdertickets>();
 		for (OpOrdertickets order:ol) {
 			order.setStartAddress(ArgsUnit.getStartAddress());
+			order.setGate(ArgsUnit.gateDeafult());
+			Date flightDate = order.getFlightDate();
+			String orderdate = format.format(flightDate);
+			order.setFlightDateFormate(orderdate);
+			resls.add(order);
 			if (StringUtils.isNotEmpty(order.getSeatNum())) {
 				//already has seat,none need chose.
 				continue;
 			}
-			Date flightDate = order.getFlightDate();
-			String orderdate = format.format(flightDate);
+			
 			String flyTime = order.getFlyTime();
 			OpOrderticketsKeyword kw = new OpOrderticketsKeyword();
 			kw.setSeleDate(orderdate);
@@ -117,8 +122,13 @@ public class DocAction extends DispatchAction {
 			List<String> seats = service.getFlightSeats(kw);
 			seats  = seats == null?new ArrayList<String>():seats;
 			order.setStatus("3");
-			order.setSeatNum(getSeatNum(seats));
-			order.setGate(ArgsUnit.gateDeafult());
+			String sn = null;
+			
+			sn = getSeatNum(seats);
+			if (sn == null) {
+				continue;
+			}
+			order.setSeatNum(sn);
 			Date flyDate = null;
 			try {
 				flyDate = format2.parse(orderdate+" "+flyTime);
@@ -132,16 +142,19 @@ public class DocAction extends DispatchAction {
 			service.updateForDjp(order,null);
 		}
 		
-		String json = JSON.toJSONString(ol);
-		out.print(json);
+		String json = JSON.toJSONString(resls);
+		out.write(json);
 		return null;
 	}
 	private String getSeatNum (List<String> seats) {
 		if (seats == null)
-			seats = new ArrayList<>();
-		int k = 5;
-		for(int i = 5;i < 18;i++){
-			k++;
+			seats = new ArrayList<String>();
+		seats.add("16C");
+		for (int i = 7;i<= 18;i++) {
+			seats.add(i+"B");
+			seats.add(i+"E");
+		}
+		for(int k = 7;k <= 16;k++){
 			String seatNumA = k+"A";
 			if (!seats.contains(seatNumA)) {
 				return seatNumA;

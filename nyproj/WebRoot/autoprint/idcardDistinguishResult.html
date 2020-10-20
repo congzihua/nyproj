@@ -68,7 +68,7 @@
                 );
         return fmt;
     };
-    var varItem1 = 'MB1.PRN^LPT1^4008^2012-01-22^是^1-A^库尔勒^<%=startAddress%>^4-6^08:30^科比布莱恩提^220111198804153641^12';
+    var varItem1 = 'MB1.PRN^LPT1^4008^2012-01-22^是^1-A^库尔勒^北京^4-6^08:30^科比布莱恩提^220111198804153641^12';
     var varDemo1 = 'MB1.PRN^LPT1^';
     var socketUrl = 'ws://localhost:7302/PrintServer';
     var socket = null;
@@ -80,7 +80,7 @@
     item.text(time);
     timerStart();
     function timerStart() {
-        if (time < 0) {
+        if (time <= 0) {
             clearTimeout(timer);
             window.location.href = "autoprintIndex.html"
         } else {
@@ -106,7 +106,7 @@
         console.log(1)
         window.location.href = "autoprintIndex.html"
     });
-    var nyprojUrl = "http://localhost:8080";
+    var nyprojUrl = "http://localhost:8089";
     function getCard() {
         $.ajax({
             dataType: "text",
@@ -114,18 +114,54 @@
             url: nyprojUrl + "/nyproj/docAction.do?method=getUserFlightInfos&idcard=" + CARD,
             success: function (data) {
                 if (!data) {
+<<<<<<< HEAD
                     alert("当前无登机牌信息");
+=======
+                    var html = "";
+                    html = '<div class="info-box">' +
+                        '<div class="row">' +
+                        '<div class="row-title">序号</div>' +
+                        '<div class="row-title">航程</div>' +
+                        '<div class="row-title">乘机日期</div>' +
+                        '<div class="row-title">起飞时间</div>' +
+                        '<div class="row-title">状态</div>' +
+                        '<div class="row-title">操作</div>' +
+                        '</div>';
+                        html += '<div class="row">未查询到当日购票信息</div>';
+                        
+                        html += '</div>';
+                        $("#content").append(html);
+>>>>>>> refs/remotes/origin/temp_flight
                     return;
                 }
                 let list = JSON.parse(data).map(function (item, index) {
                     return item;
                 });
+<<<<<<< HEAD
+=======
+                var html = "";
+                if (list.length == 0) {
+                    html = '<div class="info-box">' +
+                        '<div class="row">' +
+                        '<div class="row-title">序号</div>' +
+                        '<div class="row-title">航程</div>' +
+                        '<div class="row-title">乘机日期</div>' +
+                        '<div class="row-title">起飞时间</div>' +
+                        '<div class="row-title">状态</div>' +
+                        '<div class="row-title">操作</div>' +
+                        '</div>';
+                        html += '<div class="row">未查询到当日购票信息</div>';
+                        
+                        html += '</div>';
+                        $("#content").append(html);
+                    return;
+                }
+>>>>>>> refs/remotes/origin/temp_flight
                 $('#name').text(list[0].name);
                 var certNo = list[0].certNo;
                 certNo = certNo.substring(0, 6) + "******" + certNo.substring(14);
                 $('#card').text(certNo);
                 $.each(list, function (k, v) {
-                    var html = "";
                     html = '<div class="info-box">' +
                         '<div class="row">' +
                         '<div class="row-title">序号</div>' +
@@ -153,9 +189,14 @@
                         '<div class="row-num">' + '<a href="javascript:void(0)" onClick="upDate(' + v.id + ')">打印登机牌</a>' + '</div>' +
                         '</div>';
                     html += '</div>';
+<<<<<<< HEAD
                     $("#content").append(html);
 
                 })
+=======
+                });
+                $("#content").append(html);
+>>>>>>> refs/remotes/origin/temp_flight
             },
             error: function (e) {
                 //失败执行
@@ -164,7 +205,7 @@
         });
 
     }
-
+	var msg = '登机牌打印已成功！';
 
     function upDate(key, e) {
         var event = e || window.event
@@ -173,7 +214,11 @@
             type: "get",
             url: nyprojUrl + "/nyproj/docAction.do?method=toQueryPrintInfoById&ids=" + key,
             success: function (data) {
+<<<<<<< HEAD
                 //失败执行
+=======
+            	//失败执行
+>>>>>>> refs/remotes/origin/temp_flight
                 let list = JSON.parse(data).map(function (item, index) {
                     return item;
                 });
@@ -186,25 +231,30 @@
                 var gate = list[0].gate;
                 var flightTo = list[0].flight;
                 var flyTime = list[0].flyTime;
-                var flightDate = list[0].flightDate;
+                var flightDate = list[0].flightDateFormate;
                 var flightNo = list[0].flightNo;
                 var startAddress = list[0].startAddress;
-                $(event.target).addClass('active')
+                $(event.target).addClass('active');
                 //todo print 
-                PrintLab1(flightNo, flightDate, vipFlag, seatNum, flightTo, gate, flyTime, name, certNo, id);
+                PrintLab1(flightNo, flightDate, vipFlag, seatNum, flightTo, gate, flyTime, name, certNo, id,startAddress);
+                $('#infoBox').text(msg)
+                msg = '登机牌打印已成功！';
+            },
+            error: function (e) {
+                
             },
             error: function (e) {
 
             },
         });
-        $('#infoBox').text('登机牌打印已成功！')
+       
         $('#box-typeinfo').addClass('dis')
         setTimeout(function () {
             $('#box-typeinfo').removeClass('dis')
         }, 2000)
     }
 
-
+    
     function getInfo() {
         $.ajax({
             dataType: "JSONP",
@@ -241,12 +291,14 @@
     }
 
     //打印登机牌方法
-    function PrintLab1(a, b, c, d, e, f, g, h, i, g) {
+    function PrintLab1(a, b, c, d, e, f, flyTime, h, i, g,startAddress) {
         var flightNo = a;
         var flydate = b;
         var vipFlag = c;
-        if (vipFlag == 1) {
+        if (vipFlag == 1 || vipFlag == '1'|| vipFlag == '是') {
             vipFlag = "是";
+            msg = 'VIP客户请到柜台办理登机牌！';
+            return ;
         } else {
             vipFlag = " ";
         }
@@ -255,20 +307,19 @@
         var gate = f;
         // var flyhour = g;
         // var flyminute = h;
-        var flytime = g;
+        var flytime = flyTime;
         var name = h;
         var certNo = i;
         var id = g;
-        var startAddress = startAddress;
         if (certNo.length == 18) {
             certNo = certNo.substring(0, 6) + "******" + certNo.substring(14);
         }
         if (seatNum == null || seatNum == '') {
-            alert("座位不能为空！");
+        	msg = '座位数量不足，请到柜台办理或改签！';
             return;
         }
-
-        varItem1 = flightNo + '^' + flydate + '^' + vipFlag + '^' + seatNum + '^' + flightTo + '^startAddress^' + gate + '^' + flytime + '^' + name + '^' + certNo + '^' + id;
+		//varItem1 = flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNum+'^'+flightTo+'^<%=startAddress%>^'+gate+'^'+flytime+'^'+name+'^'+certNo+'^'+id;
+        varItem1 = flightNo + '^' + flydate + '^' + vipFlag + '^' + seatNum + '^' + flightTo + '^'+startAddress+'^' + gate + '^' + flytime + '^' + name + '^' + certNo + '^' + id;
         var pData = varDemo1 + varItem1;
         buildSocket();
         socket.onopen = function (event) {
