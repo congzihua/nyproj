@@ -84,8 +84,6 @@
                 scanName = data.name;
                 if (scanCertNo == null || scanCertNo == undefined) {
                     alert("未能正确安装身份证识别设别");
-                    clearTimeout(timer);
-                    window.location.href = "autoprintIndex.html"
                     return;
                 }
                 //成功执行undefined
@@ -94,7 +92,6 @@
             },
             error: function (e) {
                 //失败执行
-                clearTimeout(timer);
                 window.location.href = "autoprintIndex.html"
                 console.log(e.status + ',' + e.statusText);
             }
