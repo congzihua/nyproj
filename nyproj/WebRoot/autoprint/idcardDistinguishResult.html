@@ -124,32 +124,15 @@
                         '<div class="row-title">状态</div>' +
                         '<div class="row-title">操作</div>' +
                         '</div>';
-                        html += '<div class="row">未查询到当日购票信息</div>';
-                        
-                        html += '</div>';
-                        $("#content").append(html);
+                    html += '<div class="row">未查询到当日购票信息</div>';
+
+                    html += '</div>';
+                    $("#content").append(html);
                     return;
                 }
                 let list = JSON.parse(data).map(function (item, index) {
                     return item;
                 });
-                var html = "";
-                if (list.length == 0) {
-                    html = '<div class="info-box">' +
-                        '<div class="row">' +
-                        '<div class="row-title">序号</div>' +
-                        '<div class="row-title">航程</div>' +
-                        '<div class="row-title">乘机日期</div>' +
-                        '<div class="row-title">起飞时间</div>' +
-                        '<div class="row-title">状态</div>' +
-                        '<div class="row-title">操作</div>' +
-                        '</div>';
-                        html += '<div class="row">未查询到当日购票信息</div>';
-                        
-                        html += '</div>';
-                        $("#content").append(html);
-                    return;
-                }
                 $('#name').text(list[0].name);
                 var certNo = list[0].certNo;
                 certNo = certNo.substring(0, 6) + "******" + certNo.substring(14);
@@ -182,8 +165,9 @@
                         '<div class="row-num">' + '<a href="javascript:void(0)" onClick="upDate(' + v.id + ')">打印登机牌</a>' + '</div>' +
                         '</div>';
                     html += '</div>';
-                });
-                $("#content").append(html);
+                    $("#content").append(html);
+
+                })
             },
             error: function (e) {
                 //失败执行
@@ -192,7 +176,7 @@
         });
 
     }
-	var msg = '登机牌打印已成功！';
+    var msg = '登机牌打印已成功！';
 
     function upDate(key, e) {
         var event = e || window.event
@@ -201,7 +185,6 @@
             type: "get",
             url: nyprojUrl + "/nyproj/docAction.do?method=toQueryPrintInfoById&ids=" + key,
             success: function (data) {
-            	//失败执行
                 let list = JSON.parse(data).map(function (item, index) {
                     return item;
                 });
@@ -219,22 +202,25 @@
                 var startAddress = list[0].startAddress;
                 $(event.target).addClass('active');
                 //todo print 
-                PrintLab1(flightNo, flightDate, vipFlag, seatNum, flightTo, gate, flyTime, name, certNo, id,startAddress);
+                PrintLab1(flightNo, flightDate, vipFlag, seatNum, flightTo, gate, flyTime, name, certNo, id, startAddress);
                 $('#infoBox').text(msg)
                 msg = '登机牌打印已成功！';
             },
             error: function (e) {
-                
+
+            },
+            error: function (e) {
+
             },
         });
-       
+
         $('#box-typeinfo').addClass('dis')
-        setTimeout(function(){
+        setTimeout(function () {
             $('#box-typeinfo').removeClass('dis')
-        },2000)
+        }, 2000)
     }
 
-    
+
     function getInfo() {
         $.ajax({
             dataType: "JSONP",
@@ -271,14 +257,14 @@
     }
 
     //打印登机牌方法
-    function PrintLab1(a, b, c, d, e, f, flyTime, h, i, g,startAddress) {
+    function PrintLab1(a, b, c, d, e, f, flyTime, h, i, g, startAddress) {
         var flightNo = a;
         var flydate = b;
         var vipFlag = c;
-        if (vipFlag == 1 || vipFlag == '1'|| vipFlag == '是') {
+        if (vipFlag == 1 || vipFlag == '1' || vipFlag == '是') {
             vipFlag = "是";
             msg = 'VIP客户请到柜台办理登机牌！';
-            return ;
+            return;
         } else {
             vipFlag = " ";
         }
@@ -295,11 +281,11 @@
             certNo = certNo.substring(0, 6) + "******" + certNo.substring(14);
         }
         if (seatNum == null || seatNum == '') {
-        	msg = '座位数量不足，请到柜台办理或改签！';
+            msg = '座位数量不足，请到柜台办理或改签！';
             return;
         }
-		//varItem1 = flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNum+'^'+flightTo+'^<%=startAddress%>^'+gate+'^'+flytime+'^'+name+'^'+certNo+'^'+id;
-        varItem1 = flightNo + '^' + flydate + '^' + vipFlag + '^' + seatNum + '^' + flightTo + '^'+startAddress+'^' + gate + '^' + flytime + '^' + name + '^' + certNo + '^' + id;
+        //varItem1 = flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNum+'^'+flightTo+'^<%=startAddress%>^'+gate+'^'+flytime+'^'+name+'^'+certNo+'^'+id;
+        varItem1 = flightNo + '^' + flydate + '^' + vipFlag + '^' + seatNum + '^' + flightTo + '^' + startAddress + '^' + gate + '^' + flytime + '^' + name + '^' + certNo + '^' + id;
         var pData = varDemo1 + varItem1;
         buildSocket();
         socket.onopen = function (event) {

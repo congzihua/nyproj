@@ -9,8 +9,10 @@
 <link rel="stylesheet" href="./css/base.css">
 <link rel="stylesheet" href="./css/user.css">
 <link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css//keyboard.css">
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="./js/rem.js"></script>
+<script src="./js/keyboard.js"></script>
 
 <body>
     <div class="main">
@@ -24,6 +26,7 @@
         <div class="check">
             <div class="mid">
                 <img src="./images/idcard.jpg" alt="">
+                <div class="input-box"><input type="text" id="idInput"></div>
             </div>
             <!-- <button onClick="moveInfo()">下一步</button> -->
         </div>
@@ -83,6 +86,7 @@
                 scanCertNo = data.cardno;
                 scanName = data.name;
                 if (scanCertNo == null || scanCertNo == undefined) {
+                    alert("未能正确安装身份证识别设别");
                     return;
                 }
                 //成功执行undefined
@@ -91,8 +95,7 @@
             },
             error: function (e) {
                 //失败执行
-               // clearTimeout(timer);
-               // window.location.href = "autoprintIndex.html"
+                // window.location.href = "autoprintIndex.html"
                 console.log(e.status + ',' + e.statusText);
             }
         });
@@ -109,6 +112,9 @@
 
         }
     }
+    $('#idInput').on('focus', function () {
+        $('#softkeyboard').show()
+    })
 
 </script>
 

@@ -164,10 +164,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .mid img {
   width: 80%;
+}
+.mid .input-box {
+  position: absolute;
+  left: 110%;
+}
+
+.mid .input-box input {
+  width: 4rem;
+  height: 0.4rem;
+  line-height: 0.4rem;
+  font-size: 0.4rem;
+  border-radius: 0.05rem;
+  padding: .1rem .2rem;
 }
 
 .input {
