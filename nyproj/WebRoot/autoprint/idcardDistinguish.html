@@ -56,7 +56,7 @@
     var scanName = "";
     var CARD = "";
     item.text(time);
-    // timerStart();
+    timerStart();
     function timerStart() {
         if (time <= 0) {
             clearTimeout(timer);
@@ -95,6 +95,7 @@
             },
             error: function (e) {
                 //失败执行
+                // window.location.href = "autoprintIndex.html"
                 console.log(e.status + ',' + e.statusText);
             }
         });
