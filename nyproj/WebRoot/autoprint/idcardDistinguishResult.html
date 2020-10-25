@@ -203,7 +203,7 @@
                 var babyFlag = list[0].babyFlag;
                 $(event.target).addClass('active');
                 //todo print 
-                PrintLab1(flightNo, flightDate, vipFlag, seatNum, flightTo, gate, flyTime, name, certNo, id, startAddress,babyFlag);
+                PrintLab1(flightNo, flightDate, vipFlag, seatNum, flightTo, gate, flyTime, name, certNo, id, startAddress, babyFlag);
                 $('#infoBox').text(msg)
                 msg = '登机牌打印已成功！';
             },
@@ -258,7 +258,7 @@
     }
 
     //打印登机牌方法
-    function PrintLab1(a, b, c, d, e, f, flyTime, h, i, g, startAddress,babyFlag) {
+    function PrintLab1(a, b, c, d, e, f, flyTime, h, i, g, startAddress, babyFlag) {
         var flightNo = a;
         var flydate = b;
         var vipFlag = c;
@@ -282,34 +282,34 @@
             certNo = certNo.substring(0, 6) + "******" + certNo.substring(14);
         }
         if (seatNum == null || seatNum == '') {
-        	if (babyFlag != 1) {}
-	            msg = '座位数量不足，请到柜台办理或改签！';
-	            return;
-        	}
-        	seatNum = ' ';
+            if (babyFlag != 1) { }
+            msg = '座位数量不足，请到柜台办理或改签！';
+            return;
         }
-        //varItem1 = flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNum+'^'+flightTo+'^<%=startAddress%>^'+gate+'^'+flytime+'^'+name+'^'+certNo+'^'+id;
-        varItem1 = flightNo + '^' + flydate + '^' + vipFlag + '^' + seatNum + '^' + flightTo + '^' + startAddress + '^' + gate + '^' + flytime + '^' + name + '^' + certNo + '^' + id;
-        var pData = varDemo1 + varItem1;
-        buildSocket();
-        socket.onopen = function (event) {
-            socketStatus = true;
-            if (socket.readyState == 1) {
-                socket.send(pData);
-            }
+        seatNum = ' ';
+    }
+    //varItem1 = flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNum+'^'+flightTo+'^<%=startAddress%>^'+gate+'^'+flytime+'^'+name+'^'+certNo+'^'+id;
+    varItem1 = flightNo + '^' + flydate + '^' + vipFlag + '^' + seatNum + '^' + flightTo + '^' + startAddress + '^' + gate + '^' + flytime + '^' + name + '^' + certNo + '^' + id;
+    var pData = varDemo1 + varItem1;
+    buildSocket();
+    socket.onopen = function (event) {
+        socketStatus = true;
+        if (socket.readyState == 1) {
+            socket.send(pData);
         }
-        socket.onmessage = function (event) {
-            socketStatus = false;
-            pData = '';
-            socket.close();
-        };
-        socket.onerror = function (evnt) {
-            socketStatus = false;
-        };
-        socket.onclose = function (event) {
-            socketStatus = false;
-            socket = null;
-        };
+    }
+    socket.onmessage = function (event) {
+        socketStatus = false;
+        pData = '';
+        socket.close();
+    };
+    socket.onerror = function (evnt) {
+        socketStatus = false;
+    };
+    socket.onclose = function (event) {
+        socketStatus = false;
+        socket = null;
+    };
     }
     function buildSocket() {
         if ('WebSocket' in window) {

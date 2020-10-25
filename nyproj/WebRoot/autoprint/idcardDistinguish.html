@@ -8,27 +8,30 @@
 </head>
 <link rel="stylesheet" href="./css/base.css">
 <link rel="stylesheet" href="./css/user.css">
-<link rel="stylesheet" href="./css/style.css">
+
+
 <link rel="stylesheet" href="./css//keyboard.css">
+<link rel="stylesheet" href="./css/style.css">
 <script src="js/jquery-3.2.1.min.js"></script>
 <script src="./js/rem.js"></script>
-<script src="./js/keyboard.js"></script>
+
 <style>
-.next-btn {
-  height: 0.8rem;
-  line-height: 0.8rem;
-  margin-left: 5%;
-  /* width: 3rem; */
-  position: relative;
-  border: none;
-  padding: 0 0.3rem;
-  font-size: 0.4rem;
-  color: #f73d37;
-  background-color: inherit;
-  border-top: 0.02rem solid #f73d37;
-  border-bottom: 0.02rem solid #f73d37;
-}
+    .next-btn {
+        height: 0.8rem;
+        line-height: 0.8rem;
+        margin-left: 5%;
+        /* width: 3rem; */
+        position: relative;
+        border: none;
+        padding: 0 0.3rem;
+        font-size: 0.4rem;
+        color: #f73d37;
+        background-color: inherit;
+        border-top: 0.02rem solid #f73d37;
+        border-bottom: 0.02rem solid #f73d37;
+    }
 </style>
+
 <body>
     <div class="main">
         <div class="header">
@@ -41,7 +44,7 @@
         <div class="check">
             <div>
                 <!-- img src="./images/idcard.jpg" alt=""-->
-                <button class="next-btn" id="clickBtn">手动输入证件</button>
+                <button class="id-cardtext" id="clickBtn">手动输入证件</button>
             </div>
             <!-- <button onClick="moveInfo()">下一步</button> -->
         </div>
@@ -71,7 +74,7 @@
     var scanName = "";
     var CARD = "";
     item.text(time);
-    timerStart();
+    // timerStart();
     function timerStart() {
         if (time <= 0) {
             clearTimeout(timer);
@@ -129,11 +132,12 @@
     $('#clickBtn').on('focus', function () {
         $('#softkeyboard').show()
     })
-	function submitCard(cardNo) {
-    	if (cardNo != null && cardNo != '') {
-    		 window.location.href = "idcardDistinguishResult.html?card=" + cardNo;
-    	}
+    function submitCard(cardNo) {
+        if (cardNo != null && cardNo != '') {
+            window.location.href = "idcardDistinguishResult.html?card=" + cardNo;
+        }
     }
 </script>
+<script src="./js/keyboard.js"></script>
 
 </html>

@@ -150,7 +150,6 @@
   left: 0;
   height: 20%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -174,14 +173,23 @@
   position: absolute;
   left: 110%;
 }
-
+button.id-cardtext {
+  border: 0.01rem solid #f73d37;
+  height: 0.8rem;
+  line-height: 0.8rem;
+  padding: 0 0.3rem;
+  font-size: 0.4rem;
+  border-radius: 0.8rem;
+  background-color: inherit;
+  color: #f73d37;
+}
 .mid .input-box input {
   width: 4rem;
   height: 0.4rem;
   line-height: 0.4rem;
   font-size: 0.4rem;
   border-radius: 0.05rem;
-  padding: .1rem .2rem;
+  padding: 0.1rem 0.2rem;
 }
 
 .input {

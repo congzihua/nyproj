@@ -44,10 +44,10 @@ document.write(
   ' <td><input class="i_button i_button_fh" type=button onclick="addValue(\'0\');" value="0"></td>'
 );
 document.write(
-  ' <td colspan="3"><input class="i_button i_button_btn" type=button onClick="commitValue(this);" value="确定"></td>'
+  ' <td><input class="i_button i_button_btn" type=button onClick="commitValue(this);" value="确定"></td>'
 );
 document.write(
-  ' <td colspan="3"><input class="i_button i_button_btn" type=button onClick="rebackValue(this);" value="返回"></td>'
+  ' <td><input class="i_button i_button_btn" type=button onClick="rebackValue(this);" value="返回"></td>'
 );
 document.write(" </tr>");
 
@@ -84,24 +84,14 @@ document.write(
   ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'p\');" value=" p "></td>'
 );
 document.write(
-  ' <td><input class="i_button i_button_fh" type=button onClick="addValue(\'[\');" value=" [ "></td>'
+  ' <td><input class="i_button i_button_btn" type=button onclick="clearValue();"  value=清空 ></td>'
 );
-document.write(
-  ' <td><input class="i_button i_button_fh" type=button onClick="addValue(\']\');" value=" ] "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_fh" type=button onClick="addValue(\'{\');" value=" { "></td>'
-);
-
 document.write(
   ' <td><input class="i_button i_button_btn" type=button onClick="setCapsLock(this);" value="切换大写"></td>'
 );
 
 document.write(" </tr>");
 document.write(" <tr> ");
-document.write(
-  ' <td><input class="i_button i_button_fh" type=button onClick="addValue(\'|\');" value=" | "></td>'
-);
 document.write(
   ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'a\');" value=" a "></td>'
 );
@@ -130,26 +120,15 @@ document.write(
   ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'l\');" value=" l "></td>'
 );
 document.write(
-  ' <td><input class="i_button i_button_fh" type=button onclick="addValue(\';\');" value=" ; "></td>'
+  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'z\');" value=" z "></td>'
 );
+
 document.write(
-  ' <td><input class="i_button i_button_fh" type=button onclick="addValue(\':\');" value=" : "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_fh" type=button onClick="addValue(\'}\');" value=" } "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_btn" type=button onclick="clearValue();"  value=清空 ></td>'
+  ' <td><input class="i_button i_button_bs" type=button value=" BackSpace" onclick="backspace();"></td>'
 );
 document.write(" </tr>");
 
 document.write(" <tr> ");
-document.write(
-  ' <td><input class="i_button i_button_fh" type=button onclick="addValue(\'_\');" value=" _ "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'z\');" value=" z "></td>'
-);
 document.write(
   ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'x\');" value=" x "></td>'
 );
@@ -168,21 +147,7 @@ document.write(
 document.write(
   ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'m\');" value=" m "></td>'
 );
-document.write(
-  ' <td><input class="i_button i_button_fh" type=button onClick="addValue(\'<\');" value=" < "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_fh" type=button onClick="addValue(\'>\');" value=" > "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_fh" type=button onClick="addValue(\'/\');" value=" / "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_fh" type=button onClick="addValue(\'?\');" value=" ? "></td>'
-);
-document.write(
-  ' <td colspan=2><input class="i_button i_button_bs" type=button value=" BackSpace" onclick="backspace();"></td>'
-);
+
 document.write(" </tr>");
 
 document.write(" </table>");
@@ -204,11 +169,12 @@ function clearValue() {
 function commitValue() {
   //$("#idInput").val($("#softkeyinout").val());
   $("#softkeyboard").hide();
-  submitCard($("#softkeyinout").val());
+  CARD = $("#softkeyinout").val();
+  moveInfo()
+  //   submitCard($("#softkeyinout").val());
 }
 function rebackValue() {
-  $("#softkeyinout").val("");
- 
+  //   $("#softkeyinout").val("");
   $("#softkeyboard").hide();
 }
 //实现BackSpace键的功能
