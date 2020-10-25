@@ -202,12 +202,13 @@ function clearValue() {
 }
 
 function commitValue() {
-  $("#idInput").val($("#softkeyinout").val());
+  //$("#idInput").val($("#softkeyinout").val());
   $("#softkeyboard").hide();
+  submitCard($("#softkeyinout").val());
 }
 function rebackValue() {
   $("#softkeyinout").val("");
-  $("#idInput").val("");
+ 
   $("#softkeyboard").hide();
 }
 //实现BackSpace键的功能

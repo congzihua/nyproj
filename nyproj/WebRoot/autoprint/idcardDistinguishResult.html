@@ -19,7 +19,7 @@
         <div class="header">
             <div class="cardinfo-box">
                 <div class="name-box">姓名：&nbsp;&nbsp;&nbsp;<span id="name"></span></div>
-                <div class="id-box">身份证号：&nbsp;&nbsp;&nbsp;<span id="card"></span></div>
+                <div class="id-box">证件号码：&nbsp;&nbsp;&nbsp;<span id="card"></span></div>
             </div>
             <button class="btn" id="back">退出</button>
         </div>
@@ -257,7 +257,7 @@
     }
 
     //打印登机牌方法
-    function PrintLab1(a, b, c, d, e, f, flyTime, h, i, g, startAddress) {
+    function PrintLab1(a, b, c, d, e, f, flyTime, h, i, g, startAddress,babyFlag) {
         var flightNo = a;
         var flydate = b;
         var vipFlag = c;
@@ -281,8 +281,11 @@
             certNo = certNo.substring(0, 6) + "******" + certNo.substring(14);
         }
         if (seatNum == null || seatNum == '') {
-            msg = '座位数量不足，请到柜台办理或改签！';
-            return;
+        	if (babyFlag != 1) {}
+	            msg = '座位数量不足，请到柜台办理或改签！';
+	            return;
+        	}
+        	seatNum = ' ';
         }
         //varItem1 = flightNo+'^'+flydate+'^'+vipFlag+'^'+seatNum+'^'+flightTo+'^<%=startAddress%>^'+gate+'^'+flytime+'^'+name+'^'+certNo+'^'+id;
         varItem1 = flightNo + '^' + flydate + '^' + vipFlag + '^' + seatNum + '^' + flightTo + '^' + startAddress + '^' + gate + '^' + flytime + '^' + name + '^' + certNo + '^' + id;

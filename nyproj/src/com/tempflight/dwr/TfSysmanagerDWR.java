@@ -126,7 +126,7 @@ public class TfSysmanagerDWR {
   			returnSeatArray +=order.getSeatNum()!=null?(order.getSeatNum().trim()+","):",";
   			order.setId(Integer.valueOf(idArray[i]));
   			order.setStatus(String.valueOf(3));			
-  			if (luggSum == -1) {
+  			if (luggSum != null && luggSum == -1) {
 				order.setWeightSum(ol1.getWeightSum());
 				order.setLuggSum(ol1.getLuggSum());	
 				luggSum = -1;

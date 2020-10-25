@@ -101,6 +101,7 @@ public class DocAction extends DispatchAction {
 			String orderdate = format.format(flightDate);
 			order.setFlightDateFormate(orderdate);
 			resls.add(order);
+			order.setBabyFlag(0);
 			if (StringUtils.isNotEmpty(order.getSeatNum())) {
 				//already has seat,none need chose.
 				continue;
@@ -123,12 +124,27 @@ public class DocAction extends DispatchAction {
 			seats  = seats == null?new ArrayList<String>():seats;
 			order.setStatus("3");
 			String sn = null;
-			
-			sn = getSeatNum(seats);
-			if (sn == null) {
-				continue;
+			if(order.getCertNo().length()>=18){
+				SimpleDateFormat format0 = new SimpleDateFormat("yyyyMMdd");
+				String f = format0.format(new java.util.Date());
+				int f1 = (Integer.valueOf(f.substring(0,4))-2);					
+				f= f1+f.substring(4);
+				if(Long.valueOf(f)>Long.valueOf(order.getCertNo().substring(6,14))){
+					sn = getSeatNum(seats);
+					if (sn == null) {
+						continue;
+					}
+					order.setSeatNum(sn);
+				}else {
+					order.setBabyFlag(1);
+				}
+			}else {
+				sn = getSeatNum(seats);
+				if (sn == null) {
+					continue;
+				}
+				order.setSeatNum(sn);
 			}
-			order.setSeatNum(sn);
 			Date flyDate = null;
 			try {
 				flyDate = format2.parse(orderdate+" "+flyTime);
@@ -145,6 +161,20 @@ public class DocAction extends DispatchAction {
 		String json = JSON.toJSONString(resls);
 		out.write(json);
 		return null;
+	}
+	public static void main(String[] args) {
+		String certNo = "22011120181025361X";
+		SimpleDateFormat format0 = new SimpleDateFormat("yyyyMMdd");
+		String f = format0.format(new java.util.Date());
+		int f1 = (Integer.valueOf(f.substring(0,4))-2);					
+		f= f1+f.substring(4);
+		System.out.println(f);
+		System.out.println(certNo.substring(6,14));
+		if(Long.valueOf(f)>Long.valueOf(certNo.substring(6,14))){
+			System.out.println(true);
+		}else {
+			System.out.println(false);
+		}
 	}
 	private String getSeatNum (List<String> seats) {
 		if (seats == null)

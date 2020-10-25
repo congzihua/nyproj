@@ -47,8 +47,15 @@ public class OpOrdertickets {
 	private String month;
 	private String day;
 	private String bagNums;
+	private Integer babyFlag;
 	
 	
+	public Integer getBabyFlag() {
+		return babyFlag;
+	}
+	public void setBabyFlag(Integer babyFlag) {
+		this.babyFlag = babyFlag;
+	}
 	public String getFlightDateFormate() {
 		return flightDateFormate;
 	}

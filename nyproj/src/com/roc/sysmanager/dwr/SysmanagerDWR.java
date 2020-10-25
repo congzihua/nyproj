@@ -361,7 +361,7 @@ public class SysmanagerDWR {
 			order.setStatus(String.valueOf(type));			
 			order.setGate(gate);
 			order.setGateTime(gateTime);
-			if (luggSum == -1) {
+			if (luggSum != null && luggSum == -1) {
 				order.setWeightSum(ol1.getWeightSum());
 				order.setLuggSum(ol1.getLuggSum());	
 				luggSum = -1;
