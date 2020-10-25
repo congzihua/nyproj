@@ -361,9 +361,14 @@ public class SysmanagerDWR {
 			order.setStatus(String.valueOf(type));			
 			order.setGate(gate);
 			order.setGateTime(gateTime);
-			order.setWeightSum(weightSum);
-			order.setLuggSum(luggSum);			
-			
+			if (luggSum == -1) {
+				order.setWeightSum(ol1.getWeightSum());
+				order.setLuggSum(ol1.getLuggSum());	
+				luggSum = -1;
+			}else {
+				order.setWeightSum(weightSum);
+				order.setLuggSum(luggSum);
+			}
 			orderList.add(order);
 		}
 		OpUseroper useroper = new OpUseroper();		
