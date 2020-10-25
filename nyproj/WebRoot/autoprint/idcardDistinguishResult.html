@@ -200,9 +200,10 @@
                 var flightDate = list[0].flightDateFormate;
                 var flightNo = list[0].flightNo;
                 var startAddress = list[0].startAddress;
+                var babyFlag = list[0].babyFlag;
                 $(event.target).addClass('active');
                 //todo print 
-                PrintLab1(flightNo, flightDate, vipFlag, seatNum, flightTo, gate, flyTime, name, certNo, id, startAddress);
+                PrintLab1(flightNo, flightDate, vipFlag, seatNum, flightTo, gate, flyTime, name, certNo, id, startAddress,babyFlag);
                 $('#infoBox').text(msg)
                 msg = '登机牌打印已成功！';
             },
