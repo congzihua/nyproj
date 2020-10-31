@@ -42,10 +42,10 @@
 .i_button_num {
 }
 .i_button_btn {
-  float: right;
+  /* float: right; */
   width: 2.5rem;
 }
 .i_button_bs {
-  float: right;
+  /* float: right; */
   width: 2.5rem;
 }
