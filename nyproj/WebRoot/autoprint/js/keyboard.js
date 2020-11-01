@@ -46,9 +46,7 @@ document.write(
 document.write(
   ' <td><input class="i_button i_button_btn" type=button onClick="commitValue(this);" value="确定"></td>'
 );
-document.write(
-  ' <td><input class="i_button i_button_btn" type=button onClick="rebackValue(this);" value="返回"></td>'
-);
+
 document.write(" </tr>");
 
 document.write(" <tr> ");
@@ -86,10 +84,6 @@ document.write(
 document.write(
   ' <td><input class="i_button i_button_btn" type=button onclick="clearValue();"  value=清空 ></td>'
 );
-document.write(
-  ' <td><input class="i_button i_button_btn" type=button onClick="setCapsLock(this);" value="切换大写"></td>'
-);
-
 document.write(" </tr>");
 document.write(" <tr> ");
 document.write(
@@ -147,6 +141,21 @@ document.write(
 document.write(
   ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'m\');" value=" m "></td>'
 );
+document.write(
+  ' <td>&nbsp;</td>'
+);
+document.write(
+  ' <td>&nbsp;</td>'
+);
+document.write(
+  ' <td>&nbsp;</td>'
+);
+document.write(
+  ' <td><input class="i_button i_button_zm" type=button onClick="setCapsLock(this);" value="cap"></td>'
+);
+document.write(
+  ' <td><input class="i_button i_button_btn" type=button onClick="rebackValue(this);" value="返回"></td>'
+);
 
 document.write(" </tr>");
 
@@ -196,13 +205,13 @@ function changePanl(oj) {
 function setCapsLock(o) {
   if (CapsLockValue == 0) {
     CapsLockValue = 1;
-    $(o).val("转化小写");
+    $(o).val("cap");
     $.each($(".i_button_zm"), function (b, c) {
       $(c).val($(c).val().toUpperCase());
     });
   } else {
     CapsLockValue = 0;
-    $(o).val("转化大写");
+    $(o).val("cap");
     $.each($(".i_button_zm"), function (b, c) {
       $(c).val($(c).val().toLowerCase());
     });
