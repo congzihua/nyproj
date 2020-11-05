@@ -14,147 +14,138 @@ document.write(
 
 document.write(" <tr> ");
 document.write(
-  ' <td><input class="i_button i_button_fh" type=button onclick="addValue(\'1\');" value="1"></td>'
+  ' <td><input class="i_button i_button_fh" type=button onclick="addValue(\'1\');" value="1">'
 );
 document.write(
-  ' <td><input class="i_button i_button_fh" type=button onclick="addValue(\'2\');" value="2"></td>'
+  ' <input class="i_button i_button_fh" type=button onclick="addValue(\'2\');" value="2">'
 );
 document.write(
-  ' <td><input class="i_button i_button_fh" type=button onclick="addValue(\'3\');" value="3"></td>'
+  ' <input class="i_button i_button_fh" type=button onclick="addValue(\'3\');" value="3">'
 );
 document.write(
-  ' <td><input class="i_button i_button_fh" type=button onclick="addValue(\'4\');" value="4"></td>'
+  ' <input class="i_button i_button_fh" type=button onclick="addValue(\'4\');" value="4">'
 );
 document.write(
-  ' <td><input class="i_button i_button_fh" type=button onclick="addValue(\'5\');" value="5"></td>'
+  ' <input class="i_button i_button_fh" type=button onclick="addValue(\'5\');" value="5">'
 );
 document.write(
-  ' <td><input class="i_button i_button_fh" type=button onclick="addValue(\'6\');" value="6"></td>'
+  ' <input class="i_button i_button_fh" type=button onclick="addValue(\'6\');" value="6">'
 );
 document.write(
-  ' <td><input class="i_button i_button_fh" type=button onclick="addValue(\'7\');" value="7"></td>'
+  ' <input class="i_button i_button_fh" type=button onclick="addValue(\'7\');" value="7">'
 );
 document.write(
-  ' <td><input class="i_button i_button_fh" type=button onclick="addValue(\'8\');" value="8"></td>'
+  ' <input class="i_button i_button_fh" type=button onclick="addValue(\'8\');" value="8">'
 );
 document.write(
-  ' <td><input class="i_button i_button_fh" type=button onclick="addValue(\'9\');" value="9"></td>'
+  ' <input class="i_button i_button_fh" type=button onclick="addValue(\'9\');" value="9">'
 );
 document.write(
-  ' <td><input class="i_button i_button_fh" type=button onclick="addValue(\'0\');" value="0"></td>'
+  ' <input class="i_button i_button_fh" type=button onclick="addValue(\'0\');" value="0">'
 );
 document.write(
-  ' <td><input class="i_button i_button_btn" type=button onClick="commitValue(this);" value="确定"></td>'
-);
-
-document.write(" </tr>");
-
-document.write(" <tr> ");
-
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'q\');" value="q"></td>'
+  ' <input class="i_button i_button_btn" type=button onClick="commitValue(this);" value="确定">'
 );
 document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'w\');" value=" w "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'e\');" value=" e "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'r\');" value=" r "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'t\');" value=" t "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'y\');" value=" y "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'u\');" value=" u "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'i\');" value=" i "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'o\');" value=" o "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'p\');" value=" p "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_btn" type=button onclick="clearValue();"  value=清空 ></td>'
-);
-document.write(" </tr>");
-document.write(" <tr> ");
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'a\');" value=" a "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'s\');" value=" s "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'d\');" value=" d "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'f\');" value=" f "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'g\');" value=" g "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'h\');" value=" h "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'j\');" value=" j "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'k\');" value=" k "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'l\');" value=" l "></td>'
-);
-document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'z\');" value=" z "></td>'
-);
-
-document.write(
-  ' <td><input class="i_button i_button_bs" type=button value=" BackSpace" onclick="backspace();"></td>'
+  ' <input class="i_button i_button_btn" type=button onClick="rebackValue(this);" value="返回"></td>'
 );
 document.write(" </tr>");
 
 document.write(" <tr> ");
+
 document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'x\');" value=" x "></td>'
+  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'q\');" value="q">'
 );
 document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'c\');" value=" c "></td>'
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'w\');" value=" w ">'
 );
 document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'v\');" value=" v "></td>'
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'e\');" value=" e ">'
 );
 document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'b\');" value=" b "></td>'
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'r\');" value=" r ">'
 );
 document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'n\');" value=" n "></td>'
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'t\');" value=" t ">'
 );
 document.write(
-  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'m\');" value=" m "></td>'
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'y\');" value=" y ">'
 );
 document.write(
-  ' <td>&nbsp;</td>'
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'u\');" value=" u ">'
 );
 document.write(
-  ' <td>&nbsp;</td>'
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'i\');" value=" i ">'
 );
 document.write(
-  ' <td>&nbsp;</td>'
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'o\');" value=" o ">'
 );
 document.write(
-  ' <td><input class="i_button i_button_zm" type=button onClick="setCapsLock(this);" value="cap"></td>'
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'p\');" value=" p ">'
 );
 document.write(
-  ' <td><input class="i_button i_button_btn" type=button onClick="rebackValue(this);" value="返回"></td>'
+  ' <input class="i_button i_button_btn" type=button onclick="clearValue();"  value=清空 ></td>'
+);
+
+document.write(" </tr>");
+document.write(" <tr> ");
+document.write(
+  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'a\');" value=" a ">'
+);
+document.write(
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'s\');" value=" s ">'
+);
+document.write(
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'d\');" value=" d ">'
+);
+document.write(
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'f\');" value=" f ">'
+);
+document.write(
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'g\');" value=" g ">'
+);
+document.write(
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'h\');" value=" h ">'
+);
+document.write(
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'j\');" value=" j ">'
+);
+document.write(
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'k\');" value=" k ">'
+);
+document.write(
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'l\');" value=" l ">'
+);
+
+document.write(
+  ' <input class="i_button i_button_bs" type=button value=" BackSpace" onclick="backspace();"></td>'
+);
+document.write(" </tr>");
+
+document.write(" <tr> ");
+document.write(
+  ' <td><input class="i_button i_button_zm" type=button onclick="addValue(\'z\');" value=" z ">'
+);
+document.write(
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'x\');" value=" x ">'
+);
+document.write(
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'c\');" value=" c ">'
+);
+document.write(
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'v\');" value=" v ">'
+);
+document.write(
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'b\');" value=" b ">'
+);
+document.write(
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'n\');" value=" n ">'
+);
+document.write(
+  ' <input class="i_button i_button_zm" type=button onclick="addValue(\'m\');" value=" m ">'
+);
+document.write(
+  ' <input class="i_button i_button_btn" type=button onClick="setCapsLock(this);" value="切换大写"></td>'
 );
 
 document.write(" </tr>");
@@ -179,7 +170,7 @@ function commitValue() {
   //$("#idInput").val($("#softkeyinout").val());
   $("#softkeyboard").hide();
   CARD = $("#softkeyinout").val();
-  moveInfo()
+  moveInfo();
   //   submitCard($("#softkeyinout").val());
 }
 function rebackValue() {
@@ -205,13 +196,13 @@ function changePanl(oj) {
 function setCapsLock(o) {
   if (CapsLockValue == 0) {
     CapsLockValue = 1;
-    $(o).val("cap");
+    $(o).val("转化小写");
     $.each($(".i_button_zm"), function (b, c) {
       $(c).val($(c).val().toUpperCase());
     });
   } else {
     CapsLockValue = 0;
-    $(o).val("cap");
+    $(o).val("转化大写");
     $.each($(".i_button_zm"), function (b, c) {
       $(c).val($(c).val().toLowerCase());
     });
