@@ -285,7 +285,10 @@
         update op_ordertickets set STATUS=#status# where id=#id#
     </update>
     <update id="updateForDjp" parameterClass="com.roc.syspe.entity.OpOrdertickets">
-        update op_ordertickets set GATE=#gate#,STATUS=#status#,GATE_TIME=#gateTime# ,SEAT_NUM=#seatNum#,LUGG_SUM=#luggSum#,WEIGHT_SUM=#weightSum# where id=#id#
+        update op_ordertickets set GATE=#gate#,STATUS=#status#,GATE_TIME=#gateTime# ,SEAT_NUM=#seatNum#       
+        <isNotNull  property="luggSum" prepend=",">LUGG_SUM=#luggSum#</isNotNull>
+        <isNotNull  property="weightSum" prepend=",">WEIGHT_SUM=#weightSum#</isNotNull>
+        where id=#id#
      </update>
      <update id="bentchUpFlightNo" parameterClass="com.roc.syspe.entity.OpOrdertickets">
         update ba_flightinfo set FLIGHT_NO=#flightNo# where id=#flightinfoId#

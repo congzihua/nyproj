@@ -147,11 +147,11 @@ function check(type){
 			}
 			var weightSum = document.getElementById("weightSum");	
 			var luggSum = document.getElementById("luggSum");	
-			var re = /^[0-9]+.?[0-9]*$/;
-			var re1 = /^[0-9]*$/;    //判断字符串是否为数字  
+			var re = /^(\-|\+)?[0-9]+.?[0-9]*$/;
+			var re1 = /^(\-|\+)?[0-9]*$/;    //判断字符串是否为数字      
 			if (jsTrim(luggSum.value)!='' && !re1.test(jsTrim(luggSum.value)))
 		    { 
-				 alert("行李数请输入正整数！");
+				 alert("行李数请输入整数！");
 				        luggSum.focus();
 				        return false;
 			}			
@@ -168,7 +168,7 @@ function check(type){
 			var flyminute = document.getElementById("flyminute");
 			var status = document.getElementById("status").value;	
 			printIds = ids;
-			SysmanagerDWR.djpOrXlqSaveTeam(ids,'<%=auth.getUserid()%>',type,document.getElementById("seatNum").value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,jsTrim(luggSum.value),jsTrim(weightSum.value),fligntInfoIds,status,onHandleM1);		
+			SysmanagerDWR.djpOrXlqSaveTeam(ids,'<%=auth.getUserid()%>',type,document.getElementById("seatNum").value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,0,0,fligntInfoIds,status,onHandleM1);		
 		}
 		function changebox(parm){
 			var member = document.getElementsByName("member");
@@ -193,8 +193,8 @@ function check(type){
 			var gate = document.getElementById("gate");
 			
 			var weightSum = document.getElementById("weightSum");	
-			var re = /^[0-9]+.?[0-9]*$/;
-			var re1 = /^[0-9]*$/;    //判断字符串是否为数字      
+			var re = /^(\-|\+)?[0-9]+.?[0-9]*$/;
+			var re1 = /^(\-|\+)?[0-9]*$/;    //判断字符串是否为数字      
 			if(luggSum.value==null||luggSum.value==""){
 				alert("行李件数不能为空，请填写！");
 				luggSum.focus();
@@ -202,7 +202,7 @@ function check(type){
 			}
 		     if (!re1.test(luggSum.value))
 		    { 
-				 alert("行李数请输入正整数！");
+				 alert("行李数请输入整数！");
 				        luggSum.focus();
 				        return false;
 			}
@@ -216,19 +216,12 @@ function check(type){
 				        weightSum.focus();
 				        return false;
 			}
-			var lugs = 0,wsums=0;
-			if(jsTrim(luggSum.value)!=""&&jsTrim(luggSum.value)!=null){
-				lugs +=parseInt(jsTrim(luggSum.value),10);
-			}
-			var luggSum1 = document.getElementById("luggSum1").value;
-			var weightSum1 = document.getElementById("weightSum1").value;
-			if(jsTrim(weightSum.value)!=""&&jsTrim(weightSum.value)!=null){
-				wsums +=parseFloat(jsTrim(weightSum.value),10);
-			}
+			var lugs = luggSum.value,wsums=weightSum.value;
 			
-			if(!window.confirm("您确认要打印行李签吗？")){
-				return;
-			}
+			
+			//if(!window.confirm("您确认要打印行李签吗？")){
+			//	return;
+			//}
 			var ids = '';
 			var name = document.getElementsByName("name");
 			var certType = document.getElementsByName("certType");
@@ -284,11 +277,11 @@ function check(type){
 				alert("信息保存失败，你选择的信息状态已经改变，请核查后重新选择！");
 				
 			}else {
-			   if(window.confirm("信息保存成功，是否进行打印操作！")){
+			    if(data != "F" && window.confirm("信息保存成功，是否进行打印操作！")){
 		         	PrintLab1(data);
-				}
-				document.getElementById("luggSum1").value=jsTrim(document.getElementById("luggSum").value);
-				document.getElementById("weightSum1").value=jsTrim(document.getElementById("weightSum").value);
+			    }
+				//document.getElementById("luggSum1").value=jsTrim(document.getElementById("luggSum").value);
+				//document.getElementById("weightSum1").value=jsTrim(document.getElementById("weightSum").value);
 				document.getElementById("seatNum").value="";
 				document.getElementById("panduan").value='1';
 				document.getElementById("tuipiao").disabled="";
@@ -302,9 +295,11 @@ function check(type){
 				document.getElementById("tuipiao").disabled="";
 				document.getElementById("bc").disabled="";
 				document.getElementById("cl").disabled="";
-			}else{		
-				 if(window.confirm("信息保存成功，是否进行打印操作！")){
-	         		PrintLab2(data);	
+			}else{	
+				 if (data == "F") {
+				     alert("信息保存成功");
+				 }else if(window.confirm("信息保存成功，是否进行打印操作！")){
+	         		 PrintLab2(data);	
 	         	 }			
 				var luggSum = document.getElementById("luggSum");
 				var weightSum = document.getElementById("weightSum");
@@ -323,6 +318,12 @@ function check(type){
 				
 				if(jsTrim(weightSum1)!=""&&jsTrim(weightSum1)!=null){
 					wsums += parseFloat(weightSum1,10);
+				}
+				if (lugs < 0) {
+					lugs = 0;
+				}
+				if (wsums < 0) {
+					wsums = 0;
 				}
 				document.getElementById("luggSum1").value=lugs;
 				document.getElementById("weightSum1").value=wsums;
@@ -464,7 +465,7 @@ function myHandle(data){
 </SCRIPT>
 	</head>
 	<body oncontextmenu="if (!event.ctrlKey){return false;}">	
-	<c:set var="gateNo" value="<%=gt %>" scope="page"/>
+	<c:set var="gateNo" value="<%=gt%>" scope="page"/>
 	<div align="center" >
  
   <div align="left" style="width: 100%">

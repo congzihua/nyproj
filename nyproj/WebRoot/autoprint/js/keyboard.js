@@ -47,7 +47,7 @@ document.write(
   ' <input class="i_button i_button_btn" type=button onClick="commitValue(this);" value="确定">'
 );
 document.write(
-  ' <input class="i_button i_button_btn" type=button onClick="rebackValue(this);" value="返回"></td>'
+  ' </td>'
 );
 document.write(" </tr>");
 
@@ -168,7 +168,7 @@ function clearValue() {
 
 function commitValue() {
   //$("#idInput").val($("#softkeyinout").val());
-  $("#softkeyboard").hide();
+  //$("#softkeyboard").hide();
   CARD = $("#softkeyinout").val();
   moveInfo();
   //   submitCard($("#softkeyinout").val());

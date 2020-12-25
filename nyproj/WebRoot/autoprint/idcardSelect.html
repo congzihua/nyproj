@@ -3,12 +3,10 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>身份证识别页面</title>
+    <title>证件类型</title>
   </head>
   <link rel="stylesheet" href="./css/base.css" />
   <link rel="stylesheet" href="./css/user.css" />
-
-  <link rel="stylesheet" href="./css//keyboard.css" />
   <link rel="stylesheet" href="./css/style.css" />
   <script src="js/jquery-3.2.1.min.js"></script>
   <script src="./js/rem.js"></script>
@@ -28,23 +26,36 @@
       border-top: 0.02rem solid #f73d37;
       border-bottom: 0.02rem solid #f73d37;
     }
+
+    .content {
+      padding: 0 5%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .content div {
+      background: #ccc;
+      margin: 0.5rem;
+      border-radius: 20px;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      color: #ffffff;
+      background-color: #4a8cf7;
+    }
   </style>
 
   <body>
     <div class="main">
       <div class="header">
-        <div class="header-title">请将身份证件在相应位置扫描：</div>
-        <button class="btn" id="back">退出</button>
+        <div class="header-title">请根据订票时证件类型选择</div>
       </div>
-      <div class="content">
-        <div class="image-info"></div>
-      </div>
-      <div class="check">
-        <div>
-          <!-- img src="./images/idcard.jpg" alt=""-->
-        </div>
-        <!-- <button onClick="moveInfo()">下一步</button> -->
-      </div>
+     <div align="center" class="content" style="height: 40%;width: 70%;position:absolute;left:0;right:0;margin:0 auto;">
+	        <div id="idcard">身份证</div>
+	        <div id="other">其他类型证件</div>
+	  </div>
       <div class="sky">
         <div class="clouds_one"></div>
         <div class="clouds_two"></div>
@@ -78,56 +89,20 @@
         window.location.href = 'autoprintIndex.html'
       } else {
         timer = setTimeout(() => {
-          getCard()
           time -= 1
           item.text(time)
-          console.log(time)
           timerStart()
         }, 1000)
       }
     }
-
-    function getCard() {
-      var img1Base64
-      var httpServerPort = 8989
-      $.ajax({
-        dataType: 'JSONP',
-        type: 'get',
-        url: 'http://localhost:' + httpServerPort + '/api/ReadMsg', //接口服务器地址  参数: Fp=1读证内指纹，PhotoQuality 身份证头像质量，cardImg=1获取身份证正反面图片
-        //contentType: "application/x-www-form-urlencoded; charset=utf-8",
-        success: function (data) {
-          scanCertNo = data.cardno
-          scanName = data.name
-          if (scanCertNo == null || scanCertNo == undefined) {
-            return
-          }
-          //成功执行undefined
-          CARD = scanCertNo
-          moveInfo()
-        },
-        error: function (e) {
-          //失败执行
-          // window.location.href = "autoprintIndex.html"
-          console.log(e.status + ',' + e.statusText)
-        }
-      })
-    }
-
     $('#back').bind('click', function () {
       window.location.href = 'autoprintIndex.html'
     })
-
-    function moveInfo() {
-      if (CARD) {
-        window.location.href = 'idcardDistinguishResult.html?card=' + CARD
-      } else {
-      }
-    }
-
-    function submitCard(cardNo) {
-      if (cardNo != null && cardNo != '') {
-        window.location.href = 'idcardDistinguishResult.html?card=' + cardNo
-      }
-    }
+    $('#idcard').bind('click', function () {
+      window.location.href = 'idcardDistinguish.html'
+    })
+    $('#other').bind('click', function () {
+      window.location.href = 'idcardDistinguishInput.html'
+    })
   </script>
 </html>

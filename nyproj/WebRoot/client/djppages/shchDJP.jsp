@@ -82,26 +82,11 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
     function check(data,type)
 		{	      
 			var seatNum = document.getElementById("seatNum");			
-			var luggSum = document.getElementById("luggSum");	
 			var gate = document.getElementById("gate");
 			if(gate.value==null || gate.value==""){
 				alert("登机口信息不能为空， 请填写！");
 				gate.focus();
 				return;
-			}
-			var weightSum = document.getElementById("weightSum");	
-			var re = /^[0-9]+.?[0-9]*$/;
-			var re1 = /^[0-9]*$/;    //判断字符串是否为数字      
-		     if (luggSum.value!=null &&luggSum.value!="" && !re1.test(luggSum.value))
-		    {
-				 alert("行李数请输入正整数！");
-				        luggSum.focus();
-				        return false;
-			}
-			if(weightSum.value!=null && weightSum.value!=''&&!re.test(weightSum.value)){
-				 alert("行李重量请输入数字！");
-				        weightSum.focus();
-				        return false;
 			}
 			
 			document.getElementById("tuipiao").disabled="disabled";
@@ -126,7 +111,7 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 			var name=document.getElementById("name").value;
 			var certNo=document.getElementById("certNo").value;
 			var status = document.getElementById("status").value;
-			SysmanagerDWR.djpOrXlqSave(data,'<%=auth.getUserid()%>',type,seatNum.value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,luggSum.value,weightSum.value,fIds,flightno,flydate,vipText,flightTo,name,certNo,status,onHandleM1);		
+			SysmanagerDWR.djpOrXlqSave(data,'<%=auth.getUserid()%>',type,seatNum.value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,0,0,fIds,flightno,flydate,vipText,flightTo,name,certNo,status,onHandleM1);		
 			
 		}
 		function prxlq(data,type)
@@ -141,8 +126,8 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 			var gate = document.getElementById("gate");
 			
 			var weightSum = document.getElementById("weightSum");	
-			var re = /^[0-9]+.?[0-9]*$/;
-			var re1 = /^[0-9]*$/;    //判断字符串是否为数字      
+			var re = /^(\-|\+)?[0-9]+.?[0-9]*$/;
+			var re1 = /^(\-|\+)?[0-9]*$/;    //判断字符串是否为数字      
 			if(luggSum.value==null||luggSum.value==""){
 				alert("行李件数不能为空，请填写！");
 				luggSum.focus();
@@ -164,9 +149,9 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 				        weightSum.focus();
 				        return false;
 			}
-			if(!window.confirm("您确认要打印行李签吗？")){
-				return;
-			}
+			//if(!window.confirm("您确认要打印行李签吗？")){
+				//return;
+			//}
 			var lugs = 0,wsums=0;
 			
 			if(jsTrim(luggSum.value)!=""&&jsTrim(luggSum.value)!=null){
@@ -182,7 +167,6 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 			if(jsTrim(weightSum.value)!=""&&jsTrim(weightSum.value)!=null){
 				wsums +=parseFloat(jsTrim(weightSum.value),10);
 			}
-			
 			if(jsTrim(weightSum1)!=""&&jsTrim(weightSum1)!=null){
 				wsums += parseFloat(weightSum1,10);
 			}
@@ -200,8 +184,13 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 			//var id=document.getElementById("flightinfoId").value;
 			var flightTo=document.getElementById("flightTo").value;
 			var name=document.getElementById("name").value;
-			
-			SysmanagerDWR.xlqSave(data,'<%=auth.getUserid()%>',type,seatNum.value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,thisLugNum,thisWeithtNum,fIds,flightTo,<%=auth.getWorkerNo()%>,flightno,flydate,name,jsTrim(luggSum.value),onHandleM2);		
+			if (lugs < 0) {
+				lugs = 0;
+			}
+			if (wsums < 0) {
+				wsums = 0;
+			}
+			SysmanagerDWR.xlqSave(data,'<%=auth.getUserid()%>',type,seatNum.value,document.getElementById("gate").value,flyhour.value+":"+flyminute.value,lugs,wsums,fIds,flightTo,<%=auth.getWorkerNo()%>,flightno,flydate,name,luggSum.value,onHandleM2);		
 			
 		}
 		function seleSeat(){
@@ -227,15 +216,8 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 			    if(window.confirm("信息保存成功，是否进行打印操作！")){
 		         	PrintLab1(data);
 				}
-			var luggSum = document.getElementById("luggSum");
-			var weightSum = document.getElementById("weightSum");
-			
-			
-			document.getElementById("luggSum1").value=luggSum.value;
-			document.getElementById("weightSum1").value=weightSum.value;
-			
-			document.getElementById("panduan").value='1';
-			document.getElementById("tuipiao").disabled="";
+				document.getElementById("panduan").value='1';
+				document.getElementById("tuipiao").disabled="";
 				document.getElementById("bc").disabled="";
 				document.getElementById("cl").disabled="";
 		   }
@@ -247,26 +229,38 @@ BORDER-BOTTOM: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-RIGHT: blac
 				document.getElementById("bc").disabled="";
 				document.getElementById("cl").disabled="";
 			}else{		
-				 if(window.confirm("信息保存成功，是否进行打印操作！")){
+				 if(data !=  "F" &&window.confirm("信息保存成功，是否进行打印操作！")){
 	         		PrintLab2(data);	
-	         	 }			
+	         	 }
+				 if(data ==  "F") {
+					 alert("数据保存成功！");
+				 }
 				var luggSum = document.getElementById("luggSum");
-			var weightSum = document.getElementById("weightSum");
-			var lugs = 0,wsums=0;
-			if(jsTrim(luggSum.value)!=""&&jsTrim(luggSum.value)!=null){
-				lugs +=parseInt(jsTrim(luggSum.value),10);
-			}
-			var luggSum1 = document.getElementById("luggSum1").value;
-			
-			var weightSum1 = document.getElementById("weightSum1").value;
-			if(jsTrim(weightSum.value)!=""&&jsTrim(weightSum.value)!=null){
-				wsums +=parseFloat(jsTrim(weightSum.value),10);
-			}
-			
-			
-			document.getElementById("luggSum1").value=lugs;
-			document.getElementById("weightSum1").value=wsums;
-			
+				var weightSum = document.getElementById("weightSum");
+				var lugs = 0,wsums=0;
+				if(jsTrim(luggSum.value)!=""&&jsTrim(luggSum.value)!=null){
+					lugs +=parseInt(jsTrim(luggSum.value),10);
+				}
+				var luggSum1 = document.getElementById("luggSum1").value;
+				if(jsTrim(luggSum1)!=""&&jsTrim(luggSum1)!=null){
+					lugs += parseInt(luggSum1,10);
+				}
+				var weightSum1 = document.getElementById("weightSum1").value;
+				if(jsTrim(weightSum1)!=""&&jsTrim(weightSum1)!=null){
+					wsums +=parseFloat(jsTrim(weightSum1),10);
+				}
+				if(jsTrim(weightSum.value)!=""&&jsTrim(weightSum.value)!=null){
+					wsums +=parseFloat(jsTrim(weightSum.value),10);
+				}
+				if (lugs < 0) {
+					lugs = 0;
+				}
+				if (wsums < 0) {
+					wsums = 0;
+				}
+				
+				document.getElementById("luggSum1").value=lugs;
+				document.getElementById("weightSum1").value=wsums;
 				document.getElementById("tuipiao").disabled="";
 				document.getElementById("bc").disabled="";
 				document.getElementById("cl").disabled="";	

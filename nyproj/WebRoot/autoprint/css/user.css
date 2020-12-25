@@ -4,6 +4,11 @@
   height: 40px;
   bottom: 5px;
   right: 10px;
+  z-index: 999999;
+}
+
+.time-box.time-box-mid {
+  bottom: 460px !important;
 }
 
 .an-time {
@@ -79,7 +84,7 @@
   display: flex;
   position: absolute;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 0 5%;
   z-index: 999999;
 }

@@ -285,8 +285,8 @@ public class SysmanagerDWR {
 		order.setSeatNum(seatNum);
 		order.setGate(gate);
 		order.setGateTime(gateTime);
-		order.setWeightSum(weightSum);
-		order.setLuggSum(luggSum);
+		//order.setWeightSum(weightSum);
+		//order.setLuggSum(luggSum);
 		OpUseroper useroper = new OpUseroper();
 		useroper.setOrderId(id);
 		useroper.setUserId(userId);
@@ -361,14 +361,14 @@ public class SysmanagerDWR {
 			order.setStatus(String.valueOf(type));			
 			order.setGate(gate);
 			order.setGateTime(gateTime);
-			if (luggSum != null && luggSum == -1) {
-				order.setWeightSum(ol1.getWeightSum());
-				order.setLuggSum(ol1.getLuggSum());	
-				luggSum = -1;
-			}else {
-				order.setWeightSum(weightSum);
-				order.setLuggSum(luggSum);
-			}
+			//if (luggSum != null && luggSum == -1) {
+			//	order.setWeightSum(ol1.getWeightSum());
+			//	order.setLuggSum(ol1.getLuggSum());	
+			//	luggSum = -1;
+			//}else {
+			//	order.setWeightSum(weightSum);
+			//	order.setLuggSum(luggSum);
+			//}
 			orderList.add(order);
 		}
 		OpUseroper useroper = new OpUseroper();		
@@ -408,6 +408,9 @@ public class SysmanagerDWR {
 		useroper.setType(5);
 		boolean b = service.updateForDjp(order,null);
 		if(b){
+			if( prinNum < 0) {
+				return "F";
+			}
 			String r = "";
 			BagnumUtil bagUtil =  BagnumUtil.getBagnumUtil();
 			for(int i=0;i< prinNum;i++){
@@ -443,6 +446,7 @@ public class SysmanagerDWR {
 		OpOrdertickets ol1 = null;
 		int k = 0;
 		String returnSeatArray ="";
+		boolean isAdd = true;
 		for(int i =0;i <idArray.length;i++){
 			
 			kw.setId(Integer.valueOf(idArray[i]));
@@ -488,9 +492,18 @@ public class SysmanagerDWR {
 			order.setStatus(String.valueOf(type));			
 			order.setGate(gate);
 			order.setGateTime(gateTime);
-			order.setWeightSum(weightSum);
-			order.setLuggSum(luggSum);			
-			
+			Double ws = ol1.getWeightSum();
+			Integer luggs = ol1.getLuggSum();
+			if (isAdd) {
+				isAdd = false;
+				ws = ws == null ?0:ws;
+				luggs = luggs == null?0:luggs;
+				order.setWeightSum(weightSum+ws);
+				order.setLuggSum(luggSum+luggs);			
+			}else {
+				order.setWeightSum(ws);
+				order.setLuggSum(luggs);		
+			}
 			orderList.add(order);
 		}
 		OpUseroper useroper = new OpUseroper();		
@@ -498,6 +511,9 @@ public class SysmanagerDWR {
 		useroper.setType(type);
 		boolean b= service.updateForDjpTeam(orderList, null, useroper);
 		if(b){
+			if (prinNum <= 0) {
+				return "F";
+			}
 			String r = "";
 			BagnumUtil bagUtil =  BagnumUtil.getBagnumUtil();
 			for(int i=0;i< prinNum;i++){

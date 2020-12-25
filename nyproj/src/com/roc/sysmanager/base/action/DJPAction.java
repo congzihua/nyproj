@@ -133,6 +133,18 @@ public class DJPAction extends DispatchAction {
 			return null;
 		}
 		List<OpOrdertickets> ooList=service.teamDjpList(kw);
+		int lugSum = 0;
+		double weightSum = 0;
+		if (ooList!= null && ooList.size() > 0) {
+			for (OpOrdertickets ot:ooList) {
+				int luggSum = ot.getLuggSum() == null?0:ot.getLuggSum();
+				double ws = ot.getWeightSum() == null?0d:ot.getWeightSum();
+				lugSum += luggSum;
+				weightSum += ws;
+			}
+		}
+		ol1.setLuggSum(lugSum);
+		ol1.setWeightSum(weightSum);
 		request.setAttribute("ooList", ooList);
 		request.setAttribute("flightinfo", ol1);
 
